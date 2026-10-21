@@ -103,6 +103,7 @@ gantt
 
 ```
 README.md
+papers/             the 13 papers cited in Workbook 1, with an index (papers/README.md)
 report/             written report: Workbook 2 and final report (see report/README.md)
 workbook/           Workbook 1 (report sections 1 and 2), submitted
 presentation/       slides and demo material for the checkpoints
