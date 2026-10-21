@@ -69,7 +69,7 @@ def split_summary(splits: dict[str, list[int]], cases: pd.DataFrame) -> pd.DataF
 
 
 def save_splits(splits: dict[str, list[int]], directory: Path, seed: int = SEED,
-                filename: str = "ext_cdm_splits_v1.json", grouped_by: str | None = None) -> Path:
+                filename: str = "ext_cdm_splits_v2.json", grouped_by: str | None = None) -> Path:
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / filename
     meta = {"seed": seed, "n_test": N_TEST, "val_fraction": VAL_FRACTION}
