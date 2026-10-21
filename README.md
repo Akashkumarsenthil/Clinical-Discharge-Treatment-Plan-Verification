@@ -73,6 +73,7 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 |---|---|
 | Data access, manifests, integrity checks (SHA256) | done |
 | Data cleaning, validation checks, EDA, fixed stratified splits (1,840 / 460 / 100, seed 298) | done (`src/clinverify/data`, `scripts/data_demo.py`) |
+| Patient-level split leakage check (`scripts/patient_overlap_check.py`) | done: 5 of 2,383 patients cross splits, see `docs/split_leakage_check.md` |
 | Rule catalog and synthetic valid/invalid cases | in progress |
 | Verifier (Z3), evaluation harness | in progress |
 | Model A, baseline reproduction | planned (needs GPU access) |
@@ -118,12 +119,14 @@ src/clinverify/
     eval/           evaluation harness and metrics (planned)
 tests/              unit tests on synthetic data
 data/               data/README.md; data/splits holds case IDs only (all patient data is gitignored)
-docs/               data collection steps, figures
+docs/               data collection, data dictionary, metrics (draft), baseline notes, split leakage check, figures
+results/            aggregate EDA summary (no patient data)
+requirements.txt    pinned Python packages for the data pipeline
 ```
 
 ## Reproducibility
 
-- Python 3.10+ with a pinned environment (in progress).
+- Python 3.10+; install the pinned packages with `pip install -r requirements.txt`.
 - Fixed, versioned splits; every reported run records its configuration and random seed.
 - The data pipeline runs end to end with `python scripts/data_demo.py all` once the data is downloaded to `MIMIC_DIR` (steps: `manifest`, `samples`, `clean`, `missing`, `transform`, `validate`, `eda`, `splits`). Tests: `python -m pytest tests`.
 - Goal: another person can clone the repo and reproduce each reported result without help.
