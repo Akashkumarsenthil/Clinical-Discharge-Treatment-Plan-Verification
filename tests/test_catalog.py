@@ -88,3 +88,9 @@ def test_labeled_synthetic_plans_file_is_current_and_scored_exactly():
 def test_rule_catalog_doc_is_generated_from_the_code():
     from build_rule_catalog_doc import build
     assert (ROOT / "docs" / "rule_catalog.md").read_text() == build()
+
+
+def test_signoff_page_lists_every_rule():
+    page = (ROOT / "docs" / "rule_signoff.md").read_text()
+    for rule in RULES:
+        assert f"`{rule.id}`" in page, f"{rule.id} is missing from docs/rule_signoff.md"

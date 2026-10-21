@@ -18,7 +18,7 @@ Code: `src/clinverify/rules/catalog.py` (the single source of truth; this page i
 **Status: version {CATALOG_VERSION} for team sign-off.** Each rule below was written from a numbered statement or section of a published
 guideline whose full text was read, and is covered by tests. It is **not clinically validated**: no clinician has reviewed it.
 
-**Provenance.** The first draft was prepared with an AI coding assistant. A rule becomes the team's rule through the sign-off below.
+**Provenance.** The first draft was prepared with an AI coding assistant. A rule becomes the team's rule through the sign-off in `docs/rule_signoff.md`.
 The model that generates plans never writes or sees the rules, so a plan is not graded against constraints it invented.
 
 ## What the rules check
@@ -80,13 +80,8 @@ The draft rules were removed. This disagreement between a benchmark paper and th
 
 ## Sign-off
 
-| Reviewer | Rules read against the source (tick when done) | Date |
-|---|---|---|
-| Sneha (owner) | [ ] | |
-| Second team member | [ ] | |
-| Clinical / domain reviewer (if available) | [ ] | |
-
-When all boxes are ticked, tag the commit `rules-v1.0-signed-off` and do not edit the catalog without bumping `CATALOG_VERSION`.
+Sign-off is recorded in **[docs/rule_signoff.md](rule_signoff.md)** (a separate page that people edit by hand; this page is generated and must not be edited).
+Tick a rule only after reading its cited statement in the guideline itself; if you cannot tick it, write the reason in the Notes column.
 
 ## Run and test
 
