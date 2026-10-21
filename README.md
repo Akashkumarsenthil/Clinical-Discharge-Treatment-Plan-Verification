@@ -61,6 +61,8 @@ Four models are built and compared on the same benchmark and splits:
 | Constraint-violation escape rate | Secondary: invalid plans that the verifier lets through |
 | Repair success rate, translation fidelity, solver cost | Secondary (targets set before the metrics are frozen) |
 
+**Details and freeze status:** [docs/metrics.md](docs/metrics.md) (draft until the team freezes it).
+
 **Target:** validity ≥ 0.85 and escape rate ≤ 0.05 on a fixed 100-case held-out split.
 
 ## Data and access
