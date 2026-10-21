@@ -74,8 +74,8 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 | Data access, manifests, integrity checks (SHA256) | done |
 | Data cleaning, validation checks, EDA, fixed stratified splits grouped by patient (1,840 / 460 / 100, seed 298; split v2) | done (`src/clinverify/data`, `scripts/data_demo.py`) |
 | Patient-level split leakage check (`scripts/patient_overlap_check.py`) | done: v1 had 5 of 2,383 patients crossing splits; fixed in v2 (0), see `docs/split_leakage_check.md` |
-| Rule catalog and synthetic valid/invalid cases | in progress |
-| Verifier (Z3), evaluation harness | in progress |
+| Rule catalog (written and sourced by the team) and synthetic valid/invalid cases | in progress: `rules/catalog.py` is empty on purpose, see `docs/rule_authoring.md` |
+| Verifier (Z3), rule interface, evaluation harness | scaffold done and tested on toy rules (`scripts/run_eval.py`); waiting for the team's rules |
 | Model A, baseline reproduction | planned (needs GPU access) |
 
 ### Schedule
@@ -112,12 +112,14 @@ notebooks/          data pipeline demo (extraction, cleaning, EDA, splits)
 scripts/            data_demo.py: runs the data pipeline end to end, one step at a time
 src/clinverify/
     data/           loading, cleaning, validation, splits and leakage checks
-    rules/          team-authored clinical rule catalog (planned)
-    verifier/       plan -> logic -> Z3 check, names the violated rule (planned)
+    plan.py         starter schema for a structured plan
+    rules/          rule interface (done) and the team-authored rule catalog (empty until the team writes it)
+    verifier/       plan -> Z3 check, names every violated rule (done, toy-tested)
     models/         Model A (298A); Models B, C, D (298B) (planned)
     baseline/       Hager et al. 2024 reproduction (planned)
-    eval/           evaluation harness and metrics (planned)
-tests/              unit tests on synthetic data
+    eval/           evaluation harness: validity, escape rate, false rejects, solver time, bootstrap intervals
+tests/              unit tests on synthetic data and toy rules
+.github/workflows/  CI: runs the tests on every push
 data/               data/README.md; data/splits holds case IDs only (all patient data is gitignored)
 docs/               data collection, data dictionary, metrics (draft), baseline notes, split leakage check, figures
 results/            aggregate EDA summary (no patient data)

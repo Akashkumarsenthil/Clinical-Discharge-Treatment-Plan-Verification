@@ -1,0 +1,464 @@
+[
+ {
+  "plan": {
+   "case_id": 1,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 2,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 3,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 4,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 5,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 6,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 7,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 8,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 101,
+   "diagnosis": "dx",
+   "discharge_hour": 20,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 30
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-001"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 102,
+   "diagnosis": "dx",
+   "discharge_hour": 20,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 30
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-001"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 103,
+   "diagnosis": "dx",
+   "discharge_hour": 20,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 30
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-001"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 104,
+   "diagnosis": "dx",
+   "discharge_hour": 20,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 30
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-001"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 105,
+   "diagnosis": "dx",
+   "discharge_hour": 20,
+   "medications": [
+    "a"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 30
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-001"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 201,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "b"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-002"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 202,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "b"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-002"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 203,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "b"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-002"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 204,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "b"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-002"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 205,
+   "diagnosis": "dx",
+   "discharge_hour": 48,
+   "medications": [
+    "b"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 10,
+    "y": 40
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-002"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 301,
+   "diagnosis": "dx",
+   "discharge_hour": 5,
+   "medications": [
+    "b"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 9
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-001",
+   "R-TOY-002"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 302,
+   "diagnosis": "dx",
+   "discharge_hour": 5,
+   "medications": [
+    "b"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 9
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-001",
+   "R-TOY-002"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 303,
+   "diagnosis": "dx",
+   "discharge_hour": 5,
+   "medications": [
+    "b"
+   ],
+   "contraindicated": [
+    "b"
+   ],
+   "labs": {
+    "x": 9
+   },
+   "follow_up": [
+    "clinic"
+   ]
+  },
+  "violates": [
+   "R-TOY-001",
+   "R-TOY-002"
+  ]
+ }
+]
