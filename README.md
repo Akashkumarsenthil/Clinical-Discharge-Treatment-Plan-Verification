@@ -56,22 +56,7 @@ Both are **credentialed PhysioNet data** (PhysioNet Credentialed Health Data Lic
 
 ## Data pipeline (implemented)
 
-```mermaid
-flowchart TB
-    subgraph R1["Collect and check"]
-        direction LR
-        S1["1 Download<br/>+ SHA256<br/>33/33, 12/12 files"] --> S2["2 Link check<br/>2,400 of 2,400<br/>cases found"] --> S3["3 Clean<br/>75 duplicate<br/>rows removed"]
-    end
-    subgraph R2["Prepare and validate"]
-        direction LR
-        S4["4 Missing values<br/>+ transformations"] --> S5["5 Validation<br/>passes; fails on<br/>corrupted copy"]
-    end
-    subgraph R3["Analyse and split"]
-        direction LR
-        S6["6 Exploratory<br/>analysis"] --> S7["7 Fixed splits<br/>1,840 / 460 / 100<br/>+ leakage test"]
-    end
-    R1 --> R2 --> R3
-```
+![Data pipeline: seven steps from download to fixed splits](docs/images/data_pipeline.png)
 
 Every step is a function in `scripts/data_demo.py` (`manifest`, `samples`, `clean`, `missing`, `transform`, `validate`, `eda`, `splits`) and in the notebook `notebooks/data_pipeline_demo.ipynb`. Aggregate output of the exploratory analysis (counts only, no patient text):
 
