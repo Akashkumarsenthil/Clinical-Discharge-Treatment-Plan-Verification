@@ -20,12 +20,13 @@ python -m pytest tests                                    # unit tests: syntheti
 python scripts/make_synthetic_data.py --out ~/synthetic_mimic
 MIMIC_DIR=~/synthetic_mimic python scripts/data_demo.py all
 python scripts/run_eval.py --plans tests/data/toy_labeled_plans.json --rules tests.toy_rules
+python scripts/run_eval.py --plans tests/data/catalog_labeled_plans.json --rules clinverify.rules.catalog   # the draft rule catalog
 ```
 
 | Command | What it shows |
 |---|---|
 | `data_demo.py all` | the data pipeline in order: integrity check, samples, cleaning (duplicates), missing-value rules, transformations, validation checks that pass and fail on corrupted data, EDA, and patient-grouped splits with leakage tests |
-| `run_eval.py` | the Z3 verifier and evaluation harness on toy rules: validity, escape rate, false rejects, solver time, and a logged run |
+| `run_eval.py` | the Z3 verifier and evaluation harness: validity, escape rate, false rejects, solver time, and a logged run, first on toy rules and then on the draft rule catalog |
 
 Runs on synthetic data write to `results/synthetic/` and never touch the real split file or EDA summary. With real PhysioNet access, point `MIMIC_DIR` at your own download instead (see Data and access).
 
@@ -99,7 +100,7 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 | Data access, manifests, integrity checks (SHA256) | done |
 | Data cleaning, validation checks, EDA, fixed stratified splits grouped by patient (1,840 / 460 / 100, seed 298; split v2) | done (`src/clinverify/data`, `scripts/data_demo.py`) |
 | Patient-level split leakage check (`scripts/patient_overlap_check.py`) | done: v1 had 5 of 2,383 patients crossing splits; fixed in v2 (0), see `docs/split_leakage_check.md` |
-| Rule catalog (written and sourced by the team) and synthetic valid/invalid cases | in progress: `rules/catalog.py` is empty on purpose, see `docs/rule_authoring.md` |
+| Rule catalog and synthetic valid/invalid cases | first 8 sourced rules drafted (Hager et al. 2024), **pending team review**: `docs/rule_catalog.md`; 20 labeled synthetic plans |
 | Verifier (Z3), rule interface, evaluation harness | scaffold done and tested on toy rules (`scripts/run_eval.py`); waiting for the team's rules |
 | Model A, baseline reproduction | planned (needs GPU access) |
 
@@ -138,7 +139,7 @@ scripts/            data_demo.py (data pipeline, one step at a time), make_synth
 src/clinverify/
     data/           loading, cleaning, validation, splits and leakage checks; synthetic data generator
     plan.py         starter schema for a structured plan
-    rules/          rule interface (done) and the team-authored rule catalog (empty until the team writes it)
+    rules/          rule interface (done) and the rule catalog (first 8 draft rules, pending team review)
     verifier/       plan -> Z3 check, names every violated rule (done, toy-tested)
     models/         Model A (298A); Models B, C, D (298B) (planned)
     baseline/       Hager et al. 2024 reproduction (planned)

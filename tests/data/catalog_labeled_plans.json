@@ -1,0 +1,346 @@
+[
+ {
+  "plan": {
+   "case_id": 1001,
+   "diagnosis": "appendicitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "antibiotics",
+    "support",
+    "appendectomy"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 1002,
+   "diagnosis": "appendicitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "antibiotics",
+    "support"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 1003,
+   "diagnosis": "appendicitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "support",
+    "appendectomy"
+   ]
+  },
+  "violates": [
+   "R-TRT-001"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 1004,
+   "diagnosis": "appendicitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "antibiotics",
+    "appendectomy"
+   ]
+  },
+  "violates": [
+   "R-TRT-002"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 1005,
+   "diagnosis": "appendicitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": []
+  },
+  "violates": [
+   "R-TRT-001",
+   "R-TRT-002"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 1006,
+   "diagnosis": "cholecystitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "antibiotics",
+    "support",
+    "cholecystectomy"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 1007,
+   "diagnosis": "cholecystitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "antibiotics",
+    "support"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 1008,
+   "diagnosis": "cholecystitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "support",
+    "cholecystectomy"
+   ]
+  },
+  "violates": [
+   "R-TRT-003"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 1009,
+   "diagnosis": "cholecystitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "antibiotics",
+    "cholecystectomy"
+   ]
+  },
+  "violates": [
+   "R-TRT-004"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 1010,
+   "diagnosis": "cholecystitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": []
+  },
+  "violates": [
+   "R-TRT-003",
+   "R-TRT-004"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 1011,
+   "diagnosis": "diverticulitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "antibiotics",
+    "support",
+    "future_colonoscopy",
+    "colectomy"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 1012,
+   "diagnosis": "diverticulitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "antibiotics",
+    "support",
+    "future_colonoscopy"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 1013,
+   "diagnosis": "diverticulitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "support",
+    "future_colonoscopy",
+    "colectomy"
+   ]
+  },
+  "violates": [
+   "R-TRT-005"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 1014,
+   "diagnosis": "diverticulitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "antibiotics",
+    "future_colonoscopy",
+    "colectomy"
+   ]
+  },
+  "violates": [
+   "R-TRT-006"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 1015,
+   "diagnosis": "diverticulitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "antibiotics",
+    "support",
+    "colectomy"
+   ]
+  },
+  "violates": [
+   "R-FUP-001"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 1016,
+   "diagnosis": "diverticulitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": []
+  },
+  "violates": [
+   "R-FUP-001",
+   "R-TRT-005",
+   "R-TRT-006"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 1017,
+   "diagnosis": "pancreatitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "support",
+    "ercp",
+    "drainage"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 1018,
+   "diagnosis": "pancreatitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "support"
+   ]
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 1019,
+   "diagnosis": "pancreatitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": [
+    "ercp",
+    "drainage"
+   ]
+  },
+  "violates": [
+   "R-TRT-007"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 1020,
+   "diagnosis": "pancreatitis",
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": [],
+   "treatments": []
+  },
+  "violates": [
+   "R-TRT-007"
+  ]
+ }
+]

@@ -1,6 +1,6 @@
 # Writing a rule
 
-Rules are the project's central claim: **the team writes them, not the model** (requirement R3). The code only provides the machinery; `src/clinverify/rules/catalog.py` is intentionally empty until the team adds rules.
+Rules are the project's central claim: **the team writes them, not the model** (requirement R3). The code only provides the machinery; `src/clinverify/rules/catalog.py` holds a first DRAFT set (see `docs/rule_catalog.md`) that the team must review and extend.
 
 ## What a rule is
 

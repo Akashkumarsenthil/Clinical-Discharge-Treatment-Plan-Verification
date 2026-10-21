@@ -19,3 +19,4 @@ jobs:
           MIMIC_DIR="$RUNNER_TEMP/synthetic_mimic" python scripts/data_demo.py all
           MIMIC_DIR="$RUNNER_TEMP/synthetic_mimic" python scripts/patient_overlap_check.py
           python scripts/run_eval.py --plans tests/data/toy_labeled_plans.json --rules tests.toy_rules
+          python scripts/run_eval.py --plans tests/data/catalog_labeled_plans.json --rules clinverify.rules.catalog
