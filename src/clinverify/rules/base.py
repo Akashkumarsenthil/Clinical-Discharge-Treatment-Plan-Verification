@@ -34,6 +34,8 @@ class Rule:
     recommendation: str = ""                         # what the source recommends, paraphrased, with statement location
     strength: str = ""                               # strength / quality of the recommendation as stated by the source
     applies_when: str = ""                           # plain-language condition under which the rule applies
+    advisory: bool = False                           # True when the source only suggests / is weak: a violation is flagged as advisory
+    source_date: str = ""                            # publication year of the source (the course asks for sources no older than 3-4 years)
     applies: Optional[Callable[[Plan], bool]] = None  # None = always applies
     violation_message: str = ""                      # shown when the rule is violated (also feedback for repair)
     valid_example: Optional[Plan] = None             # synthetic plan that satisfies the rule
@@ -66,9 +68,9 @@ class RuleCatalog:
         self._rules[rule.id] = rule
 
     def undocumented(self) -> list[str]:
-        """IDs of rules missing a name, recommendation, strength, applicability text, violation message or either example."""
+        """IDs of rules missing a name, recommendation, strength, applicability text, source year, violation message or either example."""
         return [r.id for r in self._rules.values()
-                if not (r.name and r.recommendation and r.strength and r.applies_when and r.violation_message and r.valid_example and r.invalid_example)]
+                if not (r.name and r.recommendation and r.strength and r.applies_when and r.source_date and r.violation_message and r.valid_example and r.invalid_example)]
 
     def __iter__(self):
         return iter(self._rules.values())

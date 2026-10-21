@@ -20,11 +20,12 @@ def labeled_plans():
         items.append({"plan": rule.valid_example.to_dict(), "violates": []})
         items.append({"plan": rule.invalid_example.to_dict(), "violates": [rule.id]})
     combos = [
-        (_appendicitis(9001, treatments=("appendectomy",), days=3, hour=30), ["R-APP-001", "R-APP-002", "R-APP-004"]),
-        (_appendicitis(9002, complicated=True, days=8, hour=40), ["R-APP-003", "R-APP-004"]),
-        (_pancreatitis(9003, treatments=("ercp", "antibiotics"), gallstone=True, mild=False), ["R-PAN-001", "R-PAN-004"]),
-        (_diverticulitis(9004, treatments=("antibiotics",), days=9, complicated=True, systemic_inflammation=False),
-         ["R-DIV-002"]),
+        (_appendicitis(9001, treatments=("appendectomy",), days=3), ["R-APP-001", "R-APP-002"]),
+        (_appendicitis(9002, complicated=True, days=8), ["R-APP-003"]),
+        (_pancreatitis(9003, treatments=("ercp", "antibiotics"), biliary=True, mild=False), ["R-PAN-001", "R-PAN-004"]),
+        (_pancreatitis(9004, treatments=("parenteral_nutrition",), necrotizing=True, infection=True, mild=False),
+         ["R-PAN-002", "R-PAN-005"]),
+        (_diverticulitis(9005, treatments=("antibiotics",), alarm_symptoms=True), ["R-DIV-001", "R-DIV-003"]),
     ]
     items += [{"plan": p.to_dict(), "violates": v} for p, v in combos]
     return items

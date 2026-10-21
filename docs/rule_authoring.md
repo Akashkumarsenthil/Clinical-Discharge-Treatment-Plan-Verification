@@ -19,7 +19,7 @@ A rule is a named, sourced constraint over a `Plan` (`src/clinverify/plan.py`) a
 | `valid_example`, `invalid_example` | one synthetic plan that satisfies the rule and one that violates only this rule |
 | function | builds the Z3 expression from the plan |
 
-See `src/clinverify/rules/catalog.py` for 14 complete examples, and `docs/rule_catalog.md` (generated) for the table.
+See `src/clinverify/rules/catalog.py` for 12 complete examples, and `docs/rule_catalog.md` (generated) for the table.
 
 ## Checklist before a rule is merged
 

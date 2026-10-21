@@ -5,7 +5,7 @@ The team should agree the final schema together with the Model A input/output sp
 
 Plan content comes from the model. `facts` are case facts taken from the patient record (not from the model), such as
 whether the appendicitis is complicated. Rules may need either; a missing one makes the rule inconclusive.
-Times are integer hours since admission; durations are whole days.
+Durations are whole days; times (used by the toy rules) are integer hours since admission.
 """
 from __future__ import annotations
 
@@ -15,12 +15,12 @@ from typing import Optional
 DIAGNOSES = ("appendicitis", "cholecystitis", "diverticulitis", "pancreatitis")     # pathologies of the benchmark
 
 # Canonical treatment concepts a plan parser must map free text to (a parsing error here is a translation-fidelity error).
-TREATMENT_CONCEPTS = ("antibiotics", "preoperative_antibiotic", "appendectomy", "cholecystectomy",
-                      "cholecystectomy_index_admission", "gallbladder_drainage", "ercp", "enteral_nutrition")
+TREATMENT_CONCEPTS = ("antibiotics", "preoperative_antibiotic", "appendectomy", "cholecystectomy_during_admission", "ercp",
+                      "parenteral_nutrition", "colonoscopy_after_recovery")
 
-# Case facts (booleans) that the current rules use. They must come from the record, not from the model.
-CASE_FACTS = ("complicated", "source_control_adequate", "adult", "suitable_for_surgery", "immunocompetent",
-              "systemic_inflammation", "infected", "gallstone", "mild", "severe", "cholangitis", "cbd_obstruction")
+# Case facts (booleans) that the current rules use. They must come from the patient record, not from the model.
+CASE_FACTS = ("complicated", "low_risk", "infection", "necrotizing", "mild", "biliary", "cholangitis", "biliary_obstruction",
+              "oral_or_enteral_feasible", "alarm_symptoms", "crc_screening_up_to_date")
 
 
 @dataclass(frozen=True)
@@ -29,7 +29,6 @@ class Plan:
     diagnosis: str = ""
     treatments: tuple[str, ...] = ()                      # canonical concepts (TREATMENT_CONCEPTS)
     postop_antibiotic_days: Optional[int] = None          # postoperative antibiotic course, in days (0 = none)
-    appendectomy_hour: Optional[int] = None               # hours from admission to appendectomy
     facts: dict[str, bool] = field(default_factory=dict)  # case facts from the record (CASE_FACTS)
     # generic fields used by the toy rules in the tests
     discharge_hour: Optional[int] = None

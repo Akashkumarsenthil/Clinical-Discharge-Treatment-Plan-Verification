@@ -1,65 +1,62 @@
-"""Rule catalog v1.0 for team sign-off.
+"""Rule catalog v2.0 for team sign-off. All sources are from 2025-2026.
 
-Rules check an LLM-generated discharge / treatment plan against recommendations from published guidelines, for the four
-pathologies of the benchmark (appendicitis, cholecystitis, diverticulitis, pancreatitis). Every rule
+Rules check an LLM-generated discharge / treatment plan against recommendations in recent published guidelines. The course
+asks for sources no more than 3-4 years old, so only guidelines from 2025-2026 are used; rules that rested on older
+guidelines (WSES 2019-2020) were removed or deferred (see docs/rule_catalog.md). Every rule
 
-  * cites the guideline and the statement number or section it comes from, and paraphrases what that statement says,
-  * records the strength / quality of the recommendation as the guideline states it,
-  * says when it applies, which plan fields and case facts it needs, and what happens if one is missing
+  * cites the guideline, what part of it was read (full text or abstract) and the section it comes from,
+  * paraphrases the recommendation and records its strength / quality as the guideline states it,
+  * says when it applies, which plan fields and case facts it needs, and what happens when one is missing
     (the rule is inconclusive = "insufficient information"; a missing input never passes a plan),
-  * has a violation message, one synthetic plan that satisfies it and one that violates it.
+  * is marked advisory when its source only suggests (a violation is flagged, not treated as a hard failure),
+  * has a violation message, one synthetic plan that satisfies it and one that violates only this rule.
 
-Sources (open-access full texts, read for this catalog; see docs/rule_catalog.md for the checklist):
-  APP  Di Saverio et al. 2020, WSES Jerusalem guidelines for acute appendicitis, World J Emerg Surg 15:27
-  CHO  Pisano et al. 2020, WSES guidelines for acute calculus cholecystitis, World J Emerg Surg 15:61
-  PAN  Leppaniemi et al. 2019, WSES guidelines for severe acute pancreatitis, World J Emerg Surg 14:27
-  DIV  Sartelli et al. 2020, WSES update on acute colonic diverticulitis in the emergency setting,
-       World J Emerg Surg 15:32
+Sources (full references in docs/rule_catalog.md):
+  SWE     Salo et al. 2025, Swedish national guidelines for acute appendicitis, BJS Open 9:zrae165 (open access, full text read)
+  WSES25  Podda et al. 2026, 2025 WSES Jerusalem guidelines for acute appendicitis, JAMA Surg 161:283-295 (abstract read; paywalled)
+  ILATAM  Cardenas-Jaen et al. 2026, Ibero-Latin American guidelines on acute pancreatitis, UEG J 14:e70190 (open access, full text read)
+  ACG26   Peery et al. 2026, ACG clinical guideline: colonic diverticulitis, Am J Gastroenterol 121:1549-1561 (abstract read; paywalled)
+  KASID26 Lee et al. 2026, Korean guidelines for acute colonic diverticulitis, Intest Res 24:428-463 (open access, full text read)
 
-Scope and limits (also in docs/rule_catalog.md): only recommendations that can be checked from a structured plan and
-record facts are encoded; guidelines are from 2019-2020 and newer versions may differ; no clinician has reviewed the
-set; the ASCRS 2020 diverticulitis guideline (paywalled) was not read. Hager et al. (2024) motivate the project but
-their "essential treatment" list is NOT used as a source: it conflicts with these guidelines for uncomplicated cases.
+Scope and limits (also in docs/rule_catalog.md): cholecystitis has no rules yet because no general guideline from the last
+four years could be read; no clinician has reviewed the set; case facts must come from the record, not from the model.
+Hager et al. (2024) motivate the project but their "essential treatment" list is NOT used as a source.
 """
 import z3
 
-from clinverify.plan import DIAGNOSES, Plan
+from clinverify.plan import Plan
 from clinverify.rules.base import RuleCatalog
 
-CATALOG_VERSION = "1.0"
+CATALOG_VERSION = "2.0"
+COVERED_DIAGNOSES = ("appendicitis", "pancreatitis", "diverticulitis")
 
 catalog = RuleCatalog()
 
-APP = "WSES 2020 acute appendicitis guideline (Di Saverio et al., World J Emerg Surg 15:27)"
-CHO = "WSES 2020 acute calculus cholecystitis guideline (Pisano et al., World J Emerg Surg 15:61)"
-PAN = "WSES 2019 severe acute pancreatitis guideline (Leppaniemi et al., World J Emerg Surg 14:27)"
-DIV = "WSES 2020 acute colonic diverticulitis update (Sartelli et al., World J Emerg Surg 15:32)"
+SWE = "Swedish national guidelines for acute appendicitis (Salo et al., BJS Open 2025;9:zrae165; full text)"
+WSES25 = "2025 WSES Jerusalem guidelines for acute appendicitis (Podda et al., JAMA Surg 2026;161:283-295; abstract only)"
+ILATAM = "Ibero-Latin American guidelines on acute pancreatitis (Cardenas-Jaen et al., UEG J 2026;14:e70190; full text)"
+ACG26 = "ACG clinical guideline on colonic diverticulitis (Peery et al., Am J Gastroenterol 2026;121:1549-1561; abstract only)"
+KASID26 = "Korean guidelines for acute colonic diverticulitis (Lee et al., Intest Res 2026;24:428-463; full text)"
 
 
 # ------------------------------------------------------------------------------------------ helpers for examples
-def _plan(case_id, diagnosis, treatments=(), days=None, hour=None, **facts):
-    return Plan(case_id=case_id, diagnosis=diagnosis, treatments=tuple(treatments), postop_antibiotic_days=days,
-                appendectomy_hour=hour, facts=dict(facts))
+def _plan(case_id, diagnosis, treatments=(), days=None, **facts):
+    return Plan(case_id=case_id, diagnosis=diagnosis, treatments=tuple(treatments), postop_antibiotic_days=days, facts=dict(facts))
 
 
-def _appendicitis(case_id, treatments=("appendectomy", "preoperative_antibiotic"), days=0, hour=12, **facts):
-    base = dict(complicated=False, source_control_adequate=True, adult=True)
-    return _plan(case_id, "appendicitis", treatments, days, hour, **{**base, **facts})
-
-
-def _cholecystitis(case_id, treatments=("cholecystectomy",), days=0, **facts):
-    base = dict(complicated=False, source_control_adequate=True, suitable_for_surgery=True)
-    return _plan(case_id, "cholecystitis", treatments, days, None, **{**base, **facts})
+def _appendicitis(case_id, treatments=("appendectomy", "preoperative_antibiotic"), days=0, **facts):
+    return _plan(case_id, "appendicitis", treatments, days, **{**dict(complicated=False), **facts})
 
 
 def _pancreatitis(case_id, treatments=(), **facts):
-    base = dict(infected=False, severe=False, mild=True, gallstone=False, cholangitis=False, cbd_obstruction=False)
-    return _plan(case_id, "pancreatitis", treatments, None, None, **{**base, **facts})
+    base = dict(infection=False, necrotizing=False, mild=True, biliary=False, cholangitis=False, biliary_obstruction=False,
+                oral_or_enteral_feasible=True)
+    return _plan(case_id, "pancreatitis", treatments, None, **{**base, **facts})
 
 
-def _diverticulitis(case_id, treatments=(), days=None, **facts):
-    base = dict(immunocompetent=True, complicated=False, systemic_inflammation=False, source_control_adequate=True)
-    return _plan(case_id, "diverticulitis", treatments, days, None, **{**base, **facts})
+def _diverticulitis(case_id, treatments=(), **facts):
+    base = dict(complicated=False, low_risk=True, alarm_symptoms=False, crc_screening_up_to_date=True)
+    return _plan(case_id, "diverticulitis", treatments, None, **{**base, **facts})
 
 
 def _is(diagnosis):
@@ -77,32 +74,29 @@ def _fact(plan, key):
 # =================================================================================================== general
 @catalog.register(
     "R-GEN-001", "the plan states a diagnosis that this rule set covers",
-    "Project scope: the four pathologies of MIMIC-IV-Ext-CDM (Hager et al. 2024, Nature Medicine 30:2613-2622)",
+    "Project scope: the rule set covers appendicitis, pancreatitis and diverticulitis (benchmark pathologies of Hager et al. 2024)",
     requires=("diagnosis",),
-    name="Diagnosis is in scope",
-    recommendation="Not a clinical recommendation: the rules below exist only for appendicitis, cholecystitis, "
-                   "diverticulitis and pancreatitis, so a plan for anything else cannot be verified by them.",
-    strength="scope guard",
-    applies_when="always",
-    violation_message="The diagnosis is outside the rule set (appendicitis, cholecystitis, diverticulitis, pancreatitis); "
-                      "no guideline rules exist for it.",
+    name="Diagnosis is covered by the rules",
+    recommendation="Not a clinical recommendation: a plan for any other diagnosis cannot be verified by the rules below. "
+                   "Cholecystitis is a benchmark pathology but has no rules yet (no recent general guideline could be read).",
+    strength="scope guard", applies_when="always", source_date="2026",
+    violation_message="No guideline rules exist for this diagnosis (covered: appendicitis, pancreatitis, diverticulitis).",
     valid_example=_appendicitis(1),
-    invalid_example=_plan(2, "migraine"))
+    invalid_example=_plan(2, "cholecystitis"))
 def r_gen_001(plan):
-    return z3.BoolVal(plan.diagnosis in DIAGNOSES)
+    return z3.BoolVal(plan.diagnosis in COVERED_DIAGNOSES)
 
 
 # ================================================================================================ appendicitis
 @catalog.register(
-    "R-APP-001", "an appendectomy plan includes a single preoperative dose of broad-spectrum antibiotic",
-    f"{APP}, Recommendation 7.1", requires=(),
-    name="Preoperative antibiotic dose before appendectomy",
-    recommendation="Give a single preoperative dose of broad-spectrum antibiotics to patients with acute appendicitis "
-                   "who undergo appendectomy.",
-    strength="recommended (Recommendation 7.1; grade not shown beside this sentence)",
+    "R-APP-001", "an appendectomy plan includes a dose of broad-spectrum antibiotic as prophylaxis",
+    f"{SWE}, antibiotic recommendations for appendectomy", requires=(),
+    name="Antibiotic prophylaxis for appendectomy",
+    recommendation="A dose of broad-spectrum antibiotics should be given as prophylaxis for appendectomy.",
+    strength="GRADE high certainty of evidence (four-plus rating)", source_date="2025",
     applies=lambda p: p.diagnosis == "appendicitis" and _has(p, "appendectomy"),
     applies_when="diagnosis is appendicitis and an appendectomy is planned",
-    violation_message="Appendectomy is planned without a preoperative antibiotic dose.",
+    violation_message="Appendectomy is planned without antibiotic prophylaxis.",
     valid_example=_appendicitis(11),
     invalid_example=_appendicitis(12, treatments=("appendectomy",)))
 def r_app_001(plan):
@@ -110,14 +104,14 @@ def r_app_001(plan):
 
 
 @catalog.register(
-    "R-APP-002", "no postoperative antibiotics after appendectomy for uncomplicated appendicitis",
-    f"{APP}, Recommendation 7.1 (second sentence)", requires=("facts.complicated", "postop_antibiotic_days"),
+    "R-APP-002", "no postoperative antibiotics after surgery for uncomplicated appendicitis",
+    f"{SWE}, antibiotic recommendations for appendectomy", requires=("facts.complicated", "postop_antibiotic_days"),
     name="No postoperative antibiotics when uncomplicated",
-    recommendation="Recommends against postoperative antibiotics for patients with uncomplicated appendicitis.",
-    strength="strong, high-quality evidence (1A)",
+    recommendation="No postoperative antibiotics should be given in surgery for uncomplicated appendicitis.",
+    strength="GRADE high certainty of evidence (four-plus rating)", source_date="2025",
     applies=lambda p: p.diagnosis == "appendicitis" and _has(p, "appendectomy"),
     applies_when="diagnosis is appendicitis and an appendectomy is planned",
-    violation_message="Postoperative antibiotics are planned after appendectomy for uncomplicated appendicitis.",
+    violation_message="Postoperative antibiotics are planned after surgery for uncomplicated appendicitis.",
     valid_example=_appendicitis(21),
     invalid_example=_appendicitis(22, days=3))
 def r_app_002(plan):
@@ -125,193 +119,157 @@ def r_app_002(plan):
 
 
 @catalog.register(
-    "R-APP-003", "complicated appendicitis with adequate source control: postoperative antibiotics last at most 5 days",
-    f"{APP}, Recommendation 7.2",
-    requires=("facts.complicated", "facts.source_control_adequate", "postop_antibiotic_days"),
-    name="Postoperative antibiotics not longer than 5 days (complicated)",
-    recommendation="Recommends against prolonging postoperative antibiotics beyond 3-5 days in complicated "
-                   "appendicitis when source control is adequate. The upper bound of 5 days is encoded.",
-    strength="strong, high-quality evidence (1A)",
+    "R-APP-003", "complicated appendicitis: postoperative antibiotics are a short course of at most 3 days",
+    f"{WSES25}, key findings in the abstract", requires=("facts.complicated", "postop_antibiotic_days"),
+    name="Short postoperative antibiotic course (complicated)",
+    recommendation="Postoperative antibiotic therapy should be limited to short courses (2-3 days) in complicated "
+                   "appendicitis. The upper bound of 3 days is encoded. The Swedish 2025 guideline says there is no full "
+                   "consensus on the duration, so a violation is advisory.",
+    strength="stated in the abstract of the 2025 edition; grade not shown there", source_date="2026", advisory=True,
     applies=_is("appendicitis"),
     applies_when="diagnosis is appendicitis",
-    violation_message="The postoperative antibiotic course is longer than 5 days although source control was adequate.",
-    valid_example=_appendicitis(31, complicated=True, days=4),
+    violation_message="The postoperative antibiotic course is longer than the 2-3 days suggested for complicated appendicitis.",
+    valid_example=_appendicitis(31, complicated=True, days=3),
     invalid_example=_appendicitis(32, complicated=True, days=7))
 def r_app_003(plan):
-    return z3.Implies(z3.And(_fact(plan, "complicated"), _fact(plan, "source_control_adequate")),
-                      z3.IntVal(plan.postop_antibiotic_days) <= 5)
-
-
-@catalog.register(
-    "R-APP-004", "in adults, appendectomy takes place within 24 hours of admission",
-    f"{APP}, Recommendation 3.2", requires=("facts.adult", "appendectomy_hour"),
-    name="Appendectomy within 24 hours (adults)",
-    recommendation="Recommends against delaying appendectomy beyond 24 hours from admission when surgery is needed. "
-                   "(A separate weak suggestion exists for children; only adults are encoded.)",
-    strength="strong, moderate-quality evidence (1B)",
-    applies=lambda p: p.diagnosis == "appendicitis" and _has(p, "appendectomy"),
-    applies_when="diagnosis is appendicitis and an appendectomy is planned",
-    violation_message="Appendectomy is planned more than 24 hours after admission.",
-    valid_example=_appendicitis(41, hour=20),
-    invalid_example=_appendicitis(42, hour=30))
-def r_app_004(plan):
-    return z3.Implies(_fact(plan, "adult"), z3.IntVal(plan.appendectomy_hour) <= 24)
-
-
-# =============================================================================================== cholecystitis
-@catalog.register(
-    "R-CHO-001", "no routine postoperative antibiotics after cholecystectomy for uncomplicated cholecystitis",
-    f"{CHO}, Recommendation 7.1",
-    requires=("facts.complicated", "facts.source_control_adequate", "postop_antibiotic_days"),
-    name="No routine postoperative antibiotics when uncomplicated",
-    recommendation="In uncomplicated acute calculus cholecystitis, recommends against routine postoperative antibiotics "
-                   "when cholecystectomy controls the focus of infection.",
-    strength="strong, high-quality evidence",
-    applies=lambda p: p.diagnosis == "cholecystitis" and _has(p, "cholecystectomy"),
-    applies_when="diagnosis is cholecystitis and a cholecystectomy is planned",
-    violation_message="Postoperative antibiotics are planned after cholecystectomy for uncomplicated cholecystitis with "
-                      "the infection source controlled.",
-    valid_example=_cholecystitis(51),
-    invalid_example=_cholecystitis(52, days=5))
-def r_cho_001(plan):
-    return z3.Implies(z3.And(z3.Not(_fact(plan, "complicated")), _fact(plan, "source_control_adequate")),
-                      z3.IntVal(plan.postop_antibiotic_days) == 0)
-
-
-@catalog.register(
-    "R-CHO-002", "cholecystectomy is planned, or gallbladder drainage if the patient is not suitable for surgery",
-    f"{CHO}, Recommendations 3.1 and 6.4", requires=("facts.suitable_for_surgery",),
-    name="Cholecystectomy first-line; drainage if unsuitable for surgery",
-    recommendation="Laparoscopic cholecystectomy is the first-line treatment (3.1); for patients not suitable for "
-                   "surgery, gallbladder drainage is recommended (6.4).",
-    strength="strong; high-quality (3.1) and moderate-quality (6.4) evidence",
-    applies=_is("cholecystitis"),
-    applies_when="diagnosis is cholecystitis",
-    violation_message="The plan lacks the first-line treatment: cholecystectomy for a surgical candidate, or gallbladder "
-                      "drainage for a patient not suitable for surgery.",
-    valid_example=_cholecystitis(61, treatments=("gallbladder_drainage",), suitable_for_surgery=False),
-    invalid_example=_cholecystitis(62, treatments=("gallbladder_drainage",)))
-def r_cho_002(plan):
-    suitable = _fact(plan, "suitable_for_surgery")
-    return z3.And(z3.Implies(suitable, z3.BoolVal(_has(plan, "cholecystectomy"))),
-                  z3.Implies(z3.Not(suitable), z3.BoolVal(_has(plan, "gallbladder_drainage"))))
+    return z3.Implies(_fact(plan, "complicated"), z3.IntVal(plan.postop_antibiotic_days) <= 3)
 
 
 # =============================================================================================== pancreatitis
 @catalog.register(
-    "R-PAN-001", "antibiotics for pancreatitis are given only when infection is documented",
-    f"{PAN}, antimicrobial therapy section", requires=("facts.infected",),
-    name="No routine prophylactic antibiotics",
-    recommendation="Routine prophylactic antibiotics are no longer recommended for all patients with acute pancreatitis.",
-    strength="strong evidence grade (1A)",
+    "R-PAN-001", "antibiotics for acute pancreatitis are planned only for suspected or confirmed infection",
+    f"{ILATAM}, antibiotic recommendations", requires=("facts.infection",),
+    name="No prophylactic antibiotics",
+    recommendation="Antibiotic treatment should be reserved for suspected or confirmed infected pancreatic necrosis, "
+                   "acute cholangitis or other extrapancreatic infection; routine prophylactic antibiotics are not recommended.",
+    strength="strong recommendation, high-quality evidence", source_date="2026",
     applies=lambda p: p.diagnosis == "pancreatitis" and _has(p, "antibiotics"),
     applies_when="diagnosis is pancreatitis and antibiotics are planned",
-    violation_message="Antibiotics are planned for pancreatitis without documented infection (routine prophylaxis).",
-    valid_example=_pancreatitis(71, treatments=("antibiotics",), infected=True),
+    violation_message="Antibiotics are planned for pancreatitis without suspected or confirmed infection (prophylaxis).",
+    valid_example=_pancreatitis(71, treatments=("antibiotics",), infection=True),
     invalid_example=_pancreatitis(72, treatments=("antibiotics",)))
 def r_pan_001(plan):
-    return _fact(plan, "infected")
+    return _fact(plan, "infection")
 
 
 @catalog.register(
-    "R-PAN-002", "infected severe acute pancreatitis is treated with antibiotics",
-    f"{PAN}, antimicrobial therapy section", requires=("facts.infected", "facts.severe"),
-    name="Antibiotics for infected severe pancreatitis",
-    recommendation="Antibiotics are always recommended to treat infected severe acute pancreatitis.",
-    strength="stated as always recommended (grade not separately shown)",
+    "R-PAN-002", "necrotizing pancreatitis with confirmed or strongly suspected infection is treated with antibiotics",
+    f"{ILATAM}, explanatory text of the antibiotic recommendations", requires=("facts.necrotizing", "facts.infection"),
+    name="Empiric antibiotics for infected necrotizing pancreatitis",
+    recommendation="Empiric antibiotics must be initiated in necrotizing pancreatitis with confirmed or strongly "
+                   "suspected infection.",
+    strength="stated in the explanatory text; no strength label shown beside this sentence", source_date="2026",
     applies=_is("pancreatitis"),
     applies_when="diagnosis is pancreatitis",
-    violation_message="The patient has infected severe pancreatitis but the plan contains no antibiotic treatment.",
-    valid_example=_pancreatitis(81, treatments=("antibiotics", "enteral_nutrition"), severe=True, mild=False, infected=True),
-    invalid_example=_pancreatitis(82, treatments=("enteral_nutrition",), severe=True, mild=False, infected=True))
+    violation_message="Necrotizing pancreatitis with confirmed or strongly suspected infection: the plan has no antibiotic treatment.",
+    valid_example=_pancreatitis(81, treatments=("antibiotics",), necrotizing=True, infection=True, mild=False),
+    invalid_example=_pancreatitis(82, necrotizing=True, infection=True, mild=False))
 def r_pan_002(plan):
-    return z3.Implies(z3.And(_fact(plan, "severe"), _fact(plan, "infected")), z3.BoolVal(_has(plan, "antibiotics")))
+    return z3.Implies(z3.And(_fact(plan, "necrotizing"), _fact(plan, "infection")), z3.BoolVal(_has(plan, "antibiotics")))
 
 
 @catalog.register(
-    "R-PAN-003", "mild acute gallstone pancreatitis: cholecystectomy during the index admission",
-    f"{PAN}, section on timing of cholecystectomy", requires=("facts.gallstone", "facts.mild"),
-    name="Index-admission cholecystectomy (mild gallstone pancreatitis)",
-    recommendation="Laparoscopic cholecystectomy during the index admission is recommended in mild acute gallstone "
-                   "pancreatitis.",
-    strength="strong evidence grade (1A)",
+    "R-PAN-003", "mild biliary pancreatitis: cholecystectomy during the index hospitalization",
+    f"{ILATAM}, cholecystectomy recommendations", requires=("facts.biliary", "facts.mild"),
+    name="Cholecystectomy during the index admission (mild biliary pancreatitis)",
+    recommendation="For patients with mild acute pancreatitis, laparoscopic cholecystectomy should be performed during "
+                   "the index hospitalization (so it belongs in the discharge plan before discharge). In moderate to "
+                   "severe disease it is delayed until 8 weeks after discharge or until local complications resolve.",
+    strength="strong recommendation, high-quality evidence", source_date="2026",
     applies=_is("pancreatitis"),
     applies_when="diagnosis is pancreatitis",
-    violation_message="Mild gallstone pancreatitis: cholecystectomy during this admission is missing from the plan "
-                      "(it should be done before discharge).",
-    valid_example=_pancreatitis(91, treatments=("cholecystectomy_index_admission",), gallstone=True),
-    invalid_example=_pancreatitis(92, gallstone=True))
+    violation_message="Mild biliary pancreatitis: cholecystectomy during this admission is missing from the plan.",
+    valid_example=_pancreatitis(91, treatments=("cholecystectomy_during_admission",), biliary=True),
+    invalid_example=_pancreatitis(92, biliary=True))
 def r_pan_003(plan):
-    return z3.Implies(z3.And(_fact(plan, "gallstone"), _fact(plan, "mild")),
-                      z3.BoolVal(_has(plan, "cholecystectomy_index_admission")))
+    return z3.Implies(z3.And(_fact(plan, "biliary"), _fact(plan, "mild")),
+                      z3.BoolVal(_has(plan, "cholecystectomy_during_admission")))
 
 
 @catalog.register(
-    "R-PAN-004", "ERCP in gallstone pancreatitis only with cholangitis or bile duct obstruction",
-    f"{PAN}, ERCP section", requires=("facts.gallstone", "facts.cholangitis", "facts.cbd_obstruction"),
-    name="No routine ERCP in gallstone pancreatitis",
-    recommendation="Routine ERCP in acute gallstone pancreatitis is not indicated (1A); it is indicated with cholangitis "
-                   "(1B) and with common bile duct obstruction (2B).",
-    strength="strong evidence grade (1A) for 'not routine'; 1B and 2B for the exceptions",
+    "R-PAN-004", "ERCP in biliary pancreatitis is planned only with cholangitis or ongoing biliary obstruction",
+    f"{ILATAM}, ERCP recommendations and explanatory text", requires=("facts.biliary", "facts.cholangitis", "facts.biliary_obstruction"),
+    name="ERCP only for cholangitis or biliary obstruction",
+    recommendation="Urgent ERCP (within 24 hours) is strongly recommended for biliary pancreatitis with cholangitis; in "
+                   "choledocholithiasis without cholangitis ERCP may be delayed. The explanatory text says ERCP is "
+                   "discouraged without cholangitis or biliary obstruction (within 72 hours for ongoing obstruction).",
+    strength="strong, high-quality evidence for urgent ERCP with cholangitis; weak, moderate-quality evidence for delaying "
+             "it without cholangitis. The 'discouraged' wording is advisory.", source_date="2026", advisory=True,
     applies=lambda p: p.diagnosis == "pancreatitis" and _has(p, "ercp"),
     applies_when="diagnosis is pancreatitis and ERCP is planned",
-    violation_message="ERCP is planned for gallstone pancreatitis without cholangitis or common bile duct obstruction.",
-    valid_example=_pancreatitis(101, treatments=("ercp",), gallstone=True, mild=False, cholangitis=True),
-    invalid_example=_pancreatitis(102, treatments=("ercp",), gallstone=True, mild=False))
+    violation_message="ERCP is planned for biliary pancreatitis without cholangitis or ongoing biliary obstruction.",
+    valid_example=_pancreatitis(101, treatments=("ercp",), biliary=True, mild=False, cholangitis=True),
+    invalid_example=_pancreatitis(102, treatments=("ercp",), biliary=True, mild=False))
 def r_pan_004(plan):
-    return z3.Implies(_fact(plan, "gallstone"), z3.Or(_fact(plan, "cholangitis"), _fact(plan, "cbd_obstruction")))
+    return z3.Implies(_fact(plan, "biliary"), z3.Or(_fact(plan, "cholangitis"), _fact(plan, "biliary_obstruction")))
 
 
 @catalog.register(
-    "R-PAN-005", "severe pancreatitis: the plan includes enteral nutrition",
-    f"{PAN}, nutrition section", requires=("facts.severe",),
-    name="Enteral nutrition in severe pancreatitis",
-    recommendation="Enteral nutrition is recommended to prevent gut failure and infectious complications.",
-    strength="recommended (grade not separately shown for this sentence)",
-    applies=_is("pancreatitis"),
-    applies_when="diagnosis is pancreatitis",
-    violation_message="Severe pancreatitis: the plan contains no enteral nutrition.",
-    valid_example=_pancreatitis(111, treatments=("enteral_nutrition",), severe=True, mild=False),
-    invalid_example=_pancreatitis(112, severe=True, mild=False))
+    "R-PAN-005", "parenteral nutrition is planned only when oral and enteral feeding are not feasible",
+    f"{ILATAM}, nutrition recommendations", requires=("facts.oral_or_enteral_feasible",),
+    name="Parenteral nutrition only as a last resort",
+    recommendation="Early oral feeding is preferred; enteral tube feeding if oral intake is not tolerated after 3-4 days; "
+                   "parenteral nutrition should be reserved for cases in which oral and enteral nutrition are not feasible.",
+    strength="strong recommendation, high-quality evidence", source_date="2026",
+    applies=lambda p: p.diagnosis == "pancreatitis" and _has(p, "parenteral_nutrition"),
+    applies_when="diagnosis is pancreatitis and parenteral nutrition is planned",
+    violation_message="Parenteral nutrition is planned although oral or enteral feeding is feasible.",
+    valid_example=_pancreatitis(111, treatments=("parenteral_nutrition",), oral_or_enteral_feasible=False),
+    invalid_example=_pancreatitis(112, treatments=("parenteral_nutrition",)))
 def r_pan_005(plan):
-    return z3.Implies(_fact(plan, "severe"), z3.BoolVal(_has(plan, "enteral_nutrition")))
+    return z3.Not(_fact(plan, "oral_or_enteral_feasible"))
 
 
 # ============================================================================================== diverticulitis
 @catalog.register(
-    "R-DIV-001", "no antibiotics for uncomplicated diverticulitis in an immunocompetent patient without systemic inflammation",
-    f"{DIV}, antibiotic therapy statements",
-    requires=("facts.immunocompetent", "facts.complicated", "facts.systemic_inflammation"),
-    name="No antibiotics for uncomplicated diverticulitis",
-    recommendation="In immunocompetent patients with uncomplicated diverticulitis without signs of systemic "
-                   "inflammation, recommends not prescribing antibiotic therapy.",
-    strength="strong, high-quality evidence (1A)",
+    "R-DIV-001", "no routine antibiotics for acute uncomplicated diverticulitis in low-risk patients",
+    f"{ACG26}, recommendation on antibiotics; {KASID26}, antibiotic recommendation for uncomplicated diverticulitis",
+    requires=("facts.complicated", "facts.low_risk"),
+    name="No routine antibiotics when uncomplicated and low risk",
+    recommendation="ACG 2026 suggests against routine antibiotics for low-risk patients with acute uncomplicated "
+                   "diverticulitis because trials show little or no benefit. The Korean 2026 guideline says that in "
+                   "patients who are not immunocompromised, conservative management without antibiotics may be considered.",
+    strength="ACG: suggestion; KASID: conditional recommendation, high-quality evidence. Advisory.", source_date="2026",
+    advisory=True,
     applies=lambda p: p.diagnosis == "diverticulitis" and _has(p, "antibiotics"),
     applies_when="diagnosis is diverticulitis and antibiotics are planned",
-    violation_message="Antibiotics are planned for uncomplicated diverticulitis in an immunocompetent patient without "
-                      "systemic inflammation.",
-    valid_example=_diverticulitis(121, treatments=("antibiotics",), systemic_inflammation=True),
+    violation_message="Routine antibiotics are planned for uncomplicated diverticulitis in a low-risk patient.",
+    valid_example=_diverticulitis(121, treatments=("antibiotics",), low_risk=False),
     invalid_example=_diverticulitis(122, treatments=("antibiotics",)))
 def r_div_001(plan):
-    no_antibiotics_group = z3.And(_fact(plan, "immunocompetent"), z3.Not(_fact(plan, "complicated")),
-                                  z3.Not(_fact(plan, "systemic_inflammation")))
-    return z3.Not(no_antibiotics_group)
+    return z3.Not(z3.And(z3.Not(_fact(plan, "complicated")), _fact(plan, "low_risk")))
 
 
 @catalog.register(
-    "R-DIV-002", "complicated diverticulitis with adequate source control: postoperative antibiotics last at most 4 days",
-    f"{DIV}, postoperative antibiotic statement",
-    requires=("facts.complicated", "facts.source_control_adequate", "postop_antibiotic_days"),
-    name="Postoperative antibiotics about 4 days (complicated)",
-    recommendation="Suggests a 4-day course of postoperative antibiotics in complicated diverticulitis when source "
-                   "control has been adequate (stopping at 4 days was non-inferior to longer therapy).",
-    strength="weak suggestion, moderate-quality evidence (2B): treat a violation as advisory",
-    applies=lambda p: p.diagnosis == "diverticulitis" and p.postop_antibiotic_days is not None,
-    applies_when="diagnosis is diverticulitis and a postoperative antibiotic course is stated",
-    violation_message="The postoperative antibiotic course is longer than the suggested 4 days although source control "
-                      "was adequate.",
-    valid_example=_diverticulitis(131, days=4, complicated=True),
-    invalid_example=_diverticulitis(132, days=7, complicated=True))
+    "R-DIV-002", "complicated diverticulitis: the plan includes a colonoscopy after recovery",
+    f"{ACG26}, recommendation on colonoscopy after diverticulitis", requires=("facts.complicated",),
+    name="Colonoscopy after complicated diverticulitis",
+    recommendation="After recovery, colonoscopy is recommended for patients with complicated diverticulitis to rule out "
+                   "an underlying malignancy.",
+    strength="recommended (wording of the abstract; strength label not read)", source_date="2026",
+    applies=_is("diverticulitis"),
+    applies_when="diagnosis is diverticulitis",
+    violation_message="Complicated diverticulitis: no colonoscopy after recovery is planned.",
+    valid_example=_diverticulitis(131, treatments=("colonoscopy_after_recovery",), complicated=True),
+    invalid_example=_diverticulitis(132, complicated=True))
 def r_div_002(plan):
-    return z3.Implies(z3.And(_fact(plan, "complicated"), _fact(plan, "source_control_adequate")),
-                      z3.IntVal(plan.postop_antibiotic_days) <= 4)
+    return z3.Implies(_fact(plan, "complicated"), z3.BoolVal(_has(plan, "colonoscopy_after_recovery")))
+
+
+@catalog.register(
+    "R-DIV-003", "uncomplicated diverticulitis with alarm symptoms or overdue colorectal cancer screening: colonoscopy after recovery",
+    f"{ACG26}, recommendation on colonoscopy after diverticulitis",
+    requires=("facts.complicated", "facts.alarm_symptoms", "facts.crc_screening_up_to_date"),
+    name="Colonoscopy suggested after uncomplicated diverticulitis in selected patients",
+    recommendation="After recovery, colonoscopy is suggested for patients with uncomplicated diverticulitis who have "
+                   "alarm symptoms or are not up to date with colorectal cancer screening.",
+    strength="suggested (wording of the abstract; strength label not read). Advisory.", source_date="2026", advisory=True,
+    applies=_is("diverticulitis"),
+    applies_when="diagnosis is diverticulitis",
+    violation_message="Uncomplicated diverticulitis with alarm symptoms or overdue screening: no colonoscopy is planned.",
+    valid_example=_diverticulitis(141, treatments=("colonoscopy_after_recovery",), alarm_symptoms=True),
+    invalid_example=_diverticulitis(142, alarm_symptoms=True))
+def r_div_003(plan):
+    needs = z3.And(z3.Not(_fact(plan, "complicated")),
+                   z3.Or(_fact(plan, "alarm_symptoms"), z3.Not(_fact(plan, "crc_screening_up_to_date"))))
+    return z3.Implies(needs, z3.BoolVal(_has(plan, "colonoscopy_after_recovery")))

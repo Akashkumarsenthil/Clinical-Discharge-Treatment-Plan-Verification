@@ -8,11 +8,8 @@
     "preoperative_antibiotic"
    ],
    "postop_antibiotic_days": 0,
-   "appendectomy_hour": 12,
    "facts": {
-    "complicated": false,
-    "source_control_adequate": true,
-    "adult": true
+    "complicated": false
    },
    "discharge_hour": null,
    "medications": [],
@@ -25,10 +22,9 @@
  {
   "plan": {
    "case_id": 2,
-   "diagnosis": "migraine",
+   "diagnosis": "cholecystitis",
    "treatments": [],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {},
    "discharge_hour": null,
    "medications": [],
@@ -49,11 +45,8 @@
     "preoperative_antibiotic"
    ],
    "postop_antibiotic_days": 0,
-   "appendectomy_hour": 12,
    "facts": {
-    "complicated": false,
-    "source_control_adequate": true,
-    "adult": true
+    "complicated": false
    },
    "discharge_hour": null,
    "medications": [],
@@ -71,11 +64,8 @@
     "appendectomy"
    ],
    "postop_antibiotic_days": 0,
-   "appendectomy_hour": 12,
    "facts": {
-    "complicated": false,
-    "source_control_adequate": true,
-    "adult": true
+    "complicated": false
    },
    "discharge_hour": null,
    "medications": [],
@@ -96,11 +86,8 @@
     "preoperative_antibiotic"
    ],
    "postop_antibiotic_days": 0,
-   "appendectomy_hour": 12,
    "facts": {
-    "complicated": false,
-    "source_control_adequate": true,
-    "adult": true
+    "complicated": false
    },
    "discharge_hour": null,
    "medications": [],
@@ -119,11 +106,8 @@
     "preoperative_antibiotic"
    ],
    "postop_antibiotic_days": 3,
-   "appendectomy_hour": 12,
    "facts": {
-    "complicated": false,
-    "source_control_adequate": true,
-    "adult": true
+    "complicated": false
    },
    "discharge_hour": null,
    "medications": [],
@@ -143,12 +127,9 @@
     "appendectomy",
     "preoperative_antibiotic"
    ],
-   "postop_antibiotic_days": 4,
-   "appendectomy_hour": 12,
+   "postop_antibiotic_days": 3,
    "facts": {
-    "complicated": true,
-    "source_control_adequate": true,
-    "adult": true
+    "complicated": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -167,11 +148,8 @@
     "preoperative_antibiotic"
    ],
    "postop_antibiotic_days": 7,
-   "appendectomy_hour": 12,
    "facts": {
-    "complicated": true,
-    "source_control_adequate": true,
-    "adult": true
+    "complicated": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -185,160 +163,20 @@
  },
  {
   "plan": {
-   "case_id": 41,
-   "diagnosis": "appendicitis",
-   "treatments": [
-    "appendectomy",
-    "preoperative_antibiotic"
-   ],
-   "postop_antibiotic_days": 0,
-   "appendectomy_hour": 20,
-   "facts": {
-    "complicated": false,
-    "source_control_adequate": true,
-    "adult": true
-   },
-   "discharge_hour": null,
-   "medications": [],
-   "contraindicated": [],
-   "labs": {},
-   "follow_up": []
-  },
-  "violates": []
- },
- {
-  "plan": {
-   "case_id": 42,
-   "diagnosis": "appendicitis",
-   "treatments": [
-    "appendectomy",
-    "preoperative_antibiotic"
-   ],
-   "postop_antibiotic_days": 0,
-   "appendectomy_hour": 30,
-   "facts": {
-    "complicated": false,
-    "source_control_adequate": true,
-    "adult": true
-   },
-   "discharge_hour": null,
-   "medications": [],
-   "contraindicated": [],
-   "labs": {},
-   "follow_up": []
-  },
-  "violates": [
-   "R-APP-004"
-  ]
- },
- {
-  "plan": {
-   "case_id": 51,
-   "diagnosis": "cholecystitis",
-   "treatments": [
-    "cholecystectomy"
-   ],
-   "postop_antibiotic_days": 0,
-   "appendectomy_hour": null,
-   "facts": {
-    "complicated": false,
-    "source_control_adequate": true,
-    "suitable_for_surgery": true
-   },
-   "discharge_hour": null,
-   "medications": [],
-   "contraindicated": [],
-   "labs": {},
-   "follow_up": []
-  },
-  "violates": []
- },
- {
-  "plan": {
-   "case_id": 52,
-   "diagnosis": "cholecystitis",
-   "treatments": [
-    "cholecystectomy"
-   ],
-   "postop_antibiotic_days": 5,
-   "appendectomy_hour": null,
-   "facts": {
-    "complicated": false,
-    "source_control_adequate": true,
-    "suitable_for_surgery": true
-   },
-   "discharge_hour": null,
-   "medications": [],
-   "contraindicated": [],
-   "labs": {},
-   "follow_up": []
-  },
-  "violates": [
-   "R-CHO-001"
-  ]
- },
- {
-  "plan": {
-   "case_id": 61,
-   "diagnosis": "cholecystitis",
-   "treatments": [
-    "gallbladder_drainage"
-   ],
-   "postop_antibiotic_days": 0,
-   "appendectomy_hour": null,
-   "facts": {
-    "complicated": false,
-    "source_control_adequate": true,
-    "suitable_for_surgery": false
-   },
-   "discharge_hour": null,
-   "medications": [],
-   "contraindicated": [],
-   "labs": {},
-   "follow_up": []
-  },
-  "violates": []
- },
- {
-  "plan": {
-   "case_id": 62,
-   "diagnosis": "cholecystitis",
-   "treatments": [
-    "gallbladder_drainage"
-   ],
-   "postop_antibiotic_days": 0,
-   "appendectomy_hour": null,
-   "facts": {
-    "complicated": false,
-    "source_control_adequate": true,
-    "suitable_for_surgery": true
-   },
-   "discharge_hour": null,
-   "medications": [],
-   "contraindicated": [],
-   "labs": {},
-   "follow_up": []
-  },
-  "violates": [
-   "R-CHO-002"
-  ]
- },
- {
-  "plan": {
    "case_id": 71,
    "diagnosis": "pancreatitis",
    "treatments": [
     "antibiotics"
    ],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "infected": true,
-    "severe": false,
+    "infection": true,
+    "necrotizing": false,
     "mild": true,
-    "gallstone": false,
+    "biliary": false,
     "cholangitis": false,
-    "cbd_obstruction": false
+    "biliary_obstruction": false,
+    "oral_or_enteral_feasible": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -356,14 +194,14 @@
     "antibiotics"
    ],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "infected": false,
-    "severe": false,
+    "infection": false,
+    "necrotizing": false,
     "mild": true,
-    "gallstone": false,
+    "biliary": false,
     "cholangitis": false,
-    "cbd_obstruction": false
+    "biliary_obstruction": false,
+    "oral_or_enteral_feasible": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -380,18 +218,17 @@
    "case_id": 81,
    "diagnosis": "pancreatitis",
    "treatments": [
-    "antibiotics",
-    "enteral_nutrition"
+    "antibiotics"
    ],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "infected": true,
-    "severe": true,
+    "infection": true,
+    "necrotizing": true,
     "mild": false,
-    "gallstone": false,
+    "biliary": false,
     "cholangitis": false,
-    "cbd_obstruction": false
+    "biliary_obstruction": false,
+    "oral_or_enteral_feasible": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -405,18 +242,16 @@
   "plan": {
    "case_id": 82,
    "diagnosis": "pancreatitis",
-   "treatments": [
-    "enteral_nutrition"
-   ],
+   "treatments": [],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "infected": true,
-    "severe": true,
+    "infection": true,
+    "necrotizing": true,
     "mild": false,
-    "gallstone": false,
+    "biliary": false,
     "cholangitis": false,
-    "cbd_obstruction": false
+    "biliary_obstruction": false,
+    "oral_or_enteral_feasible": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -433,17 +268,17 @@
    "case_id": 91,
    "diagnosis": "pancreatitis",
    "treatments": [
-    "cholecystectomy_index_admission"
+    "cholecystectomy_during_admission"
    ],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "infected": false,
-    "severe": false,
+    "infection": false,
+    "necrotizing": false,
     "mild": true,
-    "gallstone": true,
+    "biliary": true,
     "cholangitis": false,
-    "cbd_obstruction": false
+    "biliary_obstruction": false,
+    "oral_or_enteral_feasible": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -459,14 +294,14 @@
    "diagnosis": "pancreatitis",
    "treatments": [],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "infected": false,
-    "severe": false,
+    "infection": false,
+    "necrotizing": false,
     "mild": true,
-    "gallstone": true,
+    "biliary": true,
     "cholangitis": false,
-    "cbd_obstruction": false
+    "biliary_obstruction": false,
+    "oral_or_enteral_feasible": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -486,14 +321,14 @@
     "ercp"
    ],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "infected": false,
-    "severe": false,
+    "infection": false,
+    "necrotizing": false,
     "mild": false,
-    "gallstone": true,
+    "biliary": true,
     "cholangitis": true,
-    "cbd_obstruction": false
+    "biliary_obstruction": false,
+    "oral_or_enteral_feasible": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -511,14 +346,14 @@
     "ercp"
    ],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "infected": false,
-    "severe": false,
+    "infection": false,
+    "necrotizing": false,
     "mild": false,
-    "gallstone": true,
+    "biliary": true,
     "cholangitis": false,
-    "cbd_obstruction": false
+    "biliary_obstruction": false,
+    "oral_or_enteral_feasible": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -535,17 +370,17 @@
    "case_id": 111,
    "diagnosis": "pancreatitis",
    "treatments": [
-    "enteral_nutrition"
+    "parenteral_nutrition"
    ],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "infected": false,
-    "severe": true,
-    "mild": false,
-    "gallstone": false,
+    "infection": false,
+    "necrotizing": false,
+    "mild": true,
+    "biliary": false,
     "cholangitis": false,
-    "cbd_obstruction": false
+    "biliary_obstruction": false,
+    "oral_or_enteral_feasible": false
    },
    "discharge_hour": null,
    "medications": [],
@@ -559,16 +394,18 @@
   "plan": {
    "case_id": 112,
    "diagnosis": "pancreatitis",
-   "treatments": [],
+   "treatments": [
+    "parenteral_nutrition"
+   ],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "infected": false,
-    "severe": true,
-    "mild": false,
-    "gallstone": false,
+    "infection": false,
+    "necrotizing": false,
+    "mild": true,
+    "biliary": false,
     "cholangitis": false,
-    "cbd_obstruction": false
+    "biliary_obstruction": false,
+    "oral_or_enteral_feasible": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -588,12 +425,11 @@
     "antibiotics"
    ],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "immunocompetent": true,
     "complicated": false,
-    "systemic_inflammation": true,
-    "source_control_adequate": true
+    "low_risk": false,
+    "alarm_symptoms": false,
+    "crc_screening_up_to_date": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -611,12 +447,11 @@
     "antibiotics"
    ],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "immunocompetent": true,
     "complicated": false,
-    "systemic_inflammation": false,
-    "source_control_adequate": true
+    "low_risk": true,
+    "alarm_symptoms": false,
+    "crc_screening_up_to_date": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -632,14 +467,15 @@
   "plan": {
    "case_id": 131,
    "diagnosis": "diverticulitis",
-   "treatments": [],
-   "postop_antibiotic_days": 4,
-   "appendectomy_hour": null,
+   "treatments": [
+    "colonoscopy_after_recovery"
+   ],
+   "postop_antibiotic_days": null,
    "facts": {
-    "immunocompetent": true,
     "complicated": true,
-    "systemic_inflammation": false,
-    "source_control_adequate": true
+    "low_risk": true,
+    "alarm_symptoms": false,
+    "crc_screening_up_to_date": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -654,13 +490,12 @@
    "case_id": 132,
    "diagnosis": "diverticulitis",
    "treatments": [],
-   "postop_antibiotic_days": 7,
-   "appendectomy_hour": null,
+   "postop_antibiotic_days": null,
    "facts": {
-    "immunocompetent": true,
     "complicated": true,
-    "systemic_inflammation": false,
-    "source_control_adequate": true
+    "low_risk": true,
+    "alarm_symptoms": false,
+    "crc_screening_up_to_date": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -674,17 +509,58 @@
  },
  {
   "plan": {
+   "case_id": 141,
+   "diagnosis": "diverticulitis",
+   "treatments": [
+    "colonoscopy_after_recovery"
+   ],
+   "postop_antibiotic_days": null,
+   "facts": {
+    "complicated": false,
+    "low_risk": true,
+    "alarm_symptoms": true,
+    "crc_screening_up_to_date": true
+   },
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": []
+  },
+  "violates": []
+ },
+ {
+  "plan": {
+   "case_id": 142,
+   "diagnosis": "diverticulitis",
+   "treatments": [],
+   "postop_antibiotic_days": null,
+   "facts": {
+    "complicated": false,
+    "low_risk": true,
+    "alarm_symptoms": true,
+    "crc_screening_up_to_date": true
+   },
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": []
+  },
+  "violates": [
+   "R-DIV-003"
+  ]
+ },
+ {
+  "plan": {
    "case_id": 9001,
    "diagnosis": "appendicitis",
    "treatments": [
     "appendectomy"
    ],
    "postop_antibiotic_days": 3,
-   "appendectomy_hour": 30,
    "facts": {
-    "complicated": false,
-    "source_control_adequate": true,
-    "adult": true
+    "complicated": false
    },
    "discharge_hour": null,
    "medications": [],
@@ -694,8 +570,7 @@
   },
   "violates": [
    "R-APP-001",
-   "R-APP-002",
-   "R-APP-004"
+   "R-APP-002"
   ]
  },
  {
@@ -707,11 +582,8 @@
     "preoperative_antibiotic"
    ],
    "postop_antibiotic_days": 8,
-   "appendectomy_hour": 40,
    "facts": {
-    "complicated": true,
-    "source_control_adequate": true,
-    "adult": true
+    "complicated": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -720,8 +592,7 @@
    "follow_up": []
   },
   "violates": [
-   "R-APP-003",
-   "R-APP-004"
+   "R-APP-003"
   ]
  },
  {
@@ -733,14 +604,14 @@
     "antibiotics"
    ],
    "postop_antibiotic_days": null,
-   "appendectomy_hour": null,
    "facts": {
-    "infected": false,
-    "severe": false,
+    "infection": false,
+    "necrotizing": false,
     "mild": false,
-    "gallstone": true,
+    "biliary": true,
     "cholangitis": false,
-    "cbd_obstruction": false
+    "biliary_obstruction": false,
+    "oral_or_enteral_feasible": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -756,17 +627,19 @@
  {
   "plan": {
    "case_id": 9004,
-   "diagnosis": "diverticulitis",
+   "diagnosis": "pancreatitis",
    "treatments": [
-    "antibiotics"
+    "parenteral_nutrition"
    ],
-   "postop_antibiotic_days": 9,
-   "appendectomy_hour": null,
+   "postop_antibiotic_days": null,
    "facts": {
-    "immunocompetent": true,
-    "complicated": true,
-    "systemic_inflammation": false,
-    "source_control_adequate": true
+    "infection": true,
+    "necrotizing": true,
+    "mild": false,
+    "biliary": false,
+    "cholangitis": false,
+    "biliary_obstruction": false,
+    "oral_or_enteral_feasible": true
    },
    "discharge_hour": null,
    "medications": [],
@@ -775,7 +648,33 @@
    "follow_up": []
   },
   "violates": [
-   "R-DIV-002"
+   "R-PAN-002",
+   "R-PAN-005"
+  ]
+ },
+ {
+  "plan": {
+   "case_id": 9005,
+   "diagnosis": "diverticulitis",
+   "treatments": [
+    "antibiotics"
+   ],
+   "postop_antibiotic_days": null,
+   "facts": {
+    "complicated": false,
+    "low_risk": true,
+    "alarm_symptoms": true,
+    "crc_screening_up_to_date": true
+   },
+   "discharge_hour": null,
+   "medications": [],
+   "contraindicated": [],
+   "labs": {},
+   "follow_up": []
+  },
+  "violates": [
+   "R-DIV-001",
+   "R-DIV-003"
   ]
  }
 ]

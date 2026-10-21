@@ -15,18 +15,18 @@ HEADER = f"""# Rule catalog v{CATALOG_VERSION}
 Code: `src/clinverify/rules/catalog.py` (the single source of truth; this page is generated from it by
 `scripts/build_rule_catalog_doc.py` and a test fails if the two differ). Owner: Sneha.
 
-**Status: version {CATALOG_VERSION} for team sign-off.** Each rule below was written from a numbered statement or section of a published
-guideline whose full text was read, and is covered by tests. It is **not clinically validated**: no clinician has reviewed it.
+**Status: version {CATALOG_VERSION} for team sign-off.** Each rule below was written from a statement in a guideline or systematic review published in 2025-2026
+(the course asks for sources no older than 3-4 years), and is covered by tests. The source column says whether the full text or only the abstract was read. It is **not clinically validated**: no clinician has reviewed it.
 
 **Provenance.** The first draft was prepared with an AI coding assistant. A rule becomes the team's rule through the sign-off in `docs/rule_signoff.md`.
 The model that generates plans never writes or sees the rules, so a plan is not graded against constraints it invented.
 
 ## What the rules check
 
-The rules check an LLM-generated plan for appendicitis, cholecystitis, diverticulitis and pancreatitis against guideline
+The rules check an LLM-generated plan for appendicitis, pancreatitis and diverticulitis against guideline
 recommendations that can be tested from a structured plan plus facts from the patient record:
 
-- **Plan content** comes from the model: diagnosis, treatments (canonical concepts), antibiotic course in days, hours to appendectomy.
+- **Plan content** comes from the model: diagnosis, treatments (canonical concepts), antibiotic course in days.
 - **Case facts** come from the record, never from the model: for example whether the disease is complicated, or whether the patient is suitable for surgery (`CASE_FACTS` in `plan.py`).
 - A rule **applies** only under its condition. If an applicable rule needs a plan field or case fact that is missing, the result is **insufficient information**, and the plan does not pass.
 - A violated rule returns its **violation message**, which is also the feedback for the repair loop (Model C).
@@ -40,48 +40,49 @@ recommendations that can be tested from a structured plan plus facts from the pa
 FOOTER = """
 Details per rule (recommendation paraphrase, violation message, valid and invalid synthetic example) are in the code.
 
-## Sources (open-access full texts)
+## Sources (all 2025-2026)
 
-| Short name | Reference |
+| Short name | Reference | Read |
+|---|---|---|
+| SWE | Salö M. et al. (2025). Antibiotic prophylaxis and postoperative antibiotics in appendicitis: systematic review and guideline. BJS Open 9:zrae165 | full text |
+| WSES25 | Podda M. et al. (2026). Acute appendicitis guideline update (WSES). JAMA Surg 161:283-295 | abstract only |
+| ILATAM | Cárdenas-Jaén K. et al. (2026). Acute pancreatitis guideline (iLATAM). United European Gastroenterol J 14:e70190 | full text |
+| ACG26 | Peery A.F. et al. (2026). ACG clinical guideline: diverticulitis. Am J Gastroenterol 121:1549-1561 | abstract only |
+| KASID26 | Lee K.-M. et al. (2026). KASID guideline on diverticular disease. Intest Res 24:428-463 | full text |
+
+Rules that rest on an abstract are weaker: read the full text before ticking them.
+
+## Why version 1.0 was replaced
+
+Version 1.0 (14 rules) used WSES guidelines from 2019-2020. The course asks for sources no older than 3-4 years, so version 2.0 uses only 2025-2026 sources.
+Rules whose newer source could not be read were not carried over:
+
+| Dropped from v1.0 | Reason |
 |---|---|
-| APP | Di Saverio S. et al. (2020). Diagnosis and treatment of acute appendicitis: 2020 update of the WSES Jerusalem guidelines. World J Emerg Surg 15:27. https://doi.org/10.1186/s13017-020-00306-3 |
-| CHO | Pisano M. et al. (2020). 2020 World Society of Emergency Surgery updated guidelines for the diagnosis and treatment of acute calculus cholecystitis. World J Emerg Surg 15:61. https://doi.org/10.1186/s13017-020-00336-x |
-| PAN | Leppaniemi A. et al. (2019). 2019 WSES guidelines for the management of severe acute pancreatitis. World J Emerg Surg 14:27. https://doi.org/10.1186/s13017-019-0247-0 |
-| DIV | Sartelli M. et al. (2020). 2020 update of the WSES guidelines for the management of acute colonic diverticulitis in the emergency setting. World J Emerg Surg 15:32. https://doi.org/10.1186/s13017-020-00313-4 |
-
-## Why the first draft was replaced
-
-The first draft (8 rules) was derived from Hager et al. (2024), who classify antibiotics, supportive care and a future colonoscopy as "essential"
-treatments. Reading the guidelines themselves showed that this conflicts with them for uncomplicated cases:
-
-| Hager-derived draft rule | What the guideline says |
-|---|---|
-| appendicitis and cholecystitis plans must contain antibiotics | recommends *against* postoperative antibiotics when uncomplicated (APP 7.1, CHO 7.1); only a single preoperative dose is recommended for appendectomy |
-| diverticulitis plans must contain antibiotics | recommends *not* prescribing antibiotics for uncomplicated diverticulitis in immunocompetent patients without systemic inflammation (1A) |
-| diverticulitis plans must schedule a colonoscopy | states that routine colonoscopy after uncomplicated diverticulitis may not be necessary; the ASCRS guideline that Hager cites was not read |
-
-The draft rules were removed. This disagreement between a benchmark paper and the guidelines is worth reporting in section 4.
+| Cholecystitis rules (R-CHO-001, R-CHO-002), `cholecystitis` as a covered diagnosis | no recent guideline with readable full text; cholecystitis plans now return R-GEN-001 |
+| Appendectomy within 24 hours (R-APP-004) | no readable recent source for the timing threshold |
+| Old R-DIV-002 (about 4 days of postoperative antibiotics) | replaced by the ACG 2026 / KASID 2026 rules R-DIV-001 to R-DIV-003 |
 
 ## Not covered, and why
 
 | Candidate | Reason |
 |---|---|
-| Colonoscopy after diverticulitis | the WSES update does not require it routinely; ASCRS 2020 (paywalled) was not read |
+| Newest full-text guidelines (IAP 2025, WSES 2025 full text, ACG 2026 full text, ASCRS 2026, ACP 2022) | paywalled; not read |
 | Severity-dependent surgery (colectomy for perforation, necrosectomy, interval appendectomy) | needs severity details the plan and record facts do not yet carry |
 | Discharge before required labs resulted; contraindicated medication (the abstract's examples) | need a clinical source and medication data (MIMIC-IV `prescriptions`, `pharmacy`) |
-| Children, pregnancy, special populations | guidelines give separate, mostly weaker statements; only adult appendectomy timing is encoded |
+| Children, pregnancy, special populations | separate, mostly weaker statements |
 
 ## Limits the team should state in the report
 
-- Guidelines date from 2019-2020; newer versions may differ.
+- Sources date from 2025-2026; two were read as abstracts only.
 - Mapping free-text plans to the canonical treatment concepts is the plan parser's job, and a mapping error there is a translation-fidelity error.
-- Two rules rest on weaker or less clearly graded statements and are marked so (R-DIV-002 weak suggestion; R-PAN-005 grade not separately shown). Treat their violations as advisory.
+- Rules marked advisory (R-APP-003, R-PAN-004, R-DIV-001, R-DIV-003) rest on weaker or conditional statements; their violations print '(advisory)' and are not blocking.
 - No clinician has reviewed the set.
 
 ## Sign-off
 
 Sign-off is recorded in **[docs/rule_signoff.md](rule_signoff.md)** (a separate page that people edit by hand; this page is generated and must not be edited).
-Tick a rule only after reading its cited statement in the guideline itself; if you cannot tick it, write the reason in the Notes column.
+Tick a rule only after reading its cited statement in the source itself; if you cannot tick it, write the reason in the Notes column.
 
 ## Run and test
 
