@@ -150,10 +150,22 @@ tests/              unit tests on synthetic data
 
 Task tracking: [Linear board](https://linear.app/298a-team-6-neurosymbolic/team/T6/overview) (two-week cycles, one assignee per issue, linked artifacts on closed issues).
 
-## Key references
+## References
 
-- Hager, P., et al. (2024). Evaluation and mitigation of the limitations of large language models in clinical decision-making. *Nature Medicine*, 30, 2613–2622. https://doi.org/10.1038/s41591-024-03097-1
-- Valmeekam, K., et al. (2023). PlanBench: An extensible benchmark for evaluating large language models on planning and reasoning about change. *NeurIPS 36*. https://arxiv.org/abs/2206.10498
-- Kambhampati, S., et al. (2024). Position: LLMs can't plan, but can help planning in LLM-Modulo frameworks. *ICML*, PMLR 235. https://proceedings.mlr.press/v235/kambhampati24a.html
-- de Moura, L., & Bjørner, N. (2008). Z3: An efficient SMT solver. https://doi.org/10.1007/978-3-540-78800-3_24
-- Johnson, A. E. W., et al. (2023). MIMIC-IV, a freely accessible electronic health record dataset. *Scientific Data*, 10, 1. https://doi.org/10.1038/s41597-022-01899-x
+The 13 papers used in the project plan (numbering matches Workbook 1):
+
+1. Guan, L., Valmeekam, K., Sreedharan, S., & Kambhampati, S. (2023). Leveraging pre-trained large language models to construct and utilize world models for model-based task planning. *NeurIPS 36*. https://arxiv.org/abs/2305.14909
+2. Hager, P., Jungmann, F., Holland, R., Bhagat, K., Hubrecht, I., Knauer, M., Vielhauer, J., Makowski, M., Braren, R., Kaissis, G., & Rueckert, D. (2024). Evaluation and mitigation of the limitations of large language models in clinical decision-making. *Nature Medicine*, 30, 2613-2622. https://doi.org/10.1038/s41591-024-03097-1 (**baseline to reproduce**)
+3. Hekmatnejad, M., Simms, A. M., & Fainekos, G. (2019). Model checking clinical decision support systems using SMT. *arXiv:1901.04545*. https://arxiv.org/abs/1901.04545
+4. Huang, J., Chen, X., Mishra, S., Zheng, H. S., Yu, A. W., Song, X., & Zhou, D. (2024). Large language models cannot self-correct reasoning yet. *ICLR*. https://arxiv.org/abs/2310.01798
+5. Kambhampati, S., Valmeekam, K., Guan, L., Verma, M., Stechly, K., Bhambri, S., Saldyt, L. P., & Murthy, A. B. (2024). Position: LLMs can't plan, but can help planning in LLM-Modulo frameworks. *ICML*, PMLR 235, 22895-22907. https://proceedings.mlr.press/v235/kambhampati24a.html
+6. Liu, B., Jiang, Y., Zhang, X., Liu, Q., Zhang, S., Biswas, J., & Stone, P. (2023). LLM+P: Empowering large language models with optimal planning proficiency. *arXiv:2304.11477*. https://arxiv.org/abs/2304.11477
+7. Olausson, T. X., Inala, J. P., Wang, C., Gao, J., & Solar-Lezama, A. (2024). Is self-repair a silver bullet for code generation? *ICLR*. https://arxiv.org/abs/2306.09896
+8. Pan, L., Albalak, A., Wang, X., & Wang, W. Y. (2023). Logic-LM: Empowering large language models with symbolic solvers for faithful logical reasoning. *Findings of EMNLP 2023*, 3806-3824. https://doi.org/10.18653/v1/2023.findings-emnlp.248
+9. Shinn, N., Cassano, F., Berman, E., Gopinath, A., Narasimhan, K., & Yao, S. (2023). Reflexion: Language agents with verbal reinforcement learning. *NeurIPS 36*. https://arxiv.org/abs/2303.11366
+10. Singhal, K., Azizi, S., Tu, T., Mahdavi, S. S., et al. (2023). Large language models encode clinical knowledge. *Nature*, 620, 172-180. https://doi.org/10.1038/s41586-023-06291-2
+11. Valmeekam, K., Marquez, M., & Kambhampati, S. (2023a). Can large language models really improve by self-critiquing their own plans? *arXiv:2310.08118*. https://arxiv.org/abs/2310.08118
+12. Valmeekam, K., Marquez, M., Olmo, A., Sreedharan, S., & Kambhampati, S. (2023b). PlanBench: An extensible benchmark for evaluating large language models on planning and reasoning about change. *NeurIPS 36 (Datasets and Benchmarks)*. https://arxiv.org/abs/2206.10498
+13. Ye, X., Chen, Q., Dillig, I., & Durrett, G. (2023). SatLM: Satisfiability-aided language models using declarative prompting. *NeurIPS 36*. https://arxiv.org/abs/2305.09656
+
+Tools and data: de Moura, L., & Bjørner, N. (2008). [Z3: An efficient SMT solver](https://doi.org/10.1007/978-3-540-78800-3_24). Johnson, A. E. W., et al. (2023). [MIMIC-IV, a freely accessible electronic health record dataset](https://doi.org/10.1038/s41597-022-01899-x). *Scientific Data*, 10, 1.
