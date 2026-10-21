@@ -57,15 +57,20 @@ Both are **credentialed PhysioNet data** (PhysioNet Credentialed Health Data Lic
 ## Data pipeline (implemented)
 
 ```mermaid
-flowchart TD
-    S1["1. Download + SHA256 check<br/>MIMIC-IV 33/33 files<br/>Ext-CDM 12/12 files"]
-    S2["2. Link check<br/>2,400/2,400 cases in admissions"]
-    S3["3. Cleaning<br/>75 duplicate rows removed"]
-    S4["4. Missing-value rules +<br/>transformations"]
-    S5["5. Validation checks<br/>pass; fail on corrupted copy"]
-    S6["6. Exploratory analysis"]
-    S7["7. Fixed stratified splits<br/>1,840 / 460 / 100<br/>+ leakage test"]
-    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7
+flowchart TB
+    subgraph R1["Collect and check"]
+        direction LR
+        S1["1 Download<br/>+ SHA256<br/>33/33, 12/12 files"] --> S2["2 Link check<br/>2,400 of 2,400<br/>cases found"] --> S3["3 Clean<br/>75 duplicate<br/>rows removed"]
+    end
+    subgraph R2["Prepare and validate"]
+        direction LR
+        S4["4 Missing values<br/>+ transformations"] --> S5["5 Validation<br/>passes; fails on<br/>corrupted copy"]
+    end
+    subgraph R3["Analyse and split"]
+        direction LR
+        S6["6 Exploratory<br/>analysis"] --> S7["7 Fixed splits<br/>1,840 / 460 / 100<br/>+ leakage test"]
+    end
+    R1 --> R2 --> R3
 ```
 
 Every step is a function in `scripts/data_demo.py` (`manifest`, `samples`, `clean`, `missing`, `transform`, `validate`, `eda`, `splits`) and in the notebook `notebooks/data_pipeline_demo.ipynb`. Aggregate output of the exploratory analysis (counts only, no patient text):
@@ -82,7 +87,7 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 | Workstream | State |
 |---|---|
 | Data access, manifests, integrity checks (SHA256) | done |
-| Data cleaning, validation checks, EDA, fixed stratified splits (1,840 / 460 / 100, seed 298) | done, being merged into this repo |
+| Data cleaning, validation checks, EDA, fixed stratified splits (1,840 / 460 / 100, seed 298) | done (`src/clinverify/data`, `scripts/data_demo.py`) |
 | Rule catalog and synthetic valid/invalid cases | in progress |
 | Verifier (Z3), evaluation harness | in progress |
 | Model A, baseline reproduction | planned (needs GPU access) |
@@ -109,30 +114,32 @@ gantt
     Final presentation           :milestone, 2026-12-08, 0d
 ```
 
-## Planned repository layout
+## Repository layout
 
 ```
-configs/            run configurations, seeds, rule-set versions
-data/               see data/README.md (data is gitignored); data/splits holds case IDs only
-docs/               design notes, data collection steps, decisions
+README.md
+report/             written report: Workbook 2 and final report (see report/README.md)
+workbook/           Workbook 1 (report sections 1 and 2), submitted
+presentation/       slides and demo material for the checkpoints
 notebooks/          data pipeline demo (extraction, cleaning, EDA, splits)
-results/            logged runs and figures
-scripts/            one-command entry points (e.g. data_demo.py)
+scripts/            data_demo.py: runs the data pipeline end to end, one step at a time
 src/clinverify/
     data/           loading, cleaning, validation, splits and leakage checks
-    rules/          team-authored clinical rule catalog
-    verifier/       plan -> logic -> Z3 check, names the violated rule
-    models/         Model A (298A); Models B, C, D (298B)
-    baseline/       Hager et al. 2024 reproduction
-    eval/           evaluation harness and metrics
+    rules/          team-authored clinical rule catalog (planned)
+    verifier/       plan -> logic -> Z3 check, names the violated rule (planned)
+    models/         Model A (298A); Models B, C, D (298B) (planned)
+    baseline/       Hager et al. 2024 reproduction (planned)
+    eval/           evaluation harness and metrics (planned)
 tests/              unit tests on synthetic data
+data/               data/README.md; data/splits holds case IDs only (all patient data is gitignored)
+docs/               data collection steps, figures
 ```
 
 ## Reproducibility
 
 - Python 3.10+ with a pinned environment (in progress).
 - Fixed, versioned splits; every reported run records its configuration and random seed.
-- The data pipeline runs end to end with `python scripts/data_demo.py all` once the data is downloaded to `MIMIC_DIR`.
+- The data pipeline runs end to end with `python scripts/data_demo.py all` once the data is downloaded to `MIMIC_DIR` (steps: `manifest`, `samples`, `clean`, `missing`, `transform`, `validate`, `eda`, `splits`). Tests: `python -m pytest tests`.
 - Goal: another person can clone the repo and reproduce each reported result without help.
 
 ## Team
