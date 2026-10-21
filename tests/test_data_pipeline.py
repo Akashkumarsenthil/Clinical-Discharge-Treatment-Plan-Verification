@@ -110,3 +110,23 @@ def test_patient_leakage_check_flags_shared_patient():
     s = {"train": [1, 5], "val": [2, 7], "test": [3, 9]}      # admissions 1, 2, 3 are the same patient
     assert S.patient_overlap(s, subject_of)["train+val"] == 1
     assert any("both train and val" in p for p in S.patient_leakage_check(s, subject_of))
+
+
+def test_synthetic_dataset_runs_through_the_whole_pipeline(tmp_path):
+    """A clean clone has no credentialed data: the synthetic stand-in must pass the same pipeline end to end."""
+    from clinverify.data import synthetic
+    root = synthetic.generate(tmp_path / "synth", n_cases=400, seed=5)
+    ext, mimic = root / "mimic-iv-ext-cdm-1.1", root / "physionet.org/files/mimiciv/3.1"
+    ids = E.load_pathology_ids(ext)
+    cases = E.case_table(ids)
+    assert len(cases) == 400
+    cleaned, report = E.clean_tables(E.load_tables(ext))
+    assert report["duplicate_rows"].sum() > 0                                  # the generator injects duplicates
+    assert E.validate_tables(cleaned, ids) == []
+    assert E.validate_tables(E.corrupt(cleaned), ids)                          # corrupted copy is caught
+    transformed = E.transform_tables(cleaned, directory=ext)
+    assert set(transformed["laboratory_tests"]["flag"]) <= {"low", "normal", "high", "unknown"}
+    subject_of = E.subject_map(mimic)
+    splits = S.make_grouped_splits(cases, subject_of, seed=5, n_test=60)
+    assert S.leakage_check(splits, cases) == [] and S.patient_leakage_check(splits, subject_of) == []
+    assert len(splits["test"]) == 60

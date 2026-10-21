@@ -10,5 +10,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pandas numpy pytest z3-solver
-      - run: python -m pytest tests -q
+      - run: pip install pandas numpy matplotlib pytest z3-solver
+      - name: Unit tests
+        run: python -m pytest tests -q
+      - name: Quickstart on synthetic data (same commands as the README)
+        run: |
+          python scripts/make_synthetic_data.py --out "$RUNNER_TEMP/synthetic_mimic"
+          MIMIC_DIR="$RUNNER_TEMP/synthetic_mimic" python scripts/data_demo.py all
+          MIMIC_DIR="$RUNNER_TEMP/synthetic_mimic" python scripts/patient_overlap_check.py
+          python scripts/run_eval.py --plans tests/data/toy_labeled_plans.json --rules tests.toy_rules

@@ -6,6 +6,29 @@ Language models now draft discharge and treatment plans, and the plans read well
 
 > **Scope:** a single hospital-encounter setting. This is an experimental verification framework, not a clinical decision support product. "Valid" means a plan complies with our formal rules; it does not prove the plan is clinically correct.
 
+## Quickstart (no PhysioNet access needed)
+
+The real data is credentialed and cannot be shared, so everything below runs on a **synthetic stand-in** with the same tables and columns (random values, nothing derived from real patients).
+
+```bash
+git clone https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification.git
+cd Clinical-Discharge-Treatment-Plan-Verification
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
+python -m pytest tests                                    # unit tests: synthetic data and toy rules only
+python scripts/make_synthetic_data.py --out ~/synthetic_mimic
+MIMIC_DIR=~/synthetic_mimic python scripts/data_demo.py all
+python scripts/run_eval.py --plans tests/data/toy_labeled_plans.json --rules tests.toy_rules
+```
+
+| Command | What it shows |
+|---|---|
+| `data_demo.py all` | the data pipeline in order: integrity check, samples, cleaning (duplicates), missing-value rules, transformations, validation checks that pass and fail on corrupted data, EDA, and patient-grouped splits with leakage tests |
+| `run_eval.py` | the Z3 verifier and evaluation harness on toy rules: validity, escape rate, false rejects, solver time, and a logged run |
+
+Runs on synthetic data write to `results/synthetic/` and never touch the real split file or EDA summary. With real PhysioNet access, point `MIMIC_DIR` at your own download instead (see Data and access).
+
 ## Approach
 
 ```mermaid
@@ -109,9 +132,9 @@ report/             written report: Workbook 2 and final report (see report/READ
 workbook/           Workbook 1 (report sections 1 and 2), submitted
 presentation/       slides and demo material for the checkpoints
 notebooks/          data pipeline demo (extraction, cleaning, EDA, splits)
-scripts/            data_demo.py: runs the data pipeline end to end, one step at a time
+scripts/            data_demo.py (data pipeline, one step at a time), make_synthetic_data.py, run_eval.py, patient_overlap_check.py
 src/clinverify/
-    data/           loading, cleaning, validation, splits and leakage checks
+    data/           loading, cleaning, validation, splits and leakage checks; synthetic data generator
     plan.py         starter schema for a structured plan
     rules/          rule interface (done) and the team-authored rule catalog (empty until the team writes it)
     verifier/       plan -> Z3 check, names every violated rule (done, toy-tested)
@@ -130,7 +153,7 @@ requirements.txt    pinned Python packages for the data pipeline
 
 - Python 3.10+; install the pinned packages with `pip install -r requirements.txt`.
 - Fixed, versioned splits; every reported run records its configuration and random seed.
-- The data pipeline runs end to end with `python scripts/data_demo.py all` once the data is downloaded to `MIMIC_DIR` (steps: `manifest`, `samples`, `clean`, `missing`, `transform`, `validate`, `eda`, `splits`). Tests: `python -m pytest tests`.
+- The data pipeline runs end to end with `python scripts/data_demo.py all`, on synthetic data (see Quickstart) or on the real data once it is downloaded to `MIMIC_DIR` (steps: `manifest`, `samples`, `clean`, `missing`, `transform`, `validate`, `eda`, `splits`). Tests: `python -m pytest tests`.
 - Goal: another person can clone the repo and reproduce each reported result without help.
 
 ## Team

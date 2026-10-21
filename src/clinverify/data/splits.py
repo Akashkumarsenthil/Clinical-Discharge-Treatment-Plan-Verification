@@ -56,7 +56,7 @@ def leakage_check(splits: dict[str, list[int]], cases: pd.DataFrame) -> list[str
     if len(union) != len(set(union)):
         problems.append("duplicate case IDs inside the splits")
     if set(union) != set(cases["hadm_id"]):
-        problems.append("splits do not cover exactly the 2,400 cases")
+        problems.append(f"splits do not cover exactly the {len(cases):,} cases")
     return problems
 
 

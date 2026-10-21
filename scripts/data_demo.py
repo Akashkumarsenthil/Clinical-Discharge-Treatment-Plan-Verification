@@ -31,9 +31,13 @@ sys.path.insert(0, str(ROOT / "src"))
 from clinverify.data import ext_cdm as E  # noqa: E402
 from clinverify.data import splits as S  # noqa: E402
 
-FIG_DIR = ROOT / "results" / "figures"
-RESULTS = ROOT / "results"
-SPLIT_DIR = ROOT / "data" / "splits"
+# Synthetic runs (MIMIC_DIR points at generated data) write to results/synthetic so they never overwrite the real,
+# committed split file or EDA summary.
+SYNTHETIC = (E.MIMIC_DIR / "SYNTHETIC").exists()
+OUT = ROOT / "results" / "synthetic" if SYNTHETIC else ROOT / "results"
+FIG_DIR = OUT / "figures"
+RESULTS = OUT
+SPLIT_DIR = OUT / "splits" if SYNTHETIC else ROOT / "data" / "splits"
 
 
 def sha256(path: Path) -> str:
@@ -67,7 +71,7 @@ def step_manifest():
             else:
                 bad += 1
         print(f"{label:24s} files listed={len(listed):2d}  verified={ok:2d}  failed/missing={bad}  "
-              f"size={size/1e9:.2f} GB   licence: PhysioNet Credentialed Health Data License 1.5.0")
+              f"size={size/1e9:.2f} GB   licence: {'none (synthetic data)' if (E.MIMIC_DIR / 'SYNTHETIC').exists() else 'PhysioNet Credentialed Health Data License 1.5.0'}")
     adm = pd.read_csv(E.MIMIC_IV_DIR / "hosp" / "admissions.csv.gz", usecols=["hadm_id"])
     cases = E.case_table(E.load_pathology_ids())
     print(f"Link check: {int(cases['hadm_id'].isin(adm['hadm_id']).sum())} of {len(cases)} Ext-CDM cases "
@@ -178,7 +182,7 @@ def step_eda():
         f"History-of-present-illness length is skewed: median {int(master['hpi_words'].median())} words, "
         f"max {int(master['hpi_words'].max())}; median by class: "
         + ", ".join(f"{k} {int(v)}" for k, v in words_by_path.items()) + ".",
-        f"Only {micro_cov:.0f}% of cases have microbiology results; labs and radiology cover all 2,400 cases.",
+        f"Only {micro_cov:.0f}% of cases have microbiology results; labs and radiology cover all {len(master):,} cases.",
         f"Duplicates affected only the ICD/procedure tables ({int(report['duplicate_rows'].sum())} rows in total).",
     ]
     print("\nFindings:")

@@ -16,7 +16,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 MIMIC_DIR = Path(os.environ.get("MIMIC_DIR", Path.home() / "data" / "mimic"))
 ADMISSIONS = MIMIC_DIR / "physionet.org" / "files" / "mimiciv" / "3.1" / "hosp" / "admissions.csv.gz"
-SPLITS_DIR = ROOT / "data" / "splits"
+SPLITS_DIR = ROOT / ("results" / Path("synthetic") / "splits" if (MIMIC_DIR / "SYNTHETIC").exists() else Path("data") / "splits")
 
 patient_of = pd.read_csv(ADMISSIONS, usecols=["subject_id", "hadm_id"]).set_index("hadm_id")["subject_id"]
 for path in sorted(SPLITS_DIR.glob("ext_cdm_splits_v*.json")):

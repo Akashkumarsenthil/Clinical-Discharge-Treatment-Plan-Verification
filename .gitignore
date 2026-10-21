@@ -17,3 +17,6 @@ results/runs/*
 
 # aggregate-only summary statistics are safe to track
 !results/eda_summary.csv
+
+# output of runs on synthetic data
+results/synthetic/
