@@ -9,14 +9,14 @@ Language models now draft discharge and treatment plans, and the plans read well
 ## Approach
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["Clinical case<br/>MIMIC-IV / Ext-CDM"] --> B["LLM drafts a plan<br/>Models A to D"]
-    B --> C["Plan parsed into a<br/>structured form"]
-    R["Team-written<br/>rule set"] --> D["Z3 verifier"]
-    C --> D
+    B --> C["Plan parsed into<br/>a structured form"]
+    C --> D{"Z3 verifier"}
+    R["Team-written<br/>rule set"] --> D
     D -->|valid| E["Release for<br/>clinician review"]
-    D -->|"invalid, with violated rule ID"| F["Hold or return"]
-    F -.->|"298B: counterexample repair"| B
+    D -->|"invalid + rule ID"| F["Hold or return"]
+    F -.->|"298B: repair loop"| B
 ```
 
 Four models are built and compared on the same benchmark and splits:
@@ -57,13 +57,15 @@ Both are **credentialed PhysioNet data** (PhysioNet Credentialed Health Data Lic
 ## Data pipeline (implemented)
 
 ```mermaid
-flowchart LR
-    S["Download and SHA256 check<br/>MIMIC-IV 33 of 33 files<br/>Ext-CDM 12 of 12 files"] --> L["Link check<br/>2,400 of 2,400 cases<br/>found in MIMIC-IV admissions"]
-    L --> C["Cleaning<br/>75 duplicate rows removed"]
-    C --> M["Missing-value rules and<br/>transformations"]
-    M --> V["Validation checks<br/>pass, and fail on a<br/>deliberately corrupted copy"]
-    V --> E["Exploratory analysis"]
-    E --> P["Fixed stratified splits<br/>1,840 train, 460 val, 100 test<br/>with leakage test"]
+flowchart TD
+    S1["1. Download + SHA256 check<br/>MIMIC-IV 33/33 files<br/>Ext-CDM 12/12 files"]
+    S2["2. Link check<br/>2,400/2,400 cases in admissions"]
+    S3["3. Cleaning<br/>75 duplicate rows removed"]
+    S4["4. Missing-value rules +<br/>transformations"]
+    S5["5. Validation checks<br/>pass; fail on corrupted copy"]
+    S6["6. Exploratory analysis"]
+    S7["7. Fixed stratified splits<br/>1,840 / 460 / 100<br/>+ leakage test"]
+    S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7
 ```
 
 Every step is a function in `scripts/data_demo.py` (`manifest`, `samples`, `clean`, `missing`, `transform`, `validate`, `eda`, `splits`) and in the notebook `notebooks/data_pipeline_demo.ipynb`. Aggregate output of the exploratory analysis (counts only, no patient text):
@@ -89,27 +91,22 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 
 ```mermaid
 gantt
-    title DATA 298A schedule - proposed task windows
+    title DATA 298A - proposed plan
     dateFormat YYYY-MM-DD
     axisFormat %b %d
-    section Data
-    Data access and manifest           :done, 2026-09-10, 2026-10-08
-    Metrics, splits, leakage checks    :done, 2026-09-29, 2026-10-08
     section Build
-    Rule catalog and synthetic cases   :active, 2026-09-25, 2026-10-22
-    Environment and CI                 :active, 2026-09-25, 2026-10-22
-    Verifier and evaluation harness    :2026-10-09, 2026-11-05
-    Model A                            :2026-10-09, 2026-11-05
-    Baseline reproduction              :2026-10-23, 2026-11-26
-    Benchmark runs and failure study   :2026-11-06, 2026-12-01
-    section Course milestones
-    Workbook 1                         :milestone, 2026-10-07, 0d
-    Team Meeting 1                     :milestone, 2026-10-08, 0d
-    Progress Report 2                  :milestone, 2026-10-22, 0d
-    Workbook 2                         :milestone, 2026-11-11, 0d
-    Team Meeting 2                     :milestone, 2026-11-12, 0d
-    Final report                       :milestone, 2026-12-07, 0d
-    Final presentation                 :milestone, 2026-12-08, 0d
+    Data pipeline                :done, 2026-09-10, 2026-10-08
+    Rule catalog + CI            :active, 2026-09-25, 2026-10-22
+    Verifier + harness + Model A :2026-10-09, 2026-11-05
+    Baseline reproduction        :2026-10-23, 2026-11-26
+    Benchmark runs               :2026-11-06, 2026-12-01
+    section Milestones
+    Team Meeting 1               :milestone, 2026-10-08, 0d
+    Progress Report 2            :milestone, 2026-10-22, 0d
+    Workbook 2                   :milestone, 2026-11-11, 0d
+    Team Meeting 2               :milestone, 2026-11-12, 0d
+    Final report                 :milestone, 2026-12-07, 0d
+    Final presentation           :milestone, 2026-12-08, 0d
 ```
 
 ## Planned repository layout
