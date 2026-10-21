@@ -100,7 +100,7 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 | Data access, manifests, integrity checks (SHA256) | done |
 | Data cleaning, validation checks, EDA, fixed stratified splits grouped by patient (1,840 / 460 / 100, seed 298; split v2) | done (`src/clinverify/data`, `scripts/data_demo.py`) |
 | Patient-level split leakage check (`scripts/patient_overlap_check.py`) | done: v1 had 5 of 2,383 patients crossing splits; fixed in v2 (0), see `docs/split_leakage_check.md` |
-| Rule catalog and synthetic valid/invalid cases | first 8 sourced rules drafted (Hager et al. 2024), **pending team review**: `docs/rule_catalog.md`; 20 labeled synthetic plans |
+| Rule catalog and synthetic valid/invalid cases | **v1.0 for team sign-off**: 14 guideline-sourced rules (WSES 2019-2020), each with source location, strength, violation message and examples; 32 labeled synthetic plans; see `docs/rule_catalog.md` |
 | Verifier (Z3), rule interface, evaluation harness | scaffold done and tested on toy rules (`scripts/run_eval.py`); waiting for the team's rules |
 | Model A, baseline reproduction | planned (needs GPU access) |
 
@@ -139,7 +139,7 @@ scripts/            data_demo.py (data pipeline, one step at a time), make_synth
 src/clinverify/
     data/           loading, cleaning, validation, splits and leakage checks; synthetic data generator
     plan.py         starter schema for a structured plan
-    rules/          rule interface (done) and the rule catalog (first 8 draft rules, pending team review)
+    rules/          rule interface (done) and the rule catalog (v1.0, 14 guideline-sourced rules, pending team sign-off)
     verifier/       plan -> Z3 check, names every violated rule (done, toy-tested)
     models/         Model A (298A); Models B, C, D (298B) (planned)
     baseline/       Hager et al. 2024 reproduction (planned)

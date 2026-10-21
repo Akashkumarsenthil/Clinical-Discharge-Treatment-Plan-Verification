@@ -1,37 +1,48 @@
-"""Starter schema for an LLM-generated discharge / treatment plan.
+"""Starter schema for an LLM-generated discharge / treatment plan, plus the case facts rules may condition on.
 
 This is the structured form the verifier checks (Workbook 1, section 1.4: "fixed schema preferred over free text").
-The fields below are a minimal starting point. The team should agree the final schema together with the Model A
-input/output specification and extend it as rules need new inputs.
+The team should agree the final schema together with the Model A input/output specification.
 
-Times are integer hours since admission, so rules can compare them exactly in Z3.
+Plan content comes from the model. `facts` are case facts taken from the patient record (not from the model), such as
+whether the appendicitis is complicated. Rules may need either; a missing one makes the rule inconclusive.
+Times are integer hours since admission; durations are whole days.
 """
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 from typing import Optional
 
+DIAGNOSES = ("appendicitis", "cholecystitis", "diverticulitis", "pancreatitis")     # pathologies of the benchmark
 
-# Canonical concept names a plan parser must map free text to (a parsing error here is a translation-fidelity error).
-# Taken from the treatment labels in Hager et al. (2024), Fig. 4.
-DIAGNOSES = ("appendicitis", "cholecystitis", "diverticulitis", "pancreatitis")
-TREATMENT_CONCEPTS = ("antibiotics", "support", "appendectomy", "cholecystectomy", "colectomy", "drainage", "ercp",
-                      "future_colonoscopy")
+# Canonical treatment concepts a plan parser must map free text to (a parsing error here is a translation-fidelity error).
+TREATMENT_CONCEPTS = ("antibiotics", "preoperative_antibiotic", "appendectomy", "cholecystectomy",
+                      "cholecystectomy_index_admission", "gallbladder_drainage", "ercp", "enteral_nutrition")
+
+# Case facts (booleans) that the current rules use. They must come from the record, not from the model.
+CASE_FACTS = ("complicated", "source_control_adequate", "adult", "suitable_for_surgery", "immunocompetent",
+              "systemic_inflammation", "infected", "gallstone", "mild", "severe", "cholangitis", "cbd_obstruction")
 
 
 @dataclass(frozen=True)
 class Plan:
     case_id: int                                          # hadm_id of the encounter
     diagnosis: str = ""
-    discharge_hour: Optional[int] = None                  # planned discharge time; None = not stated
-    medications: tuple[str, ...] = ()                     # drugs the plan prescribes
-    contraindicated: tuple[str, ...] = ()                 # drugs the record says must be avoided for this patient
-    labs: dict[str, Optional[int]] = field(default_factory=dict)   # ordered lab -> hour resulted (None = still pending)
-    follow_up: tuple[str, ...] = ()                       # follow-up actions the plan names
-    treatments: tuple[str, ...] = ()                      # treatments the plan recommends, as canonical concepts (TREATMENT_CONCEPTS)
+    treatments: tuple[str, ...] = ()                      # canonical concepts (TREATMENT_CONCEPTS)
+    postop_antibiotic_days: Optional[int] = None          # postoperative antibiotic course, in days (0 = none)
+    appendectomy_hour: Optional[int] = None               # hours from admission to appendectomy
+    facts: dict[str, bool] = field(default_factory=dict)  # case facts from the record (CASE_FACTS)
+    # generic fields used by the toy rules in the tests
+    discharge_hour: Optional[int] = None
+    medications: tuple[str, ...] = ()
+    contraindicated: tuple[str, ...] = ()
+    labs: dict[str, Optional[int]] = field(default_factory=dict)
+    follow_up: tuple[str, ...] = ()
 
     def has(self, name: str) -> bool:
-        """True if the plan states this field (None, empty text, empty tuple and empty dict count as not stated)."""
+        """True if the plan or the case facts state this field. 'facts.<key>' names a case fact.
+        None, empty text, empty tuple and empty dict count as not stated; 0 and False count as stated."""
+        if name.startswith("facts."):
+            return self.facts.get(name[6:]) is not None
         value = getattr(self, name)
         return value is not None and value != "" and value != () and value != {}
 
@@ -41,7 +52,8 @@ class Plan:
     @classmethod
     def from_dict(cls, d: dict) -> "Plan":
         d = dict(d)
-        for key in ("medications", "contraindicated", "follow_up", "treatments"):
+        for key in ("treatments", "medications", "contraindicated", "follow_up"):
             d[key] = tuple(d.get(key, ()))
         d["labs"] = dict(d.get("labs", {}))
+        d["facts"] = dict(d.get("facts", {}))
         return cls(**d)

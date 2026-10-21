@@ -16,7 +16,7 @@ from clinverify.rules.base import Rule, RuleCatalog  # noqa: E402
 from clinverify.verifier.z3_verifier import verify  # noqa: E402
 from tests.toy_rules import catalog  # noqa: E402
 
-GOOD = Plan(1, "dx", discharge_hour=48, medications=("a",), contraindicated=("b",), labs={"x": 10, "y": 40}, follow_up=("clinic",))
+GOOD = Plan(case_id=1, diagnosis="dx", discharge_hour=48, medications=("a",), contraindicated=("b",), labs={"x": 10, "y": 40}, follow_up=("clinic",))
 
 
 def test_valid_plan_passes():
@@ -25,20 +25,20 @@ def test_valid_plan_passes():
 
 
 def test_each_violation_is_named():
-    late = Plan(2, "dx", 20, ("a",), ("b",), {"x": 30}, ("clinic",))
-    bad_drug = Plan(3, "dx", 48, ("b",), ("b",), {"x": 1}, ("clinic",))
-    no_follow = Plan(4, "dx", 48, ("a",), ("b",), {"x": 1}, ())
-    pending = Plan(5, "dx", 48, ("a",), ("b",), {"x": None}, ("clinic",))
+    late = Plan(case_id=2, diagnosis="dx", discharge_hour=20, medications=("a",), contraindicated=("b",), labs={"x": 30}, follow_up=("clinic",))
+    bad_drug = Plan(case_id=3, diagnosis="dx", discharge_hour=48, medications=("b",), contraindicated=("b",), labs={"x": 1}, follow_up=("clinic",))
+    no_follow = Plan(case_id=4, diagnosis="dx", discharge_hour=48, medications=("a",), contraindicated=("b",), labs={"x": 1}, follow_up=())
+    pending = Plan(case_id=5, diagnosis="dx", discharge_hour=48, medications=("a",), contraindicated=("b",), labs={"x": None}, follow_up=("clinic",))
     assert verify(late, catalog).violated == ("R-TOY-001",)
     assert verify(bad_drug, catalog).violated == ("R-TOY-002",)
     assert verify(no_follow, catalog).inconclusive == ("R-TOY-003",)     # empty follow_up counts as not stated
     assert verify(pending, catalog).violated == ("R-TOY-001",)
-    both = Plan(6, "dx", 5, ("b",), ("b",), {"x": 9}, ("clinic",))
+    both = Plan(case_id=6, diagnosis="dx", discharge_hour=5, medications=("b",), contraindicated=("b",), labs={"x": 9}, follow_up=("clinic",))
     assert set(verify(both, catalog).violated) == {"R-TOY-001", "R-TOY-002"}
 
 
 def test_missing_input_is_inconclusive_not_valid():
-    r = verify(Plan(7, "dx", discharge_hour=None, medications=("a",), contraindicated=("b",), labs={"x": 1}, follow_up=("c",)), catalog)
+    r = verify(Plan(case_id=7, diagnosis="dx", discharge_hour=None, medications=("a",), contraindicated=("b",), labs={"x": 1}, follow_up=("c",)), catalog)
     assert r.inconclusive == ("R-TOY-001",) and not r.valid and not r.complete
 
 
@@ -58,8 +58,8 @@ def test_rule_registration_enforces_id_source_and_uniqueness():
 
 def labeled():
     return [(GOOD, set()),
-            (Plan(2, "dx", 20, ("a",), ("b",), {"x": 30}, ("clinic",)), {"R-TOY-001"}),
-            (Plan(3, "dx", 48, ("b",), ("b",), {"x": 1}, ("clinic",)), {"R-TOY-002"})]
+            (Plan(case_id=2, diagnosis="dx", discharge_hour=20, medications=("a",), contraindicated=("b",), labs={"x": 30}, follow_up=("clinic",)), {"R-TOY-001"}),
+            (Plan(case_id=3, diagnosis="dx", discharge_hour=48, medications=("b",), contraindicated=("b",), labs={"x": 1}, follow_up=("clinic",)), {"R-TOY-002"})]
 
 
 def test_harness_metrics_with_full_and_partial_rule_sets():
