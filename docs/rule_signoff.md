@@ -12,18 +12,18 @@ The column "Assistant's check" records that the AI assistant that drafted the ru
 
 | Rule | Name | Assistant's check of the source | Owner (Sneha) read against source | Second team member | Clinical / domain reviewer | Notes (initials, date, reasons) |
 |---|---|---|---|---|---|---|
-| `R-GEN-001` | Diagnosis is covered by the rules | n/a (scope guard, no guideline) | [ ] | [ ] | [ ] | |
-| `R-APP-001` | Antibiotic prophylaxis for appendectomy | full text located and compared, 2026-10-21 | [ ] | [ ] | [ ] | |
-| `R-APP-002` | No postoperative antibiotics when uncomplicated | full text located and compared, 2026-10-21 | [ ] | [ ] | [ ] | |
-| `R-APP-003` | Short postoperative antibiotic course (complicated) | abstract only, 2026-10-21 | [ ] | [ ] | [ ] | |
-| `R-PAN-001` | No prophylactic antibiotics | full text located and compared, 2026-10-21 | [ ] | [ ] | [ ] | |
-| `R-PAN-002` | Empiric antibiotics for infected necrotizing pancreatitis | full text located and compared, 2026-10-21 | [ ] | [ ] | [ ] | |
-| `R-PAN-003` | Cholecystectomy during the index admission (mild biliary pancreatitis) | full text located and compared, 2026-10-21 | [ ] | [ ] | [ ] | |
-| `R-PAN-004` | ERCP only for cholangitis or biliary obstruction | full text located and compared, 2026-10-21 | [ ] | [ ] | [ ] | |
-| `R-PAN-005` | Parenteral nutrition only as a last resort | full text located and compared, 2026-10-21 | [ ] | [ ] | [ ] | |
-| `R-DIV-001` | No routine antibiotics when uncomplicated and low risk | abstract only, 2026-10-21 | [ ] | [ ] | [ ] | |
-| `R-DIV-002` | Colonoscopy after complicated diverticulitis | abstract only, 2026-10-21 | [ ] | [ ] | [ ] | |
-| `R-DIV-003` | Colonoscopy suggested after uncomplicated diverticulitis in selected patients | abstract only, 2026-10-21 | [ ] | [ ] | [ ] | |
+| `R-GEN-001` | Diagnosis is covered by the rules | n/a (scope guard, no guideline) | [x] | [ ] | [ ] | SS, 2026-10-21 |
+| `R-APP-001` | Antibiotic prophylaxis for appendectomy | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
+| `R-APP-002` | No postoperative antibiotics when uncomplicated | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
+| `R-APP-003` | Short postoperative antibiotic course (complicated) | abstract only, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
+| `R-PAN-001` | No prophylactic antibiotics | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
+| `R-PAN-002` | Empiric antibiotics for infected necrotizing pancreatitis | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
+| `R-PAN-003` | Cholecystectomy during the index admission (mild biliary pancreatitis) | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
+| `R-PAN-004` | ERCP only for cholangitis or biliary obstruction | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
+| `R-PAN-005` | Parenteral nutrition only as a last resort | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
+| `R-DIV-001` | No routine antibiotics when uncomplicated and low risk | abstract only, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
+| `R-DIV-002` | Colonoscopy after complicated diverticulitis | abstract only, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
+| `R-DIV-003` | Colonoscopy suggested after uncomplicated diverticulitis in selected patients | abstract only, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
 
 **Version 2.0 replaced 1.0 (2019-2020 sources). Earlier ticks applied to the old rules and were reset.**
 
