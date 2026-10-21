@@ -198,3 +198,9 @@ def transform_tables(cleaned: dict[str, pd.DataFrame], directory: Path = EXT_CDM
     master["hpi_words"] = master["hadm_id"].map(out["history_of_present_illness"].set_index("hadm_id")["word_count"])
     out["cases_master"] = master.fillna(0)
     return out
+
+
+def subject_map(mimic_iv_dir: Path = MIMIC_IV_DIR) -> pd.Series:
+    """hadm_id -> subject_id (patient), from MIMIC-IV admissions. Used for patient-level splits."""
+    adm = pd.read_csv(mimic_iv_dir / "hosp" / "admissions.csv.gz", usecols=["subject_id", "hadm_id"])
+    return adm.set_index("hadm_id")["subject_id"]

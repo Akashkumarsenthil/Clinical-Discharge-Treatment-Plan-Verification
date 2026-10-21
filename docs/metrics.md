@@ -6,7 +6,7 @@ Source: project abstract and Workbook 1 (sections 1.2 and 2.2.2). Template rule:
 
 | Metric | Meaning | Target | Measured on |
 |---|---|---|---|
-| Plan validity rate | share of generated plans that satisfy the team-written rule set | **>= 0.85** | fixed 100-case held-out test split (`data/splits/ext_cdm_splits_v1.json`) |
+| Plan validity rate | share of generated plans that satisfy the team-written rule set | **>= 0.85** | fixed 100-case held-out test split (`data/splits/ext_cdm_splits_v2.json` (grouped by patient)) |
 | Constraint-violation escape rate | share of rule-violating plans that the verifier fails to flag | **<= 0.05** | same 100-case split |
 
 ## Secondary metrics (named in the abstract; targets not yet set)

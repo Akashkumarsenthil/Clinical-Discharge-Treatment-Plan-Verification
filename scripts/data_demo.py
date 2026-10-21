@@ -212,15 +212,20 @@ def step_eda():
 
 
 def step_splits():
-    """Fixed stratified splits under version control, with a leakage test."""
-    print("== Splits and leakage test ==")
+    """Fixed stratified splits, grouped by patient, with admission-level and patient-level leakage tests."""
+    print("== Splits and leakage tests ==")
     cases = E.case_table(E.load_pathology_ids())
-    splits = S.make_splits(cases)
+    subject_of = E.subject_map()
+    v1 = S.make_splits(cases)
+    print("v1 (split by admission): patients present in more than one split:", S.patient_overlap(v1, subject_of))
+    splits = S.make_grouped_splits(cases, subject_of)
+    print("\nv2 (grouped by patient):")
     print(S.split_summary(splits, cases).to_string())
-    print("Reproducible with the same seed:", S.make_splits(cases) == splits)
-    problems = S.leakage_check(splits, cases)
-    print("Leakage check:", "PASS (no overlap, all 2,400 cases covered)" if not problems else problems)
-    path = S.save_splits(splits, SPLIT_DIR)
+    print("Reproducible with the same seed:", S.make_grouped_splits(cases, subject_of) == splits)
+    for name, problems in [("Admission-level leakage check", S.leakage_check(splits, cases)),
+                           ("Patient-level leakage check", S.patient_leakage_check(splits, subject_of))]:
+        print(f"{name}:", "PASS" if not problems else problems)
+    path = S.save_splits(splits, SPLIT_DIR, filename="ext_cdm_splits_v2.json", grouped_by="subject_id")
     print("Saved (IDs only):", path.relative_to(ROOT))
     broken = {**splits, "test": splits["test"][:-1] + [splits["train"][0]]}
     print("Leakage check on a deliberately leaky split:", S.leakage_check(broken, cases))

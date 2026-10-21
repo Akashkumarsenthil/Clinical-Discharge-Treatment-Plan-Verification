@@ -72,8 +72,8 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 | Workstream | State |
 |---|---|
 | Data access, manifests, integrity checks (SHA256) | done |
-| Data cleaning, validation checks, EDA, fixed stratified splits (1,840 / 460 / 100, seed 298) | done (`src/clinverify/data`, `scripts/data_demo.py`) |
-| Patient-level split leakage check (`scripts/patient_overlap_check.py`) | done: 5 of 2,383 patients cross splits, see `docs/split_leakage_check.md` |
+| Data cleaning, validation checks, EDA, fixed stratified splits grouped by patient (1,840 / 460 / 100, seed 298; split v2) | done (`src/clinverify/data`, `scripts/data_demo.py`) |
+| Patient-level split leakage check (`scripts/patient_overlap_check.py`) | done: v1 had 5 of 2,383 patients crossing splits; fixed in v2 (0), see `docs/split_leakage_check.md` |
 | Rule catalog and synthetic valid/invalid cases | in progress |
 | Verifier (Z3), evaluation harness | in progress |
 | Model A, baseline reproduction | planned (needs GPU access) |

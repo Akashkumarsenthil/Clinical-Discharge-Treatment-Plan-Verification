@@ -85,3 +85,28 @@ def test_transform_parses_lab_values_units_and_flags(tmp_path):
     assert labs["unit"].iloc[0] == "mmol/L" and labs["qualifier"].iloc[3] == ">"
     assert out["history_of_present_illness"]["hpi"].iloc[0] == "two words"
     assert len(out["discharge_procedures"]) == 1
+
+
+def _grouped_fixture():
+    cases = E.case_table(IDS)                      # 110 cases, 3 pathologies
+    patients = {h: h for h in cases["hadm_id"]}   # one patient per admission ...
+    for extra, owner in [(2, 1), (3, 1), (62, 61), (95, 91), (96, 91), (100, 99)]:
+        patients[extra] = owner                    # ... except these shared patients (same pathology)
+    return cases, pd.Series(patients)
+
+
+def test_grouped_splits_keep_each_patient_in_one_split():
+    cases, subject_of = _grouped_fixture()
+    kw = dict(n_test=20, val_fraction=0.2)
+    s = S.make_grouped_splits(cases, subject_of, seed=3, **kw)
+    assert S.leakage_check(s, cases) == []
+    assert S.patient_leakage_check(s, subject_of) == []
+    assert len(s["test"]) == 20 and len(s["val"]) == 18 and len(s["train"]) == 72
+    assert S.make_grouped_splits(cases, subject_of, seed=3, **kw) == s
+
+
+def test_patient_leakage_check_flags_shared_patient():
+    cases, subject_of = _grouped_fixture()
+    s = {"train": [1, 5], "val": [2, 7], "test": [3, 9]}      # admissions 1, 2, 3 are the same patient
+    assert S.patient_overlap(s, subject_of)["train+val"] == 1
+    assert any("both train and val" in p for p in S.patient_leakage_check(s, subject_of))
