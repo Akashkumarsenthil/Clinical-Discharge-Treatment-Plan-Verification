@@ -28,4 +28,21 @@ The papers for this project. Papers 1–13 are the ones cited in Workbook 1 (num
 | 22 | `Chung2025_VeriFact.pdf` | Chung et al. (2025), VeriFact: verifying facts in LLM-generated clinical text with EHRs | [arXiv](https://arxiv.org/abs/2501.16672) |
 | 23 | `Amrollahi2026_Roundtrip-Autoformalization.pdf` | Amrollahi et al. (2026), faithful autoformalization via roundtrip verification and repair | [arXiv](https://arxiv.org/abs/2604.25031) |
 
+## Medical LLM literature review (Rajesh Paruchuri)
+
+Ten papers on LLMs for clinical reasoning and decision support, collected for the literature review. They are not part of the Workbook 1 reference list, so they are numbered L1-L10.
+
+| # | File | Paper | Source |
+|---|---|---|---|
+| L1 | `Singhal2023_Med-PaLM.pdf` (same file as #10 above) | Singhal et al. (2023), LLMs encode clinical knowledge (Med-PaLM). *Nature* 620, 172-180 | [DOI](https://doi.org/10.1038/s41586-023-06291-2) |
+| L2 | none (paywalled) | Moor et al. (2023), foundation models for generalist medical AI. *Nature* 616, 259-265 | [DOI](https://doi.org/10.1038/s41586-023-05881-4) |
+| L3 | `Tang2024_MedAgents.pdf` | Tang et al. (2024), MedAgents: LLMs as collaborators for zero-shot medical reasoning. *Findings of ACL 2024*, 599-621 | [DOI](https://doi.org/10.18653/v1/2024.findings-acl.33) |
+| L4 | `Oniani2024_CPG-Clinical-Decision-Support.pdf` | Oniani et al. (2024), enhancing LLMs for clinical decision support by incorporating clinical practice guidelines | [arXiv](https://arxiv.org/abs/2401.11120) |
+| L5 | `Ong2024_Medication-Safety-CDSS.pdf` | Ong et al. (2024), LLM-based clinical decision support for medication safety in 12 clinical specialties | [arXiv](https://arxiv.org/abs/2402.01741) |
+| L6 | `Shi2024_EHRAgent.pdf` | Shi et al. (2024), EHRAgent: code empowers LLMs for few-shot complex tabular reasoning on EHRs. *EMNLP 2024*, 22315-22339 | [DOI](https://doi.org/10.18653/v1/2024.emnlp-main.1245) |
+| L7 | `Liu2024_Poor-Clinical-Decision-Makers.pdf` | Liu et al. (2024), LLMs are poor clinical decision-makers: a comprehensive benchmark. *EMNLP 2024*, 13696-13710 | [DOI](https://doi.org/10.18653/v1/2024.emnlp-main.759) |
+| L8 | `Tu2025_AMIE-Conversational-Diagnosis.pdf` | Tu et al. (2025), towards conversational diagnostic AI (AMIE). *Nature* 642, 442-450 | [DOI](https://doi.org/10.1038/s41586-025-08866-7) |
+| L9 | `McDuff2025_Differential-Diagnosis.pdf` | McDuff et al. (2025), towards accurate differential diagnosis with LLMs. *Nature* 642, 451-457 | [DOI](https://doi.org/10.1038/s41586-025-08869-4) |
+| L10 | `Lievin2026_AMIE-Disease-Management.pdf` | Liévin et al. (2026), towards conversational AI for disease management. *Nature* 655, 1292-1299 | [DOI](https://doi.org/10.1038/s41586-026-10764-5) |
+
 The PDFs belong to their authors and publishers and are kept here for course use. Please cite the original sources above.
