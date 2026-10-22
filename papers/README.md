@@ -18,4 +18,19 @@ The 13 papers cited in Workbook 1 (numbers match its reference list and the READ
 | 12 | `Valmeekam2023_PlanBench.pdf` | Valmeekam et al. (2023b), PlanBench | [arXiv](https://arxiv.org/abs/2206.10498) |
 | 13 | `Ye2023_SatLM.pdf` | Ye et al. (2023), SatLM | [arXiv](https://arxiv.org/abs/2305.09656) |
 
+## Additional papers
+
+| # | File | Paper | Source |
+|---|---|---|---|
+| 1 | `Wu2022_Autoformalization.pdf` | Wu et al. (2022), Autoformalization with large language models (NeurIPS 2022) | [arXiv](https://arxiv.org/abs/2205.12615) |
+| 2 | `First2023_Baldur.pdf` | First et al. (2023), Baldur: whole-proof generation and repair with LLMs | [arXiv](https://arxiv.org/abs/2303.04910) |
+| 3 | `Ishay2023_LLM-ASP.pdf` | Ishay et al. (2023), leveraging LLMs to generate answer set programs | [arXiv](https://arxiv.org/abs/2307.07699) |
+| 4 | `Lyu2023_Faithful-CoT.pdf` | Lyu et al. (2023), Faithful chain-of-thought reasoning | [arXiv](https://arxiv.org/abs/2301.13379) |
+| 5 | `Silver2023_Generalized-Planning-PDDL.pdf` | Silver et al. (2023), generalized planning in PDDL domains with pretrained LLMs | [arXiv](https://arxiv.org/abs/2305.11014) |
+| 6 | `Zhou2023_ISR-LLM.pdf` | Zhou et al. (2023), ISR-LLM: iterative self-refined LLM for long-horizon task planning | [arXiv](https://arxiv.org/abs/2308.13724) |
+| 7 | `Pal2023_Med-HALT.pdf` | Pal et al. (2023), Med-HALT: medical domain hallucination test for LLMs | [arXiv](https://arxiv.org/abs/2307.15343) |
+| 8 | `Zakka2023_Almanac.pdf` | Zakka et al. (2023), Almanac: retrieval-augmented LMs for clinical medicine | [arXiv](https://arxiv.org/abs/2303.01229) |
+| 9 | `Chung2025_VeriFact.pdf` | Chung et al. (2025), VeriFact: verifying facts in LLM-generated clinical text with EHRs | [arXiv](https://arxiv.org/abs/2501.16672) |
+| 10 | `Amrollahi2026_Roundtrip-Autoformalization.pdf` | Amrollahi et al. (2026), faithful autoformalization via roundtrip verification and repair | [arXiv](https://arxiv.org/abs/2604.25031) |
+
 The PDFs belong to their authors and publishers and are kept here for course use. Please cite the original sources above.
