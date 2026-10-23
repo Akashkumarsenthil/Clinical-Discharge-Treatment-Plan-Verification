@@ -48,6 +48,28 @@ Runs on synthetic data write to `results/synthetic/` and never touch the real sp
 | see the metrics and targets | [`docs/metrics.md`](docs/metrics.md) |
 | follow tasks | Linear links at the end of this page |
 
+## Human audit of case facts (a reviewer is needed)
+
+The case facts the rules depend on (complicated, infection, biliary and others) are derived from ICD titles and discharge text. They are unit-tested but **not yet validated against reviewed real cases**. Tracked in Linear as T6-159. The reviewer should not be the person who wrote the extraction.
+
+1. **You need your own PhysioNet access** and the Ext-CDM data in `MIMIC_DIR` (see Data and access). The sample holds patient text, so it is never committed or shared: it is generated on your machine only.
+2. Pull the latest code, then draw the sample (the same seed gives the same cases for the same data):
+   ```bash
+   python scripts/sample_for_audit.py --per-stratum 5
+   ```
+   This writes `results/audit_sample.csv` (116 rows, Git ignores it).
+3. For each row, read `icd_titles` and `discharge_diagnosis`, compare with `fact` and `derived_value`, and fill `reviewer_agrees (yes/no/unsure)`; add a note for "no" or "unsure".
+   - Derived True or False: **yes** if the record supports the value, **no** if it does not.
+   - **unknown** row: **yes** if the record really does not establish the fact, **no** if it does (a missed fact).
+   - Save as **CSV** (not .numbers or .xlsx) under the same name.
+4. Summarize (prints counts only):
+   ```bash
+   python scripts/summarize_audit.py
+   ```
+5. Share **only the printed counts** (never the CSV or any patient text). Add reviewer initials, date and the agreement per fact to `docs/case_facts_mapping.md` (section "Validation status"), and open a pull request.
+
+The AI triage some reviewers may see (`results/audit_triage.csv`) is not validation and must not be copied into the review column. Details and the definitions: [`docs/case_facts_mapping.md`](docs/case_facts_mapping.md).
+
 ## Approach
 
 ```mermaid
