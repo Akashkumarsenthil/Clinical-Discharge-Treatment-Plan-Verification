@@ -2,7 +2,7 @@
 
 Run after a reviewer has filled the column "reviewer_agrees (yes/no/unsure)" in results/audit_sample.csv:
     python scripts/summarize_audit.py
-Writes docs/case_facts_validation.csv (counts only, safe to commit) and prints it. Rows without an answer are counted as pending.
+Writes docs/case_facts_validation.csv (counts only, safe to commit) and prints it. Rows without an answer are counted as pending. For "unknown" rows, "yes" means the unknown is right and "no" means the record does establish the fact.
 """
 import sys
 from pathlib import Path

@@ -44,7 +44,7 @@ Produced by `python scripts/case_facts_counts.py` from the same loader the verif
 
 | Pathology | Fact | True | False | Unknown | Cases |
 |---|---|---|---|---|---|
-| appendicitis | complicated | 260 | 0 | 697 | 957 |
+| appendicitis | complicated | 246 | 1 | 710 | 957 |
 | diverticulitis | complicated | 121 | 36 | 100 | 257 |
 | diverticulitis | alarm_symptoms | 14 | 0 | 243 | 257 |
 | pancreatitis | necrotizing | 7 | 89 | 442 | 538 |
@@ -54,30 +54,33 @@ Produced by `python scripts/case_facts_counts.py` from the same loader the verif
 | pancreatitis | biliary_obstruction | 86 | 0 | 452 | 538 |
 | pancreatitis | mild | 0 | 120 | 418 | 538 |
 
-## What the real data can test, per rule
+## What the facts allow each rule to check, per rule
 
-`docs/rule_eligibility_counts.csv` (strict mode). "Testable" = the rule's fact condition holds and every fact it needs is known. Conditions that depend on the plan (for example "surgery planned") are not included.
+`docs/rule_eligibility_counts.csv` (strict mode), computed with the verifier's own logic (`fact_status`), so the counts cannot drift from what the verifier does. "Testable on facts" = the rule's fact condition holds and every fact it needs is known. This is where a rule **could** be checked from the record. It is not where it **was** checked: conditions that depend on the plan (for example "surgery planned") and what a plan actually contains are not included.
 
-| Rule | Diagnosis | Testable | Fact unknown | Condition false |
+| Rule | Diagnosis | Testable on facts | Fact unknown | Condition false |
 |---|---|---|---|---|
-| R-APP-001 | appendicitis | 957 | 0 | 0 |
-| R-APP-002 | appendicitis | **0** | 697 | 260 |
-| R-APP-003 (advisory) | appendicitis | 260 | 697 | 0 |
-| R-PAN-001 | pancreatitis | 38 | 500 | 0 |
+| R-APP-001 | appendicitis | 957 (potential: applies only when an appendectomy is planned) | 0 | 0 |
+| R-APP-002 | appendicitis | 1 | 710 | 246 |
+| R-APP-003 (advisory) | appendicitis | 246 | 710 | 1 |
+| R-PAN-001 | pancreatitis | 38 (see note) | 500 | 0 |
 | R-PAN-002 | pancreatitis | 1 | 448 | 89 |
 | R-PAN-003 | pancreatitis | **0** | 407 | 131 |
-| R-PAN-004 (advisory) | pancreatitis | 6 | 508 | 24 |
+| R-PAN-004 (advisory) | pancreatitis | 16 | 498 | 24 |
 | R-PAN-005 | pancreatitis | **0** | 538 | 0 |
 | R-DIV-001 (advisory) | diverticulitis | **0** | 136 | 121 |
 | R-DIV-002 | diverticulitis | 121 | 100 | 36 |
 | R-DIV-003 (advisory) | diverticulitis | **0** | 136 | 121 |
 
-Consequence for the evaluation: on the real benchmark only R-APP-001, R-APP-003, R-PAN-001 and R-DIV-002 can be checked on more than a handful of cases, and no case tests R-APP-002, R-PAN-003, R-PAN-005, R-DIV-001 or R-DIV-003. Those rules are still verified on the synthetic labeled plans. The report must state this limit, and say that "28% coverage" applies only to R-APP-003.
+Notes:
+- **R-PAN-001:** all 38 testable cases have `infection = True`, so they can show that the verifier accepts antibiotics for an infected case. They cannot show that it catches inappropriate antibiotics, because no case has a documented absence of infection in strict mode. Detection of inappropriate antibiotics is tested only on the synthetic plans (or in the sensitivity mode).
+- **R-APP-002 and R-APP-003** need a stated postoperative antibiotic duration from the plan; the counts assume the plan states it.
+- Only R-APP-001 (when surgery is planned), R-APP-003, R-DIV-002 and, for acceptance only, R-PAN-001 can be checked on more than a handful of cases. R-APP-002 (1 case), R-PAN-002 (1), R-PAN-004 (16, advisory), R-PAN-003, R-PAN-005, R-DIV-001 and R-DIV-003 (0) are effectively tested only on the synthetic labeled plans. The report must say this and give the number of testable cases next to each rule's result.
 
 ## Version history of the checks
 - Appendicitis "complicated" was 78% when any peritonitis counted; counting only perforation, gangrene, abscess or generalized peritonitis gave 23%, in line with published rates.
 - Review round 1: generic titles were treated as "absent"; `mild` was inferred from missing words; "without mention of hemorrhage" counted as an alarm symptom (174 cases, now 14); "Generalized (acute) peritonitis" was missed.
-- Review round 2: the verifier loader did not use the discharge text; `mild` and absence-of-documentation assumptions moved out of the main result into the sensitivity mode; primary sclerosing cholangitis no longer counts as acute cholangitis; the discharge text now needs the disease, a current complication and no negation; fistula, stricture and change in bowel habit added; per-rule coverage added.
+- Review round 2 (partly overclaimed: the text matching still produced false positives): the verifier loader did not use the discharge text; `mild` and absence-of-documentation assumptions moved out of the main result into the sensitivity mode; primary sclerosing cholangitis no longer counts as acute cholangitis; the discharge text now needs the disease, a current complication and no negation; fistula, stricture and change in bowel habit added; per-rule coverage added.
 
 ## Validation status
 
@@ -94,9 +97,11 @@ Procedure (computable-definition practice, as in PheKB): one or two reviewers ch
 
 Result: _pending_.
 
+- Review round 3: four discharge-text false positives found and fixed ("Non-perforated appendicitis", "Appendicitis with abscess ruled out", "Appendicitis and perforated gastric ulcer", "Appendicitis without abscess, perforation or gangrene"). Negation now works before and after the complication, over a negated list, and for "non-" and "un-"; a complication attached to another organ is rejected. This removed 14 wrongly complicated appendicitis cases (260 down to 246). R-PAN-004 now decides when one known positive indication is enough, and the coverage counts use the verifier's own `fact_status` instead of a separate copy of the logic. Diagnosis correctness is scored separately from treatment validity.
+
 ## How to audit the facts (locally only)
 
-`python scripts/sample_for_audit.py --per-stratum 5` writes `results/audit_sample.csv` (70 cases across the strata, including the cases upgraded by the discharge text). It contains patient text, so it stays on your machine (Git ignores it) and must not be pasted into chat tools. A reviewer fills the last two columns. Share only the agreement counts.
+`python scripts/sample_for_audit.py --per-stratum 5` writes `results/audit_sample.csv` (116 cases in 24 strata: each derived value, the cases upgraded by the discharge text, and the **unknown** strata, to find evidence the extraction missed). It contains patient text, so it stays on your machine (Git ignores it) and must not be pasted into chat tools. A reviewer fills the last two columns. For a derived True or False, "yes" means the record supports the value. For an unknown row, "yes" means the record really does not establish the fact, and "no" means it does (a missed fact). Share only the agreement counts.
 
 ## How to check it on the real data (locally only)
 

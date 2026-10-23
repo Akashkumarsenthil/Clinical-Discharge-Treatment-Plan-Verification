@@ -40,25 +40,52 @@ _ALARM = re.compile(r"hemorrhage of anus and rectum|rectal bleeding|gastrointest
 _CHOLANGITIS = re.compile(r"cholangitis")
 _NOT_ACUTE_CHOLANGITIS = re.compile(r"sclerosing|primary biliary")
 
-# discharge text: a complication counts only when written in the same clause as the target disease, not negated,
-# and not historical
+# discharge text: a complication counts only when it is written in the same clause as the target disease, is not
+# negated (before or after it, including a negated list), is not historical, and is not attached to another organ
 _HISTORY = re.compile(r"\b(history of|h/o|hx of|s/p|status post|prior|previous|resolved|remote)\b")
-_NEGATION_CUE = re.compile(r"\b(no|not|without|negative for|denies|denied|rule[sd]? out|free of|absent)\b[^,;]*$")
+_NEGATION_CUE = re.compile(r"\b(no|not|without|negative for|denies|denied|rule[sd]? out|free of|absent|nor)\b")
+_NEGATION_AFTER = re.compile(r"^\W*(\w+\W+){0,3}?(ruled out|excluded|negative|not seen|not present|absent|resolved)\b")
+_NON_PREFIX = re.compile(r"\b(non|un)-?\s?(perforat\w*|gangren\w*|ruptur\w*|complicat\w*)")
+_FILLER = {"evidence", "of", "signs", "sign", "findings", "finding", "concern", "for", "suspicion", "any", "a", "an", "the", "and",
+           "or", "nor", "no", "with", "current", "acute", "overt", "frank", "free", "fluid", "extraluminal", "air"}
+_OTHER_SITE = {
+    "appendicitis": r"gastric|duodenal|peptic|stomach|ulcer|gallbladder|cholecyst|diverticul|sigmoid|ovarian|uterine|bladder",
+    "diverticulitis": r"gastric|duodenal|peptic|stomach|ulcer|gallbladder|cholecyst|append|ovarian|uterine|bladder",
+}
 
 
 def _texts(icd_titles: Iterable[str]) -> list[str]:
     return [" ".join(str(t).lower().split()) for t in icd_titles if str(t).strip()]
 
 
-def _written_complication(text: str, disease: str, complication: str) -> bool:
-    """True if a clause of the discharge text names the disease together with a current, non-negated complication."""
+def _negated_before(before: str, complication: str) -> bool:
+    """A negation cue earlier in the clause covers this complication when only filler words or other complications
+    (a negated list such as "without abscess, perforation or gangrene") lie between the cue and it."""
+    cues = list(_NEGATION_CUE.finditer(before))
+    if not cues:
+        return False
+    between = before[cues[-1].end():]
+    return all(tok in _FILLER or re.match(complication, tok) or re.match(r"perforat|gangren|abscess|rupture|peritonitis|fistula|phlegmon|stricture", tok)
+               for tok in re.findall(r"[a-z]+", between))
+
+
+def _written_complication(text: str, disease: str, complication: str, target: str) -> bool:
+    """True if a clause of the discharge text names the disease together with a current, non-negated complication of
+    that disease. Negation before or after, a negated list, "non-perforated", history and a complication attached to
+    another organ ("perforated gastric ulcer") all give False."""
+    other = re.compile(_OTHER_SITE[target])
     for clause in re.split(r"[;\n.]+", str(text or "").lower()):
         clause = " ".join(clause.split())
+        clause = _NON_PREFIX.sub(" ", clause)
         if not re.search(disease, clause) or _HISTORY.search(clause):
             continue
         for m in re.finditer(complication, clause):
-            if not _NEGATION_CUE.search(clause[max(0, m.start() - 40):m.start()]):
-                return True
+            if _negated_before(clause[:m.start()], complication) or _NEGATION_AFTER.search(clause[m.end():]):
+                continue
+            near = clause[max(0, m.start() - 25):m.end() + 25]
+            if other.search(near):
+                continue
+            return True
     return False
 
 
@@ -70,7 +97,7 @@ def _appendicitis(texts: list[str], discharge: str, sensitivity: bool) -> dict[s
     cleaned = [_NEGATED.sub("", t) for t in rows]
     if any(re.search(r"perforat|gangren|abscess|generalized peritonitis", t) for t in cleaned):
         return {"complicated": True}
-    if _written_complication(discharge, r"append(ic|e)", r"perforat|gangren|rupture|abscess"):   # text can only add True
+    if _written_complication(discharge, r"append", r"perforat\w*|gangren\w*|ruptur\w*|abscess\w*", "appendicitis"):   # text can only add True
         return {"complicated": True}
     if any(_NEGATED.search(t) for t in rows):          # an explicit "without perforation / gangrene / abscess" title
         return {"complicated": False}
@@ -133,7 +160,7 @@ def _diverticulitis(texts: list[str], discharge: str, sensitivity: bool) -> dict
                              r"fistula of intestine|colovesical fistula|vesicointestinal fistula|"
                              r"stricture of (colon|intestine)|stenosis of (colon|intestine)|obstruction of intestine", t)
                    for t in texts)
-    written = _written_complication(discharge, r"diverticul", r"perforat|abscess|peritonitis|fistula|phlegmon|stricture")
+    written = _written_complication(discharge, r"diverticul", r"perforat\w*|abscess\w*|peritonitis|fistula\w*|phlegmon|stricture", "diverticulitis")
     combined_no = any("without perforation or abscess" in t for t in rows)
     if combined_yes or separate or written:
         facts["complicated"] = True

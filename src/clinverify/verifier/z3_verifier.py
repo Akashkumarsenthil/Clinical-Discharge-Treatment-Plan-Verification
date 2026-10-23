@@ -51,6 +51,16 @@ def _condition_false(rule, plan: Plan) -> bool:
     return False
 
 
+def fact_status(rule, plan: Plan) -> str:
+    """How the record's facts alone treat this rule for this plan, ignoring conditions that depend on the plan's own
+    treatments: 'condition_false' (a known fact contradicts the rule's condition), 'unknown' (a needed fact is missing)
+    or 'testable'. `verify` and the coverage counts use the same logic, so they cannot drift apart."""
+    if _condition_false(rule, plan):
+        return "condition_false"
+    needed = rule.requires_for(plan) if rule.requires_for else rule.requires
+    return "unknown" if any(not plan.has(name) for name in needed) else "testable"
+
+
 def verify(plan: Plan, rules) -> VerifyResult:
     violated, inconclusive, skipped, messages, advisory, adv_inconclusive = [], [], [], {}, [], []
     start = time.perf_counter()
@@ -58,11 +68,11 @@ def verify(plan: Plan, rules) -> VerifyResult:
         if rule.applies is not None and not rule.applies(plan):
             skipped.append(rule.id)
             continue
-        if _condition_false(rule, plan):
+        status = fact_status(rule, plan)
+        if status == "condition_false":
             skipped.append(rule.id)
             continue
-        needed = rule.requires_for(plan) if rule.requires_for else rule.requires
-        if any(not plan.has(name) for name in needed):
+        if status == "unknown":
             inconclusive.append(rule.id)
             if rule.advisory:
                 adv_inconclusive.append(rule.id)

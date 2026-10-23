@@ -84,3 +84,14 @@ def test_sensitivity_mode_is_separate_from_the_strict_loader_output():
     strict = case_facts_from_tables({5: "pancreatitis"}, icd, discharge)[5]["facts"]
     sens = case_facts_from_tables({5: "pancreatitis"}, icd, discharge, sensitivity=True)[5]["facts"]
     assert "cholangitis" not in strict and sens["cholangitis"] is False
+
+
+def test_diagnosis_correctness_is_reported_separately_from_treatment_validity():
+    outputs = [
+        {"case_id": 1, "diagnosis": "appendicitis", "treatments": ["appendectomy", "preoperative_antibiotic"], "postop_antibiotic_days": 0},
+        {"case_id": 1, "diagnosis": "pancreatitis", "treatments": []},                 # wrong diagnosis for case 1
+    ]
+    s = verify_model_plans(outputs, FACTS, catalog)
+    assert s["n_wrong_diagnosis"] == 1 and s["diagnosis_accuracy"] == 0.5
+    assert s["validity_rate_diagnosis_correct"] == 1.0                                 # scored on the correct-diagnosis plan only
+    assert [c["diagnosis_correct"] for c in s["per_case"]] == [True, False]

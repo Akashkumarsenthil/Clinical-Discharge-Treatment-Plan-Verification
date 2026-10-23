@@ -8,7 +8,7 @@ strict,test (100),pancreatitis,22,biliary_obstruction,8,0,14
 strict,test (100),pancreatitis,22,mild,0,3,19
 strict,test (100),diverticulitis,11,complicated,7,0,4
 strict,test (100),diverticulitis,11,alarm_symptoms,0,0,11
-strict,all cases,appendicitis,957,complicated,260,0,697
+strict,all cases,appendicitis,957,complicated,246,1,710
 strict,all cases,pancreatitis,538,necrotizing,7,89,442
 strict,all cases,pancreatitis,538,infection,38,0,500
 strict,all cases,pancreatitis,538,biliary,69,24,445
@@ -26,7 +26,7 @@ sensitivity,test (100),pancreatitis,22,biliary_obstruction,8,14,0
 sensitivity,test (100),pancreatitis,22,mild,3,3,16
 sensitivity,test (100),diverticulitis,11,complicated,7,0,4
 sensitivity,test (100),diverticulitis,11,alarm_symptoms,0,0,11
-sensitivity,all cases,appendicitis,957,complicated,260,0,697
+sensitivity,all cases,appendicitis,957,complicated,246,1,710
 sensitivity,all cases,pancreatitis,538,necrotizing,7,89,442
 sensitivity,all cases,pancreatitis,538,infection,38,54,446
 sensitivity,all cases,pancreatitis,538,biliary,69,24,445

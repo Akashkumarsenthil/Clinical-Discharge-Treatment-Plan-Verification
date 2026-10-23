@@ -46,6 +46,8 @@ Any other concept is rejected as unparseable. Mapping errors are counted as tran
 - `insufficient_information`: a blocking rule applies but a field or case fact is missing. These cases never count as valid.
 - A rule whose condition the record contradicts (for example R-APP-002 on a complicated appendicitis) is **not applicable**, not a pass. The run summary has per-rule counts of not applicable, unknown, passed and violated.
 
+The run summary also reports `diagnosis_accuracy` and `validity_rate_diagnosis_correct`: diagnosis and treatment are scored separately, because a plan for the wrong diagnosis is checked against the facts of the real condition and its validity says little about the treatment. Report both.
+
 Rules that need facts the record cannot give (`oral_or_enteral_feasible`, `low_risk`, `crc_screening_up_to_date`) stay "insufficient information" on real cases (see `docs/case_facts_mapping.md`).
 
 ## Run it

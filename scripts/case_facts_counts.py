@@ -42,34 +42,32 @@ def main() -> None:
     print(out[out.group == "all cases"].to_string(index=False))
     elig = rule_eligibility(load_case_facts())
     elig.to_csv(ROOT / "docs" / "rule_eligibility_counts.csv", index=False)
-    print("\nRule eligibility on real cases (strict mode; plan-based conditions such as 'surgery planned' not included):")
+    print("\nRule coverage on real cases from the facts alone (strict mode; plan-based conditions not included):")
     print(elig.to_string(index=False))
     print("\nwrote", out_path.relative_to(ROOT))
 
 
 def rule_eligibility(cases: dict) -> pd.DataFrame:
-    """Per rule and diagnosis: cases where the rule's fact condition holds and all facts it needs are known (testable),
-    cases where a needed fact is unknown (cannot be decided) and cases where a known fact contradicts the condition."""
+    """Per rule and diagnosis, from the facts alone (same logic as the verifier, `fact_status`): cases where the rule's fact
+    condition holds and every fact it needs is known ("testable_on_facts"), cases where a needed fact is unknown, and cases
+    where a known fact contradicts the condition. Conditions that depend on the plan (for example "surgery planned") and
+    what a plan could show are not included, so these are the cases where the rule COULD be checked, not cases it was."""
+    from clinverify.plan import Plan
+    from clinverify.verifier.z3_verifier import fact_status
+
     rows = []
     for rule in catalog:
         diagnosis = rule.valid_example.diagnosis
         if diagnosis not in FACTS:
             continue
-        facts_needed = [r[6:] for r in rule.requires if r.startswith("facts.")]
-        for gname, in_group in (("all cases", lambda h: True),):
-            testable = unknown = not_applicable = 0
-            for h, c in cases.items():
-                if c["pathology"] != diagnosis or not in_group(h):
-                    continue
-                f = c["facts"]
-                if any(f.get(k) is not None and bool(f[k]) != v for k, v in rule.condition_facts):
-                    not_applicable += 1
-                elif any(f.get(k) is None for k in facts_needed):
-                    unknown += 1
-                else:
-                    testable += 1
-            rows.append({"rule": rule.id, "diagnosis": diagnosis, "advisory": rule.advisory, "testable": testable,
-                         "unknown_fact": unknown, "condition_false": not_applicable})
+        counts = {"testable": 0, "unknown": 0, "condition_false": 0}
+        for h, c in cases.items():
+            if c["pathology"] == diagnosis:
+                # plan fields come from the model, not the record, so they count as present in this facts-only view
+                plan = Plan(case_id=h, diagnosis=diagnosis, facts=c["facts"], postop_antibiotic_days=0)
+                counts[fact_status(rule, plan)] += 1
+        rows.append({"rule": rule.id, "diagnosis": diagnosis, "advisory": rule.advisory, "testable_on_facts": counts["testable"],
+                     "unknown_fact": counts["unknown"], "condition_false": counts["condition_false"]})
     return pd.DataFrame(rows)
 
 

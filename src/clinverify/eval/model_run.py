@@ -12,6 +12,7 @@ def verify_model_plans(outputs: list[dict], case_facts: dict[int, dict], rules) 
     rules = list(rules)
     per_case, rule_counts, status_counts = [], Counter(), Counter()
     unparseable, wrong_diagnosis, times, results = [], 0, [], []
+    correct_valid = correct_n = 0
     for out in outputs:
         try:
             plan = plan_from_model_output(out, case_facts)
@@ -23,14 +24,21 @@ def verify_model_plans(outputs: list[dict], case_facts: dict[int, dict], rules) 
         status_counts[res.status] += 1
         rule_counts.update(res.violated)
         times.append(res.solve_ms)
-        wrong_diagnosis += plan.diagnosis != case_facts[plan.case_id]["pathology"]
+        correct = plan.diagnosis == case_facts[plan.case_id]["pathology"]
+        wrong_diagnosis += not correct
+        correct_n += correct
+        correct_valid += correct and res.valid
         per_case.append({"case_id": plan.case_id, "status": res.status, "violated": list(res.violated),
-                         "advisory": list(res.advisory), "inconclusive": list(res.inconclusive),
+                         "diagnosis_correct": correct, "advisory": list(res.advisory), "inconclusive": list(res.inconclusive),
                          "advisory_inconclusive": list(res.advisory_inconclusive)})
     n = len(outputs)
     return {
         "n_plans": n, "n_unparseable": len(unparseable), "n_wrong_diagnosis": wrong_diagnosis,
         "status": dict(status_counts), "validity_rate": (status_counts["valid"] / n) if n else None,
+        # diagnosis and treatment are scored separately: a plan for the wrong diagnosis is checked against facts of the
+        # real condition, so its validity says little about the treatment. Report both rates.
+        "diagnosis_accuracy": (correct_n / n) if n else None,
+        "validity_rate_diagnosis_correct": (correct_valid / correct_n) if correct_n else None,
         "violations_by_rule": dict(rule_counts.most_common()),
         "per_rule": per_rule_counts(results, rules),       # not_applicable / unknown / passed / violated per rule
         "solver_ms_mean": (sum(times) / len(times)) if times else None,

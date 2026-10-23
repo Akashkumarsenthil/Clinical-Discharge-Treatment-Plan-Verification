@@ -135,3 +135,19 @@ def test_diverticulitis_fistula_and_bowel_habit_change():
     assert derive_facts("diverticulitis", [no_perf, "Stricture of colon"])["complicated"] is True
     assert derive_facts("diverticulitis", [no_perf, "Change in bowel habits"])["alarm_symptoms"] is True
     assert "alarm_symptoms" not in derive_facts("diverticulitis", [no_perf, "Abdominal pain, unspecified site"])
+
+
+def test_discharge_text_false_positives_found_in_review_round_3():
+    u = ["Unspecified acute appendicitis"]
+    for text in ["Non-perforated appendicitis", "Appendicitis with abscess ruled out", "Appendicitis and perforated gastric ulcer",
+                 "Appendicitis without abscess, perforation or gangrene", "Appendicitis, no evidence of perforation",
+                 "Appendicitis; perforated duodenal ulcer", "Unperforated appendicitis", "Appendicitis, perforation excluded"]:
+        assert derive_facts("appendicitis", u, text) == {}, text
+    for text in ["Perforated appendicitis", "Ruptured appendix", "Appendicitis complicated by perforation",
+                 "Gangrenous appendicitis with abscess"]:
+        assert derive_facts("appendicitis", u, text) == {"complicated": True}, text
+    div = ["Diverticulitis of colon (without mention of hemorrhage)"]
+    for text in ["Diverticulitis with abscess ruled out", "Non-perforated diverticulitis", "Diverticulitis; perforated gastric ulcer",
+                 "Diverticulitis without abscess, perforation or fistula"]:
+        assert "complicated" not in derive_facts("diverticulitis", div, text), text
+    assert derive_facts("diverticulitis", div, "Diverticulitis with pericolic abscess")["complicated"] is True

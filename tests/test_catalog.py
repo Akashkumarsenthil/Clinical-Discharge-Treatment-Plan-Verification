@@ -154,3 +154,28 @@ def test_per_rule_counts_cover_every_rule_and_sum_to_the_number_of_plans():
     m = evaluate(plans, catalog, 298)
     assert set(m["per_rule"]) == {r.id for r in RULES}
     assert all(sum(row.values()) == len(plans) for row in m["per_rule"].values())
+
+
+def test_ercp_rule_is_decidable_when_one_positive_indication_is_known():
+    from clinverify.verifier.z3_verifier import fact_status
+    r = catalog.get("R-PAN-004")
+    base = dict(case_id=1, diagnosis="pancreatitis", treatments=("ercp",))
+    assert fact_status(r, Plan(**base, facts={"biliary": True, "cholangitis": True})) == "testable"            # the OR is satisfied
+    assert fact_status(r, Plan(**base, facts={"biliary": True, "biliary_obstruction": True})) == "testable"
+    assert fact_status(r, Plan(**base, facts={"biliary": True})) == "unknown"
+    assert fact_status(r, Plan(**base, facts={"biliary": True, "cholangitis": False})) == "unknown"            # obstruction still unknown
+    assert fact_status(r, Plan(**base, facts={"biliary": False})) == "condition_false"
+    res = verify(Plan(**base, facts={"biliary": True, "cholangitis": True}), catalog)
+    assert "R-PAN-004" not in res.violated and "R-PAN-004" not in res.inconclusive
+
+
+def test_fact_status_matches_what_verify_does():
+    from clinverify.verifier.z3_verifier import fact_status
+    plan = Plan(case_id=2, diagnosis="diverticulitis", treatments=(), facts={"complicated": False, "alarm_symptoms": True})
+    res = verify(plan, catalog)
+    for rule in catalog:
+        status = fact_status(rule, plan)
+        if rule.applies is not None and not rule.applies(plan):
+            continue
+        assert (status == "condition_false") == (rule.id in res.not_applicable), rule.id
+        assert (status == "unknown") == (rule.id in res.inconclusive), rule.id

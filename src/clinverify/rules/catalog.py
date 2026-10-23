@@ -71,6 +71,15 @@ def _fact(plan, key):
     return z3.BoolVal(bool(plan.facts[key]))
 
 
+def _pan_004_requires(plan):
+    """One known positive (cholangitis or obstruction) already satisfies the OR condition."""
+    if plan.facts.get("cholangitis") is True:
+        return ("facts.biliary", "facts.cholangitis")
+    if plan.facts.get("biliary_obstruction") is True:
+        return ("facts.biliary", "facts.biliary_obstruction")
+    return ("facts.biliary", "facts.cholangitis", "facts.biliary_obstruction")
+
+
 def _div_003_requires(plan):
     """Known alarm symptoms already establish the colonoscopy indication, so screening history is then not needed."""
     if plan.facts.get("alarm_symptoms") is True:
@@ -206,12 +215,14 @@ def r_pan_003(plan):
     strength="strong, high-quality evidence for urgent ERCP with cholangitis; weak, moderate-quality evidence for delaying "
              "it without cholangitis. The 'discouraged' wording is advisory.", source_date="2026", advisory=True,
     applies=lambda p: p.diagnosis == "pancreatitis" and _has(p, "ercp"), condition_facts=(("biliary", True),),
+    requires_for=_pan_004_requires,
     applies_when="diagnosis is biliary pancreatitis and ERCP is planned",
     violation_message="ERCP is planned for biliary pancreatitis without cholangitis or ongoing biliary obstruction.",
     valid_example=_pancreatitis(101, treatments=("ercp",), biliary=True, mild=False, cholangitis=True),
     invalid_example=_pancreatitis(102, treatments=("ercp",), biliary=True, mild=False))
 def r_pan_004(plan):
-    return z3.Implies(_fact(plan, "biliary"), z3.Or(_fact(plan, "cholangitis"), _fact(plan, "biliary_obstruction")))
+    indication = z3.Or(z3.BoolVal(plan.facts.get("cholangitis") is True), z3.BoolVal(plan.facts.get("biliary_obstruction") is True))
+    return z3.Implies(_fact(plan, "biliary"), indication)
 
 
 @catalog.register(
