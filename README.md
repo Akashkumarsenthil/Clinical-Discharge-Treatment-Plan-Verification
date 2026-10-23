@@ -178,15 +178,15 @@ requirements.txt    pinned Python packages for the data pipeline
 - The data pipeline runs end to end with `python scripts/data_demo.py all`, on synthetic data (see Quickstart) or on the real data once it is downloaded to `MIMIC_DIR` (steps: `manifest`, `samples`, `clean`, `missing`, `transform`, `validate`, `eda`, `splits`). Tests: `python -m pytest tests`.
 - Goal: another person can clone the repo and reproduce each reported result without help.
 
-## Team
+## Work areas
 
-| Member | Current focus |
+| Area | What it covers |
 |---|---|
-| Akash Senthilkumar | data access, manifest, ingestion |
-| Ritika Mukesh Neema | Model A specification |
-| Rajesh Paruchuri | metrics, splits, baseline protocol |
-| Sneha Singh | rule catalog and synthetic cases |
-| Shruthi Thirukumaran | environment, CI, reproducibility |
+| Data access and pipeline | credentialed data, manifests, integrity checks, ingestion |
+| Model A | plan generation and its output format |
+| Metrics, splits and baseline | evaluation protocol, fixed splits, baseline reproduction |
+| Rules and verifier | rule catalog, case facts, Z3 verifier |
+| Environment and CI | reproducible setup, tests, compute |
 
 Task tracking in Linear (cycles, one assignee per issue, linked artifacts on closed issues):
 
