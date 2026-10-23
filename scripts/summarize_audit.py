@@ -30,7 +30,7 @@ def main() -> int:
     out.to_csv(out_path, index=False)
     print(out.to_string(index=False))
     done = int(out["reviewed"].sum())
-    print(f"\n{done} of {len(df)} sampled cases reviewed; overall agreement "
+    print(f"\n{done} of {len(df)} audit rows reviewed; overall agreement "
           f"{(out['yes'].sum() / done):.0%}" if done else "\nno rows reviewed yet")
     print("wrote", out_path.relative_to(ROOT))
     return 0

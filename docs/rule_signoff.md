@@ -10,6 +10,19 @@ The column "Assistant's check" records that the AI assistant that drafted the ru
 3. Tick `[x]` and add your initials and date in the Notes column.
 4. If you **cannot** tick it, leave the box empty and write the reason in Notes (for example: "statement not found", "threshold differs", "needs clinician", "condition unclear"), then tell the rule author.
 
+**Second-reviewer record (human input only)**
+
+- Reviewer name/initials: _pending_
+- Review date: _pending_
+- Catalog version: **2.1**
+- Independently check the cited recommendation, its conditions/exceptions, code and examples. Do not copy the assistant's check or the first reviewer's ticks.
+- Check especially: R-APP-003 requires appendectomy and only checks an upper bound (zero days passes); advisory findings do not block validity; missing facts are not negative facts; scope-only acceptance is not a clinical check.
+- Record exactly what was accessible for abstract-only sources. Do not claim full-text review when only the abstract was read. Resolve material uncertainty or record the limitation.
+- Run `python -m pytest tests/test_catalog.py tests/test_evaluation_protocol.py`. Tests do not replace human source review or clinical validation.
+- For accepted rows, tick **Second team member** and add your own initials/date to Notes. Clinical/domain review stays separate and blank if no such reviewer participated.
+
+The assistant has not filled second-reviewer or clinical-reviewer boxes. The metric-definition freeze in [metrics.md](metrics.md) is separate from rule approval and the deferred fact audit.
+
 | Rule | Name | Assistant's check of the source | First reviewer read against source | Second team member | Clinical / domain reviewer | Notes (initials, date, reasons) |
 |---|---|---|---|---|---|---|
 | `R-GEN-001` | Diagnosis is covered by the rules | n/a (scope guard, no guideline) | [x] | [ ] | [ ] | SS, 2026-10-21 |
@@ -29,4 +42,4 @@ The column "Assistant's check" records that the AI assistant that drafted the ru
 
 **Version 2.1** changes how rules are applied, not what the other rules say: a rule whose condition fact is known to be false is "not applicable" instead of passing, R-DIV-003 no longer waits for screening history when alarm symptoms are known, and R-APP-003 now applies only with an appendectomy (its row was reset above).
 
-**When every box in the first two columns is ticked:** tag the commit `rules-v2.1-signed-off` and do not edit the catalog afterwards without bumping `CATALOG_VERSION`. The clinical reviewer column stays empty if no clinician is available; say so in the report.
+**When every rule's First reviewer and Second team member boxes are ticked, with human initials/dates recorded:** tag the commit `rules-v2.1-signed-off` and do not edit the catalog afterwards without bumping `CATALOG_VERSION`. The clinical reviewer column stays empty if no clinician is available; say so in the report. Do not create a signed-off tag while required human review is pending.

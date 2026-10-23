@@ -86,7 +86,7 @@ Notes:
 
 **Status: manual review not done yet.** The definitions above are documented, and the code is tested on synthetic title wording, but the extraction has not been validated against reviewed real cases. Until it is, call the facts "documented, not validated".
 
-Procedure (computable-definition practice, as in PheKB): one or two reviewers check the stratified sample below; the agreement counts are recorded here; any disagreement leads to a rule fix and a version note.
+Procedure (computable-definition practice, as in PheKB): one or two reviewers check the stratified sample below; agreement counts are recorded here. Disagreements are adjudicated first: they may reflect an extraction defect, a reviewer mistake, or ambiguous evidence. Only a confirmed extraction defect leads to a code fix, regression test and version note. An AI disagreement alone is not a reason to change a rule.
 
 | Step | Command or place |
 |---|---|
@@ -101,11 +101,21 @@ Result: _pending_.
 
 - Review round 4: "Diverticulitis with bladder fistula" was left unknown because the other-organ filter listed the bladder; colovesical and colovaginal fistulas are diverticulitis complications, so they now count. Negation also covers a short noun phrase between the cue and the complication ("without bladder fistula"). No case in the real data changed.
 - Review round 5: a new assertion ("with", "but", "however", "though", "although", "plus", "except") now ends an earlier negation before a negated list or a short noun phrase is matched. Before, "Appendicitis without abscess with perforation" wrongly negated the documented perforation. Negated lists ("without abscess, perforation or gangrene"), "without bladder fistula" and negation inside the new assertion ("without abscess but without perforation") still work. Regression tests added; the real-data counts did not change.
-- **Passing tests do not establish clinical accuracy.** The tests check the rules on synthetic wording. Accuracy on real cases is established only by the manual audit below, which is still to be done.
+- **Passing tests do not establish clinical accuracy.** The tests check the rules on synthetic wording. The manual audit below measures reviewer agreement on a sample of limited record evidence; it is still pending and does not, by itself, establish full clinical validity.
 
 ## How to audit the facts (locally only)
 
-`python scripts/sample_for_audit.py --per-stratum 5` writes `results/audit_sample.csv` (116 cases in 24 strata: each derived value, the cases upgraded by the discharge text, and the **unknown** strata, to find evidence the extraction missed). It contains patient text, so it stays on your machine (Git ignores it) and must not be pasted into chat tools. A reviewer fills the last two columns. For a derived True or False, "yes" means the record supports the value. For an unknown row, "yes" means the record really does not establish the fact, and "no" means it does (a missed fact). Share only the agreement counts.
+`python scripts/sample_for_audit.py --per-stratum 5` writes `results/audit_sample.csv`. The current sample has **116 fact-review rows across 107 encounters in 24 strata**, not 116 distinct cases: one encounter may be sampled for more than one fact. It includes each derived value, cases upgraded by discharge text, and **unknown** strata to find missed evidence. It contains patient text, so it stays on your machine (Git ignores it) and must not be pasted into chat tools. A reviewer fills the last two columns. For a derived True or False, "yes" means the record supports the value. For an unknown row, "yes" means the record really does not establish the fact, and "no" means it does (a missed fact). Share only the agreement counts.
+
+### Preliminary local-model flags (not human review)
+
+`results/audit_preliminary.csv` contains a local-model opinion for every sampled row; `results/audit_priority_review.csv` selects disagreements and low-confidence opinions. These files do not populate the human reviewer column.
+
+For an evidence-checking second pass, run `python scripts/triage_audit.py` with an installed local Ollama model (default `llama3.1:8b`). It sends evidence only to `127.0.0.1`, requires any quoted support to exist in the original input, and saves `results/audit_triage.csv` plus aggregate counts in `results/audit_triage_summary.csv`. Per-row evidence and reasons remain local. The second pass uses the same model family and is **not an independent human adjudication**. A verified quotation only confirms text presence, not a correct clinical interpretation. All rows retain human-review-pending status.
+
+Review evidence candidates and domain-uncertain rows first, but do not automatically accept the other categories. Validate changes with synthetic regression tests; preserve the original sample and review history. `summarize_audit.py` reads only human answers, not model suggestions. Its agreement column is `yes / (yes + no + unsure)`; unsure and pending counts are reported separately, and this is not sensitivity, specificity or clinical accuracy.
+
+Current local preliminary run: all 41 priority flags were triaged. The second pass matched the extractor on 4 rows, had quotation-support failures on 4, had no verified supporting quotation on 3, identified 26 evidence candidates for human review, and marked 4 as domain-uncertain. Thus 30 rows are the highest-priority adjudication queue, **not 30 confirmed defects**. The other 11 are not human-adjudicated either. The original 116 human-review answers remain blank; no clinical mapping was changed on the strength of these AI opinions.
 
 ## How to check it on the real data (locally only)
 
