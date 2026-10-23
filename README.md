@@ -39,6 +39,8 @@ Runs on synthetic data write to `results/synthetic/` and never touch the real sp
 | check who signed off the rules | [`docs/rule_signoff.md`](docs/rule_signoff.md) |
 | add or change a rule | [`docs/rule_authoring.md`](docs/rule_authoring.md) |
 | see how case facts (complicated, infection, biliary...) come from the record | [`docs/case_facts_mapping.md`](docs/case_facts_mapping.md) and [`src/clinverify/data/case_facts.py`](src/clinverify/data/case_facts.py) |
+| see which rules the real data can actually test | [`docs/case_facts_mapping.md`](docs/case_facts_mapping.md) (section on coverage per rule) and [`docs/rule_eligibility_counts.csv`](docs/rule_eligibility_counts.csv) |
+| validate the extracted case facts (manual audit) | `scripts/sample_for_audit.py`, then `scripts/summarize_audit.py` (steps in `docs/case_facts_mapping.md`) |
 | see what Model A must output | [`docs/model_a_plan_format.md`](docs/model_a_plan_format.md) |
 | verify a set of plans | `python scripts/verify_model_plans.py --plans <file>` |
 | score labeled plans (validity, escape rate) | `python scripts/run_eval.py --plans tests/data/catalog_labeled_plans.json --rules clinverify.rules.catalog` |
@@ -117,7 +119,7 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 | Data cleaning, validation checks, EDA, fixed stratified splits grouped by patient (1,840 / 460 / 100, seed 298; split v2) | done (`src/clinverify/data`, `scripts/data_demo.py`) |
 | Patient-level split leakage check (`scripts/patient_overlap_check.py`) | done: v1 had 5 of 2,383 patients crossing splits; fixed in v2 (0), see `docs/split_leakage_check.md` |
 | Rule catalog and synthetic valid/invalid cases | **v2.1 for team sign-off**: 12 rules from 2025-2026 guidelines (sources within the course's 3-4 year limit), each with source location, strength, violation message and examples; 29 labeled synthetic plans; see `docs/rule_catalog.md` |
-| Verifier (Z3), rule interface, evaluation harness | done and tested on the v2.1 catalog and the 29 labeled plans (`scripts/run_eval.py`); 80 tests; advisory findings are reported but do not make a plan invalid |
+| Verifier (Z3), rule interface, evaluation harness | done and tested on the v2.1 catalog and the 29 labeled plans (`scripts/run_eval.py`); 84 tests; advisory findings are reported but do not make a plan invalid |
 | Case facts from the record (`complicated`, `infection`, `biliary` and others) | first version done: derived from ICD titles, counts in `docs/case_facts_counts.csv`; 3 facts cannot be derived, see `docs/case_facts_mapping.md` |
 | Model A plan format and verification script | done: `docs/model_a_plan_format.md`, `scripts/verify_model_plans.py` (Model A itself is not built yet) |
 | Model A, baseline reproduction | planned (needs GPU access) |
@@ -154,7 +156,7 @@ report/             written report: Workbook 2 and final report (see report/READ
 workbook/           Workbook 1 (report sections 1 and 2), submitted
 presentation/       slides and demo material for the checkpoints
 notebooks/          data pipeline demo (extraction, cleaning, EDA, splits)
-scripts/            data_demo.py (data pipeline, one step at a time), make_synthetic_data.py, run_eval.py (score labeled plans), verify_model_plans.py (verify Model A plans on real cases), case_facts_counts.py, patient_overlap_check.py, build_rule_catalog_doc.py
+scripts/            data_demo.py (data pipeline, one step at a time), make_synthetic_data.py, run_eval.py (score labeled plans), verify_model_plans.py (verify Model A plans on real cases), case_facts_counts.py, sample_for_audit.py and summarize_audit.py (audit of the derived facts), patient_overlap_check.py, build_rule_catalog_doc.py
 src/clinverify/
     data/           loading, cleaning, validation, splits and leakage checks; case_facts.py (facts from ICD titles); case_loader.py (attach facts to Model A plans); synthetic data generator
     plan.py         starter schema for a structured plan
