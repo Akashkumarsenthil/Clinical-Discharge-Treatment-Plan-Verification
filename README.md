@@ -57,7 +57,7 @@ The case facts the rules depend on (complicated, infection, biliary and others) 
    ```bash
    python scripts/sample_for_audit.py --per-stratum 5
    ```
-   This writes `results/audit_sample.csv` (116 rows, Git ignores it).
+   This writes `results/audit_sample.csv` (116 rows, Git ignores it). The same cases, as IDs and fact names only with no patient text, are listed in [`docs/audit_sample_ids_only.csv`](docs/audit_sample_ids_only.csv) so reviewers can check they are looking at the same rows. The sheet with the text is never pushed: this repository is public and the data use agreement does not allow sharing MIMIC text.
 3. For each row, read `icd_titles` and `discharge_diagnosis`, compare with `fact` and `derived_value`, and fill `reviewer_agrees (yes/no/unsure)`; add a note for "no" or "unsure".
    - Derived True or False: **yes** if the record supports the value, **no** if it does not.
    - **unknown** row: **yes** if the record really does not establish the fact, **no** if it does (a missed fact).
@@ -98,13 +98,16 @@ Four models are built and compared on the same benchmark and splits:
 
 | Metric | Role |
 |---|---|
-| Supported treatment-plan validity | Primary: correct diagnosis and verifier-accepted plan / all scheduled covered cases |
+| Supported checked acceptance | Primary automatic, descriptive: correct diagnosis, verifier acceptance and at least one decided non-advisory clinical check / all scheduled covered cases; not clinical completeness |
+| Independently adjudicated treatment validity | Research goal ≥ 0.85 on a predeclared record-evaluable covered cohort; unavailable until human plan labels and a tested label scorer exist |
 | Constraint-violation escape rate | Secondary: invalid plans that the verifier lets through |
 | Repair success rate, translation fidelity, solver cost | Secondary (targets set before the metrics are frozen) |
 
-**Definitions frozen locally (2026-10-23):** [docs/metrics.md](docs/metrics.md), with [protocol v1.0](docs/evaluation_protocol.json). Second-human rule sign-off and manual fact validation remain pending. A definition freeze is not clinical validation or a signed Git release.
+**Definitions revised locally (2026-10-23):** [docs/metrics.md](docs/metrics.md), with [protocol v1.1](docs/evaluation_protocol.json); [v1.0](docs/evaluation_protocol_v1.0.json) is archived. A local [feasibility check](docs/evaluation_feasibility.md) found the previous 85% automatic acceptance target impossible under strict unknown handling. It inspected validation and test facts, not Model A performance. Second-human rule sign-off and manual fact validation remain pending. A definition freeze is not clinical validation or a signed Git release.
 
-**Approved population:** keep the fixed 100-case test split. Score diagnosis accuracy on all 100 and primary treatment validity on the **73 cases covered by catalog v2.1** (target ≥ 0.85). Report the other 27 as unsupported for treatment, not clinical treatment failures. Escape rate ≤ 0.05 requires independent reference labels on covered generated plans, not unlabeled model outputs. Missing covered-case outputs remain failures; wrong diagnoses cannot earn primary treatment credit. Report unknown/not-applicable counts and advisory findings alongside rates.
+**Population unchanged:** keep the fixed 100-case test split. Score diagnosis accuracy on all 100 and automatic treatment metrics on the **73 cases covered by catalog v2.1**, without a numerical automatic acceptance target. Report the other 27 as unsupported for treatment, not clinical treatment failures. Keep strict unknowns visible as non-acceptances, not proven clinical errors. Missing covered-case outputs remain in the denominator; wrong diagnoses and plans with no decided blocking clinical check cannot earn primary automatic credit. Report unknown/not-applicable counts and advisory findings alongside rates.
+
+The **0.85 research goal** now concerns independent clinical adjudication, not catalog acceptance. Reviewers must freeze record eligibility for all 73 cases before generation, then assess plan adequacy/completeness and validity independently. Report eligible coverage and reasons; do not select only verifier-passing cases. This endpoint is currently **unavailable**, and its attainability is not established. Escape rate ≤ 0.05 likewise needs independent plan labels. The 116-row fact audit is not generated-plan evaluation. The label scorer is still pending; automatic runs never manufacture a human score.
 
 ## Data and access
 
@@ -141,7 +144,7 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 | Data cleaning, validation checks, EDA, fixed stratified splits grouped by patient (1,840 / 460 / 100, seed 298; split v2) | done (`src/clinverify/data`, `scripts/data_demo.py`) |
 | Patient-level split leakage check (`scripts/patient_overlap_check.py`) | done: v1 had 5 of 2,383 patients crossing splits; fixed in v2 (0), see `docs/split_leakage_check.md` |
 | Rule catalog and synthetic valid/invalid cases | **v2.1 for team sign-off**: 12 rules from 2025-2026 guidelines (sources within the course's 3-4 year limit), each with source location, strength, violation message and examples; 29 labeled synthetic plans; see `docs/rule_catalog.md` |
-| Verifier (Z3), rule interface, evaluation harness | implemented and tested on the v2.1 catalog and 29 labeled synthetic plans (`scripts/run_eval.py`); advisory findings are non-blocking; protocol v1.0 adds fixed-cohort scoring and mandatory coverage/diagnosis reporting |
+| Verifier (Z3), rule interface, evaluation harness | implemented and tested on the v2.1 catalog and 29 labeled synthetic plans (`scripts/run_eval.py`); advisory findings are non-blocking; protocol v1.1 retains fixed-cohort scoring, adds checked acceptance, and removes the infeasible automatic 85% target |
 | Case facts from the record (`complicated`, `infection`, `biliary` and others) | first version done: derived from ICD titles, counts in `docs/case_facts_counts.csv`; 3 facts cannot be derived, see `docs/case_facts_mapping.md` |
 | Model A plan format and verification script | done: `docs/model_a_plan_format.md`, `scripts/verify_model_plans.py` (Model A itself is not built yet) |
 | Model A, baseline reproduction | planned (needs GPU access) |

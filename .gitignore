@@ -20,6 +20,7 @@ results/runs/*
 !docs/case_facts_counts.csv
 !docs/rule_eligibility_counts.csv
 !docs/case_facts_ai_triage_counts.csv
+!docs/audit_sample_ids_only.csv
 !docs/case_facts_validation.csv
 
 # output of runs on synthetic data
