@@ -19,6 +19,7 @@ results/runs/*
 !results/eda_summary.csv
 !docs/case_facts_counts.csv
 !docs/rule_eligibility_counts.csv
+!docs/case_facts_validation.csv
 
 # output of runs on synthetic data
 results/synthetic/

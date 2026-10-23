@@ -79,6 +79,21 @@ Consequence for the evaluation: on the real benchmark only R-APP-001, R-APP-003,
 - Review round 1: generic titles were treated as "absent"; `mild` was inferred from missing words; "without mention of hemorrhage" counted as an alarm symptom (174 cases, now 14); "Generalized (acute) peritonitis" was missed.
 - Review round 2: the verifier loader did not use the discharge text; `mild` and absence-of-documentation assumptions moved out of the main result into the sensitivity mode; primary sclerosing cholangitis no longer counts as acute cholangitis; the discharge text now needs the disease, a current complication and no negation; fistula, stricture and change in bowel habit added; per-rule coverage added.
 
+## Validation status
+
+**Status: manual review not done yet.** The definitions above are documented, and the code is tested on synthetic title wording, but the extraction has not been validated against reviewed real cases. Until it is, call the facts "documented, not validated".
+
+Procedure (computable-definition practice, as in PheKB): one or two reviewers check the stratified sample below; the agreement counts are recorded here; any disagreement leads to a rule fix and a version note.
+
+| Step | Command or place |
+|---|---|
+| 1. Draw the sample (local) | `python scripts/sample_for_audit.py --per-stratum 5` |
+| 2. Review (local, patient text stays on the reviewer's machine) | fill `reviewer_agrees (yes/no/unsure)` in `results/audit_sample.csv` |
+| 3. Summarize (counts only) | `python scripts/summarize_audit.py` writes `docs/case_facts_validation.csv` |
+| 4. Record who reviewed and the result | add reviewer initials, date, agreement per fact, and any rule change below |
+
+Result: _pending_.
+
 ## How to audit the facts (locally only)
 
 `python scripts/sample_for_audit.py --per-stratum 5` writes `results/audit_sample.csv` (70 cases across the strata, including the cases upgraded by the discharge text). It contains patient text, so it stays on your machine (Git ignores it) and must not be pasted into chat tools. A reviewer fills the last two columns. Share only the agreement counts.
