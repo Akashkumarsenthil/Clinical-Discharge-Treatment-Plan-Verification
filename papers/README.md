@@ -46,3 +46,17 @@ Ten papers on LLMs for clinical reasoning and decision support, collected for th
 | L10 | `Lievin2026_AMIE-Disease-Management.pdf` | Liévin et al. (2026), towards conversational AI for disease management. *Nature* 655, 1292-1299 | [DOI](https://doi.org/10.1038/s41586-026-10764-5) |
 
 The PDFs belong to their authors and publishers and are kept here for course use. Please cite the original sources above.
+
+## Medical LLM literature review (Shruthi Thirukumaran)
+| **#** | **File** | **Paper** | **Source** |
+|---|---|---|---|
+| L1 | `MIMIC-IV_Johnson_2023.pdf` | Johnson et al. (2023), MIMIC-IV, a freely accessible electronic health record dataset. *Scientific Data*, 10. | [DOI](https://doi.org/10.1038/s41597-022-01899-x) |
+| L2 | `GPT-4_Medical_Challenge_Problems_Nori_2023.pdf` | Nori et al. (2023), Capabilities of GPT-4 on Medical Challenge Problems. | [Paper](https://arxiv.org/abs/2303.13375) |
+| L3 | `MedSafetyBench_Han_2024.pdf` | Han et al. (2024), MedSafetyBench: Evaluating and Improving the Medical Safety of Large Language Models. *NeurIPS 2024*. | [NeurIPS](https://papers.nips.cc/paper_files/paper/2024/hash/3ac952d0264ef7a505393868a70a46b6-Abstract-Datasets_and_Benchmarks_Track.html) |
+| L4 | `AMEGA_Fast_2024.pdf` | Fast et al. (2024), Autonomous Medical Evaluation for Guideline Adherence of Large Language Models. *npj Digital Medicine*. | [DOI](https://doi.org/10.1038/s41746-024-01356-6) |
+| L5 | `MedGUIDE_Li_2025.pdf` | Li et al. (2025), MedGUIDE: Benchmarking Clinical Decision-Making in Large Language Models. | [Paper](https://arxiv.org/abs/2505.11613) |
+| L6 | `HealthBench_Arora_2025.pdf` | Arora et al. (2025), HealthBench: Evaluating Large Language Models Towards Improved Human Health. | [Paper](https://arxiv.org/abs/2505.08775) |
+| L7 | `ReAct_Yao_2023.pdf` | Yao et al. (2023), ReAct: Synergizing Reasoning and Acting in Language Models. *ICLR 2023*. | [Paper](https://arxiv.org/abs/2210.03629) |
+| L8 | `Lets_Verify_Step_by_Step_Lightman_2023.pdf` | Lightman et al. (2023), Let’s Verify Step by Step. | [Paper](https://arxiv.org/abs/2305.20050) |
+| L9 | `PAL_Gao_2023.pdf` | Gao et al. (2023), PAL: Program-Aided Language Models. *ICML 2023*. | [PMLR](https://proceedings.mlr.press/v202/gao23f.html) |
+| L10 | `LeanDojo_Yang_2023.pdf` | Yang et al. (2023), LeanDojo: Theorem Proving with Retrieval-Augmented Language Models. *NeurIPS 2023*. | [NeurIPS](https://proceedings.neurips.cc/paper_files/paper/2023/hash/4441469427094f8873d0fecb0c4e1cee-Abstract-Datasets_and_Benchmarks.html) |
