@@ -1,4 +1,4 @@
-"""Rule catalog v1.0: every rule is documented, sourced, and verified on its own valid and invalid example."""
+"""Rule catalog v2.0: every rule is documented, sourced, and verified on its own valid and invalid example."""
 import json
 import sys
 from pathlib import Path
