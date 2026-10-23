@@ -161,3 +161,31 @@ def test_fistula_to_an_adjacent_organ_is_a_diverticulitis_complication():
     # still rejected: another organ's complication, negation
     assert "complicated" not in derive_facts("diverticulitis", div, "Diverticulitis; perforated gastric ulcer")
     assert "complicated" not in derive_facts("diverticulitis", div, "Diverticulitis without bladder fistula")
+
+
+def test_new_assertion_ends_negation_before_a_documented_complication():
+    app = ["Unspecified acute appendicitis"]
+    for text in ["Appendicitis without abscess with perforation",
+                 "Appendicitis, no abscess, with perforation",
+                 "Appendicitis without abscess but with perforation",
+                 "Appendicitis, no fever with abscess"]:
+        assert derive_facts("appendicitis", app, text) == {"complicated": True}, text
+    div = ["Diverticulitis of colon (without mention of hemorrhage)"]
+    for text in ["Diverticulitis without perforation with abscess",
+                 "Diverticulitis, no perforation, with bladder fistula",
+                 "Diverticulitis without perforation however with abscess"]:
+        assert derive_facts("diverticulitis", div, text)["complicated"] is True, text
+
+
+def test_negated_lists_and_negation_in_a_new_assertion_stay_unknown():
+    app = ["Unspecified acute appendicitis"]
+    for text in ["Appendicitis without abscess, perforation or gangrene",
+                 "Appendicitis without abscess with no perforation",
+                 "Appendicitis without abscess but without perforation",
+                 "Appendicitis without evidence of perforation"]:
+        assert derive_facts("appendicitis", app, text) == {}, text
+    div = ["Diverticulitis of colon (without mention of hemorrhage)"]
+    for text in ["Diverticulitis without bladder fistula",
+                 "Diverticulitis without abscess, perforation or fistula",
+                 "Diverticulitis without perforation with no abscess"]:
+        assert "complicated" not in derive_facts("diverticulitis", div, text), text

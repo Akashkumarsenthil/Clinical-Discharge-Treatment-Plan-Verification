@@ -119,7 +119,7 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 | Data cleaning, validation checks, EDA, fixed stratified splits grouped by patient (1,840 / 460 / 100, seed 298; split v2) | done (`src/clinverify/data`, `scripts/data_demo.py`) |
 | Patient-level split leakage check (`scripts/patient_overlap_check.py`) | done: v1 had 5 of 2,383 patients crossing splits; fixed in v2 (0), see `docs/split_leakage_check.md` |
 | Rule catalog and synthetic valid/invalid cases | **v2.1 for team sign-off**: 12 rules from 2025-2026 guidelines (sources within the course's 3-4 year limit), each with source location, strength, violation message and examples; 29 labeled synthetic plans; see `docs/rule_catalog.md` |
-| Verifier (Z3), rule interface, evaluation harness | done and tested on the v2.1 catalog and the 29 labeled plans (`scripts/run_eval.py`); 85 tests; advisory findings are reported but do not make a plan invalid |
+| Verifier (Z3), rule interface, evaluation harness | done and tested on the v2.1 catalog and the 29 labeled plans (`scripts/run_eval.py`); 87 tests; advisory findings are reported but do not make a plan invalid |
 | Case facts from the record (`complicated`, `infection`, `biliary` and others) | first version done: derived from ICD titles, counts in `docs/case_facts_counts.csv`; 3 facts cannot be derived, see `docs/case_facts_mapping.md` |
 | Model A plan format and verification script | done: `docs/model_a_plan_format.md`, `scripts/verify_model_plans.py` (Model A itself is not built yet) |
 | Model A, baseline reproduction | planned (needs GPU access) |

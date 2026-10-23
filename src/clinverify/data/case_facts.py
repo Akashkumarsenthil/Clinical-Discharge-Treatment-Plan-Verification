@@ -47,7 +47,8 @@ _NEGATION_CUE = re.compile(r"\b(no|not|without|negative for|denies|denied|rule[s
 _NEGATION_AFTER = re.compile(r"^\W*(\w+\W+){0,3}?(ruled out|excluded|negative|not seen|not present|absent|resolved)\b")
 _NON_PREFIX = re.compile(r"\b(non|un)-?\s?(perforat\w*|gangren\w*|ruptur\w*|complicat\w*)")
 _FILLER = {"evidence", "of", "signs", "sign", "findings", "finding", "concern", "for", "suspicion", "any", "a", "an", "the", "and",
-           "or", "nor", "no", "with", "current", "acute", "overt", "frank", "free", "fluid", "extraluminal", "air"}
+           "or", "nor", "no", "current", "acute", "overt", "frank", "free", "fluid", "extraluminal", "air"}
+_ASSERTION_BOUNDARIES = {"but", "however", "with", "though", "although", "plus", "except"}
 _OTHER_SITE = {
     "appendicitis": r"gastric|duodenal|peptic|stomach|ulcer|gallbladder|cholecyst|diverticul|sigmoid|ovarian|uterine|bladder",
     # bladder, vaginal and uterine fistulas are diverticulitis complications (colovesical, colovaginal), so they are not excluded
@@ -66,11 +67,15 @@ def _negated_before(before: str, complication: str) -> bool:
     if not cues:
         return False
     tokens = re.findall(r"[a-z]+", before[cues[-1].end():])
+    # A new assertion ends the last negation's scope BEFORE either matching a list or a short noun phrase.
+    # Otherwise "without abscess with perforation" incorrectly negates the documented perforation too.
+    if set(tokens) & _ASSERTION_BOUNDARIES:
+        return False
     if all(tok in _FILLER or re.match(complication, tok) or re.match(r"perforat|gangren|abscess|rupture|peritonitis|fistula|phlegmon|stricture", tok)
            for tok in tokens):
         return True                                            # a negated list: "without abscess, perforation or gangrene"
-    # a short noun phrase between the cue and the complication ("without bladder fistula"), unless a new assertion starts
-    return len(tokens) <= 3 and not set(tokens) & {"but", "however", "with", "though", "although", "plus", "except"}
+    # a short noun phrase between the cue and the complication ("without bladder fistula")
+    return len(tokens) <= 3
 
 
 def _written_complication(text: str, disease: str, complication: str, target: str) -> bool:
