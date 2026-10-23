@@ -11,6 +11,12 @@ def test_appendicitis_complicated_only_with_peritonitis_or_abscess():
     assert derive_facts("appendicitis", ["Acute appendicitis with generalized peritonitis"]) == {"complicated": True}
     assert derive_facts("appendicitis", ["Acute appendicitis with peritoneal abscess"]) == {"complicated": True}
     assert derive_facts("appendicitis", ["Unspecified acute appendicitis"]) == {"complicated": False}
+    # localized peritonitis without perforation or gangrene is not complicated; with gangrene or perforation it is
+    assert derive_facts("appendicitis", ["Acute appendicitis with localized peritonitis, without perforation or gangrene"]
+                        ) == {"complicated": False}
+    assert derive_facts("appendicitis", ["Acute appendicitis with localized peritonitis and gangrene"]) == {"complicated": True}
+    assert derive_facts("appendicitis", ["Acute appendicitis with localized peritonitis, perforation, or gangrene"]
+                        ) == {"complicated": True}
 
 
 def test_pancreatitis_necrosis_infection_and_biliary():

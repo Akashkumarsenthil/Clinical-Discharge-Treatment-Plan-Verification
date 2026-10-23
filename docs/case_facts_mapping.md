@@ -19,7 +19,7 @@ Sources: [AAPC, ICD-10 K codes for acute appendicitis](https://www.aapc.com/code
 
 | Fact | Rule | Used by | Derivable |
 |---|---|---|---|
-| `complicated` (appendicitis) | any appendicitis title with peritonitis, abscess, perforation or gangrene | R-APP-002, R-APP-003 | yes |
+| `complicated` (appendicitis) | any appendicitis title with perforation, gangrene, abscess or generalized peritonitis (localized peritonitis "without perforation or gangrene", K35.30, is not complicated) | R-APP-002, R-APP-003 | yes |
 | `complicated` (diverticulitis) | bowel title with "with perforation", abscess or peritonitis (and not "without perforation") | R-DIV-001 to R-DIV-003 | yes |
 | `necrotizing` | pancreatitis title "with uninfected necrosis" or "with infected necrosis" | R-PAN-002 | yes |
 | `infection` | pancreatitis "with infected necrosis", or a cholangitis diagnosis | R-PAN-001, R-PAN-002 | partly: other infections (for example pneumonia) are not checked |
@@ -33,6 +33,24 @@ Sources: [AAPC, ICD-10 K codes for acute appendicitis](https://www.aapc.com/code
 | `crc_screening_up_to_date` | none | R-DIV-003 | **no**: screening history is not in the record |
 
 For the three that cannot be derived, the matching rules stay "insufficient information" on real cases. That is correct behavior. If the team wants those rules to run, supply the fact by another route (for example from MIMIC-IV `poe` for diet orders) and add it to `derive_facts`.
+
+## Results on the real data (counts only, 2,400 cases)
+
+Produced by `python scripts/case_facts_counts.py`; saved in `results/case_facts_summary.csv` (no patient text). Every case matched a diagnosis title for its pathology except cholecystitis, which the rules do not cover.
+
+| Pathology | Fact | True | False | Cases |
+|---|---|---|---|---|
+| appendicitis | complicated | 221 | 736 | 957 |
+| diverticulitis | complicated | 96 | 161 | 257 |
+| diverticulitis | alarm_symptoms | 174 | 83 | 257 |
+| pancreatitis | necrotizing | 7 | 531 | 538 |
+| pancreatitis | infection | 38 | 500 | 538 |
+| pancreatitis | biliary | 69 | 469 | 538 |
+| pancreatitis | cholangitis | 37 | 501 | 538 |
+| pancreatitis | biliary_obstruction | 86 | 452 | 538 |
+| pancreatitis | mild | 430 | 108 | 538 |
+
+Check made on the first run: appendicitis "complicated" was 78%, too high, because localized peritonitis without perforation was counted. After the fix it is 23%, in line with published rates. `biliary` (13%) is probably an undercount, since gallstone pancreatitis is often coded as a gallstone code next to a generic pancreatitis code; a co-occurrence rule could be added if the team wants it.
 
 ## How to check it on the real data (locally only)
 

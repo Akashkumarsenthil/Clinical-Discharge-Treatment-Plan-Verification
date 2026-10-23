@@ -29,11 +29,17 @@ def _texts(icd_titles: Iterable[str]) -> list[str]:
     return [" ".join(str(t).lower().split()) for t in icd_titles if str(t).strip()]
 
 
+_NEGATED = re.compile(r"without (perforation|abscess|gangrene)( or (perforation|abscess|gangrene))*")
+
+
 def _appendicitis(texts: list[str]) -> dict[str, bool]:
     rows = [t for t in texts if "appendicitis" in t]
     if not rows:
         return {}
-    complicated = any(re.search(r"peritonitis|abscess|perforat|gangren", t) for t in rows)
+    # complicated = perforation, gangrene, abscess or generalized peritonitis. Localized peritonitis
+    # "without perforation or gangrene" (ICD-10 K35.30) is not complicated, so negated phrases are removed first.
+    cleaned = [_NEGATED.sub("", t) for t in rows]
+    complicated = any(re.search(r"perforat|gangren|abscess|generalized peritonitis", t) for t in cleaned)
     return {"complicated": complicated}
 
 
