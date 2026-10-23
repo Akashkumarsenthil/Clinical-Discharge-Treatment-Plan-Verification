@@ -23,4 +23,8 @@ results/runs/*
 
 # output of runs on synthetic data
 results/synthetic/
+results/figures/
 results/model_runs/
+
+# personal working files (templates, drafts, external clones): never pushed
+local/
