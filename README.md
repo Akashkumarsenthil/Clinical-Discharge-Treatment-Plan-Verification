@@ -170,7 +170,11 @@ requirements.txt    pinned Python packages for the data pipeline
 | Sneha Singh | rule catalog and synthetic cases |
 | Shruthi Thirukumaran | environment, CI, reproducibility |
 
-Task tracking: [Linear board](https://linear.app/298a-team-6-neurosymbolic/team/T6/overview) (two-week cycles, one assignee per issue, linked artifacts on closed issues).
+Task tracking in Linear (cycles, one assignee per issue, linked artifacts on closed issues):
+
+- [All issues](https://linear.app/298a-team-6-neurosymbolic/team/T6/all)
+- [Current cycle by assignee](https://linear.app/298a-team-6-neurosymbolic/view/team-6-board-current-cycle-by-assignee-be2c75252684) (dashboard view)
+- [Project page](https://linear.app/298a-team-6-neurosymbolic/project/sec22-team6-topic12-neurosymbolic-verification-of-llm-plans-9c8482aa0d9c/overview) (milestones, status updates)
 
 ## References
 
