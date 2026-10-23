@@ -131,7 +131,7 @@ gantt
 ```
 README.md
 abstract/           the submitted project abstract (PDF), with a note on two out-of-date statements
-papers/             the 13 papers cited in Workbook 1 plus a medical LLM literature review set, with an index (papers/README.md)
+papers/             31 PDFs: the 13 Workbook 1 papers, 10 later additions, and a medical LLM literature review set, with an index (papers/README.md)
 report/             written report: Workbook 2 and final report (see report/README.md)
 workbook/           Workbook 1 (report sections 1 and 2), submitted
 presentation/       slides and demo material for the checkpoints
@@ -174,7 +174,7 @@ Task tracking: [Linear board](https://linear.app/298a-team-6-neurosymbolic/team/
 
 ## References
 
-The 13 papers used in the project plan (numbering matches Workbook 1):
+The 13 papers used in the project plan (numbering matches Workbook 1). The full reading list, including later additions and the medical LLM literature review, is in [papers/README.md](papers/README.md).
 
 1. Guan, L., Valmeekam, K., Sreedharan, S., & Kambhampati, S. (2023). Leveraging pre-trained large language models to construct and utilize world models for model-based task planning. *NeurIPS 36*. https://arxiv.org/abs/2305.14909
 2. Hager, P., Jungmann, F., Holland, R., Bhagat, K., Hubrecht, I., Knauer, M., Vielhauer, J., Makowski, M., Braren, R., Kaissis, G., & Rueckert, D. (2024). Evaluation and mitigation of the limitations of large language models in clinical decision-making. *Nature Medicine*, 30, 2613-2622. https://doi.org/10.1038/s41591-024-03097-1 (**baseline to reproduce**)
