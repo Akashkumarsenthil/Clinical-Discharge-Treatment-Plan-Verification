@@ -15,7 +15,7 @@ The column "Assistant's check" records that the AI assistant that drafted the ru
 | `R-GEN-001` | Diagnosis is covered by the rules | n/a (scope guard, no guideline) | [x] | [ ] | [ ] | SS, 2026-10-21 |
 | `R-APP-001` | Antibiotic prophylaxis for appendectomy | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
 | `R-APP-002` | No postoperative antibiotics when uncomplicated | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
-| `R-APP-003` | Postoperative antibiotic course of at most 3 days (complicated) | abstract only, 2026-10-21 | [ ] | [ ] | [ ] | changed in v2.1 (applies only with an appendectomy; upper bound only): needs a new read |
+| `R-APP-003` | Postoperative antibiotic course of at most 3 days (complicated) | abstract only, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-23 (re-read for v2.1: applies only with an appendectomy, upper bound only) |
 | `R-PAN-001` | No prophylactic antibiotics | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
 | `R-PAN-002` | Empiric antibiotics for infected necrotizing pancreatitis | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
 | `R-PAN-003` | Cholecystectomy during the index admission (mild biliary pancreatitis) | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
