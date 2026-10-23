@@ -170,7 +170,7 @@ def test_cli_smoke_test_writes_provenance_and_keeps_parser_text_out_of_console(t
     assert run.returncode == 0, run.stderr
     assert "synthetic_private_parser_marker" not in run.stdout
     saved = json.loads(next(out_dir.glob("*.json")).read_text())
-    assert saved["evaluation"]["protocol_version"] == "1.0"
+    assert saved["evaluation"]["protocol_version"] == "1.1"
     assert saved["evaluation"]["cohort"] == "pilot"
     assert saved["diagnosis_accuracy"] == 1.0 and saved["supported_treatment_validity_rate"] == 0.5
 
@@ -202,3 +202,67 @@ def test_blocking_unknown_is_not_counted_as_an_escape():
     result = evaluate([(missing, {"R-APP-002"})], catalog, seed=298)
     assert result["escape_rate"]["rate"] == 0.0
     assert result["per_rule"]["R-APP-002"]["unknown"] == 1
+
+
+def test_empty_appendicitis_plan_cannot_earn_checked_acceptance():
+    facts = {1: {"pathology": "appendicitis", "facts": {}}}
+    result = verify_model_plans([{"case_id": 1, "diagnosis": "appendicitis", "treatments": []}],
+                                facts, catalog, expected_case_ids=[1])
+    assert result["supported_treatment_validity_rate"] == 1.0  # compatibility diagnostic only
+    assert result["supported_checked_acceptance_rate"] == 0.0
+    assert result["n_supported_checked_accepted"] == 0
+    assert result["n_empty_treatment_plans"] == 1
+    assert result["n_supported_accepted_without_decided_blocking_clinical_check"] == 1
+    assert result["checked_treatment_status"] == {"accepted_without_decided_blocking_clinical_check": 1}
+    assert result["per_case"][0]["n_decided_blocking_clinical_checks"] == 0
+
+
+def test_advisory_only_or_irrelevant_nonempty_treatment_is_not_checked_success():
+    outputs = [{"case_id": 3, "diagnosis": "diverticulitis", "treatments": ["antibiotics"]}]
+    result = verify_model_plans(outputs, FACTS, catalog, expected_case_ids=[3])
+    assert result["supported_treatment_validity_rate"] == 1.0
+    assert result["supported_checked_acceptance_rate"] == 0.0
+    assert result["n_empty_treatment_plans"] == 0
+    assert result["n_with_advisory_unknown"] == 1
+
+
+def test_checked_metric_retains_missing_malformed_wrong_and_unknown_cases():
+    facts = {**FACTS, 5: {"pathology": "appendicitis", "facts": {}},
+             6: {"pathology": "appendicitis", "facts": {"complicated": False}}}
+    outputs = [app(), {**app(2), "treatments": ["bad"]},
+               {"case_id": 3, "diagnosis": "appendicitis", "treatments": []}, app(5)]
+    result = verify_model_plans(outputs, facts, catalog, expected_case_ids=[1, 2, 3, 5, 6])
+    assert result["supported_checked_acceptance_rate"] == 1 / 5
+    assert result["checked_treatment_status"] == {
+        "accepted_with_decided_blocking_clinical_check": 1, "unparseable": 1,
+        "wrong_diagnosis": 1, "insufficient_information": 1, "missing_output": 1}
+    assert sum(result["checked_treatment_status"].values()) == result["n_supported_cases"]
+
+
+def test_advisory_violation_does_not_remove_a_decided_blocking_check():
+    result = verify_model_plans([app(2, days=7)], FACTS, catalog, expected_case_ids=[2])
+    assert result["supported_checked_acceptance_rate"] == 1.0
+    assert result["n_with_advisory_finding"] == 1
+    assert result["per_case"][0]["n_decided_blocking_clinical_checks"] == 1
+
+
+def test_unsupported_and_zero_cohorts_never_get_a_checked_score():
+    output = {"case_id": 4, "diagnosis": "cholecystitis", "treatments": []}
+    result = verify_model_plans([output], FACTS, catalog, expected_case_ids=[4])
+    assert result["supported_checked_acceptance_rate"] is None
+    assert result["checked_treatment_status"] == {}
+    assert result["per_case"][0]["checked_treatment_evaluation_status"] == "unsupported"
+    assert verify_model_plans([], {}, catalog, expected_case_ids=[])["supported_checked_acceptance_rate"] is None
+
+
+def test_automatic_runner_never_fabricates_an_adjudicated_score():
+    result = verify_model_plans([app()], FACTS, catalog, expected_case_ids=[1])
+    assert result["supported_checked_acceptance_rate"] == 1.0
+    assert result["adjudicated_treatment_validity_rate"] is None
+    assert result["adjudication_status"] == "unavailable_no_independent_plan_labels_loaded"
+    protocol = load_protocol()
+    assert protocol["version"] == "1.1"
+    assert "supported_treatment_validity_rate_min" not in protocol["targets"]
+    assert protocol["targets"]["adjudicated_treatment_validity_rate_min"] == 0.85
+    old = json.loads((ROOT / "docs/evaluation_protocol_v1.0.json").read_text())
+    assert old["version"] == "1.0" and old["targets"]["supported_treatment_validity_rate_min"] == 0.85

@@ -42,11 +42,15 @@ def verify_model_plans(outputs: list[dict], case_facts: dict[int, dict], rules, 
             raise ValueError("duplicate case IDs in a fixed-cohort submission")
     rules = list(rules)
     clinical_ids = {r.id for r in rules if not r.id.startswith("R-GEN-")}
+    blocking_clinical_ids = {r.id for r in rules if r.id in clinical_ids and not r.advisory}
     per_case, rule_counts, status_counts = [], Counter(), Counter()
     unparseable, wrong_diagnosis, times, results = [], 0, [], []
     correct_results = []
     supported_correct_results = []
     treatment_status = Counter()
+    checked_treatment_status = Counter()
+    supported_checked_valid = supported_accepted_without_checks = 0
+    empty_treatment_plans = 0
     supported_valid = supported_raw_valid = correct_supported_n = 0
     scheduled = list(expected) if expected is not None else [o.get("case_id") if isinstance(o, dict) else None for o in outputs]
     supported_n = sum(case_facts.get(h, {}).get("pathology") in supported_diagnoses
@@ -70,6 +74,7 @@ def verify_model_plans(outputs: list[dict], case_facts: dict[int, dict], rules, 
             unparseable.append({"case_id": out.get("case_id"), "error": str(err)})
             if supported:
                 treatment_status["unparseable"] += 1
+                checked_treatment_status["unparseable"] += 1
             continue
         res = verify(plan, rules)
         results.append(res)
@@ -80,17 +85,26 @@ def verify_model_plans(outputs: list[dict], case_facts: dict[int, dict], rules, 
         correct_valid += correct and res.valid
         if correct:
             correct_results.append(res)
+        checked = clinical_ids - set(res.not_applicable) - set(res.inconclusive)
+        blocking_checked = blocking_clinical_ids & checked
+        checked_status = ("accepted_with_decided_blocking_clinical_check" if blocking_checked
+                          else "accepted_without_decided_blocking_clinical_check") if res.valid else res.status
+        empty_treatment_plans += not plan.treatments
         if supported:
             supported_raw_valid += res.valid
             supported_valid += correct and res.valid
             treatment_status[res.status if correct else "wrong_diagnosis"] += 1
+            checked_treatment_status[checked_status if correct else "wrong_diagnosis"] += 1
+            supported_checked_valid += correct and res.valid and bool(blocking_checked)
+            supported_accepted_without_checks += correct and res.valid and not blocking_checked
             if correct:
                 supported_correct_results.append(res)
-        checked = clinical_ids - set(res.not_applicable) - set(res.inconclusive)
         valid_without_clinical_checks += res.valid and not checked
         per_case.append({"case_id": plan.case_id, "status": res.status, "violated": list(res.violated),
                          "diagnosis_correct": correct, "advisory": list(res.advisory), "inconclusive": list(res.inconclusive),
                          "treatment_evaluation_status": (res.status if correct else "wrong_diagnosis") if supported else "unsupported",
+                         "checked_treatment_evaluation_status": (checked_status if correct else "wrong_diagnosis") if supported else "unsupported",
+                         "n_decided_blocking_clinical_checks": len(blocking_checked),
                          "advisory_inconclusive": list(res.advisory_inconclusive)})
     n_missing = len(expected - {out["case_id"] for out in outputs}) if expected is not None else 0
     n = len(expected) if expected is not None else len(outputs)
@@ -102,6 +116,7 @@ def verify_model_plans(outputs: list[dict], case_facts: dict[int, dict], rules, 
                                 for h in expected - {o["case_id"] for o in outputs})
         if missing_supported:
             treatment_status["missing_output"] = missing_supported
+            checked_treatment_status["missing_output"] = missing_supported
     return {
         "n_plans": n, "n_unparseable": len(unparseable), "n_wrong_diagnosis": wrong_diagnosis,
         "n_submitted": len(outputs), "n_missing_outputs": n_missing,
@@ -109,6 +124,15 @@ def verify_model_plans(outputs: list[dict], case_facts: dict[int, dict], rules, 
         "n_verified": len(results), "n_correct_diagnosis": correct_n,
         "n_supported_cases": supported_n, "n_unsupported_cases": n - supported_n,
         "supported_treatment_validity_rate": (supported_valid / supported_n) if supported_n else None,
+        # A scope guard, skipped rules, or advisory-only checks cannot earn this credit.
+        # This still measures catalog acceptance, not completeness or clinical safety.
+        "supported_checked_acceptance_rate": (supported_checked_valid / supported_n) if supported_n else None,
+        "n_supported_checked_accepted": supported_checked_valid,
+        "n_supported_accepted_without_decided_blocking_clinical_check": supported_accepted_without_checks,
+        "checked_treatment_status": dict(checked_treatment_status),
+        "adjudicated_treatment_validity_rate": None,
+        "adjudication_status": "unavailable_no_independent_plan_labels_loaded",
+        "n_empty_treatment_plans": empty_treatment_plans,
         "supported_rule_compliance_rate": (supported_raw_valid / supported_n) if supported_n else None,
         "supported_treatment_validity_given_correct_diagnosis": (supported_valid / correct_supported_n) if correct_supported_n else None,
         "n_correct_diagnosis_supported": correct_supported_n, "n_supported_accepted_plans": supported_valid,
