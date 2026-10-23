@@ -21,3 +21,4 @@ results/runs/*
 
 # output of runs on synthetic data
 results/synthetic/
+results/model_runs/
