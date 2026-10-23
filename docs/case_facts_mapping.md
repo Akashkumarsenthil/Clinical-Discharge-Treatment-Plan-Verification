@@ -19,8 +19,8 @@ Sources: [AAPC, ICD-10 K codes for acute appendicitis](https://www.aapc.com/code
 
 | Fact | True when | False when | Otherwise | Used by |
 |---|---|---|---|---|
-| `complicated` (appendicitis) | a title has perforation, gangrene, abscess or generalized peritonitis | a title says "without perforation / gangrene / abscess" (for example K35.30) and none of those are present | unknown ("Unspecified acute appendicitis", "without mention of peritonitis") | R-APP-002, R-APP-003 |
-| `complicated` (diverticulitis) | "with perforation", or a separate intestinal abscess, intestinal perforation or peritonitis code (attribution to the diverticulitis is assumed because it is the primary diagnosis) | "without perforation or abscess" and no separate complication code | unknown (ICD-9 "Diverticulitis of colon" alone) | R-DIV-001 to R-DIV-003 |
+| `complicated` (appendicitis) | a title has perforation, gangrene, abscess or generalized peritonitis, or the discharge diagnosis text names perforation, gangrene, rupture or abscess (not negated) | a title says "without perforation / gangrene / abscess" (for example K35.30) and none of those are present | unknown ("Unspecified acute appendicitis", "without mention of peritonitis") | R-APP-002, R-APP-003 |
+| `complicated` (diverticulitis) | "with perforation", a separate intestinal abscess, intestinal perforation or peritonitis code (attribution to the diverticulitis is assumed because it is the primary diagnosis), or the discharge diagnosis text names perforation, abscess, peritonitis, fistula or rupture | "without perforation or abscess" and no separate complication code | unknown (ICD-9 "Diverticulitis of colon" alone) | R-DIV-001 to R-DIV-003 |
 | `alarm_symptoms` | "with bleeding" or "with hemorrhage" on the diverticulitis title, GI or rectal hemorrhage, melena, hematochezia, iron-deficiency anemia, weight loss | never | unknown (absence of a code does not rule out symptoms; "without bleeding" and "without mention of hemorrhage" are not positives) | R-DIV-003 |
 | `necrotizing` | "with uninfected necrosis" or "with infected necrosis" | "without necrosis or infection" (K85.x0) | unknown | R-PAN-002 |
 | `infection` | "with infected necrosis" or a cholangitis diagnosis | "without necrosis or infection" and no infection-type diagnosis coded anywhere (sepsis, pneumonia, abscess, peritonitis, urinary tract and similar) | unknown | R-PAN-001, R-PAN-002 |
@@ -38,8 +38,8 @@ Produced by `python scripts/case_facts_counts.py`; saved in `docs/case_facts_cou
 
 | Pathology | Fact | True | False | Unknown | Cases |
 |---|---|---|---|---|---|
-| appendicitis | complicated | 221 | 1 | 735 | 957 |
-| diverticulitis | complicated | 93 | 36 | 128 | 257 |
+| appendicitis | complicated | 266 | 0 | 691 | 957 |
+| diverticulitis | complicated | 126 | 35 | 96 | 257 |
 | diverticulitis | alarm_symptoms | 14 | 0 | 243 | 257 |
 | pancreatitis | necrotizing | 7 | 89 | 442 | 538 |
 | pancreatitis | infection | 38 | 54 | 446 | 538 |
@@ -52,7 +52,13 @@ What the checks found (version history):
 - Appendicitis "complicated" was 78% when any peritonitis counted; counting only perforation, gangrene, abscess or generalized peritonitis gave 23% of cases, in line with published rates.
 - A review found four further problems, all fixed with regression tests: generic titles were treated as "absent"; `mild` pancreatitis was inferred from missing words; "without mention of hemorrhage" wrongly counted as an alarm symptom (alarm symptoms fell from 174 to 14 cases); and "Generalized (acute) peritonitis" was missed for diverticulitis.
 
-**Consequence:** most appendicitis cases (735 of 957) have no complication status in the coded diagnoses, so R-APP-002 and R-APP-003 return "insufficient information" for them. That is honest, but it limits what the benchmark can test. To raise coverage, add the discharge diagnosis text or MIMIC-IV `diagnoses_icd` codes with version as extra evidence (planned).
+**Consequence:** most appendicitis cases (691 of 957) have no complication status, so R-APP-002 and R-APP-003 return "insufficient information" for them. The cause is the codes themselves: 487 cases carry ICD-9 5409 "Acute appendicitis without mention of peritonitis" and 207 carry ICD-10 K3580 "Unspecified acute appendicitis", and neither says whether the appendicitis was complicated.
+
+Extra evidence tried:
+- MIMIC-IV `diagnoses_icd` plus `d_icd_diagnoses`: holds exactly the same 17,357 diagnoses as Ext-CDM `icd_diagnosis`, so it adds no coverage.
+- Discharge diagnosis text: used only to add a written complication, never to rule one out. It raised appendicitis "complicated" True from 221 to 266 and diverticulitis from 93 to 126.
+
+Open decision for the team: treat "no complication documented in the codes or the discharge diagnosis" as uncomplicated (an assumption, with limited sensitivity), or keep it unknown as now. Keeping unknown is the safer choice for the report; the assumption would let the appendicitis rules run on most cases.
 
 ## How to check it on the real data (locally only)
 

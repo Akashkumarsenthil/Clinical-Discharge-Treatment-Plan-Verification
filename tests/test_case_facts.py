@@ -86,3 +86,16 @@ def test_facts_the_record_cannot_support_are_never_derived():
                               ("pancreatitis", ["Biliary acute pancreatitis with infected necrosis"]),
                               ("diverticulitis", ["Diverticulitis of large intestine with perforation and abscess"])]:
         assert not set(derive_facts(diagnosis, titles)) & set(NOT_DERIVABLE)
+
+
+def test_discharge_text_can_add_a_written_complication_but_never_rule_one_out():
+    unspecified = ["Unspecified acute appendicitis"]
+    assert derive_facts("appendicitis", unspecified, "Perforated appendicitis") == {"complicated": True}
+    assert derive_facts("appendicitis", unspecified, "Gangrenous appendicitis with abscess") == {"complicated": True}
+    assert derive_facts("appendicitis", unspecified, "Ruptured appendicitis") == {"complicated": True}
+    assert derive_facts("appendicitis", unspecified, "Acute appendicitis") == {}                      # nothing written: unknown
+    assert derive_facts("appendicitis", unspecified, "Appendicitis, no evidence of perforation") == {}  # negated: not a positive
+    assert derive_facts("appendicitis", unspecified, "Appendicitis without perforation") == {}          # never False from text
+    div = ["Diverticulitis of colon (without mention of hemorrhage)"]
+    assert derive_facts("diverticulitis", div, "Perforated diverticulitis with abscess")["complicated"] is True
+    assert "complicated" not in derive_facts("diverticulitis", div, "Acute diverticulitis")

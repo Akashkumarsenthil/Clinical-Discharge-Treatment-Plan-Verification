@@ -25,14 +25,16 @@ FACTS = {"appendicitis": ["complicated"],
 def main() -> None:
     ids = E.load_pathology_ids()
     pathology_of = {h: p for p, hs in ids.items() for h in hs}
-    titles = E.load_tables()["icd_diagnosis"].groupby("hadm_id")["icd_diagnosis"].apply(list).to_dict()
+    tables = E.load_tables()
+    titles = tables["icd_diagnosis"].groupby("hadm_id")["icd_diagnosis"].apply(list).to_dict()
+    discharge = tables["discharge_diagnosis"].groupby("hadm_id")["discharge_diagnosis"].apply(" ".join).to_dict()
     splits = json.load(open(ROOT / "data" / "splits" / "ext_cdm_splits_v2.json"))["splits"]
     groups = {"test (100)": set(splits["test"]), "all cases": set(pathology_of)}
     rows = []
     for gname, hadms in groups.items():
         for path, facts in FACTS.items():
             cases = [h for h in hadms if pathology_of.get(h) == path]
-            derived = [derive_facts(path, titles.get(h, [])) for h in cases]
+            derived = [derive_facts(path, titles.get(h, []), discharge.get(h, "")) for h in cases]
             for fact in facts:
                 true = sum(d.get(fact) is True for d in derived)
                 false = sum(d.get(fact) is False for d in derived)

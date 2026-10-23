@@ -26,7 +26,8 @@ _ORGAN_FAILURE = re.compile(r"\b(shock|respiratory failure|acute kidney failure|
                             r"organ dysfunction|multiple organ)\b")
 _INFECTION_TERMS = re.compile(r"infection|sepsis|septic|pneumonia|cholangitis|abscess|cellulitis|peritonitis|bacteremia|"
                               r"empyema|urinary tract")
-_NEGATED = re.compile(r"without (perforation|abscess|gangrene)( or (perforation|abscess|gangrene))*")
+_NEGATED = re.compile(r"without (perforation|abscess|gangrene)( or (perforation|abscess|gangrene))*"
+                      r"|\bno (evidence of )?(perforation|abscess|gangrene|rupture)")
 _ALARM = re.compile(r"hemorrhage of anus and rectum|rectal bleeding|gastrointestinal hemorrhage|melena|hematochezia|"
                     r"iron deficiency anemia|weight loss")
 
@@ -35,13 +36,20 @@ def _texts(icd_titles: Iterable[str]) -> list[str]:
     return [" ".join(str(t).lower().split()) for t in icd_titles if str(t).strip()]
 
 
-def _appendicitis(texts: list[str]) -> dict[str, bool]:
+def _written_complication(text: str, pattern: str) -> bool:
+    """True if the discharge diagnosis text names a complication and does not negate it."""
+    return bool(re.search(pattern, _NEGATED.sub("", " ".join(text.lower().split()))))
+
+
+def _appendicitis(texts: list[str], extra: str = "") -> dict[str, bool]:
     rows = [t for t in texts if "appendicitis" in t]
     if not rows:
         return {}
     # negated phrases ("without perforation or gangrene", ICD-10 K35.30 / K35.890) are removed before looking for complications
     cleaned = [_NEGATED.sub("", t) for t in rows]
     if any(re.search(r"perforat|gangren|abscess|generalized peritonitis", t) for t in cleaned):
+        return {"complicated": True}
+    if extra and _written_complication(extra, r"perforat|gangren|rupture|abscess"):    # discharge diagnosis can only add True
         return {"complicated": True}
     if any(_NEGATED.search(t) for t in rows):          # an explicit "without perforation / gangrene / abscess" title
         return {"complicated": False}
@@ -84,7 +92,7 @@ def _pancreatitis(texts: list[str]) -> dict[str, bool]:
     return facts
 
 
-def _diverticulitis(texts: list[str]) -> dict[str, bool]:
+def _diverticulitis(texts: list[str], extra: str = "") -> dict[str, bool]:
     rows = [t for t in texts if "diverticulitis" in t]
     if not rows:
         return {}
@@ -94,7 +102,7 @@ def _diverticulitis(texts: list[str]) -> dict[str, bool]:
     # diverticulitis is assumed because the admission's primary diagnosis is diverticulitis
     separate = any(re.search(r"abscess of intestine|perforation of intestine|peritonitis", t) for t in texts)
     combined_no = any("without perforation or abscess" in t for t in rows)
-    if combined_yes or separate:
+    if combined_yes or separate or (extra and _written_complication(extra, r"perforat|abscess|peritonitis|fistula|rupture")):
         facts["complicated"] = True
     elif combined_no:
         facts["complicated"] = False
@@ -108,8 +116,13 @@ def _diverticulitis(texts: list[str]) -> dict[str, bool]:
 _BY_DIAGNOSIS = {"appendicitis": _appendicitis, "pancreatitis": _pancreatitis, "diverticulitis": _diverticulitis}
 
 
-def derive_facts(diagnosis: str, icd_titles: Iterable[str]) -> dict[str, bool]:
-    """Case facts for one admission. `diagnosis` is the Ext-CDM pathology; `icd_titles` its ICD diagnosis titles.
+def derive_facts(diagnosis: str, icd_titles: Iterable[str], discharge_diagnosis: str = "") -> dict[str, bool]:
+    """Case facts for one admission. `diagnosis` is the Ext-CDM pathology; `icd_titles` its ICD diagnosis titles;
+    `discharge_diagnosis` the discharge diagnosis text, used only to add a written complication (never to rule one out).
     Facts that cannot be established are not in the result."""
     derive = _BY_DIAGNOSIS.get(diagnosis)
-    return derive(_texts(icd_titles)) if derive else {}
+    if derive is None:
+        return {}
+    if diagnosis in ("appendicitis", "diverticulitis"):
+        return derive(_texts(icd_titles), str(discharge_diagnosis or ""))
+    return derive(_texts(icd_titles))

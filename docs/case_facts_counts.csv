@@ -1,19 +1,19 @@
 group,pathology,cases,fact,true,false,unknown
-test (100),appendicitis,40,complicated,10,0,30
+test (100),appendicitis,40,complicated,11,0,29
 test (100),pancreatitis,22,necrotizing,0,3,19
 test (100),pancreatitis,22,infection,1,2,19
 test (100),pancreatitis,22,biliary,3,0,19
 test (100),pancreatitis,22,cholangitis,1,21,0
 test (100),pancreatitis,22,biliary_obstruction,8,14,0
 test (100),pancreatitis,22,mild,3,2,17
-test (100),diverticulitis,11,complicated,6,0,5
+test (100),diverticulitis,11,complicated,7,0,4
 test (100),diverticulitis,11,alarm_symptoms,0,0,11
-all cases,appendicitis,957,complicated,221,1,735
+all cases,appendicitis,957,complicated,266,0,691
 all cases,pancreatitis,538,necrotizing,7,89,442
 all cases,pancreatitis,538,infection,38,54,446
 all cases,pancreatitis,538,biliary,69,24,445
 all cases,pancreatitis,538,cholangitis,37,501,0
 all cases,pancreatitis,538,biliary_obstruction,86,452,0
 all cases,pancreatitis,538,mild,59,108,371
-all cases,diverticulitis,257,complicated,93,36,128
+all cases,diverticulitis,257,complicated,126,35,96
 all cases,diverticulitis,257,alarm_symptoms,14,0,243
