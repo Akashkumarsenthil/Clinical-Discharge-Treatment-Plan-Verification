@@ -1,6 +1,6 @@
 # Case facts: where each one comes from
 
-The rule catalog (v2.0) checks a plan against **case facts** that describe the patient record, never the model's output (`CASE_FACTS` in `src/clinverify/plan.py`). Ext-CDM does not store them as fields, so `src/clinverify/data/case_facts.py` derives them from each admission's ICD diagnosis titles (`icd_diagnosis` table, joined on `hadm_id`).
+The rule catalog (v2.1) checks a plan against **case facts** that describe the patient record, never the model's output (`CASE_FACTS` in `src/clinverify/plan.py`). Ext-CDM does not store them as fields, so `src/clinverify/data/case_facts.py` derives them from each admission's ICD diagnosis titles (`icd_diagnosis` table, joined on `hadm_id`).
 The Ext-CDM cases were selected by primary ICD diagnosis (Hager et al. 2024, `papers/Hager2024_NatureMedicine.pdf`), so coded diagnoses are the most reliable source in the extract.
 
 Every fact has three outcomes: **present** (explicit evidence says so), **absent** (an explicit title says so, within what that title covers) or **unknown** (the fact is left out). Missing documentation is not evidence of absence: a generic title ("Acute pancreatitis", "Unspecified acute appendicitis") or "without mention of hemorrhage" never gives False. A rule that needs an unknown fact returns "insufficient information"; it never guesses.

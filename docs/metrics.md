@@ -26,6 +26,8 @@ Source: project abstract and Workbook 1 (sections 1.2 and 2.2.2). Template rule:
 ## Notes
 
 - Validity measures compliance with our formal rules. It does not prove a plan is clinically correct.
+- A plan is valid when no blocking rule is violated and none is undecided (a needed fact is missing). Advisory rules are reported separately and do not make a plan invalid. A rule whose condition the record contradicts is "not applicable", not a pass; report per-rule counts (not applicable, unknown, passed, violated) next to the validity rate.
+- On the real benchmark most rules cannot be tested on many cases (see `docs/case_facts_mapping.md`, section "What the real data can test, per rule"). State the number of testable cases for each rule when reporting validity or escape rate.
 - The Hager et al. (2024) baseline number (54.9%, Fig. 3) is diagnostic accuracy. It is a different task and is not compared directly with plan validity.
 - Exact definitions of the escape-rate numerator and denominator need to be confirmed by the team before freezing.
 - Results will be reported over multiple seeds with the number of runs stated.

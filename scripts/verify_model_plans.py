@@ -1,4 +1,4 @@
-"""Verify Model A's plans against rule catalog v2.0, using the real case facts from the record.
+"""Verify Model A's plans against rule catalog v2.1, using the real case facts from the record.
 
 Run from the repository root (data in MIMIC_DIR, default ~/data/mimic):
     python scripts/verify_model_plans.py --plans path/to/model_a_plans.json

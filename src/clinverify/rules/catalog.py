@@ -1,4 +1,4 @@
-"""Rule catalog v2.0 for team sign-off. All sources are from 2025-2026.
+"""Rule catalog v2.1 for team sign-off. All sources are from 2025-2026.
 
 Rules check an LLM-generated discharge / treatment plan against recommendations in recent published guidelines. The course
 asks for sources no more than 3-4 years old, so only guidelines from 2025-2026 are used; rules that rested on older
