@@ -151,3 +151,13 @@ def test_discharge_text_false_positives_found_in_review_round_3():
                  "Diverticulitis without abscess, perforation or fistula"]:
         assert "complicated" not in derive_facts("diverticulitis", div, text), text
     assert derive_facts("diverticulitis", div, "Diverticulitis with pericolic abscess")["complicated"] is True
+
+
+def test_fistula_to_an_adjacent_organ_is_a_diverticulitis_complication():
+    div = ["Diverticulitis of colon (without mention of hemorrhage)"]
+    for text in ["Diverticulitis with bladder fistula", "Diverticulitis with fistula to the bladder",
+                 "Diverticulitis with colovaginal fistula", "Diverticulitis complicated by colovesical fistula"]:
+        assert derive_facts("diverticulitis", div, text)["complicated"] is True, text
+    # still rejected: another organ's complication, negation
+    assert "complicated" not in derive_facts("diverticulitis", div, "Diverticulitis; perforated gastric ulcer")
+    assert "complicated" not in derive_facts("diverticulitis", div, "Diverticulitis without bladder fistula")

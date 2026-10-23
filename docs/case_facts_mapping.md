@@ -99,6 +99,9 @@ Result: _pending_.
 
 - Review round 3: four discharge-text false positives found and fixed ("Non-perforated appendicitis", "Appendicitis with abscess ruled out", "Appendicitis and perforated gastric ulcer", "Appendicitis without abscess, perforation or gangrene"). Negation now works before and after the complication, over a negated list, and for "non-" and "un-"; a complication attached to another organ is rejected. This removed 14 wrongly complicated appendicitis cases (260 down to 246). R-PAN-004 now decides when one known positive indication is enough, and the coverage counts use the verifier's own `fact_status` instead of a separate copy of the logic. Diagnosis correctness is scored separately from treatment validity.
 
+- Review round 4: "Diverticulitis with bladder fistula" was left unknown because the other-organ filter listed the bladder; colovesical and colovaginal fistulas are diverticulitis complications, so they now count. Negation also covers a short noun phrase between the cue and the complication ("without bladder fistula"). No case in the real data changed.
+- **Passing tests do not establish clinical accuracy.** The tests check the rules on synthetic wording. Accuracy on real cases is established only by the manual audit below, which is still to be done.
+
 ## How to audit the facts (locally only)
 
 `python scripts/sample_for_audit.py --per-stratum 5` writes `results/audit_sample.csv` (116 cases in 24 strata: each derived value, the cases upgraded by the discharge text, and the **unknown** strata, to find evidence the extraction missed). It contains patient text, so it stays on your machine (Git ignores it) and must not be pasted into chat tools. A reviewer fills the last two columns. For a derived True or False, "yes" means the record supports the value. For an unknown row, "yes" means the record really does not establish the fact, and "no" means it does (a missed fact). Share only the agreement counts.

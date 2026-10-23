@@ -50,7 +50,8 @@ _FILLER = {"evidence", "of", "signs", "sign", "findings", "finding", "concern", 
            "or", "nor", "no", "with", "current", "acute", "overt", "frank", "free", "fluid", "extraluminal", "air"}
 _OTHER_SITE = {
     "appendicitis": r"gastric|duodenal|peptic|stomach|ulcer|gallbladder|cholecyst|diverticul|sigmoid|ovarian|uterine|bladder",
-    "diverticulitis": r"gastric|duodenal|peptic|stomach|ulcer|gallbladder|cholecyst|append|ovarian|uterine|bladder",
+    # bladder, vaginal and uterine fistulas are diverticulitis complications (colovesical, colovaginal), so they are not excluded
+    "diverticulitis": r"gastric|duodenal|peptic|stomach|ulcer|gallbladder|cholecyst|append|ovarian",
 }
 
 
@@ -64,9 +65,12 @@ def _negated_before(before: str, complication: str) -> bool:
     cues = list(_NEGATION_CUE.finditer(before))
     if not cues:
         return False
-    between = before[cues[-1].end():]
-    return all(tok in _FILLER or re.match(complication, tok) or re.match(r"perforat|gangren|abscess|rupture|peritonitis|fistula|phlegmon|stricture", tok)
-               for tok in re.findall(r"[a-z]+", between))
+    tokens = re.findall(r"[a-z]+", before[cues[-1].end():])
+    if all(tok in _FILLER or re.match(complication, tok) or re.match(r"perforat|gangren|abscess|rupture|peritonitis|fistula|phlegmon|stricture", tok)
+           for tok in tokens):
+        return True                                            # a negated list: "without abscess, perforation or gangrene"
+    # a short noun phrase between the cue and the complication ("without bladder fistula"), unless a new assertion starts
+    return len(tokens) <= 3 and not set(tokens) & {"but", "however", "with", "though", "although", "plus", "except"}
 
 
 def _written_complication(text: str, disease: str, complication: str, target: str) -> bool:
