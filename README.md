@@ -101,7 +101,9 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 | Data cleaning, validation checks, EDA, fixed stratified splits grouped by patient (1,840 / 460 / 100, seed 298; split v2) | done (`src/clinverify/data`, `scripts/data_demo.py`) |
 | Patient-level split leakage check (`scripts/patient_overlap_check.py`) | done: v1 had 5 of 2,383 patients crossing splits; fixed in v2 (0), see `docs/split_leakage_check.md` |
 | Rule catalog and synthetic valid/invalid cases | **v2.0 for team sign-off**: 12 rules from 2025-2026 guidelines (sources within the course's 3-4 year limit), each with source location, strength, violation message and examples; 29 labeled synthetic plans; see `docs/rule_catalog.md` |
-| Verifier (Z3), rule interface, evaluation harness | scaffold done and tested on toy rules (`scripts/run_eval.py`); waiting for the team's rules |
+| Verifier (Z3), rule interface, evaluation harness | done and tested on the v2.0 catalog and the 29 labeled plans (`scripts/run_eval.py`); 65 tests |
+| Case facts from the record (`complicated`, `infection`, `biliary` and others) | first version done: derived from ICD titles, counts in `docs/case_facts_counts.csv`; 3 facts cannot be derived, see `docs/case_facts_mapping.md` |
+| Model A plan format and verification script | done: `docs/model_a_plan_format.md`, `scripts/verify_model_plans.py` (Model A itself is not built yet) |
 | Model A, baseline reproduction | planned (needs GPU access) |
 
 ### Schedule
@@ -136,20 +138,20 @@ report/             written report: Workbook 2 and final report (see report/READ
 workbook/           Workbook 1 (report sections 1 and 2), submitted
 presentation/       slides and demo material for the checkpoints
 notebooks/          data pipeline demo (extraction, cleaning, EDA, splits)
-scripts/            data_demo.py (data pipeline, one step at a time), make_synthetic_data.py, run_eval.py, patient_overlap_check.py
+scripts/            data_demo.py (data pipeline, one step at a time), make_synthetic_data.py, run_eval.py (score labeled plans), verify_model_plans.py (verify Model A plans on real cases), case_facts_counts.py, patient_overlap_check.py, build_rule_catalog_doc.py
 src/clinverify/
-    data/           loading, cleaning, validation, splits and leakage checks; synthetic data generator
+    data/           loading, cleaning, validation, splits and leakage checks; case_facts.py (facts from ICD titles); case_loader.py (attach facts to Model A plans); synthetic data generator
     plan.py         starter schema for a structured plan
     rules/          rule interface (done) and the rule catalog (v2.0, 12 rules from 2025-2026 sources, pending team sign-off)
-    verifier/       plan -> Z3 check, names every violated rule (done, toy-tested)
+    verifier/       plan -> Z3 check, names every violated rule (done, tested on the v2.0 catalog)
     models/         Model A (298A); Models B, C, D (298B) (planned)
     baseline/       Hager et al. 2024 reproduction (planned)
-    eval/           evaluation harness: validity, escape rate, false rejects, solver time, bootstrap intervals
+    eval/           evaluation harness (validity, escape rate, false rejects, solver time, bootstrap intervals); model_run.py (verify a batch of Model A plans)
 tests/              unit tests on synthetic data and toy rules
 .github/workflows/  CI: runs the tests on every push
 data/               data/README.md; data/splits holds case IDs only (all patient data is gitignored)
-docs/               data collection, data dictionary, metrics (draft), baseline notes, split leakage check, figures
-results/            aggregate EDA summary (no patient data)
+docs/               data engineering (report section 3), data collection, data dictionary, metrics (draft), baseline notes, split leakage check, rule catalog and sign-off, case-fact mapping and counts, Model A plan format, figures
+results/            aggregate EDA summary (no patient data); run outputs stay local
 requirements.txt    pinned Python packages for the data pipeline
 ```
 
