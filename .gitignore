@@ -18,6 +18,7 @@ results/runs/*
 # aggregate-only summary statistics are safe to track
 !results/eda_summary.csv
 !docs/case_facts_counts.csv
+!docs/rule_eligibility_counts.csv
 
 # output of runs on synthetic data
 results/synthetic/

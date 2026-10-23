@@ -37,9 +37,13 @@ def test_valid_example_passes_the_whole_catalog_and_invalid_example_breaks_only_
     ok = verify(rule.valid_example, catalog)
     assert ok.valid and ok.status == "valid", ok
     bad = verify(rule.invalid_example, catalog)
-    assert bad.violated == (rule.id,) and not bad.inconclusive and bad.status == "violated", bad
+    assert bad.violated == (rule.id,) and not bad.inconclusive, bad
     assert bad.messages[rule.id] == ("(advisory) " if rule.advisory else "") + rule.violation_message
     assert (rule.id in bad.advisory) == rule.advisory
+    if rule.advisory:      # a suggestion: reported, but the plan is not invalid
+        assert bad.valid and bad.status == "valid" and bad.blocking == ()
+    else:
+        assert not bad.valid and bad.status == "violated" and bad.blocking == (rule.id,)
 
 
 def test_rules_only_use_known_fields_facts_treatments_and_diagnoses():
@@ -109,3 +113,44 @@ def test_signoff_page_lists_every_rule():
     page = (ROOT / "docs" / "rule_signoff.md").read_text()
     for rule in RULES:
         assert f"`{rule.id}`" in page, f"{rule.id} is missing from docs/rule_signoff.md"
+
+
+def test_advisory_violation_is_reported_but_does_not_make_the_plan_invalid():
+    r = verify(next(x.invalid_example for x in RULES if x.id == "R-DIV-001"), catalog)
+    assert r.violated == ("R-DIV-001",) and r.advisory == ("R-DIV-001",) and r.valid and r.status == "valid"
+
+
+def test_a_rule_whose_condition_fact_is_false_is_not_applicable_instead_of_passing():
+    plan = Plan(case_id=1, diagnosis="appendicitis", treatments=("appendectomy", "preoperative_antibiotic"),
+                postop_antibiotic_days=0, facts={"complicated": False})
+    r = verify(plan, catalog)
+    assert "R-APP-003" in r.not_applicable and "R-APP-002" not in r.not_applicable
+    plan2 = Plan(case_id=2, diagnosis="appendicitis", treatments=("appendectomy", "preoperative_antibiotic"),
+                 postop_antibiotic_days=5, facts={"complicated": True})
+    assert "R-APP-002" in verify(plan2, catalog).not_applicable
+
+
+def test_postoperative_course_rule_needs_an_appendectomy_and_only_checks_the_upper_bound():
+    no_surgery = Plan(case_id=3, diagnosis="appendicitis", treatments=("antibiotics",), postop_antibiotic_days=7,
+                      facts={"complicated": True})
+    assert "R-APP-003" in verify(no_surgery, catalog).not_applicable
+    zero_days = Plan(case_id=4, diagnosis="appendicitis", treatments=("appendectomy", "preoperative_antibiotic"),
+                     postop_antibiotic_days=0, facts={"complicated": True})
+    r = verify(zero_days, catalog)
+    assert "R-APP-003" not in r.violated and "R-APP-003" not in r.inconclusive        # passes: it is only an upper bound
+
+
+def test_known_alarm_symptoms_decide_the_colonoscopy_rule_without_screening_history():
+    plan = Plan(case_id=5, diagnosis="diverticulitis", treatments=(), facts={"complicated": False, "alarm_symptoms": True})
+    r = verify(plan, catalog)
+    assert "R-DIV-003" in r.violated and "R-DIV-003" not in r.inconclusive
+    unknown = Plan(case_id=6, diagnosis="diverticulitis", treatments=(), facts={"complicated": False})
+    assert "R-DIV-003" in verify(unknown, catalog).inconclusive
+
+
+def test_per_rule_counts_cover_every_rule_and_sum_to_the_number_of_plans():
+    from clinverify.eval.harness import evaluate
+    plans = [(rule.valid_example, set()) for rule in RULES] + [(rule.invalid_example, {rule.id}) for rule in RULES]
+    m = evaluate(plans, catalog, 298)
+    assert set(m["per_rule"]) == {r.id for r in RULES}
+    assert all(sum(row.values()) == len(plans) for row in m["per_rule"].values())

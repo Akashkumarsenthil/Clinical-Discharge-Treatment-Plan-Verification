@@ -1,9 +1,9 @@
-# Rule catalog v2.0
+# Rule catalog v2.1
 
 Code: `src/clinverify/rules/catalog.py` (the single source of truth; this page is generated from it by
 `scripts/build_rule_catalog_doc.py` and a test fails if the two differ).
 
-**Status: version 2.0 for team sign-off.** Each rule below was written from a statement in a guideline or systematic review published in 2025-2026
+**Status: version 2.1 for team sign-off.** Each rule below was written from a statement in a guideline or systematic review published in 2025-2026
 (the course asks for sources no older than 3-4 years), and is covered by tests. The source column says whether the full text or only the abstract was read. It is **not clinically validated**: no clinician has reviewed it.
 
 **Provenance.** The first draft was prepared with an AI coding assistant. A rule becomes the team's rule through the sign-off in `docs/rule_signoff.md`.
@@ -25,16 +25,16 @@ recommendations that can be tested from a structured plan plus facts from the pa
 |---|---|---|---|---|---|
 | `R-GEN-001` | Diagnosis is covered by the rules | always | `diagnosis` | Project scope: the rule set covers appendicitis, pancreatitis and diverticulitis (benchmark pathologies of Hager et al. 2024) | scope guard |
 | `R-APP-001` | Antibiotic prophylaxis for appendectomy | diagnosis is appendicitis and an appendectomy is planned | none | Swedish national guidelines for acute appendicitis (Salo et al., BJS Open 2025;9:zrae165; full text), antibiotic recommendations for appendectomy | GRADE high certainty of evidence (four-plus rating) |
-| `R-APP-002` | No postoperative antibiotics when uncomplicated | diagnosis is appendicitis and an appendectomy is planned | `facts.complicated`, `postop_antibiotic_days` | Swedish national guidelines for acute appendicitis (Salo et al., BJS Open 2025;9:zrae165; full text), antibiotic recommendations for appendectomy | GRADE high certainty of evidence (four-plus rating) |
-| `R-APP-003` | Short postoperative antibiotic course (complicated) | diagnosis is appendicitis | `facts.complicated`, `postop_antibiotic_days` | 2025 WSES Jerusalem guidelines for acute appendicitis (Podda et al., JAMA Surg 2026;161:283-295; abstract only), key findings in the abstract | stated in the abstract of the 2025 edition; grade not shown there |
+| `R-APP-002` | No postoperative antibiotics when uncomplicated | diagnosis is appendicitis, an appendectomy is planned and the appendicitis is uncomplicated | `facts.complicated`, `postop_antibiotic_days` | Swedish national guidelines for acute appendicitis (Salo et al., BJS Open 2025;9:zrae165; full text), antibiotic recommendations for appendectomy | GRADE high certainty of evidence (four-plus rating) |
+| `R-APP-003` | Postoperative antibiotic course of at most 3 days (complicated) | diagnosis is appendicitis, an appendectomy is planned and the appendicitis is complicated | `facts.complicated`, `postop_antibiotic_days` | 2025 WSES Jerusalem guidelines for acute appendicitis (Podda et al., JAMA Surg 2026;161:283-295; abstract only), key findings in the abstract | stated in the abstract of the 2025 edition; grade not shown there |
 | `R-PAN-001` | No prophylactic antibiotics | diagnosis is pancreatitis and antibiotics are planned | `facts.infection` | Ibero-Latin American guidelines on acute pancreatitis (Cardenas-Jaen et al., UEG J 2026;14:e70190; full text), antibiotic recommendations | strong recommendation, high-quality evidence |
-| `R-PAN-002` | Empiric antibiotics for infected necrotizing pancreatitis | diagnosis is pancreatitis | `facts.necrotizing`, `facts.infection` | Ibero-Latin American guidelines on acute pancreatitis (Cardenas-Jaen et al., UEG J 2026;14:e70190; full text), explanatory text of the antibiotic recommendations | stated in the explanatory text; no strength label shown beside this sentence |
-| `R-PAN-003` | Cholecystectomy during the index admission (mild biliary pancreatitis) | diagnosis is pancreatitis | `facts.biliary`, `facts.mild` | Ibero-Latin American guidelines on acute pancreatitis (Cardenas-Jaen et al., UEG J 2026;14:e70190; full text), cholecystectomy recommendations | strong recommendation, high-quality evidence |
-| `R-PAN-004` | ERCP only for cholangitis or biliary obstruction | diagnosis is pancreatitis and ERCP is planned | `facts.biliary`, `facts.cholangitis`, `facts.biliary_obstruction` | Ibero-Latin American guidelines on acute pancreatitis (Cardenas-Jaen et al., UEG J 2026;14:e70190; full text), ERCP recommendations and explanatory text | strong, high-quality evidence for urgent ERCP with cholangitis; weak, moderate-quality evidence for delaying it without cholangitis. The 'discouraged' wording is advisory. |
+| `R-PAN-002` | Empiric antibiotics for infected necrotizing pancreatitis | diagnosis is pancreatitis with necrosis and infection | `facts.necrotizing`, `facts.infection` | Ibero-Latin American guidelines on acute pancreatitis (Cardenas-Jaen et al., UEG J 2026;14:e70190; full text), explanatory text of the antibiotic recommendations | stated in the explanatory text; no strength label shown beside this sentence |
+| `R-PAN-003` | Cholecystectomy during the index admission (mild biliary pancreatitis) | diagnosis is mild biliary pancreatitis | `facts.biliary`, `facts.mild` | Ibero-Latin American guidelines on acute pancreatitis (Cardenas-Jaen et al., UEG J 2026;14:e70190; full text), cholecystectomy recommendations | strong recommendation, high-quality evidence |
+| `R-PAN-004` | ERCP only for cholangitis or biliary obstruction | diagnosis is biliary pancreatitis and ERCP is planned | `facts.biliary`, `facts.cholangitis`, `facts.biliary_obstruction` | Ibero-Latin American guidelines on acute pancreatitis (Cardenas-Jaen et al., UEG J 2026;14:e70190; full text), ERCP recommendations and explanatory text | strong, high-quality evidence for urgent ERCP with cholangitis; weak, moderate-quality evidence for delaying it without cholangitis. The 'discouraged' wording is advisory. |
 | `R-PAN-005` | Parenteral nutrition only as a last resort | diagnosis is pancreatitis and parenteral nutrition is planned | `facts.oral_or_enteral_feasible` | Ibero-Latin American guidelines on acute pancreatitis (Cardenas-Jaen et al., UEG J 2026;14:e70190; full text), nutrition recommendations | strong recommendation, high-quality evidence |
-| `R-DIV-001` | No routine antibiotics when uncomplicated and low risk | diagnosis is diverticulitis and antibiotics are planned | `facts.complicated`, `facts.low_risk` | ACG clinical guideline on colonic diverticulitis (Peery et al., Am J Gastroenterol 2026;121:1549-1561; abstract only), recommendation on antibiotics; Korean guidelines for acute colonic diverticulitis (Lee et al., Intest Res 2026;24:428-463; full text), antibiotic recommendation for uncomplicated diverticulitis | ACG: suggestion; KASID: conditional recommendation, high-quality evidence. Advisory. |
-| `R-DIV-002` | Colonoscopy after complicated diverticulitis | diagnosis is diverticulitis | `facts.complicated` | ACG clinical guideline on colonic diverticulitis (Peery et al., Am J Gastroenterol 2026;121:1549-1561; abstract only), recommendation on colonoscopy after diverticulitis | recommended (wording of the abstract; strength label not read) |
-| `R-DIV-003` | Colonoscopy suggested after uncomplicated diverticulitis in selected patients | diagnosis is diverticulitis | `facts.complicated`, `facts.alarm_symptoms`, `facts.crc_screening_up_to_date` | ACG clinical guideline on colonic diverticulitis (Peery et al., Am J Gastroenterol 2026;121:1549-1561; abstract only), recommendation on colonoscopy after diverticulitis | suggested (wording of the abstract; strength label not read). Advisory. |
+| `R-DIV-001` | No routine antibiotics when uncomplicated and low risk | diagnosis is uncomplicated diverticulitis in a low-risk patient and antibiotics are planned | `facts.complicated`, `facts.low_risk` | ACG clinical guideline on colonic diverticulitis (Peery et al., Am J Gastroenterol 2026;121:1549-1561; abstract only), recommendation on antibiotics; Korean guidelines for acute colonic diverticulitis (Lee et al., Intest Res 2026;24:428-463; full text), antibiotic recommendation for uncomplicated diverticulitis | ACG: suggestion; KASID: conditional recommendation, high-quality evidence. Advisory. |
+| `R-DIV-002` | Colonoscopy after complicated diverticulitis | diagnosis is complicated diverticulitis | `facts.complicated` | ACG clinical guideline on colonic diverticulitis (Peery et al., Am J Gastroenterol 2026;121:1549-1561; abstract only), recommendation on colonoscopy after diverticulitis | recommended (wording of the abstract; strength label not read) |
+| `R-DIV-003` | Colonoscopy suggested after uncomplicated diverticulitis in selected patients | diagnosis is uncomplicated diverticulitis | `facts.complicated`, `facts.alarm_symptoms`, `facts.crc_screening_up_to_date` | ACG clinical guideline on colonic diverticulitis (Peery et al., Am J Gastroenterol 2026;121:1549-1561; abstract only), recommendation on colonoscopy after diverticulitis | suggested (wording of the abstract; strength label not read). Advisory. |
 
 Details per rule (recommendation paraphrase, violation message, valid and invalid synthetic example) are in the code.
 
@@ -49,6 +49,13 @@ Details per rule (recommendation paraphrase, violation message, valid and invali
 | KASID26 | Lee K.-M. et al. (2026). KASID guideline on diverticular disease. Intest Res 24:428-463 | full text |
 
 Rules that rest on an abstract are weaker: read the full text before ticking them.
+
+## Version 2.1 changes
+
+- A rule whose condition fact is known to be false is "not applicable", not a pass (R-APP-002, R-APP-003, R-PAN-002 to R-PAN-004, R-DIV-001 to R-DIV-003).
+- R-APP-003 applies only when an appendectomy is planned and checks only the upper bound of 3 days (zero days passes).
+- R-DIV-003 no longer needs screening history when alarm symptoms are known.
+- Advisory violations are reported but do not make a plan invalid.
 
 ## Why version 1.0 was replaced
 

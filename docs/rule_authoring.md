@@ -34,3 +34,10 @@ See `src/clinverify/rules/catalog.py` for 12 complete examples, and `docs/rule_c
 - A plan is counted **valid only if no rule is violated and none is inconclusive**, so a missing field never passes silently.
 - Times are integer hours since admission.
 - `escape_rate` in the harness is the share of known-violating plans that the verifier lets through (confirm this definition in `docs/metrics.md` before freezing).
+
+
+## Conditions and unknown facts (v2.1)
+
+- `condition_facts=(("complicated", False),)`: the case-fact values under which the rule's condition holds. If a fact is known and different, the rule is **not applicable** (it is not counted as a pass). If the fact is unknown, the rule stays applicable and is inconclusive.
+- `requires_for=fn(plan)`: optional, returns the fields this plan needs, so an unknown that cannot change the outcome does not block a decidable check (see R-DIV-003).
+- `advisory=True`: a violation is reported but does not make the plan invalid.

@@ -52,6 +52,13 @@ Details per rule (recommendation paraphrase, violation message, valid and invali
 
 Rules that rest on an abstract are weaker: read the full text before ticking them.
 
+## Version 2.1 changes
+
+- A rule whose condition fact is known to be false is "not applicable", not a pass (R-APP-002, R-APP-003, R-PAN-002 to R-PAN-004, R-DIV-001 to R-DIV-003).
+- R-APP-003 applies only when an appendectomy is planned and checks only the upper bound of 3 days (zero days passes).
+- R-DIV-003 no longer needs screening history when alarm symptoms are known.
+- Advisory violations are reported but do not make a plan invalid.
+
 ## Why version 1.0 was replaced
 
 Version 1.0 (14 rules) used WSES guidelines from 2019-2020. The course asks for sources no older than 3-4 years, so version 2.0 uses only 2025-2026 sources.

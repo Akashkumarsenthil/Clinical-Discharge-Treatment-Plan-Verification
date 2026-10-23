@@ -3,7 +3,11 @@
 The rule catalog (v2.0) checks a plan against **case facts** that describe the patient record, never the model's output (`CASE_FACTS` in `src/clinverify/plan.py`). Ext-CDM does not store them as fields, so `src/clinverify/data/case_facts.py` derives them from each admission's ICD diagnosis titles (`icd_diagnosis` table, joined on `hadm_id`).
 The Ext-CDM cases were selected by primary ICD diagnosis (Hager et al. 2024, `papers/Hager2024_NatureMedicine.pdf`), so coded diagnoses are the most reliable source in the extract.
 
-Every fact has three outcomes: **present** (an explicit title says so), **absent** (an explicit title says so, within what that title covers) or **unknown** (the fact is left out). A generic title ("Acute pancreatitis", "Unspecified acute appendicitis") or "without mention of hemorrhage" does not establish absence, so it never gives False. A rule that needs an unknown fact returns "insufficient information"; it never guesses.
+Every fact has three outcomes: **present** (explicit evidence says so), **absent** (an explicit title says so, within what that title covers) or **unknown** (the fact is left out). Missing documentation is not evidence of absence: a generic title ("Acute pancreatitis", "Unspecified acute appendicitis") or "without mention of hemorrhage" never gives False. A rule that needs an unknown fact returns "insufficient information"; it never guesses.
+
+Two modes: **strict** (default, the main result) and **sensitivity** (`derive_facts(..., sensitivity=True)`), which adds absence-of-documentation assumptions. Sensitivity results must be reported separately and labelled as a sensitivity analysis.
+
+**Evidence time point.** ICD codes and the discharge diagnosis are assigned at discharge. They are retrospective record evidence used to judge whether a plan follows the guideline for this patient. They are not information the model saw when it wrote the plan, and they are never given to the model.
 
 ## ICD structure used
 
@@ -15,51 +19,70 @@ Every fact has three outcomes: **present** (an explicit title says so), **absent
 
 Sources: [AAPC, ICD-10 K codes for acute appendicitis](https://www.aapc.com/codes/coding-newsletters/my-internal-medicine-coding-alert/icd-10-k-codes-extract-more-details-for-acute-appendicitis-133085-article); [K85 acute pancreatitis](https://codebooks.rapidclaims.ai/icd10cm/K85) and [K85.02](https://icd-10codes.com/code/K85.02); [K57 group](https://www.findacode.com/icd-10-cm/icd-10-cm-diagnosis-codes-K57-group.html). These are reference sites, and one source set disagreed on the deeper K35 digits, so check titles against the CMS tabular list before relying on them for anything beyond this project.
 
-## Mapping
+## Mapping (strict mode)
 
 | Fact | True when | False when | Otherwise | Used by |
 |---|---|---|---|---|
-| `complicated` (appendicitis) | a title has perforation, gangrene, abscess or generalized peritonitis, or the discharge diagnosis text names perforation, gangrene, rupture or abscess (not negated) | a title says "without perforation / gangrene / abscess" (for example K35.30) and none of those are present | unknown ("Unspecified acute appendicitis", "without mention of peritonitis") | R-APP-002, R-APP-003 |
-| `complicated` (diverticulitis) | "with perforation", a separate intestinal abscess, intestinal perforation or peritonitis code (attribution to the diverticulitis is assumed because it is the primary diagnosis), or the discharge diagnosis text names perforation, abscess, peritonitis, fistula or rupture | "without perforation or abscess" and no separate complication code | unknown (ICD-9 "Diverticulitis of colon" alone) | R-DIV-001 to R-DIV-003 |
-| `alarm_symptoms` | "with bleeding" or "with hemorrhage" on the diverticulitis title, GI or rectal hemorrhage, melena, hematochezia, iron-deficiency anemia, weight loss | never | unknown (absence of a code does not rule out symptoms; "without bleeding" and "without mention of hemorrhage" are not positives) | R-DIV-003 |
+| `complicated` (appendicitis) | a title has perforation, gangrene, abscess or generalized peritonitis, or the discharge text names perforation, gangrene, rupture or abscess of the appendicitis (current, not negated) | a title says "without perforation / gangrene / abscess" (for example K35.30) and nothing above is present | unknown ("Unspecified acute appendicitis", "without mention of peritonitis") | R-APP-002, R-APP-003 |
+| `complicated` (diverticulitis) | "with perforation"; a separate coded intestinal abscess, perforation, peritonitis, phlegmon, intestinal fistula, stricture or stenosis (attribution is assumed because diverticulitis is the primary diagnosis); or discharge text naming one for the diverticulitis | "without perforation or abscess" and none of the above | unknown (ICD-9 "Diverticulitis of colon" alone) | R-DIV-001 to R-DIV-003 |
+| `alarm_symptoms` | explicit "with bleeding" or "with hemorrhage" on the diverticulitis title, GI or rectal hemorrhage, melena, hematochezia, iron-deficiency anemia, weight loss, change in bowel habit | never | unknown (absence of a code does not rule out symptoms; abdominal pain alone is not used) | R-DIV-003 |
 | `necrotizing` | "with uninfected necrosis" or "with infected necrosis" | "without necrosis or infection" (K85.x0) | unknown | R-PAN-002 |
-| `infection` | "with infected necrosis" or a cholangitis diagnosis | "without necrosis or infection" and no infection-type diagnosis coded anywhere (sepsis, pneumonia, abscess, peritonitis, urinary tract and similar) | unknown | R-PAN-001, R-PAN-002 |
+| `infection` | "with infected necrosis", or acute cholangitis (primary sclerosing and primary biliary cholangitis do not count) | never | unknown | R-PAN-001, R-PAN-002 |
 | `biliary` | "biliary acute pancreatitis" or "gallstone pancreatitis" | another cause is named (idiopathic, alcohol-induced, drug-induced, other acute pancreatitis) | unknown (generic "Acute pancreatitis", older ICD-9 codes) | R-PAN-003, R-PAN-004 |
-| `cholangitis` | a cholangitis diagnosis | not coded (diagnoses are coded when present; sensitivity is limited) | never unknown | R-PAN-004 |
-| `biliary_obstruction` | "obstruction of bile duct" or a bile-duct stone title with obstruction | not coded (same caveat) | never unknown | R-PAN-004 |
-| `mild` | an explicit "without necrosis or infection" title and no organ failure coded | necrosis coded, or organ failure coded (shock, respiratory or kidney failure, severe sepsis) | unknown (codes cannot show the absence of organ failure; Atlanta classification) | R-PAN-003 |
+| `cholangitis` | acute cholangitis diagnosis | never | unknown | R-PAN-004 |
+| `biliary_obstruction` | "obstruction of bile duct" or a bile-duct stone title with obstruction | never | unknown | R-PAN-004 |
+| `mild` | never | necrosis, organ failure (shock, respiratory or kidney failure, severe sepsis) or a local complication (pseudocyst, fluid collection, pancreatic abscess) is coded | unknown (codes cannot show the absence of organ failure or local or systemic complications; Atlanta classification) | R-PAN-003 |
 | `oral_or_enteral_feasible`, `low_risk`, `crc_screening_up_to_date` | never derived | never derived | always unknown (no field or code in the record) | R-PAN-005, R-DIV-001, R-DIV-003 |
 
-For the last row, the matching rules stay "insufficient information" on real cases. That is correct behavior. If the team wants those rules to run, supply the fact by another route and add it to `derive_facts`.
+**Discharge text is used only to add a complication, never to rule one out.** A complication counts only when it is written in the same clause as the target disease, is current (not "history of", "prior", "resolved"), and is not negated ("no evidence of", "without", "ruled out"). "Appendicitis; history of perforated peptic ulcer" and "Diverticulitis, no evidence of peritonitis" therefore give nothing.
 
-## Results on the real data (counts only, 2,400 cases)
+**Sensitivity mode adds:** `infection` False when "without necrosis or infection" is coded and no infection-type diagnosis is coded; `cholangitis` and `biliary_obstruction` False when not coded; `mild` True with an explicit "without necrosis or infection" title and no organ failure or local complication coded.
 
-Produced by `python scripts/case_facts_counts.py`; saved in `docs/case_facts_counts.csv` (counts only, no patient text). The 100-test-case counts are in the CSV.
+## Results on the real data (counts only, 2,400 cases, strict mode)
+
+Produced by `python scripts/case_facts_counts.py` from the same loader the verifier uses (`load_case_facts`); saved in `docs/case_facts_counts.csv` (strict and sensitivity, counts only, no patient text).
 
 | Pathology | Fact | True | False | Unknown | Cases |
 |---|---|---|---|---|---|
-| appendicitis | complicated | 266 | 0 | 691 | 957 |
-| diverticulitis | complicated | 126 | 35 | 96 | 257 |
+| appendicitis | complicated | 260 | 0 | 697 | 957 |
+| diverticulitis | complicated | 121 | 36 | 100 | 257 |
 | diverticulitis | alarm_symptoms | 14 | 0 | 243 | 257 |
 | pancreatitis | necrotizing | 7 | 89 | 442 | 538 |
-| pancreatitis | infection | 38 | 54 | 446 | 538 |
+| pancreatitis | infection | 38 | 0 | 500 | 538 |
 | pancreatitis | biliary | 69 | 24 | 445 | 538 |
-| pancreatitis | cholangitis | 37 | 501 | 0 | 538 |
-| pancreatitis | biliary_obstruction | 86 | 452 | 0 | 538 |
-| pancreatitis | mild | 59 | 108 | 371 | 538 |
+| pancreatitis | cholangitis | 37 | 0 | 501 | 538 |
+| pancreatitis | biliary_obstruction | 86 | 0 | 452 | 538 |
+| pancreatitis | mild | 0 | 120 | 418 | 538 |
 
-What the checks found (version history):
-- Appendicitis "complicated" was 78% when any peritonitis counted; counting only perforation, gangrene, abscess or generalized peritonitis gave 23% of cases, in line with published rates.
-- A review found four further problems, all fixed with regression tests: generic titles were treated as "absent"; `mild` pancreatitis was inferred from missing words; "without mention of hemorrhage" wrongly counted as an alarm symptom (alarm symptoms fell from 174 to 14 cases); and "Generalized (acute) peritonitis" was missed for diverticulitis.
+## What the real data can test, per rule
 
-**Consequence:** most appendicitis cases (691 of 957) have no complication status, so R-APP-002 and R-APP-003 return "insufficient information" for them. The cause is the codes themselves: 487 cases carry ICD-9 5409 "Acute appendicitis without mention of peritonitis" and 207 carry ICD-10 K3580 "Unspecified acute appendicitis", and neither says whether the appendicitis was complicated.
+`docs/rule_eligibility_counts.csv` (strict mode). "Testable" = the rule's fact condition holds and every fact it needs is known. Conditions that depend on the plan (for example "surgery planned") are not included.
 
-Extra evidence tried:
-- MIMIC-IV `diagnoses_icd` plus `d_icd_diagnoses`: holds exactly the same 17,357 diagnoses as Ext-CDM `icd_diagnosis`, so it adds no coverage.
-- Discharge diagnosis text: used only to add a written complication, never to rule one out. It raised appendicitis "complicated" True from 221 to 266 and diverticulitis from 93 to 126.
+| Rule | Diagnosis | Testable | Fact unknown | Condition false |
+|---|---|---|---|---|
+| R-APP-001 | appendicitis | 957 | 0 | 0 |
+| R-APP-002 | appendicitis | **0** | 697 | 260 |
+| R-APP-003 (advisory) | appendicitis | 260 | 697 | 0 |
+| R-PAN-001 | pancreatitis | 38 | 500 | 0 |
+| R-PAN-002 | pancreatitis | 1 | 448 | 89 |
+| R-PAN-003 | pancreatitis | **0** | 407 | 131 |
+| R-PAN-004 (advisory) | pancreatitis | 6 | 508 | 24 |
+| R-PAN-005 | pancreatitis | **0** | 538 | 0 |
+| R-DIV-001 (advisory) | diverticulitis | **0** | 136 | 121 |
+| R-DIV-002 | diverticulitis | 121 | 100 | 36 |
+| R-DIV-003 (advisory) | diverticulitis | **0** | 136 | 121 |
 
-Open decision for the team: treat "no complication documented in the codes or the discharge diagnosis" as uncomplicated (an assumption, with limited sensitivity), or keep it unknown as now. Keeping unknown is the safer choice for the report; the assumption would let the appendicitis rules run on most cases.
+Consequence for the evaluation: on the real benchmark only R-APP-001, R-APP-003, R-PAN-001 and R-DIV-002 can be checked on more than a handful of cases, and no case tests R-APP-002, R-PAN-003, R-PAN-005, R-DIV-001 or R-DIV-003. Those rules are still verified on the synthetic labeled plans. The report must state this limit, and say that "28% coverage" applies only to R-APP-003.
+
+## Version history of the checks
+- Appendicitis "complicated" was 78% when any peritonitis counted; counting only perforation, gangrene, abscess or generalized peritonitis gave 23%, in line with published rates.
+- Review round 1: generic titles were treated as "absent"; `mild` was inferred from missing words; "without mention of hemorrhage" counted as an alarm symptom (174 cases, now 14); "Generalized (acute) peritonitis" was missed.
+- Review round 2: the verifier loader did not use the discharge text; `mild` and absence-of-documentation assumptions moved out of the main result into the sensitivity mode; primary sclerosing cholangitis no longer counts as acute cholangitis; the discharge text now needs the disease, a current complication and no negation; fistula, stricture and change in bowel habit added; per-rule coverage added.
+
+## How to audit the facts (locally only)
+
+`python scripts/sample_for_audit.py --per-stratum 5` writes `results/audit_sample.csv` (70 cases across the strata, including the cases upgraded by the discharge text). It contains patient text, so it stays on your machine (Git ignores it) and must not be pasted into chat tools. A reviewer fills the last two columns. Share only the agreement counts.
 
 ## How to check it on the real data (locally only)
 
-Run the derivation over the cases and look at **counts only**, such as "complicated appendicitis: 41 of 100". Do not paste patient text into chat tools or commit the per-case table. The synthetic tests in `tests/test_case_facts.py` use public ICD title wording only.
+Run the derivation over the cases (strict mode) and look at **counts only**, such as "complicated appendicitis: 41 of 100". Do not paste patient text into chat tools or commit the per-case table. The synthetic tests in `tests/test_case_facts.py` use public ICD title wording only.

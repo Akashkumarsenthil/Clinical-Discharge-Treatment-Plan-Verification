@@ -27,7 +27,7 @@ import z3
 from clinverify.plan import Plan
 from clinverify.rules.base import RuleCatalog
 
-CATALOG_VERSION = "2.0"
+CATALOG_VERSION = "2.1"
 COVERED_DIAGNOSES = ("appendicitis", "pancreatitis", "diverticulitis")
 
 catalog = RuleCatalog()
@@ -71,6 +71,13 @@ def _fact(plan, key):
     return z3.BoolVal(bool(plan.facts[key]))
 
 
+def _div_003_requires(plan):
+    """Known alarm symptoms already establish the colonoscopy indication, so screening history is then not needed."""
+    if plan.facts.get("alarm_symptoms") is True:
+        return ("facts.complicated", "facts.alarm_symptoms")
+    return ("facts.complicated", "facts.alarm_symptoms", "facts.crc_screening_up_to_date")
+
+
 # =================================================================================================== general
 @catalog.register(
     "R-GEN-001", "the plan states a diagnosis that this rule set covers",
@@ -110,7 +117,8 @@ def r_app_001(plan):
     recommendation="No postoperative antibiotics should be given in surgery for uncomplicated appendicitis.",
     strength="GRADE high certainty of evidence (four-plus rating)", source_date="2025",
     applies=lambda p: p.diagnosis == "appendicitis" and _has(p, "appendectomy"),
-    applies_when="diagnosis is appendicitis and an appendectomy is planned",
+    condition_facts=(("complicated", False),),
+    applies_when="diagnosis is appendicitis, an appendectomy is planned and the appendicitis is uncomplicated",
     violation_message="Postoperative antibiotics are planned after surgery for uncomplicated appendicitis.",
     valid_example=_appendicitis(21),
     invalid_example=_appendicitis(22, days=3))
@@ -119,15 +127,17 @@ def r_app_002(plan):
 
 
 @catalog.register(
-    "R-APP-003", "complicated appendicitis: postoperative antibiotics are a short course of at most 3 days",
+    "R-APP-003", "complicated appendicitis with surgery: a postoperative antibiotic course, if given, is at most 3 days",
     f"{WSES25}, key findings in the abstract", requires=("facts.complicated", "postop_antibiotic_days"),
-    name="Short postoperative antibiotic course (complicated)",
+    name="Postoperative antibiotic course of at most 3 days (complicated)",
     recommendation="Postoperative antibiotic therapy should be limited to short courses (2-3 days) in complicated "
-                   "appendicitis. The upper bound of 3 days is encoded. The Swedish 2025 guideline says there is no full "
-                   "consensus on the duration, so a violation is advisory.",
+                   "appendicitis. Only the upper bound of 3 days is encoded: the rule does not check that antibiotics are indicated "
+                   "(zero days passes). The Swedish 2025 guideline says there is no full consensus on the duration, so a "
+                   "violation is advisory.",
     strength="stated in the abstract of the 2025 edition; grade not shown there", source_date="2026", advisory=True,
-    applies=_is("appendicitis"),
-    applies_when="diagnosis is appendicitis",
+    applies=lambda p: p.diagnosis == "appendicitis" and _has(p, "appendectomy"),
+    condition_facts=(("complicated", True),),
+    applies_when="diagnosis is appendicitis, an appendectomy is planned and the appendicitis is complicated",
     violation_message="The postoperative antibiotic course is longer than the 2-3 days suggested for complicated appendicitis.",
     valid_example=_appendicitis(31, complicated=True, days=3),
     invalid_example=_appendicitis(32, complicated=True, days=7))
@@ -159,8 +169,8 @@ def r_pan_001(plan):
     recommendation="Empiric antibiotics must be initiated in necrotizing pancreatitis with confirmed or strongly "
                    "suspected infection.",
     strength="stated in the explanatory text; no strength label shown beside this sentence", source_date="2026",
-    applies=_is("pancreatitis"),
-    applies_when="diagnosis is pancreatitis",
+    applies=_is("pancreatitis"), condition_facts=(("necrotizing", True), ("infection", True)),
+    applies_when="diagnosis is pancreatitis with necrosis and infection",
     violation_message="Necrotizing pancreatitis with confirmed or strongly suspected infection: the plan has no antibiotic treatment.",
     valid_example=_pancreatitis(81, treatments=("antibiotics",), necrotizing=True, infection=True, mild=False),
     invalid_example=_pancreatitis(82, necrotizing=True, infection=True, mild=False))
@@ -176,8 +186,8 @@ def r_pan_002(plan):
                    "the index hospitalization (so it belongs in the discharge plan before discharge). In moderate to "
                    "severe disease it is delayed until 8 weeks after discharge or until local complications resolve.",
     strength="strong recommendation, high-quality evidence", source_date="2026",
-    applies=_is("pancreatitis"),
-    applies_when="diagnosis is pancreatitis",
+    applies=_is("pancreatitis"), condition_facts=(("biliary", True), ("mild", True)),
+    applies_when="diagnosis is mild biliary pancreatitis",
     violation_message="Mild biliary pancreatitis: cholecystectomy during this admission is missing from the plan.",
     valid_example=_pancreatitis(91, treatments=("cholecystectomy_during_admission",), biliary=True),
     invalid_example=_pancreatitis(92, biliary=True))
@@ -195,8 +205,8 @@ def r_pan_003(plan):
                    "discouraged without cholangitis or biliary obstruction (within 72 hours for ongoing obstruction).",
     strength="strong, high-quality evidence for urgent ERCP with cholangitis; weak, moderate-quality evidence for delaying "
              "it without cholangitis. The 'discouraged' wording is advisory.", source_date="2026", advisory=True,
-    applies=lambda p: p.diagnosis == "pancreatitis" and _has(p, "ercp"),
-    applies_when="diagnosis is pancreatitis and ERCP is planned",
+    applies=lambda p: p.diagnosis == "pancreatitis" and _has(p, "ercp"), condition_facts=(("biliary", True),),
+    applies_when="diagnosis is biliary pancreatitis and ERCP is planned",
     violation_message="ERCP is planned for biliary pancreatitis without cholangitis or ongoing biliary obstruction.",
     valid_example=_pancreatitis(101, treatments=("ercp",), biliary=True, mild=False, cholangitis=True),
     invalid_example=_pancreatitis(102, treatments=("ercp",), biliary=True, mild=False))
@@ -232,7 +242,8 @@ def r_pan_005(plan):
     strength="ACG: suggestion; KASID: conditional recommendation, high-quality evidence. Advisory.", source_date="2026",
     advisory=True,
     applies=lambda p: p.diagnosis == "diverticulitis" and _has(p, "antibiotics"),
-    applies_when="diagnosis is diverticulitis and antibiotics are planned",
+    condition_facts=(("complicated", False), ("low_risk", True)),
+    applies_when="diagnosis is uncomplicated diverticulitis in a low-risk patient and antibiotics are planned",
     violation_message="Routine antibiotics are planned for uncomplicated diverticulitis in a low-risk patient.",
     valid_example=_diverticulitis(121, treatments=("antibiotics",), low_risk=False),
     invalid_example=_diverticulitis(122, treatments=("antibiotics",)))
@@ -247,8 +258,8 @@ def r_div_001(plan):
     recommendation="After recovery, colonoscopy is recommended for patients with complicated diverticulitis to rule out "
                    "an underlying malignancy.",
     strength="recommended (wording of the abstract; strength label not read)", source_date="2026",
-    applies=_is("diverticulitis"),
-    applies_when="diagnosis is diverticulitis",
+    applies=_is("diverticulitis"), condition_facts=(("complicated", True),),
+    applies_when="diagnosis is complicated diverticulitis",
     violation_message="Complicated diverticulitis: no colonoscopy after recovery is planned.",
     valid_example=_diverticulitis(131, treatments=("colonoscopy_after_recovery",), complicated=True),
     invalid_example=_diverticulitis(132, complicated=True))
@@ -264,12 +275,14 @@ def r_div_002(plan):
     recommendation="After recovery, colonoscopy is suggested for patients with uncomplicated diverticulitis who have "
                    "alarm symptoms or are not up to date with colorectal cancer screening.",
     strength="suggested (wording of the abstract; strength label not read). Advisory.", source_date="2026", advisory=True,
-    applies=_is("diverticulitis"),
-    applies_when="diagnosis is diverticulitis",
+    applies=_is("diverticulitis"), condition_facts=(("complicated", False),), requires_for=_div_003_requires,
+    applies_when="diagnosis is uncomplicated diverticulitis",
     violation_message="Uncomplicated diverticulitis with alarm symptoms or overdue screening: no colonoscopy is planned.",
     valid_example=_diverticulitis(141, treatments=("colonoscopy_after_recovery",), alarm_symptoms=True),
     invalid_example=_diverticulitis(142, alarm_symptoms=True))
 def r_div_003(plan):
-    needs = z3.And(z3.Not(_fact(plan, "complicated")),
-                   z3.Or(_fact(plan, "alarm_symptoms"), z3.Not(_fact(plan, "crc_screening_up_to_date"))))
+    # known alarm symptoms are enough; otherwise screening history is also known (see _div_003_requires)
+    indication = z3.Or(z3.BoolVal(plan.facts.get("alarm_symptoms") is True),
+                       z3.BoolVal(plan.facts.get("crc_screening_up_to_date") is False))
+    needs = z3.And(z3.Not(_fact(plan, "complicated")), indication)
     return z3.Implies(needs, z3.BoolVal(_has(plan, "colonoscopy_after_recovery")))

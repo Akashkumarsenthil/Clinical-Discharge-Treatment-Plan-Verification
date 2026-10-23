@@ -35,7 +35,7 @@ Runs on synthetic data write to `results/synthetic/` and never touch the real sp
 | I want to... | Go to |
 |---|---|
 | read the rules (what each checks, its source and strength) | [`docs/rule_catalog.md`](docs/rule_catalog.md) (generated from the code) |
-| see the rule code | [`src/clinverify/rules/catalog.py`](src/clinverify/rules/catalog.py) (12 rules, v2.0) |
+| see the rule code | [`src/clinverify/rules/catalog.py`](src/clinverify/rules/catalog.py) (12 rules, v2.1) |
 | check who signed off the rules | [`docs/rule_signoff.md`](docs/rule_signoff.md) |
 | add or change a rule | [`docs/rule_authoring.md`](docs/rule_authoring.md) |
 | see how case facts (complicated, infection, biliary...) come from the record | [`docs/case_facts_mapping.md`](docs/case_facts_mapping.md) and [`src/clinverify/data/case_facts.py`](src/clinverify/data/case_facts.py) |
@@ -116,8 +116,8 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 | Data access, manifests, integrity checks (SHA256) | done |
 | Data cleaning, validation checks, EDA, fixed stratified splits grouped by patient (1,840 / 460 / 100, seed 298; split v2) | done (`src/clinverify/data`, `scripts/data_demo.py`) |
 | Patient-level split leakage check (`scripts/patient_overlap_check.py`) | done: v1 had 5 of 2,383 patients crossing splits; fixed in v2 (0), see `docs/split_leakage_check.md` |
-| Rule catalog and synthetic valid/invalid cases | **v2.0 for team sign-off**: 12 rules from 2025-2026 guidelines (sources within the course's 3-4 year limit), each with source location, strength, violation message and examples; 29 labeled synthetic plans; see `docs/rule_catalog.md` |
-| Verifier (Z3), rule interface, evaluation harness | done and tested on the v2.0 catalog and the 29 labeled plans (`scripts/run_eval.py`); 65 tests |
+| Rule catalog and synthetic valid/invalid cases | **v2.1 for team sign-off**: 12 rules from 2025-2026 guidelines (sources within the course's 3-4 year limit), each with source location, strength, violation message and examples; 29 labeled synthetic plans; see `docs/rule_catalog.md` |
+| Verifier (Z3), rule interface, evaluation harness | done and tested on the v2.1 catalog and the 29 labeled plans (`scripts/run_eval.py`); 80 tests; advisory findings are reported but do not make a plan invalid |
 | Case facts from the record (`complicated`, `infection`, `biliary` and others) | first version done: derived from ICD titles, counts in `docs/case_facts_counts.csv`; 3 facts cannot be derived, see `docs/case_facts_mapping.md` |
 | Model A plan format and verification script | done: `docs/model_a_plan_format.md`, `scripts/verify_model_plans.py` (Model A itself is not built yet) |
 | Model A, baseline reproduction | planned (needs GPU access) |
@@ -158,8 +158,8 @@ scripts/            data_demo.py (data pipeline, one step at a time), make_synth
 src/clinverify/
     data/           loading, cleaning, validation, splits and leakage checks; case_facts.py (facts from ICD titles); case_loader.py (attach facts to Model A plans); synthetic data generator
     plan.py         starter schema for a structured plan
-    rules/          rule interface (done) and the rule catalog (v2.0, 12 rules from 2025-2026 sources, pending team sign-off)
-    verifier/       plan -> Z3 check, names every violated rule (done, tested on the v2.0 catalog)
+    rules/          rule interface (done) and the rule catalog (v2.1, 12 rules from 2025-2026 sources, pending team sign-off)
+    verifier/       plan -> Z3 check, names every violated rule (done, tested on the v2.1 catalog)
     models/         Model A (298A); Models B, C, D (298B) (planned)
     baseline/       Hager et al. 2024 reproduction (planned)
     eval/           evaluation harness (validity, escape rate, false rejects, solver time, bootstrap intervals); model_run.py (verify a batch of Model A plans)

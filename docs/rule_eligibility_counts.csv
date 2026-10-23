@@ -1,0 +1,13 @@
+rule,diagnosis,advisory,testable,unknown_fact,condition_false
+R-GEN-001,appendicitis,False,957,0,0
+R-APP-001,appendicitis,False,957,0,0
+R-APP-002,appendicitis,False,0,697,260
+R-APP-003,appendicitis,True,260,697,0
+R-PAN-001,pancreatitis,False,38,500,0
+R-PAN-002,pancreatitis,False,1,448,89
+R-PAN-003,pancreatitis,False,0,407,131
+R-PAN-004,pancreatitis,True,6,508,24
+R-PAN-005,pancreatitis,False,0,538,0
+R-DIV-001,diverticulitis,True,0,136,121
+R-DIV-002,diverticulitis,False,121,100,36
+R-DIV-003,diverticulitis,True,0,136,121

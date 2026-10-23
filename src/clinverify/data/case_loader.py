@@ -14,16 +14,27 @@ from clinverify.plan import DIAGNOSES, TREATMENT_CONCEPTS, Plan
 MODEL_PLAN_FIELDS = ("case_id", "diagnosis", "treatments", "postop_antibiotic_days")
 
 
-def load_case_facts(hadm_ids: Optional[Iterable[int]] = None) -> dict[int, dict]:
-    """{hadm_id: {"pathology": str, "facts": {...}}} from the Ext-CDM data in MIMIC_DIR. Reads local data only."""
+def case_facts_from_tables(pathology_of: dict[int, str], icd_diagnosis, discharge_diagnosis, hadm_ids=None,
+                           sensitivity: bool = False) -> dict[int, dict]:
+    """{hadm_id: {"pathology": str, "facts": {...}}} from the Ext-CDM `icd_diagnosis` and `discharge_diagnosis` tables
+    (pandas frames). This is the single extraction path: the verification pipeline and the counts script both use it."""
+    titles = icd_diagnosis.groupby("hadm_id")["icd_diagnosis"].apply(list).to_dict()
+    discharge = discharge_diagnosis.groupby("hadm_id")["discharge_diagnosis"].apply(lambda s: " ".join(map(str, s))).to_dict()
+    wanted = set(pathology_of) if hadm_ids is None else {int(h) for h in hadm_ids}
+    return {h: {"pathology": pathology_of[h],
+                "facts": derive_facts(pathology_of[h], titles.get(h, []), discharge.get(h, ""), sensitivity=sensitivity)}
+            for h in wanted if h in pathology_of}
+
+
+def load_case_facts(hadm_ids: Optional[Iterable[int]] = None, sensitivity: bool = False) -> dict[int, dict]:
+    """Case facts for benchmark cases from the Ext-CDM data in MIMIC_DIR. Reads local data only.
+    `sensitivity=True` adds the absence-of-documentation assumptions (report it only as a sensitivity analysis)."""
     from clinverify.data import ext_cdm as E
 
     ids = E.load_pathology_ids()
     pathology_of = {h: p for p, hs in ids.items() for h in hs}
-    titles = E.load_tables()["icd_diagnosis"].groupby("hadm_id")["icd_diagnosis"].apply(list).to_dict()
-    wanted = set(pathology_of) if hadm_ids is None else {int(h) for h in hadm_ids}
-    return {h: {"pathology": pathology_of[h], "facts": derive_facts(pathology_of[h], titles.get(h, []))}
-            for h in wanted if h in pathology_of}
+    tables = E.load_tables()
+    return case_facts_from_tables(pathology_of, tables["icd_diagnosis"], tables["discharge_diagnosis"], hadm_ids, sensitivity)
 
 
 def plan_from_model_output(output: dict, case_facts: dict[int, dict]) -> Plan:

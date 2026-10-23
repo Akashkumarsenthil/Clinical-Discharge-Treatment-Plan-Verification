@@ -41,9 +41,10 @@ Any other concept is rejected as unparseable. Mapping errors are counted as tran
 
 ## What the verifier returns per plan
 
-- `valid`: no rule is violated and none is inconclusive.
-- `violated`: names every broken rule ID (advisory rules are labelled "(advisory)").
-- `insufficient_information`: a rule applies but a field or case fact is missing. These cases never count as valid.
+- `valid`: no **blocking** rule is violated and no blocking rule is undecided. Advisory rules (their source only suggests) are reported separately and do not make a plan invalid.
+- `violated`: a blocking rule is broken. `violated` lists every broken rule ID, advisory ones labelled "(advisory)".
+- `insufficient_information`: a blocking rule applies but a field or case fact is missing. These cases never count as valid.
+- A rule whose condition the record contradicts (for example R-APP-002 on a complicated appendicitis) is **not applicable**, not a pass. The run summary has per-rule counts of not applicable, unknown, passed and violated.
 
 Rules that need facts the record cannot give (`oral_or_enteral_feasible`, `low_risk`, `crc_screening_up_to_date`) stay "insufficient information" on real cases (see `docs/case_facts_mapping.md`).
 

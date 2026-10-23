@@ -1,4 +1,4 @@
-# Rule catalog sign-off (v2.0)
+# Rule catalog sign-off (v2.1)
 
 Edit this page directly on GitHub. The rules and their sources are listed in [rule_catalog.md](rule_catalog.md); the code is `src/clinverify/rules/catalog.py`.
 
@@ -15,7 +15,7 @@ The column "Assistant's check" records that the AI assistant that drafted the ru
 | `R-GEN-001` | Diagnosis is covered by the rules | n/a (scope guard, no guideline) | [x] | [ ] | [ ] | SS, 2026-10-21 |
 | `R-APP-001` | Antibiotic prophylaxis for appendectomy | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
 | `R-APP-002` | No postoperative antibiotics when uncomplicated | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
-| `R-APP-003` | Short postoperative antibiotic course (complicated) | abstract only, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
+| `R-APP-003` | Postoperative antibiotic course of at most 3 days (complicated) | abstract only, 2026-10-21 | [ ] | [ ] | [ ] | changed in v2.1 (applies only with an appendectomy; upper bound only): needs a new read |
 | `R-PAN-001` | No prophylactic antibiotics | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
 | `R-PAN-002` | Empiric antibiotics for infected necrotizing pancreatitis | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
 | `R-PAN-003` | Cholecystectomy during the index admission (mild biliary pancreatitis) | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
@@ -27,4 +27,6 @@ The column "Assistant's check" records that the AI assistant that drafted the ru
 
 **Version 2.0 replaced 1.0 (2019-2020 sources). Earlier ticks applied to the old rules and were reset.**
 
-**When every box in the first two columns is ticked:** tag the commit `rules-v2.0-signed-off` and do not edit the catalog afterwards without bumping `CATALOG_VERSION`. The clinical reviewer column stays empty if no clinician is available; say so in the report.
+**Version 2.1** changes how rules are applied, not what the other rules say: a rule whose condition fact is known to be false is "not applicable" instead of passing, R-DIV-003 no longer waits for screening history when alarm symptoms are known, and R-APP-003 now applies only with an appendectomy (its row was reset above).
+
+**When every box in the first two columns is ticked:** tag the commit `rules-v2.1-signed-off` and do not edit the catalog afterwards without bumping `CATALOG_VERSION`. The clinical reviewer column stays empty if no clinician is available; say so in the report.

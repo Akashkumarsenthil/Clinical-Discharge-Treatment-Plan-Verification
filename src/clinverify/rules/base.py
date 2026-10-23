@@ -4,6 +4,11 @@ A rule is a named, sourced constraint over a Plan (and the case facts), expresse
 hold when the rule applies. Registration enforces the project requirement "rules have IDs and supporting sources".
 
   applies      when the rule is relevant (for example only for one diagnosis); not applicable = skipped
+  condition_facts  case-fact values under which the rule's condition holds, for example (("complicated", False),).
+               A fact that is known and differs makes the rule not applicable (a rule whose condition is false is
+               not "checked"); an unknown fact keeps the rule applicable, and it then needs that fact (inconclusive)
+  requires_for optional: the fields needed for this particular plan (so an unknown fact that cannot change the
+               outcome does not block a decidable check). Defaults to `requires`
   requires     plan fields / case facts ('facts.<key>') the constraint needs; if one is missing the rule is
                inconclusive ("insufficient information"), never an automatic pass
   constraint   Z3 expression that must be satisfiable for the plan to comply
@@ -37,6 +42,8 @@ class Rule:
     advisory: bool = False                           # True when the source only suggests / is weak: a violation is flagged as advisory
     source_date: str = ""                            # publication year of the source (the course asks for sources no older than 3-4 years)
     applies: Optional[Callable[[Plan], bool]] = None  # None = always applies
+    condition_facts: tuple[tuple[str, bool], ...] = ()  # (fact, value) pairs under which the rule's condition holds
+    requires_for: Optional[Callable[[Plan], tuple[str, ...]]] = None  # fields needed for this plan; None = `requires`
     violation_message: str = ""                      # shown when the rule is violated (also feedback for repair)
     valid_example: Optional[Plan] = None             # synthetic plan that satisfies the rule
     invalid_example: Optional[Plan] = None           # synthetic plan that violates the rule
