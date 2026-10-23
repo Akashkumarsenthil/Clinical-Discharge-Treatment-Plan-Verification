@@ -30,6 +30,22 @@ python scripts/run_eval.py --plans tests/data/catalog_labeled_plans.json --rules
 
 Runs on synthetic data write to `results/synthetic/` and never touch the real split file or EDA summary. With real PhysioNet access, point `MIMIC_DIR` at your own download instead (see Data and access).
 
+## Where to find things
+
+| I want to... | Go to |
+|---|---|
+| read the rules (what each checks, its source and strength) | [`docs/rule_catalog.md`](docs/rule_catalog.md) (generated from the code) |
+| see the rule code | [`src/clinverify/rules/catalog.py`](src/clinverify/rules/catalog.py) (12 rules, v2.0) |
+| check who signed off the rules | [`docs/rule_signoff.md`](docs/rule_signoff.md) |
+| add or change a rule | [`docs/rule_authoring.md`](docs/rule_authoring.md) |
+| see how case facts (complicated, infection, biliary...) come from the record | [`docs/case_facts_mapping.md`](docs/case_facts_mapping.md) and [`src/clinverify/data/case_facts.py`](src/clinverify/data/case_facts.py) |
+| see what Model A must output | [`docs/model_a_plan_format.md`](docs/model_a_plan_format.md) |
+| verify a set of plans | `python scripts/verify_model_plans.py --plans <file>` |
+| score labeled plans (validity, escape rate) | `python scripts/run_eval.py --plans tests/data/catalog_labeled_plans.json --rules clinverify.rules.catalog` |
+| understand the data pipeline and splits | [`docs/data_engineering.md`](docs/data_engineering.md), [`docs/split_leakage_check.md`](docs/split_leakage_check.md) |
+| see the metrics and targets | [`docs/metrics.md`](docs/metrics.md) |
+| follow tasks | Linear links at the end of this page |
+
 ## Approach
 
 ```mermaid
