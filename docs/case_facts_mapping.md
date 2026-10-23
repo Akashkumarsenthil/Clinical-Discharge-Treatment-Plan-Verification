@@ -36,7 +36,7 @@ For the three that cannot be derived, the matching rules stay "insufficient info
 
 ## Results on the real data (counts only, 2,400 cases)
 
-Produced by `python scripts/case_facts_counts.py`; saved in `results/case_facts_summary.csv` (no patient text). Every case matched a diagnosis title for its pathology except cholecystitis, which the rules do not cover.
+Produced by `python scripts/case_facts_counts.py`; saved in `docs/case_facts_counts.csv` (counts only, no patient text). Every case matched a diagnosis title for its pathology except cholecystitis, which the rules do not cover.
 
 | Pathology | Fact | True | False | Cases |
 |---|---|---|---|---|

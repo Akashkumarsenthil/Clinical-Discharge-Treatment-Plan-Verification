@@ -1,0 +1,21 @@
+group,pathology,cases,fact,true,false,no_title_match
+test (100),appendicitis,40,complicated,10,30,0
+test (100),cholecystitis,27,(no matching diagnosis title),0,0,27
+test (100),diverticulitis,11,alarm_symptoms,9,2,0
+test (100),diverticulitis,11,complicated,5,6,0
+test (100),pancreatitis,22,biliary,3,19,0
+test (100),pancreatitis,22,biliary_obstruction,8,14,0
+test (100),pancreatitis,22,cholangitis,1,21,0
+test (100),pancreatitis,22,infection,1,21,0
+test (100),pancreatitis,22,mild,20,2,0
+test (100),pancreatitis,22,necrotizing,0,22,0
+all cases,appendicitis,957,complicated,221,736,0
+all cases,cholecystitis,648,(no matching diagnosis title),0,0,648
+all cases,diverticulitis,257,alarm_symptoms,174,83,0
+all cases,diverticulitis,257,complicated,96,161,0
+all cases,pancreatitis,538,biliary,69,469,0
+all cases,pancreatitis,538,biliary_obstruction,86,452,0
+all cases,pancreatitis,538,cholangitis,37,501,0
+all cases,pancreatitis,538,infection,38,500,0
+all cases,pancreatitis,538,mild,430,108,0
+all cases,pancreatitis,538,necrotizing,7,531,0

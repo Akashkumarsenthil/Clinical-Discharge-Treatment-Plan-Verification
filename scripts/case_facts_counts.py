@@ -2,7 +2,7 @@
 
 Run from the repository root with the data in MIMIC_DIR (default ~/data/mimic):
     python scripts/case_facts_counts.py
-Writes results/case_facts_summary.csv (counts only).
+Writes docs/case_facts_counts.csv (counts only, safe to commit).
 """
 import json
 import sys
@@ -45,7 +45,7 @@ def main() -> None:
             rows.append({"group": gname, "pathology": path, "cases": n[path], "fact": fact,
                          "true": c.get("True", 0), "false": c.get("False", 0), "no_title_match": c.get("n", 0)})
     out = pd.DataFrame(rows)
-    out_path = ROOT / "results" / "case_facts_summary.csv"
+    out_path = ROOT / "docs" / "case_facts_counts.csv"
     out.to_csv(out_path, index=False)
     print(out.to_string(index=False))
     print("\nwrote", out_path.relative_to(ROOT))
