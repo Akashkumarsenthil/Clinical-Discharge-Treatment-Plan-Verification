@@ -1,7 +1,7 @@
 # Rule catalog v2.0
 
 Code: `src/clinverify/rules/catalog.py` (the single source of truth; this page is generated from it by
-`scripts/build_rule_catalog_doc.py` and a test fails if the two differ). Owner: Sneha.
+`scripts/build_rule_catalog_doc.py` and a test fails if the two differ).
 
 **Status: version 2.0 for team sign-off.** Each rule below was written from a statement in a guideline or systematic review published in 2025-2026
 (the course asks for sources no older than 3-4 years), and is covered by tests. The source column says whether the full text or only the abstract was read. It is **not clinically validated**: no clinician has reviewed it.

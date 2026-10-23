@@ -1,7 +1,7 @@
 # Model A plan format (output contract for the verifier)
 
 Model A writes one plan per case. The verifier reads exactly the fields below. Anything else is rejected, so a plan can never be graded against facts the model made up.
-Owner: Sneha (verifier side). Model A side: Ritika. Linear: T6-110 (output contract), T6-28 (connect Model A to the verifier).
+Linear: T6-110 (output contract), T6-28 (connect Model A to the verifier).
 
 ## Output: a JSON list, one object per case
 

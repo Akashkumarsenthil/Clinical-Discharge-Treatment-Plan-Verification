@@ -8,9 +8,9 @@ The column "Assistant's check" records that the AI assistant that drafted the ru
 1. Open the guideline cited for the rule (the source and statement number are in the rule table) and read that statement, not only the summary.
 2. Check that the rule's condition, threshold and wording match the statement. Read the rule's violation message too.
 3. Tick `[x]` and add your initials and date in the Notes column.
-4. If you **cannot** tick it, leave the box empty and write the reason in Notes (for example: "statement not found", "threshold differs", "needs clinician", "condition unclear"), then tell the rule owner.
+4. If you **cannot** tick it, leave the box empty and write the reason in Notes (for example: "statement not found", "threshold differs", "needs clinician", "condition unclear"), then tell the rule author.
 
-| Rule | Name | Assistant's check of the source | Owner (Sneha) read against source | Second team member | Clinical / domain reviewer | Notes (initials, date, reasons) |
+| Rule | Name | Assistant's check of the source | First reviewer read against source | Second team member | Clinical / domain reviewer | Notes (initials, date, reasons) |
 |---|---|---|---|---|---|---|
 | `R-GEN-001` | Diagnosis is covered by the rules | n/a (scope guard, no guideline) | [x] | [ ] | [ ] | SS, 2026-10-21 |
 | `R-APP-001` | Antibiotic prophylaxis for appendectomy | full text located and compared, 2026-10-21 | [x] | [ ] | [ ] | SS, 2026-10-21 |
