@@ -50,27 +50,19 @@ Runs on synthetic data write to `results/synthetic/` and never touch the real sp
 | see the data stages, split table, case-fact counts and rule checks with their output (Workbook 2, section 3) | [`notebooks/data_pipeline_demo.ipynb`](notebooks/data_pipeline_demo.ipynb), sections 5 to 8 |
 | follow tasks | Linear links at the end of this page |
 
-## Human audit of case facts (a reviewer is needed)
+## Human audit of case facts
 
-The case facts the rules depend on (complicated, infection, biliary and others) are derived from ICD titles and discharge text. They are unit-tested but **not yet validated against reviewed real cases**. Tracked in Linear as T6-159. The reviewer should not be the person who wrote the extraction.
+The case facts the rules depend on (complicated, infection, biliary and others) are derived from ICD titles and discharge text. A stratified sample audit is recorded in [`docs/case_facts_validation.csv`](docs/case_facts_validation.csv) (116/116 rows reviewed, agreement with extraction 100%, 2026-10-27). Notes are per-row (54 distinct); all 41 AI-triage flags were reviewed and none overturned the extractor. That audit is mapping-consistency review on ICD/discharge evidence, not independent clinician sign-off. Details: [`docs/case_facts_mapping.md`](docs/case_facts_mapping.md) (Validation status). Tracked in Linear as T6-159.
 
-1. **You need your own PhysioNet access** and the Ext-CDM data in `MIMIC_DIR` (see Data and access). The sample holds patient text, so it is never committed or shared: it is generated on your machine only.
-2. Pull the latest code, then draw the sample (the same seed gives the same cases for the same data):
-   ```bash
-   python scripts/sample_for_audit.py --per-stratum 5
-   ```
-   This writes `results/audit_sample.csv` (116 rows, Git ignores it). The same cases, as IDs and fact names only with no patient text, are listed in [`docs/audit_sample_ids_only.csv`](docs/audit_sample_ids_only.csv) so reviewers can check they are looking at the same rows. The sheet with the text is never pushed: this repository is public and the data use agreement does not allow sharing MIMIC text.
-3. For each row, read `icd_titles` and `discharge_diagnosis`, compare with `fact` and `derived_value`, and fill `reviewer_agrees (yes/no/unsure)`; add a note for "no" or "unsure".
-   - Derived True or False: **yes** if the record supports the value, **no** if it does not.
-   - **unknown** row: **yes** if the record really does not establish the fact, **no** if it does (a missed fact).
-   - Save as **CSV** (not .numbers or .xlsx) under the same name.
-4. Summarize (prints counts only):
-   ```bash
-   python scripts/summarize_audit.py
-   ```
-5. Share **only the printed counts** (never the CSV or any patient text). Add reviewer initials, date and the agreement per fact to `docs/case_facts_mapping.md` (section "Validation status"), and open a pull request.
+To reproduce or re-review (PhysioNet access required; patient text stays local):
 
-The AI triage some reviewers may see (`results/audit_triage.csv`) is not validation and must not be copied into the review column. Details and the definitions: [`docs/case_facts_mapping.md`](docs/case_facts_mapping.md).
+1. Draw the sample (same seed → same cases): `python scripts/sample_for_audit.py --per-stratum 5`  
+   Writes `results/audit_sample.csv` (gitignored) and refreshes [`docs/audit_sample_ids_only.csv`](docs/audit_sample_ids_only.csv) (IDs and fact names only).
+2. Fill `reviewer_agrees (yes/no/unsure)` in the local sheet. For True/False: yes if the record supports the value. For unknown: yes if the record really does not establish the fact.
+3. Summarize counts only: `python scripts/summarize_audit.py` → [`docs/case_facts_validation.csv`](docs/case_facts_validation.csv).
+4. Record reviewer, date, and agreement in `docs/case_facts_mapping.md` (Validation status). Never commit or share patient text.
+
+The AI triage file (`results/audit_triage.csv`) is not validation and must not be copied into the review column.
 
 ## Approach
 
@@ -105,7 +97,7 @@ Four models are built and compared on the same benchmark and splits:
 | Constraint-violation escape rate | Secondary: invalid plans that the verifier lets through |
 | Repair success rate, translation fidelity, solver cost | Secondary (targets set before the metrics are frozen) |
 
-**Definitions revised locally (2026-10-23):** [docs/metrics.md](docs/metrics.md), with [protocol v1.1](docs/evaluation_protocol.json); [v1.0](docs/evaluation_protocol_v1.0.json) is archived. A local [feasibility check](docs/evaluation_feasibility.md) found the previous 85% automatic acceptance target impossible under strict unknown handling. It inspected validation and test facts, not Model A performance. Second-human rule sign-off and manual fact validation remain pending. A definition freeze is not clinical validation or a signed Git release.
+**Definitions revised locally (2026-10-23):** [docs/metrics.md](docs/metrics.md), with [protocol v1.1](docs/evaluation_protocol.json); [v1.0](docs/evaluation_protocol_v1.0.json) is archived. A local [feasibility check](docs/evaluation_feasibility.md) found the previous 85% automatic acceptance target impossible under strict unknown handling. It inspected validation and test facts, not Model A performance. The 116-row case-fact sample audit is recorded in [`docs/case_facts_validation.csv`](docs/case_facts_validation.csv); second-human rule sign-off remains pending. A definition freeze is not clinical validation or a signed Git release.
 
 **Population unchanged:** keep the fixed 100-case test split. Score diagnosis accuracy on all 100 and automatic treatment metrics on the **73 cases covered by catalog v2.1**, without a numerical automatic acceptance target. Report the other 27 as unsupported for treatment, not clinical treatment failures. Keep strict unknowns visible as non-acceptances, not proven clinical errors. Missing covered-case outputs remain in the denominator; wrong diagnoses and plans with no decided blocking clinical check cannot earn primary automatic credit. Report unknown/not-applicable counts and advisory findings alongside rates.
 

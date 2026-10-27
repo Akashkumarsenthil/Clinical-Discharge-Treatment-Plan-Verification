@@ -21,7 +21,7 @@ The column "Assistant's check" records that the AI assistant that drafted the ru
 - Run `python -m pytest tests/test_catalog.py tests/test_evaluation_protocol.py`. Tests do not replace human source review or clinical validation.
 - For accepted rows, tick **Second team member** and add your own initials/date to Notes. Clinical/domain review stays separate and blank if no such reviewer participated.
 
-The assistant has not filled second-reviewer or clinical-reviewer boxes. The metric-definition freeze in [metrics.md](metrics.md) is separate from rule approval and the deferred fact audit.
+The assistant has not filled second-reviewer or clinical-reviewer boxes. The metric-definition freeze in [metrics.md](metrics.md) is separate from rule approval and from the completed case-fact sample audit.
 
 | Rule | Name | Assistant's check of the source | First reviewer read against source | Second team member | Clinical / domain reviewer | Notes (initials, date, reasons) |
 |---|---|---|---|---|---|---|

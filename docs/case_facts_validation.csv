@@ -1,0 +1,25 @@
+pathology,fact,derived_value,evidence_source,yes,no,unsure,pending,reviewed,agreement
+appendicitis,complicated,False,icd titles,1,0,0,0,1,1.0
+appendicitis,complicated,True,discharge text,5,0,0,0,5,1.0
+appendicitis,complicated,True,icd titles,5,0,0,0,5,1.0
+appendicitis,complicated,unknown,none,5,0,0,0,5,1.0
+diverticulitis,alarm_symptoms,True,icd titles,5,0,0,0,5,1.0
+diverticulitis,alarm_symptoms,unknown,none,5,0,0,0,5,1.0
+diverticulitis,complicated,False,icd titles,5,0,0,0,5,1.0
+diverticulitis,complicated,True,discharge text,5,0,0,0,5,1.0
+diverticulitis,complicated,True,icd titles,5,0,0,0,5,1.0
+diverticulitis,complicated,unknown,none,5,0,0,0,5,1.0
+pancreatitis,biliary,False,icd titles,5,0,0,0,5,1.0
+pancreatitis,biliary,True,icd titles,5,0,0,0,5,1.0
+pancreatitis,biliary,unknown,none,5,0,0,0,5,1.0
+pancreatitis,biliary_obstruction,True,icd titles,5,0,0,0,5,1.0
+pancreatitis,biliary_obstruction,unknown,none,5,0,0,0,5,1.0
+pancreatitis,cholangitis,True,icd titles,5,0,0,0,5,1.0
+pancreatitis,cholangitis,unknown,none,5,0,0,0,5,1.0
+pancreatitis,infection,True,icd titles,5,0,0,0,5,1.0
+pancreatitis,infection,unknown,none,5,0,0,0,5,1.0
+pancreatitis,mild,False,icd titles,5,0,0,0,5,1.0
+pancreatitis,mild,unknown,none,5,0,0,0,5,1.0
+pancreatitis,necrotizing,False,icd titles,5,0,0,0,5,1.0
+pancreatitis,necrotizing,True,icd titles,5,0,0,0,5,1.0
+pancreatitis,necrotizing,unknown,none,5,0,0,0,5,1.0

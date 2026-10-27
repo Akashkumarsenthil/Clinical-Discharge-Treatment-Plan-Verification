@@ -52,10 +52,22 @@ def main() -> None:
             rows.append({"hadm_id": h, "pathology": path, "fact": fact, "derived_value": value, "evidence_source": source,
                          "icd_titles": " | ".join(titles.get(h, [])), "discharge_diagnosis": discharge.get(h, ""),
                          "reviewer_agrees (yes/no/unsure)": "", "reviewer_note": ""})
+    sample = pd.DataFrame(rows)
     out = ROOT / "results" / "audit_sample.csv"
     out.parent.mkdir(exist_ok=True)
-    pd.DataFrame(rows).to_csv(out, index=False)
+    sample.to_csv(out, index=False)
+    # Public companion: case IDs and fact names only (no patient text). Safe to commit.
+    ids = pd.DataFrame({
+        "audit_row": range(1, len(sample) + 1),
+        "hadm_id": sample["hadm_id"],
+        "fact": sample["fact"],
+        "reviewer_agrees (yes/no/unsure)": "",
+        "reviewer_note": "",
+    })
+    ids_path = ROOT / "docs" / "audit_sample_ids_only.csv"
+    ids.to_csv(ids_path, index=False)
     print(len(rows), "rows in", len(strata), "strata ->", out.relative_to(ROOT), "(local only, never commit)")
+    print("IDs only ->", ids_path.relative_to(ROOT), "(no patient text)")
 
 
 if __name__ == "__main__":

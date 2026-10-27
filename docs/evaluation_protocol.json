@@ -7,7 +7,7 @@
   "feasibility_record": "evaluation_feasibility.md",
   "catalog_version": "2.1",
   "human_rule_second_review": "pending",
-  "manual_fact_audit": "deferred_by_user",
+  "manual_fact_audit": "sample_complete_2026-10-27_mapping_consistency_not_clinician_signoff",
   "fact_mode": "strict",
   "split_file": "data/splits/ext_cdm_splits_v2.json",
   "split_sha256": "0e83a970955e85451b7c9bbdf241c428acbae08df4d66af9f60efe33457c2f2c",

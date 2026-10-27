@@ -1,6 +1,6 @@
 # Evaluation feasibility check — October 23, 2026
 
-This is a local inspection of strict record facts and catalog v2.1 software behaviour **before Model A experiments**, not model performance, clinical accuracy or recommended care. Both validation and test facts were inspected; disclose this when describing protocol v1.1. No patient text or case IDs are published here. Extraction remains unvalidated pending the deferred human audit.
+This is a local inspection of strict record facts and catalog v2.1 software behaviour **before Model A experiments**, not model performance, clinical accuracy or recommended care. Both validation and test facts were inspected; disclose this when describing protocol v1.1. No patient text or case IDs are published here. Extraction has a 116-row mapping-consistency audit ([`case_facts_validation.csv`](case_facts_validation.csv)); that is not clinician sign-off.
 
 ## Reproduce locally
 

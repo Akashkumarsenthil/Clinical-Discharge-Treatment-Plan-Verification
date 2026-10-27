@@ -87,7 +87,7 @@ Runs use seeds 298, 299 and 300. Missing or unparseable plans count as failures.
 |---|---|---|
 | Plan validity >= 0.85 (abstract) | With the facts the record supports, no model can reach 0.85 automatically. The ceiling on the 73 covered test cases is 47 (64.4%) for the legacy acceptance diagnostic and 18 (24.7%) for checked acceptance, even with a perfect diagnosis (`docs/evaluation_feasibility.md`). Protocol v1.1 removes 0.85 as an automatic target | 0.85 kept only as a research goal on independently human-adjudicated plans. No numeric target on the automatic rates |
 | Escape rate <= 0.05 (abstract) | unchanged | unchanged, measured on independently labelled plans |
-| Human check of the derived case facts (116 cases) | not done; reassigned to a team member | reviewer fills in the review columns; extraction stays "unvalidated" until then |
+| Human check of the derived case facts (116 cases) | done on 2026-10-27 by one team member: 116 of 116 reviewed, 100% agreement with the extraction. It is a consistency check against the mapping, not an independent clinician review | an independent reviewer, if the team wants a stronger validation |
 | Second review of the rule catalog | pending | second reviewer signs `docs/rule_signoff.md` |
 | Baseline reproduction (Hager et al., 54.9%) | not run: needs a GPU or an agreed smaller model | Workbook 2 keeps 4.5 and 4.6 as headings, per the template |
 

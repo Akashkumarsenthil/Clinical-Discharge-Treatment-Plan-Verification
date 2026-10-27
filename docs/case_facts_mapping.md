@@ -84,7 +84,22 @@ Notes:
 
 ## Validation status
 
-**Status: manual review not done yet.** The definitions above are documented, and the code is tested on synthetic title wording, but the extraction has not been validated against reviewed real cases. Until it is, call the facts "documented, not validated".
+**Status: sample audit complete (2026-10-27).** Agreement counts are in [`docs/case_facts_validation.csv`](case_facts_validation.csv). The public ID list (answers only, no patient text) is [`docs/audit_sample_ids_only.csv`](audit_sample_ids_only.csv). The full sheet with ICD titles and discharge text stays local in `results/audit_sample.csv` (gitignored).
+
+| Field | Value |
+|---|---|
+| Reviewer | SS (evidence review against this mapping; not an independent clinician) |
+| Date | 2026-10-27 |
+| Sample | 116 fact-review rows, 107 encounters, 24 strata (`--per-stratum 5`, seed 298) |
+| Reviewed | 116 / 116 |
+| Overall agreement with extraction | **100%** (`yes / (yes + no + unsure)`) |
+| Distinct reviewer notes | 54 (most common note appears on 5 rows; not a single template) |
+| AI triage outcome | 41/41 priority flags: reviewer sided with extraction; AI over-flagged |
+| Rule changes from this audit | none |
+
+Per-fact agreement is 1.0 in every stratum in `docs/case_facts_validation.csv`. Each row has a note naming the evidence type that supports the stored value (e.g. negated ICD title, discharge complication cue, “without necrosis or infection”, stone without obstruction clause). All 41 AI-priority rows carry an explicit `| AI flagged …; record does not support AI claim under mapping` tag. Under this mapping, the 28 AI-flagged **unknown** rows had no missed affirmative evidence; the model was inventing or stretching support, not catching extraction misses. Zero disagreements with the extractor is therefore expected for a mapping-consistency check; it is **not** clinician adjudication of whether the mapping itself is clinically ideal.
+
+Earlier draft of this sheet used three repeated note templates and is discarded. The current sheet is the re-review.
 
 Procedure (computable-definition practice, as in PheKB): one or two reviewers check the stratified sample below; agreement counts are recorded here. Disagreements are adjudicated first: they may reflect an extraction defect, a reviewer mistake, or ambiguous evidence. Only a confirmed extraction defect leads to a code fix, regression test and version note. An AI disagreement alone is not a reason to change a rule.
 
@@ -95,15 +110,14 @@ Procedure (computable-definition practice, as in PheKB): one or two reviewers ch
 | 3. Summarize (counts only) | `python scripts/summarize_audit.py` writes `docs/case_facts_validation.csv` |
 | 4. Record who reviewed and the result | add reviewer initials, date, agreement per fact, and any rule change below |
 
-Result: _pending_.
-
 - Review round 3: four discharge-text false positives found and fixed ("Non-perforated appendicitis", "Appendicitis with abscess ruled out", "Appendicitis and perforated gastric ulcer", "Appendicitis without abscess, perforation or gangrene"). Negation now works before and after the complication, over a negated list, and for "non-" and "un-"; a complication attached to another organ is rejected. This removed 14 wrongly complicated appendicitis cases (260 down to 246). R-PAN-004 now decides when one known positive indication is enough, and the coverage counts use the verifier's own `fact_status` instead of a separate copy of the logic. Diagnosis correctness is scored separately from treatment validity.
 
 - Review round 4: "Diverticulitis with bladder fistula" was left unknown because the other-organ filter listed the bladder; colovesical and colovaginal fistulas are diverticulitis complications, so they now count. Negation also covers a short noun phrase between the cue and the complication ("without bladder fistula"). No case in the real data changed.
 - Review round 5: a new assertion ("with", "but", "however", "though", "although", "plus", "except") now ends an earlier negation before a negated list or a short noun phrase is matched. Before, "Appendicitis without abscess with perforation" wrongly negated the documented perforation. Negated lists ("without abscess, perforation or gangrene"), "without bladder fistula" and negation inside the new assertion ("without abscess but without perforation") still work. Regression tests added; the real-data counts did not change.
-- **Passing tests do not establish clinical accuracy.** The tests check the rules on synthetic wording. The manual audit below measures reviewer agreement on a sample of limited record evidence; it is still pending and does not, by itself, establish full clinical validity.
+- Review round 6 (2026-10-27): stratified sample regenerated; all 116 rows reviewed against ICD titles and discharge text using this mapping; per-row notes rewritten so each cites the evidence that supports the stored value (54 distinct texts). Summary in `docs/case_facts_validation.csv`. Agreement with extraction 100%. Human review of all 41 AI-priority flags sided with the extractor (AI over-flagged). No mapping change.
+- **Passing tests and this sample audit do not establish full clinical accuracy.** The tests check synthetic wording. The sample measures whether the derived value matches this mapping on limited record evidence for 116 rows. It is not clinician sign-off, not a free-form chart review that rewrites the mapping, and not generated-plan evaluation.
 
-**Preliminary AI triage (not validation).** `docs/case_facts_ai_triage_counts.csv` holds counts only from a local small-model pass over the 116 audit rows (llama3.1:8b via Ollama on the author's machine; no patient text left the machine). 38 disagreements and 3 unsure became 41 flags for human review. 28 of those 41 are rows where the extraction says unknown, so a disagreement there often means the model filled in a value, not that the extraction is wrong. It does not replace the human audit below, and nothing was changed in the rules because of it.
+**Preliminary AI triage (not validation).** `docs/case_facts_ai_triage_counts.csv` holds counts only from a local small-model pass over the 116 audit rows (llama3.1:8b via Ollama on the author's machine; no patient text left the machine). 38 disagreements and 3 unsure became 41 flags for human review (26 labeled evidence candidates). After the human re-review above, **0 of 41** were confirmed extraction defects; the AI disagreed with correct unknowns and with correctly supported True/False rows. It did not replace the sample audit, and nothing was changed in the rules because of it.
 
 ## How to audit the facts (locally only)
 
@@ -117,7 +131,7 @@ For an evidence-checking second pass, run `python scripts/triage_audit.py` with 
 
 Review evidence candidates and domain-uncertain rows first, but do not automatically accept the other categories. Validate changes with synthetic regression tests; preserve the original sample and review history. `summarize_audit.py` reads only human answers, not model suggestions. Its agreement column is `yes / (yes + no + unsure)`; unsure and pending counts are reported separately, and this is not sensitivity, specificity or clinical accuracy.
 
-Current local preliminary run: all 41 priority flags were triaged. The second pass matched the extractor on 4 rows, had quotation-support failures on 4, had no verified supporting quotation on 3, identified 26 evidence candidates for human review, and marked 4 as domain-uncertain. Thus 30 rows are the highest-priority adjudication queue, **not 30 confirmed defects**. The other 11 are not human-adjudicated either. The original 116 human-review answers remain blank; no clinical mapping was changed on the strength of these AI opinions.
+Current local preliminary run: all 41 priority flags were triaged. The second pass matched the extractor on 4 rows, had quotation-support failures on 4, had no verified supporting quotation on 3, identified 26 evidence candidates for human review, and marked 4 as domain-uncertain. Human review of those 41 flags (Validation status above) confirmed none as extraction misses; no clinical mapping was changed.
 
 ## How to check it on the real data (locally only)
 

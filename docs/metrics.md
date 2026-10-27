@@ -1,8 +1,8 @@
 # Evaluation metrics v1.1
 
-**Definitions frozen locally: October 23, 2026.** Machine-readable record: [evaluation_protocol.json](evaluation_protocol.json). This freezes definitions for future Model A validation/test runs, not human rule approval or clinical validation. The second human rule review remains pending. The manual fact audit is deferred at the user's request and its human-answer columns remain blank.
+**Definitions frozen locally: October 23, 2026.** Machine-readable record: [evaluation_protocol.json](evaluation_protocol.json). This freezes definitions for future Model A validation/test runs, not human rule approval or clinical validation. The second human rule review remains pending. The 116-row case-fact sample audit was completed 2026-10-27 ([`case_facts_validation.csv`](case_facts_validation.csv)); it is mapping-consistency review, not clinician sign-off.
 
-Existing synthetic tests, pipeline checks and preliminary audit outputs predate this freeze. Do not call it preregistration before all results existed. Those engineering checks establish no Model A held-out performance claim. Commit this record before formal held-out runs; a `metrics-frozen` Git tag has **not** been created automatically.
+Existing synthetic tests and pipeline checks predate this freeze. The 116-row case-fact sample audit (2026-10-27) is recorded separately in [`case_facts_validation.csv`](case_facts_validation.csv); it does not change these metric definitions. Do not call this freeze preregistration before all results existed. Those engineering checks establish no Model A held-out performance claim. Commit this record before formal held-out runs; a `metrics-frozen` Git tag has **not** been created automatically.
 
 ## Revision and feasibility
 
@@ -20,7 +20,7 @@ The target concern previously tracked as **Linear T6-160** is addressed locally 
 - Request one plan per scheduled case per run. Missing generations stay in the denominator. Malformed treatment plans fail validity. Duplicate, out-of-cohort or unidentifiable case IDs reject the run; do not cherry-pick an output.
 - Use generation seeds **298, 299 and 300** with the same frozen model, prompt and decoding settings. Report each run plus mean and standard deviation across seeds. Do not treat 300 generations as 300 independent patients. Choose and record decoding settings before the first formal test, not by test performance.
 - Record exact model/digest, prompt SHA-256, seed, temperature, top-p, token limit, protocol version, source/split hashes, Git revision and dirty-state flag. A dirty tree is disclosed, not falsely represented as a tagged release.
-- **Strict facts are the main analysis.** Label sensitivity results separately; the formal CLI uses strict extraction. Final ICD/discharge diagnoses are retrospective judging evidence, never model-generation input. Extraction remains unvalidated while human audit is pending, so real-data findings remain provisional even though definitions are frozen.
+- **Strict facts are the main analysis.** Label sensitivity results separately; the formal CLI uses strict extraction. Final ICD/discharge diagnoses are retrospective judging evidence, never model-generation input. A 116-row mapping-consistency audit is complete ([`case_facts_validation.csv`](case_facts_validation.csv)); it is not clinician sign-off, so real-data findings remain provisional even though definitions are frozen.
 
 ## Exact definitions
 
@@ -49,7 +49,7 @@ Before Model A generation, qualified independent human reviewers must assess rec
 
 After generation, independent reviewers evaluate clinical adequacy/completeness and validity, using the record rather than copying rule outcomes. The numerator requires correct diagnosis and an adequate/valid plan. Missing, malformed, wrong-diagnosis and clinically incomplete plans on eligible cases are failures, not exclusions. Unresolved labels prevent a final target claim; do not shrink E to completed favourable reviews. Resolve reviewer disagreements with a documented adjudication process. Ineligible cases stay visible in full-cohort automatic metrics. A conditional 85% result is not 85% success on all 73 cases and needs its count, coverage and uncertainty reported; feasibility is not established yet.
 
-The current automatic runner deliberately returns `adjudicated_treatment_validity_rate: null` and an unavailable status. An independently labelled plan schema and tested scorer still need to be implemented before this endpoint can be claimed; no human labels are fabricated by this revision. The deferred 116-row fact audit and rule-catalog sign-off are separate tasks, not clinical labels for generated plans. If the team cannot arrange qualified independent plan review, report the automatic metrics descriptively and mark the 85% goal unassessed; do not invent a new automatic denominator to hit it.
+The current automatic runner deliberately returns `adjudicated_treatment_validity_rate: null` and an unavailable status. An independently labelled plan schema and tested scorer still need to be implemented before this endpoint can be claimed; no human labels are fabricated by this revision. The completed 116-row fact audit and pending rule-catalog sign-off are separate from clinical labels for generated plans. If the team cannot arrange qualified independent plan review, report the automatic metrics descriptively and mark the 85% goal unassessed; do not invent a new automatic denominator to hit it.
 
 ## Unknown, not applicable and advisory findings
 
@@ -100,7 +100,7 @@ Metadata keys: `model`, `model_digest`, `prompt_sha256`, `seed`, `temperature`, 
 | Independent plan eligibility, adjudication and label scorer | Pending, not supplied by the fact audit or automatic verifier |
 | First human rule reviewer | Existing entries preserved in `rule_signoff.md` |
 | Second human rule reviewer | **Pending; cannot be completed by the assistant** |
-| Manual case-fact audit | Deferred by user; human answers left blank |
+| Manual case-fact audit | Complete 2026-10-27 (mapping-consistency sample; see [`case_facts_mapping.md`](case_facts_mapping.md)) |
 | Exact Model A model/prompt/decoding settings | Record before formal test; Model A not implemented yet |
 | Git commit and `metrics-frozen` tag | Not created by this edit |
 
