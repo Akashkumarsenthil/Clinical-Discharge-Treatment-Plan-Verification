@@ -31,7 +31,7 @@ Let **N** be all scheduled cases (100 on test), **C** the covered scheduled case
 | `diagnosis_accuracy` | D / N | Missing/invalid diagnostic labels are not correct. |
 | **`supported_checked_acceptance_rate`** | Correctly diagnosed, accepted covered plans with at least one decided non-advisory clinical rule / C | **Primary automatic treatment metric; descriptive, no numerical target.** Scope guard, advisory-only and not-applicable rules cannot earn credit. A passed prophylaxis check does not establish completeness of an entire plan. |
 | `supported_treatment_validity_rate` | Jc / C | Legacy covered-cohort acceptance diagnostic, retained unchanged for compatibility; **no 0.85 target**. Can credit plans with no decided blocking clinical check. Missing, malformed, wrong-diagnosis and blocking-inconclusive covered cases remain non-acceptances, not necessarily proven clinical errors. |
-| `adjudicated_treatment_validity_rate` | Independently adjudicated clinically adequate/valid, correctly diagnosed plans / fixed record-evaluable covered cohort E | Research goal >= 0.85; **unavailable until independent human eligibility and complete generated-plan labels exist and their scorer is implemented/tested**. Not computed from verifier acceptance. |
+| `adjudicated_treatment_validity_rate` | Independently adjudicated clinically adequate/valid, correctly diagnosed plans / fixed record-evaluable covered cohort E | Research goal >= 0.85; **scorer ready; unavailable until independent human eligibility and complete generated-plan labels exist**. Not computed from verifier acceptance. |
 | `validity_rate` | V / N | Legacy all-submission rule-compliance diagnostic. No 0.85 target is applied to this rate under the user-approved scope decision. It can include wrong diagnoses and scope failures; never report it alone. |
 | `validity_rate_diagnosis_correct` | J / D | Treatment-rule compliance among correct diagnoses, including malformed treatment outputs as failures. |
 | `supported_treatment_validity_given_correct_diagnosis` | Jc / correctly diagnosed covered cases | Conditional treatment metric restricted to covered pathologies; report its denominator. |
@@ -49,7 +49,7 @@ Before Model A generation, qualified independent human reviewers must assess rec
 
 After generation, independent reviewers evaluate clinical adequacy/completeness and validity, using the record rather than copying rule outcomes. The numerator requires correct diagnosis and an adequate/valid plan. Missing, malformed, wrong-diagnosis and clinically incomplete plans on eligible cases are failures, not exclusions. Unresolved labels prevent a final target claim; do not shrink E to completed favourable reviews. Resolve reviewer disagreements with a documented adjudication process. Ineligible cases stay visible in full-cohort automatic metrics. A conditional 85% result is not 85% success on all 73 cases and needs its count, coverage and uncertainty reported; feasibility is not established yet.
 
-The current automatic runner deliberately returns `adjudicated_treatment_validity_rate: null` and an unavailable status. An independently labelled plan schema and tested scorer still need to be implemented before this endpoint can be claimed; no human labels are fabricated by this revision. The completed 116-row fact audit and pending rule-catalog sign-off are separate from clinical labels for generated plans. If the team cannot arrange qualified independent plan review, report the automatic metrics descriptively and mark the 85% goal unassessed; do not invent a new automatic denominator to hit it.
+The label **schema and scorer are implemented** ([adjudication_labels.md](adjudication_labels.md), `clinverify.eval.adjudication`). Without a frozen human eligibility manifest and complete plan labels, the runner still returns `adjudicated_treatment_validity_rate: null`. No human labels are fabricated by this revision. The completed 116-row fact audit and pending rule-catalog second review are separate from clinical labels for generated plans. If the team cannot arrange qualified independent plan review, report the automatic metrics descriptively and mark the 85% goal unassessed; do not invent a new automatic denominator to hit it.
 
 ## Unknown, not applicable and advisory findings
 
@@ -97,9 +97,9 @@ Metadata keys: `model`, `model_digest`, `prompt_sha256`, `seed`, `temperature`, 
 |---|---|
 | Metric definitions, denominators, unknown/advisory policy | Revised locally as protocol v1.1; v1.0 archived; no clinical rules or split changed |
 | Targets and treatment population | Automatic treatment metrics descriptive on all 73 covered cases; 0.85 research goal only on independently adjudicated evaluable plans (unavailable); 0.05 escape on independently labelled covered plans; diagnosis accuracy on all 100 |
-| Independent plan eligibility, adjudication and label scorer | Pending, not supplied by the fact audit or automatic verifier |
+| Independent plan eligibility, adjudication and label scorer | **Scorer + schema done** ([adjudication_labels.md](adjudication_labels.md)); human eligibility/labels still pending |
 | First human rule reviewer | Existing entries preserved in `rule_signoff.md` |
-| Second human rule reviewer | **Pending; cannot be completed by the assistant** |
+| Second human rule reviewer | **Pending** ([rule_second_review.md](rule_second_review.md)); cannot be completed by the assistant |
 | Manual case-fact audit | Complete 2026-10-27 (mapping-consistency sample; see [`case_facts_mapping.md`](case_facts_mapping.md)) |
 | Exact Model A model/prompt/decoding settings | Record before formal test; Model A not implemented yet |
 | Git commit and `metrics-frozen` tag | Not created by this edit |

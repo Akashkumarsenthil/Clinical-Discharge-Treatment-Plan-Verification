@@ -10,7 +10,8 @@ from clinverify.verifier.z3_verifier import verify
 
 
 def verify_model_plans(outputs: list[dict], case_facts: dict[int, dict], rules, *, expected_case_ids=None,
-                       supported_diagnoses=None) -> dict:
+                       supported_diagnoses=None, eligibility_manifest=None, plan_labels=None,
+                       catalog_version=None) -> dict:
     """Score a submission; a fixed cohort is mandatory for validation/test reporting.
 
     Without expected_case_ids this remains a submission-only diagnostic (legacy
@@ -117,7 +118,7 @@ def verify_model_plans(outputs: list[dict], case_facts: dict[int, dict], rules, 
         if missing_supported:
             treatment_status["missing_output"] = missing_supported
             checked_treatment_status["missing_output"] = missing_supported
-    return {
+    summary = {
         "n_plans": n, "n_unparseable": len(unparseable), "n_wrong_diagnosis": wrong_diagnosis,
         "n_submitted": len(outputs), "n_missing_outputs": n_missing,
         "scoring_population": "fixed_cohort" if expected is not None else "submitted_outputs_only_pilot",
@@ -158,3 +159,17 @@ def verify_model_plans(outputs: list[dict], case_facts: dict[int, dict], rules, 
         "solver_ms_p95": float(np.percentile(times, 95)) if times else None,
         "unparseable": unparseable, "per_case": per_case,
     }
+    if eligibility_manifest is not None or plan_labels is not None:
+        from clinverify.eval.adjudication import apply_adjudication
+        covered = {
+            h for h in (expected if expected is not None else scheduled)
+            if type(h) is int and case_facts.get(h, {}).get("pathology") in supported_diagnoses
+        }
+        apply_adjudication(
+            summary,
+            eligibility_manifest=eligibility_manifest,
+            plan_labels=plan_labels,
+            covered_case_ids=covered,
+            catalog_version=catalog_version,
+        )
+    return summary

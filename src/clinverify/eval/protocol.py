@@ -70,6 +70,7 @@ def run_provenance(root: Path = ROOT) -> dict:
     paths = ["docs/evaluation_protocol.json", "src/clinverify/rules/catalog.py",
              "src/clinverify/data/case_facts.py", "src/clinverify/data/case_loader.py",
              "src/clinverify/eval/model_run.py", "src/clinverify/eval/harness.py", "src/clinverify/eval/protocol.py",
+             "src/clinverify/eval/adjudication.py",
              "src/clinverify/verifier/z3_verifier.py", "docs/rule_signoff.md", protocol["split_file"]]
     hashes = {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in paths}
     try:

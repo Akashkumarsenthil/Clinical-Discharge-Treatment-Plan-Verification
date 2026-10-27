@@ -74,8 +74,8 @@ The definitions are in [`metrics.md`](metrics.md) (protocol v1.1, frozen locally
 | `diagnosis_accuracy` | the baseline paper's headline number; reproduces a published reference | all 100 test cases | Oct 23, 2026 |
 | `supported_checked_acceptance_rate` (primary, descriptive, no numeric target) | share of covered cases with a correct diagnosis and a plan accepted after at least one decided blocking clinical rule; scope-only or advisory-only acceptance earns no credit | the 73 covered test cases | Oct 23, 2026 |
 | `joint_success_rate` | correct diagnosis and an accepted plan together | all 100 test cases | Oct 23, 2026 |
-| Escape rate, target <= 0.05 | bad plans that the verifier lets through, measured on independently labelled plans | independently labelled plans (labelling not yet done) | Oct 23, 2026 |
-| `adjudicated_treatment_validity_rate`, research goal 0.85 | independent human judgement of treatment validity | record-evaluable covered cases (human review not yet done) | Oct 23, 2026 |
+| Escape rate, target <= 0.05 | bad plans that the verifier lets through, measured on independently labelled plans | independently labelled plans (scorer ready; human labels not yet done) | Oct 23, 2026; scorer 2026-10-27 |
+| `adjudicated_treatment_validity_rate`, research goal 0.85 | independent human judgement of treatment validity | record-evaluable covered cases (scorer ready; human eligibility/labels not yet done) | Oct 23, 2026; scorer 2026-10-27 |
 
 Runs use seeds 298, 299 and 300. Missing or unparseable plans count as failures. Results are reported per pathology next to the overall number.
 
@@ -88,7 +88,7 @@ Runs use seeds 298, 299 and 300. Missing or unparseable plans count as failures.
 | Plan validity >= 0.85 (abstract) | With the facts the record supports, no model can reach 0.85 automatically. The ceiling on the 73 covered test cases is 47 (64.4%) for the legacy acceptance diagnostic and 18 (24.7%) for checked acceptance, even with a perfect diagnosis (`docs/evaluation_feasibility.md`). Protocol v1.1 removes 0.85 as an automatic target | 0.85 kept only as a research goal on independently human-adjudicated plans. No numeric target on the automatic rates |
 | Escape rate <= 0.05 (abstract) | unchanged | unchanged, measured on independently labelled plans |
 | Human check of the derived case facts (116 cases) | done on 2026-10-27 by one team member: 116 of 116 reviewed, 100% agreement with the extraction. It is a consistency check against the mapping, not an independent clinician review | an independent reviewer, if the team wants a stronger validation |
-| Second review of the rule catalog | pending | second reviewer signs `docs/rule_signoff.md` |
+| Second review of the rule catalog | still pending (needs a different human from SS) | second reviewer follows `docs/rule_second_review.md` and signs `docs/rule_signoff.md` |
 | Baseline reproduction (Hager et al., 54.9%) | not run: needs a GPU or an agreed smaller model | Workbook 2 keeps 4.5 and 4.6 as headings, per the template |
 
 ## Self-assessment and gap register
@@ -101,7 +101,7 @@ Ratings are our first guess from the evidence in the notebook and on this page. 
 | 4.1 Model proposals | poor | the owner of each model (table 10.1) | | Nov 11, 2026 |
 | 4.2 Model supports | good | the diagram is a draft; the GPU or fallback model is still open, and it needs exporting as an image for the report | | |
 | 4.3 Comparison | good | the team has not yet reviewed the strengths and limitations in 10.2 | | |
-| 4.4 Evaluation methods | good | independently labelled plans and the label scorer are not built, so the escape rate and the 0.85 research goal can't be measured yet | | |
+| 4.4 Evaluation methods | good | label scorer is built (`docs/adjudication_labels.md`); human eligibility/labels still missing, so the escape rate and the 0.85 research goal can't be measured yet | | |
 | References | good | the list is in section 12; add any source the team introduces later | | |
 
 ## References

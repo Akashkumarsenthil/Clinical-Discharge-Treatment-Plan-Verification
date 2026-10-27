@@ -29,6 +29,10 @@ def main() -> int:
                     help="pilot scores submitted outputs only; validation/test enforce the fixed split and count missing outputs")
     ap.add_argument("--generation-metadata", type=Path,
                     help="JSON with exact model/digest, prompt hash, seed and decoding settings; required for test")
+    ap.add_argument("--eligibility-manifest", type=Path,
+                    help="human eligibility JSON (docs/adjudication_labels.md); required with --plan-labels")
+    ap.add_argument("--plan-labels", type=Path,
+                    help="independent human plan labels JSON; scores adjudicated_treatment_validity_rate")
     ap.add_argument("--out", type=Path, default=ROOT / "results" / "model_runs")
     args = ap.parse_args()
 
@@ -50,10 +54,18 @@ def main() -> int:
     else:
         wanted = expected if expected is not None else [o.get("case_id") for o in outputs if isinstance(o, dict) and type(o.get("case_id")) is int]
         case_facts = load_case_facts(wanted)
+    eligibility = json.loads(args.eligibility_manifest.read_text()) if args.eligibility_manifest else None
+    labels = json.loads(args.plan_labels.read_text()) if args.plan_labels else None
+    if (eligibility is None) ^ (labels is None):
+        ap.error("pass both --eligibility-manifest and --plan-labels, or neither")
     try:
         cohort_record = treatment_cohort_record(expected, case_facts, protocol, formal_test=args.cohort == "test") if expected is not None else None
-        summary = verify_model_plans(outputs, case_facts, catalog, expected_case_ids=expected,
-                                     supported_diagnoses=protocol["treatment_diagnoses"])
+        summary = verify_model_plans(
+            outputs, case_facts, catalog, expected_case_ids=expected,
+            supported_diagnoses=protocol["treatment_diagnoses"],
+            eligibility_manifest=eligibility, plan_labels=labels,
+            catalog_version=protocol["catalog_version"],
+        )
     except ValueError as err:
         ap.error(str(err))
     summary["evaluation"] = {"cohort": args.cohort, "cohort_record": cohort_record, "generation": metadata,

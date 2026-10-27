@@ -22,7 +22,7 @@
   "bootstrap_resamples": 1000,
   "primary_automatic_treatment_metric": "supported_checked_acceptance_rate",
   "targets": {"adjudicated_treatment_validity_rate_min": 0.85, "escape_rate_max": 0.05},
-  "target_status": "0.85 is an unverified research goal on independently adjudicated, record-evaluable covered cases, not an automatic acceptance threshold on 73 cases; no adjudicated plan labels or label scorer exist yet",
+  "target_status": "0.85 is an unverified research goal on independently adjudicated, record-evaluable covered cases, not an automatic acceptance threshold on 73 cases; label scorer implemented 2026-10-27 (docs/adjudication_labels.md); human eligibility and plan labels still absent so the rate stays null",
   "rates": {
     "diagnosis_accuracy": "correct canonical diagnosis labels / all scheduled cohort cases, independent of treatment parsing",
     "validity_rate": "fully parsed plans with no blocking violation or blocking unknown / all scheduled cohort cases",
@@ -46,7 +46,7 @@
   "unsupported_diagnosis_policy": "retain all 100 for diagnosis; report 27 unsupported treatment cases separately, not as clinical treatment failures; keep all 73 covered cases in automatic treatment reporting, without a 0.85 automatic target",
   "no_clinical_checks_policy": "scope guard, not-applicable and advisory-only checks cannot earn primary automatic treatment credit; retain legacy acceptance as a diagnostic and report the no-decided-blocking-clinical-check category separately",
   "adjudicated_eligibility_policy": "Qualified independent human reviewers determine record evaluability for all 73 covered cases without viewing generated plans, model identity or verifier outcomes; freeze a complete eligibility manifest and its hash before Model A generation. Do not select only verifier-decided or passing cases. Report E/73 and exclusion reasons; E=0 gives null.",
-  "adjudicated_label_policy": "After eligibility is frozen, independently review the generated plans for clinical adequacy/completeness and validity using the record, not catalog verdicts. Correct diagnosis is required. Missing, malformed, wrong-diagnosis or incomplete plans on eligible cases are failures. Unresolved human labels prevent reporting the target; do not silently remove them. The 116-row fact audit is not generated-plan adjudication. Label schema/scorer must be implemented and tested before any target claim; automatic runner always returns null for this metric today.",
+  "adjudicated_label_policy": "After eligibility is frozen, independently review the generated plans for clinical adequacy/completeness and validity using the record, not catalog verdicts. Correct diagnosis is required. Missing, malformed, wrong-diagnosis or incomplete plans on eligible cases are failures. Unresolved human labels prevent reporting the target; do not silently remove them. The 116-row fact audit is not generated-plan adjudication. Schema and scorer live in clinverify.eval.adjudication and docs/adjudication_labels.md; without human files the runner returns null.",
   "labelled_evaluation_policy": "synthetic self-generated labels are software-consistency tests, not clinical ground truth",
   "change_policy": "new protocol version plus rationale before further held-out evaluation; preserve previous results"
 }

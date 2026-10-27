@@ -36,7 +36,8 @@ Runs on synthetic data write to `results/synthetic/` and never touch the real sp
 |---|---|
 | read the rules (what each checks, its source and strength) | [`docs/rule_catalog.md`](docs/rule_catalog.md) (generated from the code) |
 | see the rule code | [`src/clinverify/rules/catalog.py`](src/clinverify/rules/catalog.py) (12 rules, v2.1) |
-| check who signed off the rules | [`docs/rule_signoff.md`](docs/rule_signoff.md) |
+| check who signed off the rules | [`docs/rule_signoff.md`](docs/rule_signoff.md) (second reviewer: [`docs/rule_second_review.md`](docs/rule_second_review.md)) |
+| independent plan labels / 0.85 scorer | [`docs/adjudication_labels.md`](docs/adjudication_labels.md) |
 | add or change a rule | [`docs/rule_authoring.md`](docs/rule_authoring.md) |
 | see how case facts (complicated, infection, biliary...) come from the record | [`docs/case_facts_mapping.md`](docs/case_facts_mapping.md) and [`src/clinverify/data/case_facts.py`](src/clinverify/data/case_facts.py) |
 | see which rules the real data can actually test | [`docs/case_facts_mapping.md`](docs/case_facts_mapping.md) (section on coverage per rule) and [`docs/rule_eligibility_counts.csv`](docs/rule_eligibility_counts.csv) |
@@ -93,7 +94,7 @@ Four models are built and compared on the same benchmark and splits:
 | Metric | Role |
 |---|---|
 | Supported checked acceptance | Primary automatic, descriptive: correct diagnosis, verifier acceptance and at least one decided non-advisory clinical check / all scheduled covered cases; not clinical completeness |
-| Independently adjudicated treatment validity | Research goal ≥ 0.85 on a predeclared record-evaluable covered cohort; unavailable until human plan labels and a tested label scorer exist |
+| Independently adjudicated treatment validity | Research goal ≥ 0.85 on a predeclared record-evaluable covered cohort; scorer ready ([docs/adjudication_labels.md](docs/adjudication_labels.md)); unavailable until human eligibility and plan labels exist |
 | Constraint-violation escape rate | Secondary: invalid plans that the verifier lets through |
 | Repair success rate, translation fidelity, solver cost | Secondary (targets set before the metrics are frozen) |
 
@@ -101,7 +102,7 @@ Four models are built and compared on the same benchmark and splits:
 
 **Population unchanged:** keep the fixed 100-case test split. Score diagnosis accuracy on all 100 and automatic treatment metrics on the **73 cases covered by catalog v2.1**, without a numerical automatic acceptance target. Report the other 27 as unsupported for treatment, not clinical treatment failures. Keep strict unknowns visible as non-acceptances, not proven clinical errors. Missing covered-case outputs remain in the denominator; wrong diagnoses and plans with no decided blocking clinical check cannot earn primary automatic credit. Report unknown/not-applicable counts and advisory findings alongside rates.
 
-The **0.85 research goal** now concerns independent clinical adjudication, not catalog acceptance. Reviewers must freeze record eligibility for all 73 cases before generation, then assess plan adequacy/completeness and validity independently. Report eligible coverage and reasons; do not select only verifier-passing cases. This endpoint is currently **unavailable**, and its attainability is not established. Escape rate ≤ 0.05 likewise needs independent plan labels. The 116-row fact audit is not generated-plan evaluation. The label scorer is still pending; automatic runs never manufacture a human score.
+The **0.85 research goal** now concerns independent clinical adjudication, not catalog acceptance. Reviewers must freeze record eligibility for all 73 cases before generation, then assess plan adequacy/completeness and validity independently. Report eligible coverage and reasons; do not select only verifier-passing cases. The label scorer is implemented ([docs/adjudication_labels.md](docs/adjudication_labels.md)); without human files the endpoint stays **unavailable**. Escape rate ≤ 0.05 likewise needs independent plan labels. The 116-row fact audit is not generated-plan evaluation. Automatic runs never manufacture a human score. Second rule-catalog review remains open ([docs/rule_second_review.md](docs/rule_second_review.md)).
 
 ## Data and access
 
