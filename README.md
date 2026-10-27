@@ -46,6 +46,8 @@ Runs on synthetic data write to `results/synthetic/` and never touch the real sp
 | score labeled plans (validity, escape rate) | `python scripts/run_eval.py --plans tests/data/catalog_labeled_plans.json --rules clinverify.rules.catalog` |
 | understand the data pipeline and splits | [`docs/data_engineering.md`](docs/data_engineering.md), [`docs/split_leakage_check.md`](docs/split_leakage_check.md) |
 | see the metrics and targets | [`docs/metrics.md`](docs/metrics.md) |
+| see the model proposals, the platform and architecture diagram and the model comparison (Workbook 2, section 4) | [`docs/workbook2_model_development.md`](docs/workbook2_model_development.md) |
+| see the data stages, split table, case-fact counts and rule checks with their output (Workbook 2, section 3) | [`notebooks/data_pipeline_demo.ipynb`](notebooks/data_pipeline_demo.ipynb), sections 5 to 8 |
 | follow tasks | Linear links at the end of this page |
 
 ## Human audit of case facts (a reviewer is needed)
@@ -180,7 +182,7 @@ papers/             31 PDFs: the 13 Workbook 1 papers, 10 later additions, and a
 report/             written report: Workbook 2 and final report (see report/README.md)
 workbook/           Workbook 1 (report sections 1 and 2), submitted
 presentation/       slides and demo material for the checkpoints
-notebooks/          data pipeline demo (extraction, cleaning, EDA, splits)
+notebooks/          data pipeline demo (extraction, cleaning, EDA, splits, stage table, case facts, population gaps, rule checks)
 scripts/            data_demo.py (data pipeline, one step at a time), make_synthetic_data.py, run_eval.py (score labeled plans), verify_model_plans.py (verify Model A plans on real cases), case_facts_counts.py, sample_for_audit.py and summarize_audit.py (audit of the derived facts), patient_overlap_check.py, build_rule_catalog_doc.py
 src/clinverify/
     data/           loading, cleaning, validation, splits and leakage checks; case_facts.py (facts from ICD titles); case_loader.py (attach facts to Model A plans); synthetic data generator
@@ -193,7 +195,7 @@ src/clinverify/
 tests/              unit tests on synthetic data and toy rules
 .github/workflows/  CI: runs the tests on every push
 data/               data/README.md; data/splits holds case IDs only (all patient data is gitignored)
-docs/               data engineering (report section 3), data collection, data dictionary, metrics (draft), baseline notes, split leakage check, rule catalog and sign-off, case-fact mapping and counts, Model A plan format, figures
+docs/               data engineering (report section 3), data collection, data dictionary, metrics (draft), baseline notes, split leakage check, rule catalog and sign-off, case-fact mapping and counts, Model A plan format, Workbook 2 model development (4.1 to 4.4), figures
 results/            aggregate EDA summary (no patient data); run outputs stay local
 requirements.txt    pinned Python packages for the data pipeline
 ```
