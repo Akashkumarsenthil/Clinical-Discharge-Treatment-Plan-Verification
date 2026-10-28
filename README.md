@@ -6,7 +6,7 @@ Language models now draft discharge and treatment plans, and the plans read well
 
 > **Scope:** a single hospital-encounter setting. This is an experimental verification framework, not a clinical decision support product. "Valid" means a plan complies with our formal rules; it does not prove the plan is clinically correct.
 
-## Quickstart (no PhysioNet access needed)
+## Quickstart 
 
 The real data is credentialed and cannot be shared, so everything below runs on a **synthetic stand-in** with the same tables and columns (random values, nothing derived from real patients).
 
