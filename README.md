@@ -49,6 +49,7 @@ Runs on synthetic data write to `results/synthetic/` and never touch the real sp
 | see the metrics and targets | [`docs/metrics.md`](docs/metrics.md) |
 | see the model proposals, the platform and architecture diagram and the model comparison (Workbook 2, section 4) | [`docs/workbook2_model_development.md`](docs/workbook2_model_development.md) |
 | see the data stages, split table, case-fact counts and rule checks with their output (Workbook 2, section 3) | [`notebooks/data_pipeline_demo.ipynb`](notebooks/data_pipeline_demo.ipynb), sections 5 to 8 |
+| run everything for Workbook 2 (sections 3.1-4.5: data, models A and E on the GPU, warehouse demo) | [`notebooks/workbook2.ipynb`](notebooks/workbook2.ipynb); warehouse: `python scripts/run_pipeline.py` |
 | follow tasks | Linear links at the end of this page |
 
 ## Human audit of case facts

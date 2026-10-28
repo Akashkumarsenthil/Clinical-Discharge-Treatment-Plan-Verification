@@ -27,6 +27,12 @@ results/runs/*
 results/synthetic/
 results/figures/
 results/model_runs/
+results/workbook2/
 
 # personal working files (templates, drafts, external clones): never pushed
 local/
+
+# Google Drive download of MIMIC-IV parts (credentialed data): move it to MIMIC_DIR, never commit
+data/*.zip
+data/*.gz
+data/*.csv-*

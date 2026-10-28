@@ -10,7 +10,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pandas numpy matplotlib pytest z3-solver
+      - run: pip install pandas numpy matplotlib pytest z3-solver duckdb
       - name: Unit tests
         run: python -m pytest tests -q
       - name: Quickstart on synthetic data (same commands as the README)
