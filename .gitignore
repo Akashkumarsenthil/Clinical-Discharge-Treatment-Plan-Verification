@@ -36,3 +36,8 @@ local/
 data/*.zip
 data/*.gz
 data/*.csv-*
+
+# Anything else put in data/ (dataset copies, downloads) stays local: only the README and split IDs are tracked
+data/*
+!data/README.md
+!data/splits/

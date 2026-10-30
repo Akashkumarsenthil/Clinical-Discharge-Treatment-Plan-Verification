@@ -3,6 +3,7 @@
 Run from the repository root (data in MIMIC_DIR, default ~/data/mimic):
     python scripts/run_pipeline.py                      # build or refresh the warehouse
     python scripts/run_pipeline.py --history            # show the last runs (counts only)
+    python scripts/run_pipeline.py --inject-fault --trigger demo-fault   # gate demo: rejected, nothing published
 Schedule it with cron, for example every night at 02:00:
     0 2 * * * cd /path/to/repo && MIMIC_DIR=$HOME/data/mimic .venv/bin/python scripts/run_pipeline.py --trigger cron >> $HOME/data/mimic/warehouse/cron.log 2>&1
 Exit code: 0 ok, 1 a data-quality check failed, 2 the run raised an error (a scheduler or monitor can alert on non-zero).
@@ -24,13 +25,15 @@ def main() -> int:
     ap.add_argument("--split-file", type=Path, default=W.SPLIT_FILE)
     ap.add_argument("--trigger", default="manual", help="recorded in ops.pipeline_runs (manual, cron, notebook)")
     ap.add_argument("--history", action="store_true", help="print the last 20 runs and exit")
+    ap.add_argument("--inject-fault", action="store_true",
+                    help="demo: load a corrupted copy; the gate must reject it and publish nothing (exit 1)")
     args = ap.parse_args()
     if args.history:
         con = W.connect(args.db)
         print(W.run_history(con).to_string(index=False))
         return 0
     try:
-        run = W.run_pipeline(args.db, split_file=args.split_file, trigger=args.trigger)
+        run = W.run_pipeline(args.db, split_file=args.split_file, trigger=args.trigger, inject_fault=args.inject_fault)
     except Exception as err:                    # already logged in ops.pipeline_runs as status 'error'
         print(f"pipeline error: {type(err).__name__}", file=sys.stderr)
         return 2
