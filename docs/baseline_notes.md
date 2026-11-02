@@ -65,6 +65,12 @@ Operational notes: the first long run was stopped by a 4-hour timeout I had set,
 | Pancreatitis | 44.1 | 48.0 |
 | Mean | 54.9 | 47.4 |
 
-All four pathologies finished on 11/1 (400 cases, scored with the framework's own evaluator). The mean is 7.5 points below the paper's, and the ranking of pathologies matches (appendicitis easiest).
+All four pathologies finished on 11/1 (400 cases, scored with the framework's own evaluator). The mean is 7.5 points below the paper's. Appendicitis is the easiest pathology in both; the order of the other three differs (in the paper pancreatitis is lowest at 44.1, in this run it is second highest at 48.0, above diverticulitis and cholecystitis).
 
-Read the comparison with care. With 100 cases per pathology the 95% interval on one accuracy is about plus or minus 9 points, and the model, data version and quantization all differ from the paper. A gap does not by itself show that the framework was reproduced wrongly or rightly.
+Read the comparison with care. With 100 cases per pathology the 95% interval on one accuracy is about plus or minus 10 points, and the model, data version and quantization all differ from the paper. A gap does not by itself show that the framework was reproduced wrongly or rightly.
+
+## Open checks (optional, before the numbers go into the report)
+
+- [ ] Find out why one appendicitis case was skipped by the scorer (99 of 100 scored), and say so in the report.
+- [ ] Confirm which of cholecystitis and diverticulitis is 48.0 and which is 45.5 in the paper's autonomous results.
+- [ ] Confirm the prototype (`app/demo_app.py`) starts on a fresh clone. The saved Model A plans are in the gitignored `results/model_runs/`, so they have to be regenerated first.
