@@ -30,4 +30,47 @@ The cloned framework is not committed here.
 
 ## Status
 
-Not run yet. Blockers: GPU access, environment setup, and agreeing the fallback (smaller model or subset, with the gap documented). Record every attempt and its result here, including failures.
+Run on the local machine (RTX 5060 Ti, 16 GB, WSL2). A reduced-scale reproduction, not a like-for-like one: the 70B models do not fit in 16 GB, so the framework was run with a smaller model on a sample of cases. Result files contain MIMIC text and stay outside this repository; only the aggregate numbers are recorded here.
+
+## What was run, and how it differs from the paper
+
+| Item | Paper | This run | Why |
+|---|---|---|---|
+| Model | OASST / Llama 2 Chat / WizardLM 70B | Llama 3.1 8B Instruct, 4-bit (bitsandbytes) | 70B does not fit in 16 GB |
+| Cases | 2,400 (600 per pathology) | 400 (100 per pathology, sampled with seed 298) | time; one case takes about 30 s |
+| Task | Autonomous | Autonomous (same framework, same prompts, `ZeroShot`) | unchanged |
+| Metric | Diagnosis accuracy per pathology, then the mean | Same evaluator (`load_evaluator(...)._evaluate_agent_trajectory`) | unchanged |
+| MIMIC-IV / Ext-CDM | v2.2 / v1.0 | v3.1 / v1.1 | what the project has access to |
+| Framework | public repository | pinned commit `e1b4a52`, with the edits below | modern GPU needs a newer stack |
+| Context length | model default | 16,384 tokens | fits memory with the 8B model |
+
+Edits to the framework (all local, none change the task, prompts or scoring):
+- `configs/model/Llama3.1Instruct8B.yaml`: new config copied from the 70B Llama 3.1 one, with the 8B model name.
+- `models/models.py`: the 8B model name is routed through the existing Llama 3 code path; the `auto_gptq` and `exllamav2` imports are wrapped in try/except because they do not install on this GPU.
+- `utils/nlp.py`: the ExLlamaV2 tokenizer import falls back to a placeholder class.
+- `run.py`: an optional `patient_list_path` restricts a run to a list of case IDs (used for the 100-case sample).
+- `ConvertPhysionet.py` (dataset repo): output path set to the local folder. It leaves out the procedure keys for patients with no procedures, so the scorer defaults them to empty lists.
+
+Environment: Python 3.12, torch 2.11 with CUDA 12.8 (the RTX 5060 Ti is a Blackwell card, which the paper's torch 2.0.1 stack does not support), spacy 3.7.5, pandas < 2.3, numpy < 2.
+
+Operational notes: the first long run was stopped by a 4-hour timeout I had set, and a WSL restart at about 15:52 on 11/1 killed another run. `resume_subset.sh` reruns only the cases without a result, so each pathology's 100 cases come from one or more result files that `score_hager.py` merges.
+
+## Results
+
+| Pathology | Paper OASST 70B | This run (Llama 3.1 8B 4-bit, n=100) |
+|---|---|---|
+| Appendicitis | 82.0 | 74.7 (99 scored, 1 skipped, reason not yet checked) |
+| Cholecystitis | 48.0 or 45.5 (the paper's middle two; order not yet confirmed) | 30.0 |
+| Diverticulitis | 45.5 or 48.0 (order not yet confirmed) | 37.0 |
+| Pancreatitis | 44.1 | 48.0 |
+| Mean | 54.9 | 47.4 |
+
+All four pathologies finished on 11/1 (400 cases, scored with the framework's own evaluator). The mean is 7.5 points below the paper's. Appendicitis is the easiest pathology in both; the order of the other three differs (in the paper pancreatitis is lowest at 44.1, in this run it is second highest at 48.0, above diverticulitis and cholecystitis).
+
+Read the comparison with care. With 100 cases per pathology the 95% interval on one accuracy is about plus or minus 10 points, and the model, data version and quantization all differ from the paper. A gap does not by itself show that the framework was reproduced wrongly or rightly.
+
+## Open checks (optional, before the numbers go into the report)
+
+- [ ] Find out why one appendicitis case was skipped by the scorer (99 of 100 scored), and say so in the report.
+- [ ] Confirm which of cholecystitis and diverticulitis is 48.0 and which is 45.5 in the paper's autonomous results.
+- [ ] Confirm the prototype (`app/demo_app.py`) starts on a fresh clone. The saved Model A plans are in the gitignored `results/model_runs/`, so they have to be regenerated first.

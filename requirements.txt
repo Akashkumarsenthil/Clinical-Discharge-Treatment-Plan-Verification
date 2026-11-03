@@ -10,3 +10,5 @@ z3-solver==5.3.1.0
 duckdb==2.0.0
 scikit-learn==1.9.1
 nbconvert
+# live prototype (app/demo_app.py)
+streamlit==1.66.1
