@@ -11,7 +11,7 @@ The test split (100 cases, 73 covered) stays untouched until every box below is 
 | 1 | Model and quantisation | name and the Ollama digest the run prints (currently validation used qwen2.5:14b, 4-bit) | team | [ ] |
 | 2 | Prompt | the `prompt_sha256` printed by `model_a.prompt_sha256()` | team | [ ] |
 | 3 | Decoding | temperature 0, top_p 1, max_new_tokens 256, num_ctx 8192 (the validation settings). Chosen now, not after seeing test results | team | [ ] |
-| 4 | Seeds | 298, 299, 300 (frozen in the protocol) | team | [ ] |
+| 4 | Seeds and temperature | Seeds 298, 299, 300 are frozen. With temperature 0 the three seeds give identical output, so the seed summary will show SD = 0. Decide now: raise the temperature (then record it in item 3), or keep 0 and say in the report why SD is 0. Decide before the first formal test | team | [ ] |
 | 5 | Protocol v1.1 confirmed by the team | commit that holds `docs/evaluation_protocol.json` | team | [ ] |
 | 6 | Is Model E the fifth model? | yes or no; changes the report wording only | team | [ ] |
 
