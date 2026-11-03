@@ -1,0 +1,54 @@
+{
+ "split": "validation",
+ "cases": 460,
+ "seed": 298,
+ "protocol_version": "1.1",
+ "catalog_version": "2.1",
+ "models": {
+  "Majority class": {
+   "cases": 460,
+   "accuracy": 0.4,
+   "macro_precision": 0.1,
+   "macro_recall": 0.25,
+   "macro_f1": 0.14285714285714285,
+   "acc_appendicitis": 1.0,
+   "acc_cholecystitis": 0.0,
+   "acc_diverticulitis": 0.0,
+   "acc_pancreatitis": 0.0,
+   "supported_checked_acceptance_rate": 0.14285714285714285,
+   "n_supported_cases": 336,
+   "n_supported_checked_accepted": 48,
+   "joint_success_rate": 0.10434782608695652,
+   "validity_rate": 0.1826086956521739,
+   "n_missing_outputs": 0,
+   "n_unparseable": 0,
+   "solver_ms_mean": 0.4604717882339964
+  },
+  "Model E (TF-IDF + LR)": {
+   "cases": 460,
+   "accuracy": 0.8869565217391304,
+   "macro_precision": 0.8613293589198963,
+   "macro_recall": 0.8466513823356383,
+   "macro_f1": 0.853088026149609,
+   "acc_appendicitis": 0.967391304347826,
+   "acc_cholecystitis": 0.8709677419354839,
+   "acc_diverticulitis": 0.6938775510204082,
+   "acc_pancreatitis": 0.8543689320388349,
+   "supported_checked_acceptance_rate": 0.1875,
+   "n_supported_cases": 336,
+   "n_supported_checked_accepted": 63,
+   "joint_success_rate": 0.16304347826086957,
+   "validity_rate": 0.18478260869565216,
+   "n_missing_outputs": 0,
+   "n_unparseable": 0,
+   "solver_ms_mean": 0.3597535427062489,
+   "roc_auc_macro_ovr": 0.9788983977189682,
+   "log_loss": 0.3156747163088549,
+   "train_seconds": 9.673560917028226,
+   "ms_per_case": 0.004634330347787751
+  }
+ },
+ "not_run": [
+  "Model A (needs the local Ollama model, see 4.4.4)"
+ ]
+}
