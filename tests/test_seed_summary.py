@@ -59,3 +59,10 @@ def test_a_null_metric_is_not_averaged_as_zero():
     bad["supported_checked_acceptance_rate"] = None
     out = summarize_seed_runs([run(298), run(299), bad], PROTOCOL)
     assert out["mean"]["supported_checked_acceptance_rate"] is None
+
+
+def test_zero_sd_is_flagged_as_identical_runs():
+    same = summarize_seed_runs([run(298), run(299), run(300)], PROTOCOL)
+    assert same["identical_across_seeds"] is True and same["sd"]["diagnosis_accuracy"] == 0
+    varied = summarize_seed_runs([run(298, 0.8), run(299, 0.9), run(300, 1.0)], PROTOCOL)
+    assert varied["identical_across_seeds"] is False

@@ -36,4 +36,6 @@ def summarize_seed_runs(runs: list[dict], protocol: dict) -> dict:
             out["mean"][m] = out["sd"][m] = None
         else:
             out["mean"][m], out["sd"][m] = mean(values), stdev(values)
+    # At temperature 0 the three seeds can give identical output. Say so, so an SD of 0 is not read as a precise estimate.
+    out["identical_across_seeds"] = all(sd == 0 for sd in out["sd"].values() if sd is not None)
     return out
