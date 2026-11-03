@@ -1,6 +1,6 @@
 # Second human review of rule catalog v2.1
 
-**Status: still open.** A different team member from the first reviewer (SS) must complete this. The assistant must not tick **Second team member** in [rule_signoff.md](rule_signoff.md).
+**Status: still open.** Assigned second reviewer: Akash (AS), a different team member from the first reviewer (SS). He has not started. The assistant must not tick **Second team member** in [rule_signoff.md](rule_signoff.md).
 
 ## Why this is still open
 

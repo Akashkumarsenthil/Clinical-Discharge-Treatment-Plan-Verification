@@ -331,3 +331,18 @@ def example_labels_template(eligible_case_ids: list[int], manifest_hash: str) ->
         ],
         "_instructions": "Fill after generation. Do not copy verifier verdicts. Unresolved nulls block the 0.85 research rate.",
     }
+
+
+def manifest_from_review_rows(rows: list[dict], *, reviewer: str, review_date: str, blind_to_plans: bool, catalog_version: str) -> dict:
+    """Turn the filled review sheet (case_id, eligible_yes_no, reason_if_no) into an eligibility manifest.
+
+    Nothing is guessed: a blank or unclear answer raises, so a half-finished sheet cannot become a manifest.
+    """
+    cases = []
+    for row in rows:
+        answer = (row.get("eligible_yes_no") or "").strip().lower()
+        if answer not in ("yes", "no"):
+            raise ValueError(f"case {row.get('case_id')}: answer must be yes or no")
+        cases.append({"case_id": int(row["case_id"]), "eligible": answer == "yes", "reason": (row.get("reason_if_no") or "").strip()})
+    return {"schema_version": ELIGIBILITY_SCHEMA_VERSION, "catalog_version": catalog_version, "reviewer": reviewer,
+            "review_date": review_date, "blind_to_plans": blind_to_plans, "cases": cases}
