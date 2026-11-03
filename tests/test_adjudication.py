@@ -142,3 +142,16 @@ def test_partial_inputs_do_not_score():
     )
     assert summary["adjudication_status"] == "unavailable_incomplete_adjudication_inputs"
     assert summary["adjudicated_treatment_validity_rate"] is None
+
+
+def test_review_sheet_becomes_a_manifest_and_blank_answers_are_refused():
+    import pytest
+    from clinverify.eval.adjudication import manifest_from_review_rows, validate_eligibility_manifest
+    rows = [{"case_id": "1", "eligible_yes_no": "yes", "reason_if_no": ""},
+            {"case_id": "2", "eligible_yes_no": "No", "reason_if_no": "record has no imaging result"}]
+    manifest = manifest_from_review_rows(rows, reviewer="AB", review_date="2026-11-10", blind_to_plans=True, catalog_version="2.1")
+    result = validate_eligibility_manifest(manifest, covered_case_ids={1, 2}, catalog_version="2.1")
+    assert (result["n_eligible"], result["n_ineligible"]) == (1, 1)
+    with pytest.raises(ValueError, match="yes or no"):
+        manifest_from_review_rows([{"case_id": "1", "eligible_yes_no": "", "reason_if_no": ""}], reviewer="AB",
+                                  review_date="2026-11-10", blind_to_plans=True, catalog_version="2.1")

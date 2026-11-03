@@ -22,6 +22,8 @@ results/runs/*
 !docs/case_facts_ai_triage_counts.csv
 !docs/audit_sample_ids_only.csv
 !docs/case_facts_validation.csv
+!docs/eligibility_review_sheet.csv
+!docs/plan_label_sheet_template.csv
 
 # output of runs on synthetic data
 results/synthetic/

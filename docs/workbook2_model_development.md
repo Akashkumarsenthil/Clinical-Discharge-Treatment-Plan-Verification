@@ -1,6 +1,6 @@
 # Workbook 2 material: model development (sections 4.1 to 4.4)
 
-Workbook 2 is report sections 3 and 4. Section 3 (data engineering) is in the notebook [`notebooks/data_pipeline_demo.ipynb`](../notebooks/data_pipeline_demo.ipynb), sections 5 to 8, where the code runs and shows its output. This page holds the model-development part, which is text and tables and describes models that do not exist yet.
+Workbook 2 is report sections 3 and 4. The code that produces every table and figure is in [`notebooks/workbook2.ipynb`](../notebooks/workbook2.ipynb). The data-cleaning walk-through is in `notebooks/data_pipeline_demo.ipynb`. This page holds the model-development text and tables.
 
 This page is a draft built from what the repository already says (README, `docs/baseline_notes.md`, `docs/metrics.md`) and from the papers in `papers/`. Owners and dates are blank for the team to fill in. The strengths and limitations are our reading of the papers and the data so far. Nothing here is a test result: Model A has only been run on the validation split, and the formal test runs have not happened.
 
@@ -62,7 +62,7 @@ To use the diagram in the Word report, export it as an image. Mermaid only rende
 
 - Model A loses to B, C and D whenever correction matters, because it never sees why a plan failed.
 - Model B loses when the notes are too long or messy to translate correctly. Pancreatitis notes have a median of 248 words against 95 for appendicitis (notebook section 3).
-- Model C loses when most facts are unknown. Six of 12 rules can be checked on at most one case from the facts alone (notebook section 6.3), so there is little to feed back.
+- Model C loses when most facts are unknown. Six of 12 rules can be checked on at most one case from the facts alone (`notebooks/workbook2.ipynb`, figure 3.6e), so there is little to feed back.
 - Model D loses when the care step cannot be written as an action with a precondition, as with the lab-dependent and conditional guideline rules.
 
 ## 4.4 Evaluation methods
