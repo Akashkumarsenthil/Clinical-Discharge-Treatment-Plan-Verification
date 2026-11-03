@@ -2,7 +2,7 @@
 
 Workbook 2 is report sections 3 and 4. Section 3 (data engineering) is in the notebook [`notebooks/data_pipeline_demo.ipynb`](../notebooks/data_pipeline_demo.ipynb), sections 5 to 8, where the code runs and shows its output. This page holds the model-development part, which is text and tables and describes models that do not exist yet.
 
-This page is a draft built from what the repository already says (README, `docs/baseline_notes.md`, `docs/metrics.md`) and from the papers in `papers/`. Owners and dates are blank for the team to fill in. The strengths and limitations are our reading of the papers and the data so far. Nothing here is a result, because no model other than the verifier exists yet.
+This page is a draft built from what the repository already says (README, `docs/baseline_notes.md`, `docs/metrics.md`) and from the papers in `papers/`. Owners and dates are blank for the team to fill in. The strengths and limitations are our reading of the papers and the data so far. Nothing here is a test result: Model A has only been run on the validation split, and the formal test runs have not happened.
 
 ## 4.1 Model proposals
 
@@ -67,7 +67,7 @@ To use the diagram in the Word report, export it as an image. Mermaid only rende
 
 ## 4.4 Evaluation methods
 
-The definitions are in [`metrics.md`](metrics.md) (protocol v1.1, frozen locally on October 23, 2026) and [`evaluation_protocol.json`](evaluation_protocol.json). If this page and `metrics.md` ever differ, `metrics.md` is right. No Model A output exists yet. The table below is the same content in the shape the template asks for.
+The definitions are in [`metrics.md`](metrics.md) (protocol v1.1, frozen locally on October 23, 2026) and [`evaluation_protocol.json`](evaluation_protocol.json). If this page and `metrics.md` ever differ, `metrics.md` is right. Model A has validation-split output only (see `notebooks/workbook2.ipynb`); no test-split output exists. The table below is the same content in the shape the template asks for.
 
 | Metric | Why this metric | Measured on | Committed on |
 |---|---|---|---|
@@ -89,7 +89,7 @@ Runs use seeds 298, 299 and 300. Missing or unparseable plans count as failures.
 | Escape rate <= 0.05 (abstract) | unchanged | unchanged, measured on independently labelled plans |
 | Human check of the derived case facts (116 cases) | done on 2026-10-27 by one team member: 116 of 116 reviewed, 100% agreement with the extraction. It is a consistency check against the mapping, not an independent clinician review | an independent reviewer, if the team wants a stronger validation |
 | Second review of the rule catalog | still pending (needs a different human from SS) | second reviewer follows `docs/rule_second_review.md` and signs `docs/rule_signoff.md` |
-| Baseline reproduction (Hager et al., 54.9%) | not run: needs a GPU or an agreed smaller model | Workbook 2 keeps 4.5 and 4.6 as headings, per the template |
+| Baseline reproduction (Hager et al., 54.9%) | reduced-scale run done (Llama 3.1 8B 4-bit, 400 cases, 47.4% against 54.9%; not like-for-like, see `baseline_notes.md`). The 70B reproduction is not done | Workbook 2 keeps 4.5 and 4.6 as headings, per the template |
 
 ## Self-assessment and gap register
 

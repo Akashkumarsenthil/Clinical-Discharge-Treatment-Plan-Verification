@@ -143,8 +143,9 @@ Main findings: classes are imbalanced (appendicitis 957 vs diverticulitis 257, 3
 | Rule catalog and synthetic valid/invalid cases | **v2.1 for team sign-off**: 12 rules from 2025-2026 guidelines (sources within the course's 3-4 year limit), each with source location, strength, violation message and examples; 29 labeled synthetic plans; see `docs/rule_catalog.md` |
 | Verifier (Z3), rule interface, evaluation harness | implemented and tested on the v2.1 catalog and 29 labeled synthetic plans (`scripts/run_eval.py`); advisory findings are non-blocking; protocol v1.1 retains fixed-cohort scoring, adds checked acceptance, and removes the infeasible automatic 85% target |
 | Case facts from the record (`complicated`, `infection`, `biliary` and others) | first version done: derived from ICD titles, counts in `docs/case_facts_counts.csv`; 3 facts cannot be derived, see `docs/case_facts_mapping.md` |
-| Model A plan format and verification script | done: `docs/model_a_plan_format.md`, `scripts/verify_model_plans.py` (Model A itself is not built yet) |
-| Model A, baseline reproduction | planned (needs GPU access) |
+| Model A plan format and verification script | done: `docs/model_a_plan_format.md`, `scripts/verify_model_plans.py` |
+| Model A (local Ollama, qwen2.5:14b, schema-constrained output) | implemented in `src/clinverify/models/model_a.py`; run on the validation split only. The formal test runs (seeds 298, 299, 300) wait for frozen settings and the human eligibility review |
+| Baseline reproduction (Hager et al. 2024) | reduced-scale run done: Llama 3.1 8B 4-bit, 400 cases, mean diagnostic accuracy 47.4% against 54.9% in the paper; not like-for-like (the 70B models do not fit on the team GPU), see `docs/baseline_notes.md` |
 
 ### Schedule
 
@@ -184,8 +185,7 @@ src/clinverify/
     plan.py         starter schema for a structured plan
     rules/          rule interface (done) and the rule catalog (v2.1, 12 rules from 2025-2026 sources, pending team sign-off)
     verifier/       plan -> Z3 check, names every violated rule (done, tested on the v2.1 catalog)
-    models/         Model A (298A); Models B, C, D (298B) (planned)
-    baseline/       Hager et al. 2024 reproduction (planned)
+    models/         Model A (298A, implemented); Models B, C, D (298B) (planned)
     eval/           evaluation harness (validity, escape rate, false rejects, solver time, bootstrap intervals); model_run.py (verify a batch of Model A plans)
 tests/              unit tests on synthetic data and toy rules
 .github/workflows/  CI: runs the tests on every push

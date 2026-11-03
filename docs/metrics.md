@@ -101,7 +101,7 @@ Metadata keys: `model`, `model_digest`, `prompt_sha256`, `seed`, `temperature`, 
 | First human rule reviewer | Existing entries preserved in `rule_signoff.md` |
 | Second human rule reviewer | **Pending** ([rule_second_review.md](rule_second_review.md)); cannot be completed by the assistant |
 | Manual case-fact audit | Complete 2026-10-27 (mapping-consistency sample; see [`case_facts_mapping.md`](case_facts_mapping.md)) |
-| Exact Model A model/prompt/decoding settings | Record before formal test; Model A not implemented yet |
+| Exact Model A model/prompt/decoding settings | Record before formal test (Model A is implemented and has a validation run; the settings are not frozen yet) |
 | Git commit and `metrics-frozen` tag | Not created by this edit |
 
 Definition or clinical-rule changes after held-out results require a new version, dated rationale, preserved earlier results and a disclosed evaluation consequence. A changed held-out split cannot be scored under the old hash pin. This freeze does not certify clinical completeness of the catalog or extraction.
