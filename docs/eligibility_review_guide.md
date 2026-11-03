@@ -1,6 +1,6 @@
 # Eligibility review of the 73 covered test cases
 
-**Status:** not started. Assigned reviewer: Akash (AS). Nobody has filled the sheet. The assistant must not fill it.
+**Status:** not started. Reviewer: **not assigned yet**. It has to be one of the other three members, not Akash (he wrote Model A) and not SS (rule author). Nobody has filled the sheet. The assistant must not fill it.
 
 This is step 1 in [adjudication_labels.md](adjudication_labels.md) and a hard requirement in [metrics.md](metrics.md). It has to be finished and frozen **before** Model A generates any test plan.
 
