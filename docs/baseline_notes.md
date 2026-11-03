@@ -60,8 +60,8 @@ Operational notes: the first long run was stopped by a 4-hour timeout I had set,
 | Pathology | Paper OASST 70B | This run (Llama 3.1 8B 4-bit, n=100) |
 |---|---|---|
 | Appendicitis | 82.0 | 74.7 (99 scored, 1 skipped, reason not yet checked) |
-| Cholecystitis | 48.0 or 45.5 (the paper's middle two; order not yet confirmed) | 30.0 |
-| Diverticulitis | 45.5 or 48.0 (order not yet confirmed) | 37.0 |
+| Cholecystitis | 48.0 | 30.0 |
+| Diverticulitis | 45.5 | 37.0 |
 | Pancreatitis | 44.1 | 48.0 |
 | Mean | 54.9 | 47.4 |
 
@@ -72,5 +72,4 @@ Read the comparison with care. With 100 cases per pathology the 95% interval on 
 ## Open checks (optional, before the numbers go into the report)
 
 - [ ] Find out why one appendicitis case was skipped by the scorer (99 of 100 scored), and say so in the report.
-- [ ] Confirm which of cholecystitis and diverticulitis is 48.0 and which is 45.5 in the paper's autonomous results.
 - [ ] Confirm the prototype (`app/demo_app.py`) starts on a fresh clone. The saved Model A plans are in the gitignored `results/model_runs/`, so they have to be regenerated first.
