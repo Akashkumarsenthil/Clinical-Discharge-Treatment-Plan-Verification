@@ -59,7 +59,7 @@ Operational notes: the first long run was stopped by a 4-hour timeout I had set,
 
 | Pathology | Paper OASST 70B | This run (Llama 3.1 8B 4-bit, n=100) |
 |---|---|---|
-| Appendicitis | 82.0 | 74.7 (99 scored, 1 skipped, reason not yet checked) |
+| Appendicitis | 82.0 | 74.7 (99 scored, 1 skipped, see below) |
 | Cholecystitis | 48.0 | 30.0 |
 | Diverticulitis | 45.5 | 37.0 |
 | Pancreatitis | 44.1 | 48.0 |
@@ -71,5 +71,5 @@ Read the comparison with care. With 100 cases per pathology the 95% interval on 
 
 ## Open checks (optional, before the numbers go into the report)
 
-- [ ] Find out why one appendicitis case was skipped by the scorer (99 of 100 scored), and say so in the report.
+- [x] Skipped appendicitis case (99 of 100 scored): the model's run finished normally and its answer is well formed. The evaluator failed on the reference side: for that case the converted record's `Procedures Discharge` list holds a missing value (a float NaN), and the evaluator's text step (spaCy) rejects it. It is a data gap in the converted reference, not a model failure, so the case is left unscored rather than counted wrong. Counting it as wrong would lower appendicitis from 74.7% to 74.0%, which does not change any conclusion.
 - [ ] Confirm the prototype (`app/demo_app.py`) starts on a fresh clone. The saved Model A plans are in the gitignored `results/model_runs/`, so they have to be regenerated first.

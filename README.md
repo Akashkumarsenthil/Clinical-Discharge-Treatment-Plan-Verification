@@ -10,6 +10,8 @@ Language models now draft discharge and treatment plans, and the plans read well
 
 The real data is credentialed and cannot be shared, so everything below runs on a **synthetic stand-in** with the same tables and columns (random values, nothing derived from real patients).
 
+Use **Python 3.12 or 3.13** (CI runs 3.12). The pinned pandas 2.2.3 crashes with a segmentation fault on Python 3.14, so create the environment with `python3.12 -m venv .venv` if `python --version` shows 3.14.
+
 ```bash
 git clone https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification.git
 cd Clinical-Discharge-Treatment-Plan-Verification
