@@ -24,6 +24,7 @@ results/runs/*
 !docs/case_facts_validation.csv
 !docs/eligibility_review_sheet.csv
 !docs/plan_label_sheet_template.csv
+!docs/scheduler_run_history.csv
 
 # output of runs on synthetic data
 results/synthetic/

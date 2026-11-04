@@ -22,7 +22,7 @@
    "validity_rate": 0.1826086956521739,
    "n_missing_outputs": 0,
    "n_unparseable": 0,
-   "solver_ms_mean": 0.4604717882339964
+   "solver_ms_mean": 0.7633480999688997
   },
   "Model E (TF-IDF + LR)": {
    "cases": 460,
@@ -41,14 +41,54 @@
    "validity_rate": 0.18478260869565216,
    "n_missing_outputs": 0,
    "n_unparseable": 0,
-   "solver_ms_mean": 0.3597535427062489,
+   "solver_ms_mean": 0.5507528043302085,
    "roc_auc_macro_ovr": 0.9788983977189682,
-   "log_loss": 0.3156747163088549,
-   "train_seconds": 9.673560917028226,
-   "ms_per_case": 0.004634330347787751
+   "log_loss": 0.31567471631074573,
+   "train_seconds": 29.116017576001468,
+   "ms_per_case": 0.006721510868848544
+  },
+  "Model A (qwen2.5:14b)": {
+   "cases": 460,
+   "accuracy": 0.8869565217391304,
+   "macro_precision": 0.866863276723097,
+   "macro_recall": 0.8533916701935884,
+   "macro_f1": 0.8547017989159105,
+   "acc_appendicitis": 0.9456521739130435,
+   "acc_cholecystitis": 0.8225806451612904,
+   "acc_diverticulitis": 0.6938775510204082,
+   "acc_pancreatitis": 0.9514563106796117,
+   "supported_checked_acceptance_rate": 0.14583333333333334,
+   "n_supported_cases": 336,
+   "n_supported_checked_accepted": 49,
+   "joint_success_rate": 0.11956521739130435,
+   "validity_rate": 0.12391304347826088,
+   "n_missing_outputs": 0,
+   "n_unparseable": 0,
+   "solver_ms_mean": 0.8878261434722884,
+   "ms_per_case": null,
+   "output_tokens_per_s": null
   }
  },
- "not_run": [
-  "Model A (needs the local Ollama model, see 4.4.4)"
- ]
+ "not_run": [],
+ "model_a_run": {
+  "model": "qwen2.5:14b",
+  "model_digest": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+  "prompt_sha256": "995be554a9b0ab5ac2340da8a040697491722be7a0c7fda916d49a51a340ae18",
+  "seed": 298,
+  "temperature": 0.0,
+  "top_p": 1.0,
+  "max_new_tokens": 256,
+  "plan_status": {
+   "insufficient_information": 280,
+   "violated": 123,
+   "valid": 57
+  },
+  "violations_by_rule": {
+   "R-GEN-001": 106,
+   "R-APP-003": 46,
+   "R-DIV-002": 14,
+   "R-APP-002": 2,
+   "R-PAN-002": 1
+  }
+ }
 }
