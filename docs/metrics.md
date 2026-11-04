@@ -1,6 +1,6 @@
 # Evaluation metrics v1.1
 
-**Definitions frozen locally: October 23, 2026.** Machine-readable record: [evaluation_protocol.json](evaluation_protocol.json). This freezes definitions for future Model A validation/test runs, not human rule approval or clinical validation. The second human rule review remains pending. The 116-row case-fact sample audit was completed 2026-10-27 ([`case_facts_validation.csv`](case_facts_validation.csv)); it is mapping-consistency review, not clinician sign-off.
+**Definitions frozen: October 23, 2026 (committed as `84c3ca5`).** Machine-readable record: [evaluation_protocol.json](evaluation_protocol.json). This freezes definitions for future Model A validation/test runs, not human rule approval or clinical validation. The second human rule review remains pending. The 116-row case-fact sample audit was completed 2026-10-27 ([`case_facts_validation.csv`](case_facts_validation.csv)); it is mapping-consistency review, not clinician sign-off.
 
 Existing synthetic tests and pipeline checks predate this freeze. The 116-row case-fact sample audit (2026-10-27) is recorded separately in [`case_facts_validation.csv`](case_facts_validation.csv); it does not change these metric definitions. Do not call this freeze preregistration before all results existed. Those engineering checks establish no Model A held-out performance claim. Commit this record before formal held-out runs; a `metrics-frozen` Git tag has **not** been created automatically.
 
@@ -95,12 +95,13 @@ Metadata keys: `model`, `model_digest`, `prompt_sha256`, `seed`, `temperature`, 
 
 | Item | Status |
 |---|---|
-| Metric definitions, denominators, unknown/advisory policy | Revised locally as protocol v1.1; v1.0 archived; no clinical rules or split changed |
+| Metric definitions, denominators, unknown/advisory policy | Revised as protocol v1.1 (commit `84c3ca5`); v1.0 archived; no clinical rules or split changed |
 | Targets and treatment population | Automatic treatment metrics descriptive on all 73 covered cases; 0.85 research goal only on independently adjudicated evaluable plans (unavailable); 0.05 escape on independently labelled covered plans; diagnosis accuracy on all 100 |
 | Independent plan eligibility, adjudication and label scorer | **Scorer + schema done** ([adjudication_labels.md](adjudication_labels.md)); human eligibility/labels still pending |
 | First human rule reviewer | Existing entries preserved in `rule_signoff.md` |
 | Second human rule reviewer | **Pending** ([rule_second_review.md](rule_second_review.md)); cannot be completed by the assistant |
 | Manual case-fact audit | Complete 2026-10-27 (mapping-consistency sample; see [`case_facts_mapping.md`](case_facts_mapping.md)) |
+| Model A validation run (460 cases, seed 298) | **Done**: aggregate results only, in [`validation_summary.json`](validation_summary.json); no test-split run yet |
 | Exact Model A model/prompt/decoding settings | Record before formal test (Model A is implemented and has a validation run; the settings are not frozen yet) |
 | Git commit and `metrics-frozen` tag | Not created by this edit |
 

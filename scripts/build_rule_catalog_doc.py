@@ -61,7 +61,7 @@ Rules that rest on an abstract are weaker: read the full text before ticking the
 
 ## Why version 1.0 was replaced
 
-Version 1.0 (14 rules) used WSES guidelines from 2019-2020. The course asks for sources no older than 3-4 years, so version 2.0 uses only 2025-2026 sources.
+Version 1.0 (14 rules) used WSES guidelines from 2019-2020. The course asks for sources no older than 3-4 years, so versions 2.0 and 2.1 use only 2025-2026 sources.
 Rules whose newer source could not be read were not carried over:
 
 | Dropped from v1.0 | Reason |
