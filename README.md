@@ -19,6 +19,9 @@ pip install -r requirements.txt
 python -m pytest tests                                    # unit tests: synthetic data and toy rules only
 python scripts/make_synthetic_data.py --out ~/synthetic_mimic
 MIMIC_DIR=~/synthetic_mimic python scripts/data_demo.py all
+MIMIC_DIR=~/synthetic_mimic python scripts/run_pipeline.py             # warehouse: raw -> staging -> mart -> data-quality checks
+MIMIC_DIR=~/synthetic_mimic python scripts/run_pipeline.py --tables    # tables, rows and columns per layer
+MIMIC_DIR=~/synthetic_mimic python scripts/run_pipeline.py --history   # the logged runs
 python scripts/run_eval.py --plans tests/data/toy_labeled_plans.json --rules tests.toy_rules
 python scripts/run_eval.py --plans tests/data/catalog_labeled_plans.json --rules clinverify.rules.catalog   # the draft rule catalog
 ```
@@ -26,6 +29,7 @@ python scripts/run_eval.py --plans tests/data/catalog_labeled_plans.json --rules
 | Command | What it shows |
 |---|---|
 | `data_demo.py all` | the data pipeline in order: integrity check, samples, cleaning (duplicates), missing-value rules, transformations, validation checks that pass and fail on corrupted data, EDA, and patient-grouped splits with leakage tests |
+| `run_pipeline.py` | the DuckDB warehouse: each layer built from the one before, data-quality checks that gate the load, and a run log; on synthetic data it uses the split file `data_demo.py` wrote, so run that first |
 | `run_eval.py` | the Z3 verifier and evaluation harness: validity, escape rate, false rejects, solver time, and a logged run, first on toy rules and then on the draft rule catalog |
 
 Runs on synthetic data write to `results/synthetic/` and never touch the real split file or EDA summary. With real PhysioNet access, point `MIMIC_DIR` at your own download instead (see Data and access).
