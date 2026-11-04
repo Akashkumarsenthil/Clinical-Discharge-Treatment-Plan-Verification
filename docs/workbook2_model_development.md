@@ -2,7 +2,7 @@
 
 Workbook 2 is report sections 3 and 4. The code that produces every table and figure is in [`notebooks/workbook2.ipynb`](../notebooks/workbook2.ipynb). The data-cleaning walk-through is in `notebooks/data_pipeline_demo.ipynb`. This page holds the model-development text and tables.
 
-This page is a draft built from what the repository already says (README, `docs/baseline_notes.md`, `docs/metrics.md`) and from the papers in `papers/`. Owners and dates are blank for the team to fill in. The strengths and limitations are our reading of the papers and the data so far. Nothing here is a test result: Model A has only been run on the validation split, and the formal test runs have not happened.
+This page is a working draft built from what the repository says (README, `docs/baseline_notes.md`, `docs/metrics.md`) and from the papers in `papers/`. Owners are filled in where they are known (Models B, C and D are 298B and not assigned yet); dates are for the team to fill in. The strengths and limitations are our reading of the papers and the data so far. Nothing here is a test result: Model A has only been run on the validation split, and the formal test runs have not happened.
 
 ## 4.1 Model proposals
 
@@ -10,11 +10,11 @@ We build four models, one in 298A and three in 298B. The reproduced baseline is 
 
 | # | Model | Concept / architecture | Built in | Owner |
 |---|---|---|---|---|
-| 1 | A | An LLM generates the discharge and treatment plan directly. The plan is parsed into the structured form and checked by the Z3 verifier | 298A | |
-| 2 | B | An LLM translates the clinical goals and notes into a formal specification; a solver does the reasoning | 298B | |
-| 3 | C | LLM generation with the solver in the loop: the verifier names the broken rule and returns it to the LLM for repair | 298B | |
-| 4 | D | An LLM paired with a classical PDDL planner | 298B | |
-| — | Reproduced baseline | Hager et al. (2024), autonomous task on 2,400 cases; best open model OASST 70B, 54.9% mean diagnostic accuracy (Fig. 3). It measures diagnosis, not plan validity | 298A | |
+| 1 | A | An LLM generates the discharge and treatment plan directly. The plan is parsed into the structured form and checked by the Z3 verifier | 298A | Akash |
+| 2 | B | An LLM translates the clinical goals and notes into a formal specification; a solver does the reasoning | 298B | not assigned yet |
+| 3 | C | LLM generation with the solver in the loop: the verifier names the broken rule and returns it to the LLM for repair | 298B | not assigned yet |
+| 4 | D | An LLM paired with a classical PDDL planner | 298B | not assigned yet |
+| — | Reproduced baseline | Hager et al. (2024), autonomous task on 2,400 cases; best open model OASST 70B, 54.9% mean diagnostic accuracy (Fig. 3). It measures diagnosis, not plan validity. A reduced-scale run is done (Llama 3.1 8B, 4-bit, 400 cases, 47.4%; see `baseline_notes.md`) | 298A | Akash |
 
 ## 4.2 Model supports: platform and architecture
 
@@ -25,7 +25,7 @@ flowchart TD
     subgraph LOCAL["Local machine: credentialed data stays here"]
         D["MIMIC-IV v3.1 and Ext-CDM v1.1<br/>in ~/data/mimic"] --> P["Data pipeline<br/>clean, transform, fixed splits"]
         P --> F["Case facts<br/>from ICD titles and discharge text"]
-        P --> M["Models A to D<br/>local LLM, GPU not decided yet"]
+        P --> M["Models A to D<br/>local LLM through Ollama<br/>(one team machine, RTX 5060 Ti)"]
         M --> Q["Plan parser<br/>structured plan"]
         Q --> Z["Z3 verifier"]
         R["Rule catalog v2.1<br/>12 rules"] --> Z
@@ -41,7 +41,7 @@ flowchart TD
 | Language and libraries | Python (runs verified on 3.13.5, GitHub Actions uses 3.12), pandas, numpy, matplotlib, z3-solver 5.3.1, pytest (`requirements.txt`) |
 | Where code is checked | unit tests with `pytest`, run in GitHub Actions on every push |
 | Where data lives | outside the repo, in `~/data/mimic`, and `.gitignore` blocks data files |
-| Where the models run | local only. The GPU or the smaller fallback model is not decided yet, so this part of the diagram is open |
+| Where the models run | local only: one team machine with an NVIDIA RTX 5060 Ti (16 GB). Model A is served by Ollama as qwen2.5:14b (4-bit weights), with the plan constrained to a JSON schema. Models B, C and D are built in 298B |
 
 To use the diagram in the Word report, export it as an image. Mermaid only renders on GitHub and in some notebook viewers.
 
@@ -67,7 +67,7 @@ To use the diagram in the Word report, export it as an image. Mermaid only rende
 
 ## 4.4 Evaluation methods
 
-The definitions are in [`metrics.md`](metrics.md) (protocol v1.1, frozen locally on October 23, 2026) and [`evaluation_protocol.json`](evaluation_protocol.json). If this page and `metrics.md` ever differ, `metrics.md` is right. Model A has validation-split output only (see `notebooks/workbook2.ipynb`); no test-split output exists. The table below is the same content in the shape the template asks for.
+The definitions are in [`metrics.md`](metrics.md) (protocol v1.1, committed to the repository on October 23, 2026, commit `84c3ca5`) and [`evaluation_protocol.json`](evaluation_protocol.json). If this page and `metrics.md` ever differ, `metrics.md` is right. Model A has validation-split output only (aggregate results in [`validation_summary.json`](validation_summary.json) and `notebooks/workbook2.ipynb`); no test-split output exists. The table below is the same content in the shape the template asks for.
 
 | Metric | Why this metric | Measured on | Committed on |
 |---|---|---|---|
@@ -98,8 +98,8 @@ Ratings are our first guess from the evidence in the notebook and on this page. 
 | Report section | Our rating | If below good: what is missing | Owner | Lands by |
 |---|---|---|---|---|
 | 3.1–3.6 Data engineering | good | none known. Notes and labs are not shown, only case IDs and counts, because the data is credentialed | | |
-| 4.1 Model proposals | poor | the owner of each model (table 10.1) | | Nov 11, 2026 |
-| 4.2 Model supports | good | the diagram is a draft; the GPU or fallback model is still open, and it needs exporting as an image for the report | | |
+| 4.1 Model proposals | poor | owners of Models B, C and D (built in 298B) | | Nov 11, 2026 |
+| 4.2 Model supports | good | the diagram is a draft and needs exporting as an image for the report | | |
 | 4.3 Comparison | good | the team has not yet reviewed the strengths and limitations in 10.2 | | |
 | 4.4 Evaluation methods | good | label scorer is built (`docs/adjudication_labels.md`); human eligibility/labels still missing, so the escape rate and the 0.85 research goal can't be measured yet | | |
 | References | good | the list is in section 12; add any source the team introduces later | | |
@@ -120,5 +120,5 @@ Ratings are our first guess from the evidence in the notebook and on this page. 
 
 ## Still open
 
-- The owner of each model in the table in 4.1.
+- The owners of Models B, C and D (built in 298B) in the table in 4.1.
 - 4.5 and 4.6, which stay as headings, as the template says.
