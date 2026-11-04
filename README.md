@@ -22,7 +22,7 @@ python -m pytest tests                                    # unit tests: syntheti
 python scripts/make_synthetic_data.py --out ~/synthetic_mimic
 MIMIC_DIR=~/synthetic_mimic python scripts/data_demo.py all
 python scripts/run_eval.py --plans tests/data/toy_labeled_plans.json --rules tests.toy_rules
-python scripts/run_eval.py --plans tests/data/catalog_labeled_plans.json --rules clinverify.rules.catalog   # the draft rule catalog
+python scripts/run_eval.py --plans tests/data/catalog_labeled_plans.json --rules clinverify.rules.catalog   # the v2.1 rule catalog (12 rules)
 ```
 
 | Command | What it shows |
@@ -101,7 +101,7 @@ Four models are built and compared on the same benchmark and splits:
 | Constraint-violation escape rate | Secondary: invalid plans that the verifier lets through |
 | Repair success rate, translation fidelity, solver cost | Secondary (targets set before the metrics are frozen) |
 
-**Definitions revised locally (2026-10-23):** [docs/metrics.md](docs/metrics.md), with [protocol v1.1](docs/evaluation_protocol.json); [v1.0](docs/evaluation_protocol_v1.0.json) is archived. A local [feasibility check](docs/evaluation_feasibility.md) found the previous 85% automatic acceptance target impossible under strict unknown handling. It inspected validation and test facts, not Model A performance. The 116-row case-fact sample audit is recorded in [`docs/case_facts_validation.csv`](docs/case_facts_validation.csv); second-human rule sign-off remains pending. A definition freeze is not clinical validation or a signed Git release.
+**Definitions revised (2026-10-23, commit `84c3ca5`):** [docs/metrics.md](docs/metrics.md), with [protocol v1.1](docs/evaluation_protocol.json); [v1.0](docs/evaluation_protocol_v1.0.json) is archived. A local [feasibility check](docs/evaluation_feasibility.md) found the previous 85% automatic acceptance target impossible under strict unknown handling. It inspected validation and test facts, not Model A performance. The 116-row case-fact sample audit is recorded in [`docs/case_facts_validation.csv`](docs/case_facts_validation.csv); second-human rule sign-off remains pending. A definition freeze is not clinical validation or a signed Git release.
 
 **Population unchanged:** keep the fixed 100-case test split. Score diagnosis accuracy on all 100 and automatic treatment metrics on the **73 cases covered by catalog v2.1**, without a numerical automatic acceptance target. Report the other 27 as unsupported for treatment, not clinical treatment failures. Keep strict unknowns visible as non-acceptances, not proven clinical errors. Missing covered-case outputs remain in the denominator; wrong diagnoses and plans with no decided blocking clinical check cannot earn primary automatic credit. Report unknown/not-applicable counts and advisory findings alongside rates.
 
