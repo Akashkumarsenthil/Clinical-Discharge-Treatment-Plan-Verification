@@ -21,29 +21,43 @@ We build four models, one in 298A and three in 298B. The reproduced baseline is 
 The patient data, the models and the verifier all run on a local machine. Only code, documents, case IDs and aggregate counts go to GitHub. MIMIC text is never sent to a hosted LLM, which PhysioNet's data-use rules require.
 
 ```mermaid
-flowchart TD
-    subgraph LOCAL["Local machine: credentialed data stays here"]
-        D["MIMIC-IV v3.1 and Ext-CDM v1.1<br/>in ~/data/mimic"] --> P["Data pipeline<br/>clean, transform, fixed splits"]
-        P --> F["Case facts<br/>from ICD titles and discharge text"]
-        P --> M["Models A to D<br/>local LLM through Ollama<br/>(one team machine, RTX 5060 Ti)"]
-        M --> Q["Plan parser<br/>structured plan"]
-        Q --> Z["Z3 verifier"]
-        R["Rule catalog v2.1<br/>12 rules"] --> Z
-        F -->|"used to judge the plan only,<br/>never given to the model"| Z
-        Z --> E["Evaluation harness<br/>metrics v1.1"]
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Arial","fontSize":"20px","clusterBkg":"#f8fafc","clusterBorder":"#91a1b3","lineColor":"#536477"},"flowchart":{"htmlLabels":true,"curve":"linear","nodeSpacing":30,"rankSpacing":45}}}%%
+flowchart LR
+    subgraph LOCAL["Local machine — credentialed data stays here"]
+        D["MIMIC-IV v3.1<br/>Ext-CDM v1.1"] --> P["Pipeline + DuckDB<br/>clean, transform,<br/>patient-grouped split v2"]
+        P --> M["Model A — 298A<br/>local Ollama<br/>Qwen2.5:14b"]
+        P --> F["Record-derived facts<br/>ICD + discharge text"]
+        M --> Q["Plan parser<br/>attach record facts"]
+        F -->|"judging only;<br/>not model input"| Q
+        Q --> Z["Z3 verifier<br/>violations + unknowns<br/>advisory findings"]
+        R["Rule catalog v2.1<br/>12 team-written rules<br/>second review pending"] --> Z
+        Z --> E["Evaluation harness<br/>protocol v1.1<br/>fixed cohorts"]
+        N["Proposed — 298B<br/>B: translation + solver<br/>C: verifier-guided repair<br/>D: PDDL planner"]
+        P -. "case input" .-> N
+        N -. "plan output" .-> Q
+        Z -. "broken rule + message<br/>Model C only" .-> N
     end
-    E -.->|"counts only"| G["GitHub<br/>code, docs, case IDs, aggregate results"]
-    Z -.->|"broken rule + message<br/>(Model C, 298B)"| M
+    E -. "aggregate results" .-> G["GitHub<br/>code, docs, IDs,<br/>counts and rates"]
+    classDef current fill:#eaf2fb,stroke:#315a85,color:#142b45,stroke-width:1.5px;
+    classDef evidence fill:#edf6ef,stroke:#47785b,color:#183c24,stroke-width:1.5px;
+    classDef proposed fill:#fff5e6,stroke:#a77730,color:#583d17,stroke-width:1.5px;
+    class D,P,M,Q,Z,E current;
+    class F,R evidence;
+    class N proposed;
 ```
+
+![Model architecture: implemented Model A data flow and proposed Models B–D](images/model_architecture.png)
 
 | Part | What it is |
 |---|---|
 | Language and libraries | Python (runs verified on 3.13.5, GitHub Actions uses 3.12), pandas, numpy, matplotlib, z3-solver 5.3.1, pytest (`requirements.txt`) |
 | Where code is checked | unit tests with `pytest`, run in GitHub Actions on every push |
 | Where data lives | outside the repo, in `~/data/mimic`, and `.gitignore` blocks data files |
-| Where the models run | local only: one team machine with an NVIDIA RTX 5060 Ti (16 GB). Model A is served by Ollama as qwen2.5:14b (4-bit weights), with the plan constrained to a JSON schema. Models B, C and D are built in 298B |
+| Where the models run | Local only: one team machine with an NVIDIA RTX 5060 Ti (16 GB) in WSL2. Model A uses Ollama (`qwen2.5:14b`, 4-bit weights) with schema-constrained JSON. Models B–D remain proposed for 298B |
 
-To use the diagram in the Word report, export it as an image. Mermaid only renders on GitHub and in some notebook viewers.
+Solid arrows show the implemented Model A path; dashed arrows show proposed 298B extensions or the export of aggregate results. The model receives the allowed clinical input tables, never the record-derived case facts. Rule acceptance is not a clinical safety or completeness guarantee. Platform details: [`team_meeting_2_prep.md`, section 3](team_meeting_2_prep.md#3-deck-notes-8-slides-17--3-minutes).
+
+To reproduce the PNG locally after editing the Mermaid block, extract it to a `.mmd` file and run `mmdc -i architecture.mmd -o docs/images/model_architecture.png --size 3200 -b white` (Mermaid CLI 12.2.0). Alternatively, use Mermaid Live Editor with the same source and a PNG width of 3200 pixels. No patient data is needed.
 
 ## 4.3 Comparison and justification
 
@@ -99,7 +113,7 @@ Ratings are our first guess from the evidence in the notebook and on this page. 
 |---|---|---|---|---|
 | 3.1–3.6 Data engineering | good | none known. Notes and labs are not shown, only case IDs and counts, because the data is credentialed | | |
 | 4.1 Model proposals | poor | owners of Models B, C and D (built in 298B) | | Nov 11, 2026 |
-| 4.2 Model supports | good | the diagram is a draft and needs exporting as an image for the report | | |
+| 4.2 Model supports | good | PNG exported for Word/slides; Models B–D and their flows remain proposals for 298B | | |
 | 4.3 Comparison | good | the team has not yet reviewed the strengths and limitations in 10.2 | | |
 | 4.4 Evaluation methods | good | label scorer is built (`docs/adjudication_labels.md`); human eligibility/labels still missing, so the escape rate and the 0.85 research goal can't be measured yet | | |
 | References | good | the list is in section 12; add any source the team introduces later | | |
