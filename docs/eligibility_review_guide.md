@@ -12,7 +12,7 @@ Answer **yes** or **no**. For **no**, write a short reason in your own words (fo
 
 ## Conditions (the manifest says `blind_to_plans: true`, so these must hold)
 
-- Do not look at any generated plan, any Model A output or any verifier verdict for these 73 cases.
+- Do not look at any generated plan, output from any model (including the earlier baseline), or verifier verdict for these 73 cases.
 - Do not use the case facts or the rule coverage counts to decide. Judge from the record only.
 - Do not choose cases because a rule can decide them. Every one of the 73 gets an answer, including the hard ones.
 - The record text stays on the authorised machine. Only IDs, yes/no and short reasons go in the sheet.
@@ -30,8 +30,49 @@ Report **E/73** with the reasons for each excluded case. The 73-case denominator
 
 ## Independence
 
-The reviewer must not have written the rules (SS) or Model A (AS) and must not have seen any test plan; none exists yet. Akash asked not to be the blind reviewer for that reason (PR 3 review).
+The reviewer must not have written the rules (SS) or Model A (AS) and must not have seen any generated plan, model output or verifier verdict for these test cases. Earlier baseline outputs exist privately; see the disclosure below. Akash asked not to be the blind reviewer for that reason (PR 3 review).
 
 ## Plan labels come later and need a different person
 
 After generation, each eligible plan needs an independent label (see [adjudication_labels.md](adjudication_labels.md); blank template: [plan_label_sheet_template.csv](plan_label_sheet_template.csv)). That reviewer must also be someone other than the rule author (SS) and the Model A author (AS). The eligibility reviewer and the label reviewer can be the same person or two of the three remaining members.
+
+## Agreed record and decision procedure
+
+Review only the Ext-CDM 1.1 tables `history_of_present_illness`, `physical_examination`, `laboratory_tests`, `microbiology`, and `radiology_reports`, shown in full, together with the reference diagnosis from the case list. Use the tables exactly as supplied, with no re-timing. Do not use discharge diagnosis, ICD diagnosis or procedure tables, discharge procedures, wider MIMIC-IV records, case-fact files, rule coverage counts, generated plans, model outputs or verifier verdicts.
+
+Before starting, check the local files against the release's `SHA256SUMS.txt` and record the actual check date in the review PR. Patient text remains on the reviewer's own authorized machine; it must not be pasted into an AI tool. The assistant must not make eligibility decisions or prefill the sheet.
+
+Decide once per case in sheet order. Answer yes only when confident that the allowed record is sufficient for a clinician to judge the adequacy and validity of a treatment plan for the reference diagnosis. If unsure, answer no and start the reason with `uncertain:` followed by what is missing, without patient text.
+
+## Corrections before freeze
+
+Corrections are allowed only for:
+
+- `transcription`: the reviewer typed a different answer or case ID from the one intended;
+- `viewer`: a loading or display problem meant the original decision used an incomplete record, such as a table that failed to load or text that was cut off.
+
+A change of clinical judgment is not a correction. If re-reading changes the reviewer's opinion, the original decision stands.
+
+Keep the original completed sheet unchanged. Append each correction to [eligibility_corrections_log.csv](eligibility_corrections_log.csv), with columns:
+
+`case_id,original_answer,original_reason,corrected_answer,corrected_reason,correction_type,date,reviewer_initials`
+
+Use `transcription` or `viewer` for `correction_type`, an ISO date (`YYYY-MM-DD`), and `ST` for Shruthi's initials. Never put patient text in any field. If a case ID was transcribed incorrectly, use the intended case ID in `case_id` and record the originally typed ID in the reason; preserve the original file. Keep every correction as a new row, including any later permitted correction to the same case, so the history remains visible.
+
+Corrections must stop before the manifest is built and its hash recorded. They must also stop immediately if the reviewer sees any generated plan, model output or verifier verdict for these cases, regardless of the producing model. Accidental exposure must be reported to the team as a deviation; do not make further corrections after exposure.
+
+After review, make a separate final input copy by applying only logged, permitted corrections to the preserved original sheet. Confirm that the final copy still contains exactly the frozen 73 case IDs, each once, in sheet order. Do not overwrite the original. Run the existing builder only after the reviewer has completed and verified all decisions:
+
+```bash
+python scripts/build_eligibility_manifest.py --sheet <final_filled.csv> --reviewer ST --date YYYY-MM-DD --blind-to-plans
+```
+
+The builder does not apply the correction log automatically. Pass `--blind-to-plans` only when the blindness conditions actually hold. Record the manifest hash, review date, ST, eligible count E and exclusion reasons in `docs/metrics.md`. After the hash is recorded, the manifest is frozen; later problems are documented deviations, not edits. Commit the corrections log with the manifest; a header-only log records zero corrections. Use the existing repository policy for committing the manifest, which is under the ignored `results/` directory; do not unignore that directory or any model outputs.
+
+## Baseline overlap and reporting
+
+Team disclosure: 14 of the 400 earlier Llama 3.1 8B Hager baseline cases fall within the 100-case test split; these same 14 are within the 73 covered cases (2 appendicitis, 9 diverticulitis, 3 pancreatitis). Akash reports that their outputs are private on his machine, have never been shown to Shruthi, and were not used to select cases, tune models or make eligibility decisions. No Model A test plans have been generated according to the team disclosure. Baseline generation predates the eligibility freeze; this must be disclosed in the report.
+
+Shruthi must not see these baseline outputs, any new Model A test output or any verifier verdict for the 73 cases before the manifest hash is recorded. Blindness is about what the reviewer has seen, not the model that produced an output.
+
+Report E out of 73, the reason for each exclusion, the number of exclusions whose reasons begin `uncertain:`, and the number of correction events of each type. E is not substituted for the fixed 73-case denominator. Record any accidental exposure and any post-freeze problem as a deviation.
