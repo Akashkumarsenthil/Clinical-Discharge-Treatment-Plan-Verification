@@ -39,7 +39,7 @@
 
 ## 4. What we will show today
 
-The seven ISA rows in `docs/team_meeting_2_prep.md` section 2, in order: transformations; pipeline on a schedule; warehouse contents; monitoring; live prototype; clone-and-run (Ritika); each member's Linear issues and PRs. Presenters for the other rows: [team to fill].
+The seven ISA rows in `docs/team_meeting_2_prep.md` section 2, in order: transformations; pipeline on a schedule; warehouse contents (Shruthi); monitoring; live prototype; clone-and-run (Ritika); each member's Linear issues and PRs. Presenters for the other rows: [team to fill].
 
 ## 5. Anything mocked or incomplete
 
@@ -55,5 +55,5 @@ Each member fills their own row (issue IDs from Linear, PR links from GitHub). R
 | Akashkumar Senthilkumar | [to be filled by Akash] | | |
 | Rajesh Paruchuri | [to be filled by Rajesh] | | |
 | Ritika Mukesh Neema | [to be filled by Ritika] | | |
-| Shruthi Thirukumaran | [to be filled by Shruthi] | | |
+| Shruthi Thirukumaran | [T6-181](https://linear.app/298a-team-6-neurosymbolic/issue/T6-181), [T6-182](https://linear.app/298a-team-6-neurosymbolic/issue/T6-182), [T6-183](https://linear.app/298a-team-6-neurosymbolic/issue/T6-183) | — | Architecture figure [PR #10](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/pull/10); slides 1–4 and notes [PR #11](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/pull/11); guarded generation CLI and tests [PR #12](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/pull/12). Adapter-training package [T6-187](https://linear.app/298a-team-6-neurosymbolic/issue/T6-187) / [PR #16](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/pull/16) is in review; synthetic CPU checks passed, real training is not run. |
 | Sneha Singh | T6-17, T6-22, T6-28, T6-96, T6-97, T6-98, T6-173, T6-174, T6-175, T6-177, T6-179, T6-180 | model, eval, data | PRs [#2](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/pull/2), [#3](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/pull/3), [#4](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/pull/4), [#9](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/pull/9); [`docs/rule_catalog.md`](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/blob/main/docs/rule_catalog.md), [`docs/validation_summary.json`](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/blob/main/docs/validation_summary.json), [`docs/case_facts_mapping.md`](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/blob/main/docs/case_facts_mapping.md) |
