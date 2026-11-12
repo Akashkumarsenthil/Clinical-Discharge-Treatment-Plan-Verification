@@ -40,7 +40,7 @@
 
 ## 4. What we will show today
 
-The seven ISA rows in `docs/team_meeting_2_prep.md` section 2, in order: transformations; pipeline on a schedule; warehouse contents (Shruthi); monitoring; live prototype; clone-and-run (Ritika); each member's Linear issues and PRs. Presenters for the other rows: [team to fill].
+The seven ISA rows in `docs/team_meeting_2_prep.md` section 2, in order: transformations (Sneha); pipeline on a schedule (Akash); warehouse contents (Shruthi); monitoring (Rajesh); live prototype (Akash); clone-and-run (Ritika); each member's Linear issues and PRs (each member shows their own). Presenters were assigned on 2026-11-11 and can be swapped.
 
 ## 5. Anything mocked or incomplete
 
