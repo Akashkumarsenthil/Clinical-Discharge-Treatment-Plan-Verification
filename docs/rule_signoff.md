@@ -12,7 +12,7 @@ The column "Assistant's check" records that the AI assistant that drafted the ru
 
 **Second-reviewer record (human input only)**
 
-- Reviewer name/initials: _pending_
+- Reviewer name/initials: _pending_ (assigned: Akash, AS; not started)
 - Review date: _pending_
 - Catalog version: **2.1**
 - Independently check the cited recommendation, its conditions/exceptions, code and examples. Do not copy the assistant's check or the first reviewer's ticks.
