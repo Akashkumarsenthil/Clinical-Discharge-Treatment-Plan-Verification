@@ -42,6 +42,8 @@ Review only the Ext-CDM 1.1 tables `history_of_present_illness`, `physical_exami
 
 Before starting, check the local files against the release's `SHA256SUMS.txt` and record the actual check date in the review PR. Patient text remains on the reviewer's own authorized machine; it must not be pasted into an AI tool. The assistant must not make eligibility decisions or prefill the sheet.
 
+**Checksum verification record:** On November 3, 2026, Shruthi's local Ext-CDM 1.1 files were checked against the release `SHA256SUMS.txt`. All manifest entries passed, including the five permitted review tables. The check compared file hashes only; no patient records were displayed and no eligibility decisions were made. This date was recovered from the successful verification recorded in the review chat.
+
 Decide once per case in sheet order. Answer yes only when confident that the allowed record is sufficient for a clinician to judge the adequacy and validity of a treatment plan for the reference diagnosis. If unsure, answer no and start the reason with `uncertain:` followed by what is missing, without patient text.
 
 ## Corrections before freeze
