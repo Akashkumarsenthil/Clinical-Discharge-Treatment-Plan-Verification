@@ -10,6 +10,8 @@ Language models now draft discharge and treatment plans, and the plans read well
 
 The real data is credentialed and cannot be shared, so everything below runs on a **synthetic stand-in** with the same tables and columns (random values, nothing derived from real patients).
 
+Verified from a fresh clone on macOS 15.7.3 (Apple Silicon), Python 3.12.2 and 3.13.7, 2026-11-04 (commit `04acfc4`): every command below exits 0 and 159 tests pass.
+
 Use **Python 3.12 or 3.13** (CI runs 3.12). The pinned pandas 2.2.3 crashes with a segmentation fault on Python 3.14, so create the environment with `python3.12 -m venv .venv` if `python --version` shows 3.14.
 
 ```bash
@@ -21,13 +23,17 @@ pip install -r requirements.txt
 python -m pytest tests                                    # unit tests: synthetic data and toy rules only
 python scripts/make_synthetic_data.py --out ~/synthetic_mimic
 MIMIC_DIR=~/synthetic_mimic python scripts/data_demo.py all
+MIMIC_DIR=~/synthetic_mimic python scripts/run_pipeline.py             # warehouse: raw -> staging -> mart -> data-quality checks
+MIMIC_DIR=~/synthetic_mimic python scripts/run_pipeline.py --tables    # tables, rows and columns per layer
+MIMIC_DIR=~/synthetic_mimic python scripts/run_pipeline.py --history   # the logged runs
 python scripts/run_eval.py --plans tests/data/toy_labeled_plans.json --rules tests.toy_rules
-python scripts/run_eval.py --plans tests/data/catalog_labeled_plans.json --rules clinverify.rules.catalog   # the draft rule catalog
+python scripts/run_eval.py --plans tests/data/catalog_labeled_plans.json --rules clinverify.rules.catalog   # the v2.1 rule catalog (12 rules)
 ```
 
 | Command | What it shows |
 |---|---|
 | `data_demo.py all` | the data pipeline in order: integrity check, samples, cleaning (duplicates), missing-value rules, transformations, validation checks that pass and fail on corrupted data, EDA, and patient-grouped splits with leakage tests |
+| `run_pipeline.py` | the DuckDB warehouse: each layer built from the one before, data-quality checks that gate the load, and a run log; on synthetic data it uses the split file `data_demo.py` wrote, so run that first |
 | `run_eval.py` | the Z3 verifier and evaluation harness: validity, escape rate, false rejects, solver time, and a logged run, first on toy rules and then on the draft rule catalog |
 
 Runs on synthetic data write to `results/synthetic/` and never touch the real split file or EDA summary. With real PhysioNet access, point `MIMIC_DIR` at your own download instead (see Data and access).
@@ -101,7 +107,7 @@ Four models are built and compared on the same benchmark and splits:
 | Constraint-violation escape rate | Secondary: invalid plans that the verifier lets through |
 | Repair success rate, translation fidelity, solver cost | Secondary (targets set before the metrics are frozen) |
 
-**Definitions revised locally (2026-10-23):** [docs/metrics.md](docs/metrics.md), with [protocol v1.1](docs/evaluation_protocol.json); [v1.0](docs/evaluation_protocol_v1.0.json) is archived. A local [feasibility check](docs/evaluation_feasibility.md) found the previous 85% automatic acceptance target impossible under strict unknown handling. It inspected validation and test facts, not Model A performance. The 116-row case-fact sample audit is recorded in [`docs/case_facts_validation.csv`](docs/case_facts_validation.csv); second-human rule sign-off remains pending. A definition freeze is not clinical validation or a signed Git release.
+**Definitions revised (2026-10-23, commit `84c3ca5`):** [docs/metrics.md](docs/metrics.md), with [protocol v1.1](docs/evaluation_protocol.json); [v1.0](docs/evaluation_protocol_v1.0.json) is archived. A local [feasibility check](docs/evaluation_feasibility.md) found the previous 85% automatic acceptance target impossible under strict unknown handling. It inspected validation and test facts, not Model A performance. The 116-row case-fact sample audit is recorded in [`docs/case_facts_validation.csv`](docs/case_facts_validation.csv); second-human rule sign-off remains pending. A definition freeze is not clinical validation or a signed Git release.
 
 **Population unchanged:** keep the fixed 100-case test split. Score diagnosis accuracy on all 100 and automatic treatment metrics on the **73 cases covered by catalog v2.1**, without a numerical automatic acceptance target. Report the other 27 as unsupported for treatment, not clinical treatment failures. Keep strict unknowns visible as non-acceptances, not proven clinical errors. Missing covered-case outputs remain in the denominator; wrong diagnoses and plans with no decided blocking clinical check cannot earn primary automatic credit. Report unknown/not-applicable counts and advisory findings alongside rates.
 

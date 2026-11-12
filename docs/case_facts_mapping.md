@@ -96,6 +96,7 @@ Notes:
 | Distinct reviewer notes | 54 (most common note appears on 5 rows; not a single template) |
 | AI triage outcome | 41/41 priority flags: reviewer sided with extraction; AI over-flagged |
 | Rule changes from this audit | none |
+| Second reviewer | Rajesh (RP), proposed, not started. Reviews a fresh sample (`scripts/sample_for_audit.py`) on his own authorised machine, then adds his initials, date and agreement counts here. Nothing is recorded for him yet. |
 
 Per-fact agreement is 1.0 in every stratum in `docs/case_facts_validation.csv`. Each row has a note naming the evidence type that supports the stored value (e.g. negated ICD title, discharge complication cue, “without necrosis or infection”, stone without obstruction clause). All 41 AI-priority rows carry an explicit `| AI flagged …; record does not support AI claim under mapping` tag. Under this mapping, the 28 AI-flagged **unknown** rows had no missed affirmative evidence; the model was inventing or stretching support, not catching extraction misses. Zero disagreements with the extractor is therefore expected for a mapping-consistency check; it is **not** clinician adjudication of whether the mapping itself is clinically ideal.
 

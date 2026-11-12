@@ -49,7 +49,12 @@ def main() -> int:
     run = {"timestamp": datetime.now(timezone.utc).isoformat(timespec="seconds"), "git_commit": git_commit(),
            "config": {"plans": str(args.plans), "rules": args.rules, "seed": args.seed}, "metrics": metrics}
     args.out.mkdir(parents=True, exist_ok=True)
-    path = args.out / f"run_{datetime.now(timezone.utc):%Y%m%dT%H%M%S}_seed{args.seed}.json"
+    # the plans file is in the name, and a counter is added on a clash, so two runs in the same second (as in the
+    # README Quickstart) do not overwrite each other's log
+    stem = f"run_{datetime.now(timezone.utc):%Y%m%dT%H%M%S}_{args.plans.stem}_seed{args.seed}"
+    path, n = args.out / f"{stem}.json", 2
+    while path.exists():
+        path, n = args.out / f"{stem}_{n}.json", n + 1
     path.write_text(json.dumps(run, indent=1))
     print(json.dumps(metrics, indent=1))
     print("logged:", path.relative_to(ROOT) if path.is_relative_to(ROOT) else path)
