@@ -83,7 +83,7 @@ Two cautions. This is one run at temperature 0, so there is no spread to report.
 3. One test-split run of Model A, once.
 
 **Next (298B)**
-- Models B, C and D (owners not assigned yet), then an ablation and a failure study.
+- Models B, C and D (proposed owners: Rajesh, Shruthi, Ritika; to confirm by Nov 19), then an ablation and a failure study.
 - Independent plan labels, so the escape rate and the 0.85 research goal can be measured.
 - Results by age, sex, race and language.
 
@@ -100,7 +100,7 @@ Two cautions. This is one run at temperature 0, so there is no spread to report.
 
 Before the test split is touched, three things have to happen. Shruthi is doing the blind eligibility review of the 73 covered test cases with her own copy of the data; its result freezes the denominator. We then decide the decoding temperature and sign the freeze checklist, because greedy decoding makes our three seeds identical and would hide any variation. Only then do we run Model A on the test cases, once.
 
-In 298B we build Models B, C and D, which are not assigned to owners yet, and compare them with Model A and the baseline. Independent plan labels from someone who did not write the rules or Model A are needed to measure the escape rate and the 0.85 research goal. We also owe a breakdown of results by group.
+In 298B we build Models B, C and D, with proposed owners Rajesh, Shruthi and Ritika, to be confirmed by November 19, and compare them with Model A and the baseline. Independent plan labels from someone who did not write the rules or Model A are needed to measure the escape rate and the 0.85 research goal. We also owe a breakdown of results by group.
 
 The main risks: the second rule review and any clinical review are still pending, so the rules are implemented and tested but not clinically validated; we must use the test set only once; and fine-tuning needs approved labels and GPU time.
 

@@ -94,9 +94,8 @@ training results for them, so we should not invent any.
 
 The Hager autonomous diagnostic baseline remains outside these four models.
 In particular, its step-by-step information requests should not be presented
-as Model A's current input procedure. Section 4.3 still contains that older
-input description; the implemented full-information path is documented in
-`src/clinverify/models/model_a.py`.
+as Model A's current input procedure. The implemented full-information path is
+documented in `src/clinverify/models/model_a.py` and in Workbook 2, section 4.3.
 
 ### Repository sources
 
@@ -165,7 +164,7 @@ and clinical validation must not be implied by successful software tests.
 | **C** | Repair plans using case text and rule feedback | LLM + verifier loop | Useful when actionable rule failures can guide revisions | Unknown facts, uncovered errors, or costly repeated calls |
 | **D** | Sequences of care actions from a case and domain | LLM + classical planner | Useful when actions and preconditions are expressible in a domain | Missing or inaccurate clinical PDDL domain |
 
-**Current choice:** A as the implemented reference. **No preferred winner established** for A–D; B–D comparisons are proposed.
+**Current choice:** A is the preferred approach for 298A, the only one built and measured. **Not a claim that it is the best**; B–D comparisons are proposed.
 
 ### Speaker notes — approximately 2 minutes
 
