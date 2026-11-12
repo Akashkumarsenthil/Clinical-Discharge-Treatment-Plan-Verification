@@ -1,7 +1,7 @@
 # Team 6, Section 22, Topic 12 · Checkpoint memo: Team Meeting 2
 
 **Project:** Neurosymbolic Verification of LLM-Generated Clinical Discharge and Treatment Plans
-**Repository at the memo commit:** [`04acfc4`](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/tree/04acfc407aed26d92af30297ddbcd4c1c3f1956f) (`main`, 2026-11-04). Replace with the presentation-day commit before submitting.
+**Repository at the memo commit:** [`36be960`](https://github.com/Akashkumarsenthil/Clinical-Discharge-Treatment-Plan-Verification/tree/36be960cab7d81bcb5f889f88fb3043a6e4f4e27) (`main`, 2026-11-12).
 **Linear board:** https://linear.app/298a-team-6-neurosymbolic/team/T6/all
 **Template:** 8. Drafted from `docs/team_meeting_2_prep.md` section 4 · Linear: T6-186.
 
