@@ -1,6 +1,6 @@
 # Eligibility review of the 73 covered test cases
 
-**Status:** not started. Reviewer: **not assigned yet**. It has to be one of the other three members, not Akash (he wrote Model A) and not SS (rule author). Nobody has filled the sheet. The assistant must not fill it.
+**Status:** reviewer named: **Shruthi (ST)**, who has taken the review (procedure in PR #18, below). Akash (AS, wrote Model A) and SS (rule author) cannot be the reviewer. The sheet in this repository is still blank and completion is not claimed. The assistant must not fill it.
 
 This is step 1 in [adjudication_labels.md](adjudication_labels.md) and a hard requirement in [metrics.md](metrics.md). It has to be finished and frozen **before** Model A generates any test plan.
 
@@ -16,6 +16,19 @@ Answer **yes** or **no**. For **no**, write a short reason in your own words (fo
 - Do not use the case facts or the rule coverage counts to decide. Judge from the record only.
 - Do not choose cases because a rule can decide them. Every one of the 73 gets an answer, including the hard ones.
 - The record text stays on the authorised machine. Only IDs, yes/no and short reasons go in the sheet.
+
+## Who does what
+
+**Shruthi (ST) is the blind reviewer.** She does the review as described in the sections below, on her own authorised machine.
+
+**Akash (AS) coordinates. He is not the reviewer.**
+
+1. Review this PR with a formal GitHub review (Approve or Request changes, not only a comment), then merge it.
+2. When Shruthi has completed and verified all decisions and the manifest is built, check that: all 73 rows have an answer; every "no" has a short reason; no patient text is in the files; and the reviewer is not SS or AS.
+3. Check that the manifest hash, date, reviewer and eligible count **E** are recorded in [metrics.md](metrics.md) (Open items table) and in the first box under "Before any test generation" in [model_a_freeze_checklist.md](model_a_freeze_checklist.md).
+4. Do not generate any test plan until step 3 is done and the temperature decision (item 4 in the freeze checklist) is recorded.
+
+**Sneha (SS)** has nothing to do here. She wrote the rules and cannot review.
 
 ## Steps
 
