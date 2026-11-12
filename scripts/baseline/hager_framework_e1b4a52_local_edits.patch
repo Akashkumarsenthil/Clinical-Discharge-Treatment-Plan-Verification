@@ -1,0 +1,117 @@
+diff --git a/models/models.py b/models/models.py
+index 32550a3..c6e103f 100644
+--- a/models/models.py
++++ b/models/models.py
+@@ -10,9 +10,15 @@ from tenacity import (
+     wait_random_exponential,
+ )
+ from transformers import GenerationConfig, StoppingCriteriaList
+-from auto_gptq import exllama_set_max_input_length
++try:  # local 8B deviation: GPTQ/exllama stack not installed (not needed for the Llama 3 path)
++    from auto_gptq import exllama_set_max_input_length
++except ImportError:
++    exllama_set_max_input_length = None
+ from langchain.llms.base import LLM
+-from exllamav2.generator import ExLlamaV2Sampler
++try:
++    from exllamav2.generator import ExLlamaV2Sampler
++except ImportError:
++    ExLlamaV2Sampler = None
+ import tiktoken
+ 
+ from models.utils import create_stop_criteria, create_stop_criteria_exllama
+@@ -129,6 +135,7 @@ class CustomLLM(LLM):
+             self.model_name == "meta-llama/Meta-Llama-3-70B-Instruct"
+             or self.model_name == "aaditya/OpenBioLLM-Llama3-70B"
+             or self.model_name == "meta-llama/Meta-Llama-3.1-70B-Instruct"
++            or self.model_name == "meta-llama/Llama-3.1-8B-Instruct"  # local 8B deviation
+             or self.model_name == "meta-llama/Llama-3.3-70B-Instruct"
+         ):
+             from transformers import (
+diff --git a/run.py b/run.py
+index 122d300..2810aa3 100644
+--- a/run.py
++++ b/run.py
+@@ -110,6 +110,11 @@ def run(args: DictConfig):
+ 
+     # Predict for all patients
+     first_patient_seen = False
++    patient_subset = None
++    if args.patient_list_path:
++        with open(args.patient_list_path) as f:
++            patient_subset = {int(x) for x in f.read().split()}
++        logger.info(f"Restricting to {len(patient_subset)} patients from {args.patient_list_path}")
+     for _id in hadm_info_clean.keys():
+         if args.first_patient and not first_patient_seen:
+             if _id == args.first_patient:
+@@ -117,6 +122,10 @@ def run(args: DictConfig):
+             else:
+                 continue
+ 
++        # local deviation: optional subset, one hadm_id per line
++        if patient_subset is not None and int(_id) not in patient_subset:
++            continue
++
+         logger.info(f"Processing patient: {_id}")
+ 
+         # Build
+diff --git a/utils/nlp.py b/utils/nlp.py
+index 6bb82ad..68eb62e 100644
+--- a/utils/nlp.py
++++ b/utils/nlp.py
+@@ -12,7 +12,11 @@ from thefuzz import process, fuzz
+ from nltk.tokenize import word_tokenize
+ from nltk.corpus import stopwords
+ from transformers import LlamaTokenizer, AutoTokenizer
+-from exllamav2 import ExLlamaV2Tokenizer
++try:  # local 8B deviation: exllamav2 not installed
++    from exllamav2 import ExLlamaV2Tokenizer
++except ImportError:
++    class ExLlamaV2Tokenizer:  # placeholder so isinstance() checks are False
++        pass
+ import tiktoken
+ 
+ from tools.utils import FLUID_MAPPING, itemid_to_field
+diff --git a/configs/model/Llama3.1Instruct8B.yaml b/configs/model/Llama3.1Instruct8B.yaml
+new file mode 100644
+index 0000000..dbb0353
+--- /dev/null
++++ b/configs/model/Llama3.1Instruct8B.yaml
+@@ -0,0 +1,22 @@
++# @package _global_
++defaults:
++  - _self_
++
++openai_api_key:
++model_name: "meta-llama/Llama-3.1-8B-Instruct"
++max_context_length: 16384
++exllama: False
++
++system_tag_start: "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n"
++system_tag_end: "<|eot_id|>"
++
++user_tag_start: "<|start_header_id|>user<|end_header_id|>\n\n"
++user_tag_end: "<|eot_id|>"
++
++ai_tag_start: "<|start_header_id|>assistant<|end_header_id|>\n\n"
++ai_tag_end: "<|eot_id|>"
++
++stop_words:
++ - "<|eot_id|>"
++ - "<|end_of_text|>"
++ - "<|eom_id|>"
+\ No newline at end of file
+diff --git a/configs/paths/local.yaml b/configs/paths/local.yaml
+new file mode 100644
+index 0000000..928a80e
+--- /dev/null
++++ b/configs/paths/local.yaml
+@@ -0,0 +1,8 @@
++# @package _global_
++defaults:
++  - _self_
++
++base_mimic: /home/akash/baseline/cdm_work
++base_models: /home/akash/baseline/models
++lab_test_mapping_path: /home/akash/baseline/cdm_work/lab_test_mapping.pkl
++local_logging_dir: /home/akash/baseline/logs
