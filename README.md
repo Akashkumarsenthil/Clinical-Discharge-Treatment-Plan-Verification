@@ -10,6 +10,8 @@ Language models now draft discharge and treatment plans, and the plans read well
 
 The real data is credentialed and cannot be shared, so everything below runs on a **synthetic stand-in** with the same tables and columns (random values, nothing derived from real patients).
 
+Verified from a fresh clone on macOS 15.7.3 (Apple Silicon), Python 3.12.2 and 3.13.7, 2026-11-04 (commit `04acfc4`): every command below exits 0 and 159 tests pass.
+
 Use **Python 3.12 or 3.13** (CI runs 3.12). The pinned pandas 2.2.3 crashes with a segmentation fault on Python 3.14, so create the environment with `python3.12 -m venv .venv` if `python --version` shows 3.14.
 
 ```bash
