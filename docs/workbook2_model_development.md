@@ -10,11 +10,11 @@ We build four models, one in 298A and three in 298B. The reproduced baseline is 
 
 | # | Model | Concept / architecture | Built in | Owner |
 |---|---|---|---|---|
-| 1 | A | An LLM generates the discharge and treatment plan directly. The plan is parsed into the structured form and checked by the Z3 verifier | 298A | Akash |
-| 2 | B | An LLM translates the clinical goals and notes into a formal specification; a solver does the reasoning | 298B | not assigned yet |
-| 3 | C | LLM generation with the solver in the loop: the verifier names the broken rule and returns it to the LLM for repair | 298B | not assigned yet |
-| 4 | D | An LLM paired with a classical PDDL planner | 298B | not assigned yet |
-| — | Reproduced baseline | Hager et al. (2024), autonomous task on 2,400 cases; best open model OASST 70B, 54.9% mean diagnostic accuracy (Fig. 3). It measures diagnosis, not plan validity. A reduced-scale run is done (Llama 3.1 8B, 4-bit, 400 cases, 47.4%; see `baseline_notes.md`) | 298A | Akash |
+| 1 | A | An LLM generates the discharge and treatment plan directly. The plan is parsed into the structured form and checked by the Z3 verifier. The LLM is prompted, with no project fine-tuning | 298A | |
+| 2 | B | An LLM translates the clinical goals and notes into a formal specification; a solver does the reasoning | 298B | |
+| 3 | C | LLM generation with the solver in the loop: the verifier names the broken rule and returns it to the LLM for repair | 298B | |
+| 4 | D | An LLM paired with a classical PDDL planner | 298B | |
+| — | Reproduced baseline | Hager et al. (2024), autonomous task, 2,400 cases in the paper. The best open model, OASST 70B, reaches 54.9% mean diagnostic accuracy (Fig. 3 of the paper). It measures diagnosis, not plan validity. Our reproduction is reduced-scale (see the carry-forward table) | 298A | |
 
 ## 4.2 Model supports: platform and architecture
 
@@ -53,7 +53,7 @@ flowchart LR
 | Language and libraries | Python (runs verified on 3.13.5, GitHub Actions uses 3.12), pandas, numpy, matplotlib, z3-solver 5.3.1, pytest (`requirements.txt`) |
 | Where code is checked | unit tests with `pytest`, run in GitHub Actions on every push |
 | Where data lives | outside the repo, in `~/data/mimic`, and `.gitignore` blocks data files |
-| Where the models run | Local only: one team machine with an NVIDIA RTX 5060 Ti (16 GB) in WSL2. Model A uses Ollama (`qwen2.5:14b`, 4-bit weights) with schema-constrained JSON. Models B–D remain proposed for 298B |
+| Where the models run | local only: one team machine with an NVIDIA RTX 5060 Ti (16 GB) under WSL2. Model A is served by Ollama 0.40.12 as qwen2.5:14b (Q4_K_M, 4-bit weights), with output constrained to a JSON schema. Decoding is greedy (temperature 0, seed 298, 8,192-token context) |
 
 Solid arrows show the implemented Model A path; dashed arrows show proposed 298B extensions or the export of aggregate results. The model receives the allowed clinical input tables, never the record-derived case facts. Rule acceptance is not a clinical safety or completeness guarantee. Platform details: [`team_meeting_2_prep.md`, section 3](team_meeting_2_prep.md#3-deck-notes-8-slides-17--3-minutes).
 
@@ -64,7 +64,7 @@ To reproduce the PNG locally after editing the Mermaid block, extract it to a `.
 | | Model A | Model B | Model C | Model D |
 |---|---|---|---|---|
 | Targeted problem | plain plan generation, the reference for the rest | plans that are faithful to a formal reading of the case | plans that are corrected until they pass the rules | plans that are valid by construction for a planning domain |
-| Input | case history, with exam, labs and imaging requested step by step (Hager et al.) | case text | case text plus verifier feedback | case text plus a domain model |
+| Input | the whole record in one prompt: history, exam, labs, microbiology and radiology, trimmed to an 8,192-token context (the full-information setting of Hager et al.); no discharge diagnosis, ICD codes or case facts | case text | case text plus verifier feedback | case text plus a domain model |
 | Approach | LLM prompting (deep learning) | LLM translation plus a deterministic solver (Logic-LM, SatLM, Faithful-CoT) | LLM plus an external critic in a loop (LLM-Modulo, Logic-LM self-refine) | LLM translation plus a classical planner (LLM+P) |
 | Strength | simplest; closest to the baseline paper; no translation step | the solver does the reasoning, so the explanation matches the answer | uses the rule catalog directly and names the broken rule | the planner's output follows the domain model |
 | Limitation | no correction step; Hager et al. report that LLMs often skip guideline-recommended treatment | translation errors (counted as translation fidelity); the formal language has to cover each diagnosis | can only repair what the rules cover; an unknown fact gives no feedback; costs extra solver calls and generations | needs a clinical planning domain written in PDDL, which does not exist yet and is hard to write |
@@ -103,7 +103,8 @@ Runs use seeds 298, 299 and 300. Missing or unparseable plans count as failures.
 | Escape rate <= 0.05 (abstract) | unchanged | unchanged, measured on independently labelled plans |
 | Human check of the derived case facts (116 cases) | done on 2026-10-27 by one team member: 116 of 116 reviewed, 100% agreement with the extraction. It is a consistency check against the mapping, not an independent clinician review | an independent reviewer, if the team wants a stronger validation |
 | Second review of the rule catalog | still pending (needs a different human from SS) | second reviewer follows `docs/rule_second_review.md` and signs `docs/rule_signoff.md` |
-| Baseline reproduction (Hager et al., 54.9%) | reduced-scale run done (Llama 3.1 8B 4-bit, 400 cases, 47.4% against 54.9%; not like-for-like, see `baseline_notes.md`). The 70B reproduction is not done | Workbook 2 keeps 4.5 and 4.6 as headings, per the template |
+| Baseline reproduction (Hager et al., 54.9%) | reduced-scale run done (Llama 3.1 8B 4-bit, 400 cases, 47.4% against 54.9%; not like-for-like, see `baseline_notes.md`). The 70B reproduction is not done | Workbook 2 keeps 4.5 and 4.6 as headings, per the template. The skipped appendicitis case is explained (a missing value in the reference's procedures field, left unscored). 14 of the 400 baseline cases (2 appendicitis, 9 diverticulitis, 3 pancreatitis) are among the 100 test cases; they were not used to choose cases or tune anything (`baseline_notes.md`) |
+| Three generation seeds (298, 299, 300) | Model A decodes greedily (temperature 0), so the three seeds give identical output and the standard deviation is 0. The metric definitions are unchanged | the team decides before the test run whether to raise the temperature and records it in `docs/model_a_freeze_checklist.md` |
 
 ## Self-assessment and gap register
 
@@ -112,8 +113,8 @@ Ratings are our first guess from the evidence in the notebook and on this page. 
 | Report section | Our rating | If below good: what is missing | Owner | Lands by |
 |---|---|---|---|---|
 | 3.1–3.6 Data engineering | good | none known. Notes and labs are not shown, only case IDs and counts, because the data is credentialed | | |
-| 4.1 Model proposals | poor | owners of Models B, C and D (built in 298B) | | Nov 11, 2026 |
-| 4.2 Model supports | good | PNG exported for Word/slides; Models B–D and their flows remain proposals for 298B | | |
+| 4.1 Model proposals | poor | the owner of each model (table 10.1) | | Nov 11, 2026 |
+| 4.2 Model supports | good | none known. Figure 3 is the architecture figure in `docs/images/model_architecture.png` (PR #10) | Akash | Nov 11, 2026 |
 | 4.3 Comparison | good | the team has not yet reviewed the strengths and limitations in 10.2 | | |
 | 4.4 Evaluation methods | good | label scorer is built (`docs/adjudication_labels.md`); human eligibility/labels still missing, so the escape rate and the 0.85 research goal can't be measured yet | | |
 | References | good | the list is in section 12; add any source the team introduces later | | |

@@ -69,6 +69,10 @@ All four pathologies finished on 11/1 (400 cases, scored with the framework's ow
 
 Read the comparison with care. With 100 cases per pathology the 95% interval on one accuracy is about plus or minus 10 points, and the model, data version and quantization all differ from the paper. A gap does not by itself show that the framework was reproduced wrongly or rightly.
 
+## Overlap with the test split
+
+14 of the 400 baseline cases are also among the 100 test cases of split v2 (2 appendicitis, 0 cholecystitis, 9 diverticulitis, 3 pancreatitis), so all 14 are among the 73 covered cases. The baseline outputs for them come from Llama 3.1 8B in the Hager framework, not from Model A, and stay outside the repository because they contain MIMIC text. The 400 cases were drawn per pathology with seed 298 on 2026-11-01, after split v2 was fixed (2026-10-21). Only accuracy per pathology was computed. Nothing was tuned, selected or decided from these cases, and the blind eligibility reviewer has not seen the outputs. State this overlap in the report.
+
 ## Open checks (optional, before the numbers go into the report)
 
 - [x] Skipped appendicitis case (99 of 100 scored): the model's run finished normally and its answer is well formed. The evaluator failed on the reference side: for that case the converted record's `Procedures Discharge` list holds a missing value (a float NaN), and the evaluator's text step (spaCy) rejects it. It is a data gap in the converted reference, not a model failure, so the case is left unscored rather than counted wrong. Counting it as wrong would lower appendicitis from 74.7% to 74.0%, which does not change any conclusion.
