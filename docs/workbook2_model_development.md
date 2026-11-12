@@ -11,9 +11,9 @@ We build four models, one in 298A and three in 298B. The reproduced baseline is 
 | # | Model | Concept / architecture | Built in | Owner |
 |---|---|---|---|---|
 | 1 | A | An LLM generates the discharge and treatment plan directly. The plan is parsed into the structured form and checked by the Z3 verifier. The LLM is prompted, with no project fine-tuning | 298A | |
-| 2 | B | An LLM translates the clinical goals and notes into a formal specification; a solver does the reasoning | 298B | |
-| 3 | C | LLM generation with the solver in the loop: the verifier names the broken rule and returns it to the LLM for repair | 298B | |
-| 4 | D | An LLM paired with a classical PDDL planner | 298B | |
+| 2 | B | Proposed for 298B. Input: the admission record text (history, examination, labs, microbiology, radiology) and no record-derived facts. Architecture: an LLM turns the record and the clinical goals into a formal specification, a JSON list of constraints on the plan (diagnosis, allowed treatment concepts, required durations) that maps to Z3 terms. Algorithm: a Z3 solver finds a treatment set that satisfies the specification and the rule catalog; the LLM then writes the plan text from the solved set. The result is checked by the same verifier as Model A. | 298B | Rajesh |
+| 3 | C | Proposed for 298B. Input: the same record as Model A. Architecture: Model A's generator plus a repair loop around the Z3 verifier. Algorithm: generate a plan, verify it, return the names and messages of the violated rules to the LLM, and regenerate; stop when no rule is violated or after a fixed number of rounds (proposed: 3). Unknown rule outcomes are not fed back as violations. The final plan is scored by the same verifier as Model A. | 298B | Shruthi (proposed; to confirm) |
+| 4 | D | Proposed for 298B. Input: the same record as Model A. Architecture: an LLM writes the initial state and the goal in PDDL from the record, and a classical planner (for example Fast Downward) searches for an action sequence. Algorithm: the actions are the treatment concepts of the plan schema, with preconditions taken from the rule catalog; the found action sequence is rendered back to the structured plan and checked by Z3. It is the hardest to build, because lab-dependent and conditional rules are hard to write as preconditions. | 298B | Ritika |
 | — | Reproduced baseline | Hager et al. (2024), autonomous task, 2,400 cases in the paper. The best open model, OASST 70B, reaches 54.9% mean diagnostic accuracy (Fig. 3 of the paper). It measures diagnosis, not plan validity. Our reproduction is reduced-scale (see the carry-forward table) | 298A | |
 
 ## 4.2 Model supports: platform and architecture
@@ -113,7 +113,7 @@ Ratings are our first guess from the evidence in the notebook and on this page. 
 | Report section | Our rating | If below good: what is missing | Owner | Lands by |
 |---|---|---|---|---|
 | 3.1–3.6 Data engineering | good | none known. Notes and labs are not shown, only case IDs and counts, because the data is credentialed | | |
-| 4.1 Model proposals | poor | the owner of each model (table 10.1) | | Nov 11, 2026 |
+| 4.1 Model proposals | poor | owners of B, C and D are proposed, not yet confirmed by Rajesh, Shruthi and Ritika; designs are proposals with no implementation or results | Akash | Nov 19, 2026 |
 | 4.2 Model supports | good | none known. Figure 3 is the architecture figure in `docs/images/model_architecture.png` (PR #10) | Akash | Nov 11, 2026 |
 | 4.3 Comparison | good | the team has not yet reviewed the strengths and limitations in 10.2 | | |
 | 4.4 Evaluation methods | good | label scorer is built (`docs/adjudication_labels.md`); human eligibility/labels still missing, so the escape rate and the 0.85 research goal can't be measured yet | | |
