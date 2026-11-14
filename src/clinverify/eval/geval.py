@@ -19,6 +19,7 @@ Note: MIMIC text must NOT be sent to any hosted API. This module uses local Olla
 from __future__ import annotations
 
 import json
+import os
 import statistics
 import urllib.request
 import urllib.error
@@ -26,8 +27,15 @@ from dataclasses import dataclass, field
 from typing import Optional
 
 
-OLLAMA_URL = "http://localhost:11434/api/chat"
 DEFAULT_JUDGE_MODEL = "llama3.1:8b"
+
+
+def ollama_chat_url() -> str:
+    """Local Ollama chat endpoint. OLLAMA_HOST overrides the default so tests can stub the server."""
+    host = os.environ.get("OLLAMA_HOST", "http://localhost:11434").rstrip("/")
+    if not host.startswith("http"):
+        host = "http://" + host
+    return host + "/api/chat"
 
 CRITERIA = {
     "coherence": (
@@ -79,7 +87,7 @@ def _call_ollama(prompt: str, model: str, timeout: int = 60) -> str:
         "options": {"temperature": 0, "num_predict": 4},
     }).encode()
     req = urllib.request.Request(
-        OLLAMA_URL, data=payload, headers={"Content-Type": "application/json"}
+        ollama_chat_url(), data=payload, headers={"Content-Type": "application/json"}
     )
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         data = json.loads(resp.read())

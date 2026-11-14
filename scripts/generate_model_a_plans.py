@@ -143,9 +143,18 @@ def run(args, root: Path):
         inputs = {cid: "Synthetic fixture only; no patient data." for cid in ids}
         client = FakeClient()
     else:
-        ids = cohort_ids(args.cohort, root)
-        # Use only the machine's local server, even if OLLAMA_HOST names a hosted service.
-        client = A.Ollama(args.ollama_model, host="http://127.0.0.1:11434")
+        if args.split_file is not None:
+            splits = json.loads(args.split_file.read_text())["splits"]
+            key = "test" if args.cohort == "test" else "val"
+            ids = [int(h) for h in splits[key]]
+        else:
+            ids = cohort_ids(args.cohort, root)
+        if args.limit is not None:
+            ids = ids[: args.limit]
+        # Default to loopback so a hosted OLLAMA_HOST cannot leak MIMIC text.
+        # Tests may pass --ollama-host to a local stub server.
+        host = args.ollama_host or "http://127.0.0.1:11434"
+        client = A.Ollama(args.ollama_model, host=host)
         inputs = None
     metadata = {"model": client.model, "model_digest": client.digest(), "prompt_sha256": A.prompt_sha256(),
                 "seed": args.seed, "temperature": args.temperature, "top_p": TOP_P, "max_new_tokens": MAX_NEW_TOKENS}
@@ -219,6 +228,11 @@ def main(argv=None, *, root: Path = ROOT):
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--out", type=Path, help="output directory (default results/model_runs/)")
     parser.add_argument("--ollama-model", default="qwen2.5:14b")
+    parser.add_argument("--ollama-host", default=None,
+                        help="Ollama base URL (default http://127.0.0.1:11434; for local stubs/tests only)")
+    parser.add_argument("--split-file", type=Path,
+                        help="alternate split JSON (synthetic tests); skips the frozen protocol split")
+    parser.add_argument("--limit", type=int, help="generate only the first N cohort cases")
     parser.add_argument("--i-confirm-freeze", action="store_true")
     parser.add_argument("--dry-run", action="store_true", help="fake client and invented IDs; never loads real cohort data")
     args = parser.parse_args(argv)

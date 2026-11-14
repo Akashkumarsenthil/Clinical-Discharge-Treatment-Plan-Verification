@@ -1,0 +1,93 @@
+# Airflow on a GCP VM (TA checklist §3). Not Cloud Composer.
+# Local Mac development can keep using `airflow standalone` (docs/airflow_setup.md).
+#
+# On the VM:
+#   1. Put repo at /opt/clinverify and MIMIC working set under MIMIC_DIR
+#   2. export AIRFLOW_UID=50000 MIMIC_DIR=/data/mimic
+#   3. docker compose up airflow-init && docker compose up -d
+#   4. Open http://<vm-ip>:8080 (admin / admin) and unpause clinverify_pipeline
+#
+# Patient text stays on the VM disk (PhysioNet DUA).
+
+x-airflow-common: &airflow-common
+  image: apache/airflow:3.0.2-python3.12
+  environment: &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+    # "admin:admin" = username admin with role admin (not password). Password is in the JSON file.
+    AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_USERS: "admin:admin"
+    AIRFLOW__CORE__SIMPLE_AUTH_MANAGER_PASSWORDS_FILE: /opt/airflow/simple_auth_manager_passwords.json
+    AIRFLOW__API_AUTH__JWT_SECRET: clinverify_jwt_dev_only
+    # Airflow 3 LocalExecutor workers call the api-server execution API
+    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: http://airflow-apiserver:8080/execution/
+    AIRFLOW_VAR_MIMIC_DIR: ${MIMIC_DIR:?set MIMIC_DIR to the VM path that holds the working set}
+    CLINVERIFY_REPO: /opt/clinverify
+    CLINVERIFY_PYTHON: python
+    PYTHONPATH: /opt/clinverify/src
+    # Ollama on the VM host (Compose extra_hosts maps this name)
+    OLLAMA_HOST: http://host.docker.internal:11434
+    # Empty here so the UI starts fast; scheduler sets real deps below
+    _PIP_ADDITIONAL_REQUIREMENTS: ""
+  volumes:
+    - /opt/clinverify:/opt/clinverify
+    - /opt/clinverify/dags:/opt/airflow/dags:ro
+    # Must be writable: SimpleAuthManager opens this with a+ on startup
+    - /opt/clinverify/config/simple_auth_manager_passwords.json:/opt/airflow/simple_auth_manager_passwords.json
+    # RW: DuckDB warehouse writes under MIMIC_DIR/warehouse/
+    - ${MIMIC_DIR}:${MIMIC_DIR}
+  user: "${AIRFLOW_UID:-50000}:0"
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 10s
+      retries: 5
+    restart: unless-stopped
+
+  airflow-init:
+    <<: *airflow-common
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - airflow db migrate
+    restart: "no"
+
+  airflow-apiserver:
+    <<: *airflow-common
+    command: api-server --workers 1
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  airflow-scheduler:
+    <<: *airflow-common
+    environment:
+      <<: *airflow-common-env
+      _PIP_ADDITIONAL_REQUIREMENTS: >-
+        pandas==2.2.3 numpy==2.1.3 matplotlib==3.10.0
+        duckdb==2.0.0 scikit-learn==1.9.1 z3-solver==5.3.1.0
+    command: scheduler
+    restart: unless-stopped
+
+  airflow-dag-processor:
+    <<: *airflow-common
+    command: dag-processor
+    restart: unless-stopped
+
+  airflow-triggerer:
+    <<: *airflow-common
+    command: triggerer
+    restart: unless-stopped

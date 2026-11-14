@@ -114,7 +114,11 @@ def main() -> int:
         "summary": summary,
         "per_case": results,
     }, indent=1))
-    print(f"\nResults written to: {out_path.relative_to(ROOT)}")
+    try:
+        shown = out_path.relative_to(ROOT)
+    except ValueError:
+        shown = out_path
+    print(f"\nResults written to: {shown}")
     return 0
 
 
