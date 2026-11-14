@@ -32,7 +32,7 @@ airflow db migrate
 
 ```bash
 mkdir -p ~/airflow/dags
-ln -sf "$(pwd)/dags/clinverify_pipeline.py" ~/airflow/dags/clinverify_pipeline.py
+ln -sf "$(pwd)/dags/clinverify_pipeline.dag.py" ~/airflow/dags/clinverify_pipeline.dag.py
 ```
 
 Run from the repo root. The symlink means any `git pull` update to the DAG
@@ -46,14 +46,20 @@ ls -la ~/airflow/dags/
 
 ## 4. Set your MIMIC_DIR variable in Airflow
 
-The pipeline scripts read `MIMIC_DIR` to find your local MIMIC data:
+The pipeline scripts read `MIMIC_DIR` to find your local MIMIC data.
+**This step is required** — if unset the variable resolves to an empty string and
+`warehouse_refresh` fails with `FileNotFoundError`.
 
 ```bash
 airflow variables set MIMIC_DIR /path/to/your/mimic
 # e.g. airflow variables set MIMIC_DIR ~/data/mimic
 ```
 
-Default if not set: `~/data/mimic`
+Verify it was saved:
+
+```bash
+airflow variables get MIMIC_DIR
+```
 
 ## 5. Start Airflow (standalone mode)
 
@@ -99,16 +105,27 @@ Or open the UI at `http://localhost:8080` (standalone starts the webserver).
 
 ## Pipeline task chain
 
+Matches TA checklist §3 (`dags/clinverify_pipeline.dag.py`). Validation cohort only.
+
 ```
-warehouse_refresh → generate_plans → verify_plans → run_geval
+validation_only_guard
+  → data_manifest → data_clean → data_missing → data_transform
+  → data_validate → data_eda → data_splits → warehouse
+  → generate_plans → verify_z3 → evaluate_harness → g_eval → report
 ```
 
 | Task | Script | Fails if |
 |------|--------|----------|
-| `warehouse_refresh` | `scripts/run_pipeline.py --trigger airflow` | MIMIC_DIR wrong / DuckDB locked |
-| `generate_plans` | `scripts/generate_model_a_plans.py --cohort validation --seed 298` | Ollama not running / qwen2.5:14b not pulled |
-| `verify_plans` | `scripts/verify_model_plans.py --plans <json>` | Generated plans file missing |
-| `run_geval` | `scripts/run_geval.py --plans <json> --judge-model llama3.1:8b` | llama3.1:8b not pulled |
+| `validation_only_guard` | inline check | cohort is not `validation` |
+| `data_*` | `scripts/data_demo.py <step>` | MIMIC_DIR wrong / tables missing |
+| `warehouse` | `scripts/run_pipeline.py --trigger airflow` | MIMIC_DIR wrong / DuckDB locked |
+| `generate_plans` | `scripts/generate_model_a_plans.py --cohort validation --seed 298` | Ollama not running / `qwen2.5:14b` not pulled |
+| `verify_z3` | `scripts/verify_model_plans.py --plans <json> --cohort validation` | Generated plans file missing |
+| `evaluate_harness` | `scripts/run_eval.py` (catalog labeled plans) | Rule catalog / labeled plans missing |
+| `g_eval` | `scripts/run_geval.py --judge-model llama3.1:8b` | `llama3.1:8b` not pulled |
+| `report` | writes `pipeline_report.json` | Results directory missing |
+
+`scripts/scheduled_pipeline.sh` is retired. For a GCP VM use `docker-compose.yml` instead of Cloud Composer.
 
 ## Scheduled runs
 

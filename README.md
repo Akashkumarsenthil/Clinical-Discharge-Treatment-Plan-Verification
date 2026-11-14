@@ -58,6 +58,7 @@ Runs on synthetic data write to `results/synthetic/` and never touch the real sp
 | see the model proposals, the platform and architecture diagram and the model comparison (Workbook 2, section 4) | [`docs/workbook2_model_development.md`](docs/workbook2_model_development.md) |
 | run everything for Workbook 2 (sections 3.1-4.5: data, stages and splits, case facts, population gaps, rule catalog check, models A and E on the GPU, warehouse demo) | [`notebooks/workbook2.ipynb`](notebooks/workbook2.ipynb); warehouse: `python scripts/run_pipeline.py` |
 | run the live prototype (pick a validation case, see the plan accepted or rejected, inject a fault) | `streamlit run app/demo_app.py` (needs `MIMIC_DIR` data; live generation also needs a local Ollama server). Only validation cases are offered |
+| run the Airflow pipeline (ETL → warehouse → Model A → Z3 → G-Eval, validation only) | [`docs/airflow_setup.md`](docs/airflow_setup.md); DAG: [`dags/clinverify_pipeline.dag.py`](dags/clinverify_pipeline.dag.py). GCP VM: [`docker-compose.yml`](docker-compose.yml). Do **not** use `scripts/scheduled_pipeline.sh` (retired) |
 | follow tasks | Linear links at the end of this page |
 
 ## Human audit of case facts

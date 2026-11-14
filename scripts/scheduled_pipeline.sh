@@ -1,18 +1,13 @@
 #!/bin/bash
-# Scheduled run of the warehouse pipeline, for cron or Windows Task Scheduler (via wsl.exe).
-# Logs every run to $MIMIC_DIR/warehouse/scheduler.log; retries once after 60 s if the run raised an error (exit 2);
-# writes an ALERT line to $MIMIC_DIR/warehouse/alerts.log when the run still fails (a monitor can watch that file).
-# Exit code is the pipeline's: 0 ok, 1 a data-quality check failed, 2 error.
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-export MIMIC_DIR="${MIMIC_DIR:-$HOME/data/mimic}"
-LOGDIR="$MIMIC_DIR/warehouse"; mkdir -p "$LOGDIR"
-stamp() { date '+%Y-%m-%d %H:%M:%S'; }
-run() { "$ROOT/.venv/bin/python" "$ROOT/scripts/run_pipeline.py" --trigger scheduler 2>&1 | tail -n 12 >> "$LOGDIR/scheduler.log"; return "${PIPESTATUS[0]}"; }
-echo "$(stamp) start" >> "$LOGDIR/scheduler.log"
-run; code=$?
-if [ "$code" -eq 2 ]; then
-  echo "$(stamp) error, retrying in 60 s" >> "$LOGDIR/scheduler.log"; sleep 60; run; code=$?
-fi
-echo "$(stamp) finished exit=$code" >> "$LOGDIR/scheduler.log"
-[ "$code" -ne 0 ] && echo "$(stamp) ALERT pipeline exit=$code (see scheduler.log)" >> "$LOGDIR/alerts.log"
-exit "$code"
+# RETIRED (TA checklist §3). Do not schedule this script.
+#
+# The warehouse + Model A + Z3 + G-Eval chain is now the Airflow DAG
+#   dags/clinverify_pipeline.dag.py
+# Run locally with `airflow standalone` (see docs/airflow_setup.md) or on a GCP
+# VM with Docker Compose (docker-compose.yml). Windows Task Scheduler /
+# cron should point at Airflow, not this wrapper.
+#
+# Kept only so old Task Scheduler entries fail loudly instead of silently.
+echo "scheduled_pipeline.sh is retired. Use Airflow DAG clinverify_pipeline." >&2
+echo "See docs/airflow_setup.md and docker-compose.yml." >&2
+exit 2
