@@ -2,15 +2,27 @@
 
 TA checklist §3: Airflow on a GCP VM via Docker Compose — not Cloud Composer.
 
-## Shared team login (UI)
+## Shared team URL + login (UI)
 
-Every teammate uses the **same** credentials — there is no per-person account:
+One Airflow for the whole team — **same VM, same URL pattern, same password**. There is no per-person UI.
 
 | Field | Value |
 |-------|--------|
-| URL | `http://<EXTERNAL_IP>:8080` (IP from the `gcloud … describe` command below) |
-| Username | `admin` |
-| Password | `admin` |
+| GCP project | `clinverify-298a` |
+| VM name | `clinverify-airflow` (zone `us-west1-b`) |
+| URL | `http://<EXTERNAL_IP>:8080` — **shared**; get the current IP with the command below |
+| Username | `admin` (shared) |
+| Password | `admin` (shared) |
+
+```bash
+# Current shared UI address (IP changes after every VM stop/start):
+gcloud compute instances describe clinverify-airflow \
+  --project=clinverify-298a --zone=us-west1-b \
+  --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
+# Then open http://THAT_IP:8080
+```
+
+Example while a run is live: `http://136.87.113.132:8080` (only valid until the next stop/start).
 
 Airflow 3 Simple auth: `SIMPLE_AUTH_MANAGER_USERS=admin:admin` means user **admin** with role **admin** (the second `admin` is the *role*, not the password). The password is fixed in [`config/simple_auth_manager_passwords.json`](../config/simple_auth_manager_passwords.json) as `{"admin": "admin"}`.
 
