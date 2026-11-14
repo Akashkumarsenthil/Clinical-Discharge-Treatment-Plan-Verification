@@ -105,7 +105,8 @@ Or open the UI at `http://localhost:8080` (standalone starts the webserver).
 
 ## Pipeline task chain
 
-Matches TA checklist §3 (`dags/clinverify_pipeline.dag.py`). Validation cohort only.
+Canonical DAG file: `dags/clinverify_pipeline.dag.py` (TA checklist §3).
+Every model/eval step is **validation-split only**.
 
 ```
 validation_only_guard
@@ -116,16 +117,17 @@ validation_only_guard
 
 | Task | Script | Fails if |
 |------|--------|----------|
-| `validation_only_guard` | inline check | cohort is not `validation` |
+| `validation_only_guard` | built-in check | cohort is not `validation` |
 | `data_*` | `scripts/data_demo.py <step>` | MIMIC_DIR wrong / tables missing |
 | `warehouse` | `scripts/run_pipeline.py --trigger airflow` | MIMIC_DIR wrong / DuckDB locked |
-| `generate_plans` | `scripts/generate_model_a_plans.py --cohort validation --seed 298` | Ollama not running / `qwen2.5:14b` not pulled |
+| `generate_plans` | `scripts/generate_model_a_plans.py --cohort validation --seed 298` | Ollama not running / qwen2.5:14b not pulled |
 | `verify_z3` | `scripts/verify_model_plans.py --plans <json> --cohort validation` | Generated plans file missing |
-| `evaluate_harness` | `scripts/run_eval.py` (catalog labeled plans) | Rule catalog / labeled plans missing |
-| `g_eval` | `scripts/run_geval.py --judge-model llama3.1:8b` | `llama3.1:8b` not pulled |
-| `report` | writes `pipeline_report.json` | Results directory missing |
+| `evaluate_harness` | `scripts/run_eval.py` (catalog labeled plans) | catalog / labeled plans missing |
+| `g_eval` | `scripts/run_geval.py --judge-model llama3.1:8b` | llama3.1:8b not pulled |
+| `report` | writes `pipeline_report.json` | results dir missing |
 
-`scripts/scheduled_pipeline.sh` is retired. For a GCP VM use `docker-compose.yml` instead of Cloud Composer.
+`scripts/scheduled_pipeline.sh` and Windows Task Scheduler are **retired**. Use Airflow.
+For a GCP VM deploy package see `docker-compose.yml`.
 
 ## Scheduled runs
 

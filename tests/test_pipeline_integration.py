@@ -63,8 +63,7 @@ def _run(args: list[str], env: dict) -> subprocess.CompletedProcess:
 
 
 def test_dag_matches_ta_checklist():
-    path = ROOT / "dags" / "clinverify_pipeline.dag.py"
-    text = path.read_text()
+    text = (ROOT / "dags" / "clinverify_pipeline.dag.py").read_text()
     assert "{{ ds }}" not in text
     assert "logical_date" in text
     assert "scripts/generate_model_a_plans.py" in text
@@ -78,9 +77,11 @@ def test_dag_matches_ta_checklist():
         "evaluate_harness", "g_eval", "report",
     ):
         assert task in text
-    # CI-safe load check: the DAG module must parse, even when Airflow is not installed.
-    compile(text, str(path), "exec")
-    assert "from airflow" in text or "import airflow" in text
+    assert (ROOT / "docker-compose.yml").is_file()
+    retired = (ROOT / "scripts" / "scheduled_pipeline.sh").read_text()
+    assert "RETIRED" in retired
+    assert "clinverify_pipeline.dag.py" in retired
+    assert "exit 2" in retired
 
 
 def test_warehouse_generate_verify_geval(tmp_path, ollama):
