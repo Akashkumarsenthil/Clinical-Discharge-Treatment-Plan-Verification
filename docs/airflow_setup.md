@@ -127,7 +127,8 @@ validation_only_guard
 | `report` | writes `pipeline_report.json` | results dir missing |
 
 `scripts/scheduled_pipeline.sh` and Windows Task Scheduler are **retired**. Use Airflow.
-For a GCP VM deploy package see `docker-compose.yml`.
+For a GCP VM deploy package see `docker-compose.yml` and **`docs/airflow_cloud.md`**
+(shared team UI login: **admin** / **admin**).
 
 ## Scheduled runs
 

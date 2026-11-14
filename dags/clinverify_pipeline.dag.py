@@ -20,8 +20,16 @@ from pathlib import Path
 from airflow.models.dag import DAG
 from airflow.providers.standard.operators.bash import BashOperator
 
-REPO = str(Path(__file__).resolve().parents[1])
-VENV = os.path.join(REPO, ".venv", "bin", "python")
+# Local standalone: DAG lives in <repo>/dags → parents[1] is the repo.
+# Docker Compose on the GCP VM: set CLINVERIFY_REPO=/opt/clinverify (mounted RW).
+_REPO_DEFAULT = str(Path(__file__).resolve().parents[1])
+REPO = os.environ.get("CLINVERIFY_REPO", _REPO_DEFAULT)
+
+_venv_python = os.path.join(REPO, ".venv", "bin", "python")
+PYTHON = os.environ.get(
+    "CLINVERIFY_PYTHON",
+    _venv_python if Path(_venv_python).exists() else "python",
+)
 
 # Never change this to "test" in the DAG. The guard task refuses anything else.
 COHORT = "validation"
@@ -41,6 +49,8 @@ TASK_ENV = {
     "MIMIC_DIR": "{{ var.value.get('MIMIC_DIR', '') }}",
     "PATH": os.environ.get("PATH", ""),
     "CLINVERIFY_COHORT": COHORT,
+    "OLLAMA_HOST": os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434"),
+    "PYTHONPATH": os.path.join(REPO, "src"),
 }
 
 default_args = {
@@ -55,7 +65,7 @@ def _bash(cmd: str) -> str:
 
 
 def _py(script_and_args: str) -> str:
-    return _bash(f"{VENV!r} {script_and_args}")
+    return _bash(f"{PYTHON!r} {script_and_args}")
 
 
 with DAG(
@@ -132,7 +142,7 @@ with DAG(
     report = BashOperator(
         task_id="report",
         bash_command=_bash(
-            f"{VENV!r} - <<'PY'\n"
+            f"{PYTHON!r} - <<'PY'\n"
             "import json\n"
             "from pathlib import Path\n"
             f"out = Path({RESULTS_DIR!r})\n"
