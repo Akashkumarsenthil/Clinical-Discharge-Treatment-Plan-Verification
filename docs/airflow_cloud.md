@@ -86,6 +86,7 @@ curl -fsSL https://ollama.com/install.sh | sh
 ollama serve   # or enable the systemd service
 ollama pull qwen2.5:14b
 ollama pull llama3.1:8b
+ollama pull nomic-embed-text   # RAG embedder (plan §2 / §6)
 ```
 
 Compose maps `host.docker.internal` → the VM host so containers reach Ollama on port 11434.
