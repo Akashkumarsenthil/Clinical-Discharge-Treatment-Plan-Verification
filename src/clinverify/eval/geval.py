@@ -138,7 +138,8 @@ def batch_score(
 ) -> list[dict]:
     """Score a list of plan dicts. Each dict must have 'plan_text' and 'case_context'.
 
-    Returns list of dicts with original fields plus 'geval_scores' and 'geval_composite'.
+    Uses case_context only in memory for the judge call. Returned / saved rows never
+    include case_context (MIMIC notes stay off disk in results JSON).
     """
     out = []
     for item in plans:
@@ -146,12 +147,15 @@ def batch_score(
             item["plan_text"], item.get("case_context", ""),
             judge_model=judge_model, timeout=timeout,
         )
-        out.append({
-            **item,
+        row = {
+            "plan_text": item.get("plan_text"),
             "geval_scores": res.scores,
             "geval_composite": res.composite,
             "geval_error": res.error,
-        })
+        }
+        if "case_id" in item:
+            row["case_id"] = item["case_id"]
+        out.append(row)
     return out
 
 
