@@ -77,3 +77,14 @@ def test_cli_writes_aggregate_summary_without_text(tmp_path):
     assert out["plans"]["supported_checked_acceptance_rate"] == 0.25
     assert out["generation"] == {"model": "synthetic", "seed": 298}
     assert "antibiotics" not in json.dumps(out)
+
+
+def test_macro_f1_matches_sklearn_definition_when_available():
+    sklearn = pytest.importorskip("sklearn.metrics")
+    import random
+    rng = random.Random(298)
+    labels = list(S.DIAGNOSES)
+    y_true = [rng.choice(labels) for _ in range(200)]
+    y_pred = [rng.choice(labels + ["missing", "gastritis"]) for _ in range(200)]
+    expected = sklearn.f1_score(y_true, y_pred, labels=labels, average="macro", zero_division=0)
+    assert S.macro_f1(y_true, y_pred) == pytest.approx(expected)

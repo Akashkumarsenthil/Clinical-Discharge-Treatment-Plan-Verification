@@ -31,10 +31,20 @@ VERIFY_KEYS = (
 )
 
 
+def macro_f1(y_true: list[str], y_pred: list[str], labels=DIAGNOSES) -> float:
+    """Unweighted mean F1 over the given labels (same as sklearn's average="macro" with labels= and zero_division=0).
+    A prediction outside the labels, such as "missing", is only a false negative for the true class."""
+    scores = []
+    for c in labels:
+        tp = sum(t == c and p == c for t, p in zip(y_true, y_pred))
+        fp = sum(t != c and p == c for t, p in zip(y_true, y_pred))
+        fn = sum(t == c and p != c for t, p in zip(y_true, y_pred))
+        scores.append(2 * tp / (2 * tp + fp + fn) if tp else 0.0)
+    return sum(scores) / len(scores)
+
+
 def diagnosis_metrics(predicted: dict[int, str], reference: dict[int, str]) -> dict:
     """Accuracy, macro F1 and per-pathology recall over the reference cases; absent predictions count as wrong."""
-    from sklearn.metrics import f1_score
-
     ids = sorted(reference)
     if not ids:
         return {"n": 0, "accuracy": None, "macro_f1": None, "n_missing": 0, "per_pathology": {}}
@@ -47,8 +57,7 @@ def diagnosis_metrics(predicted: dict[int, str], reference: dict[int, str]) -> d
     return {
         "n": len(ids),
         "accuracy": sum(t == p for t, p in zip(y_true, y_pred)) / len(ids),
-        # labels= keeps the four pathologies fixed, so "missing" or an off-list answer only costs recall.
-        "macro_f1": float(f1_score(y_true, y_pred, labels=list(DIAGNOSES), average="macro", zero_division=0)),
+        "macro_f1": macro_f1(y_true, y_pred),
         "n_missing": sum(p == MISSING for p in y_pred),
         "per_pathology": per,
     }
