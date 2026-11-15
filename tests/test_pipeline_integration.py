@@ -69,11 +69,14 @@ def test_dag_matches_ta_checklist():
     assert "scripts/generate_model_a_plans.py" in text
     assert "scripts/data_demo.py" in text
     assert "scripts/run_eval.py" in text
+    assert "scripts/summarize_model_run.py" in text
+    assert "tests/data/catalog_labeled_plans.json" not in text.split("evaluate_harness = BashOperator(")[1].split("verifier_regression")[0]
+    assert "warehouse >> verifier_regression >> generate_plans >> verify_z3 >> evaluate_harness" in text
     assert "validation_only_guard" in text
     assert 'COHORT = "validation"' in text
     for task in (
         "data_manifest", "data_clean", "data_missing", "data_transform", "data_validate",
-        "data_eda", "data_splits", "warehouse", "generate_plans", "verify_z3",
+        "data_eda", "data_splits", "warehouse", "verifier_regression", "generate_plans", "verify_z3",
         "evaluate_harness", "g_eval", "report",
     ):
         assert task in text
@@ -131,6 +134,15 @@ def test_warehouse_generate_verify_geval(tmp_path, ollama):
     )
     assert verified.returncode == 0, verified.stderr
     assert '"n_plans": 2' in verified.stdout
+
+    summarized = _run(
+        ["scripts/summarize_model_run.py", "--plans", str(plans), "--verify-dir", str(tmp_path / "verify"),
+         "--cohort", "pilot", "--out", str(out)],
+        env,
+    )
+    assert summarized.returncode == 0, summarized.stderr
+    summary = json.loads((out / "evaluation_summary.json").read_text())
+    assert summary["diagnosis"]["n"] == 2 and summary["plans"]["n_plans"] == 2
 
     judged = _run(
         ["scripts/run_geval.py", "--plans", str(plans), "--judge-model", "llama3.1:8b", "--out", str(tmp_path / "geval")],

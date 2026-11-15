@@ -112,7 +112,7 @@ Every model/eval step is **validation-split only**.
 validation_only_guard
   → data_manifest → data_clean → data_missing → data_transform
   → data_validate → data_eda → data_splits → warehouse
-  → generate_plans → verify_z3 → evaluate_harness → g_eval → report
+  → verifier_regression → generate_plans → verify_z3 → evaluate_harness → g_eval → report
 ```
 
 | Task | Script | Fails if |
@@ -120,9 +120,10 @@ validation_only_guard
 | `validation_only_guard` | built-in check | cohort is not `validation` |
 | `data_*` | `scripts/data_demo.py <step>` | MIMIC_DIR wrong / tables missing |
 | `warehouse` | `scripts/run_pipeline.py --trigger airflow` | MIMIC_DIR wrong / DuckDB locked |
+| `verifier_regression` | `scripts/run_eval.py` on `tests/data/catalog_labeled_plans.json` (synthetic labeled plans) | the verifier no longer catches the known violations; runs before generation so no GPU time is spent |
 | `generate_plans` | `scripts/generate_model_a_plans.py --cohort validation --seed 298` | Ollama not running / qwen2.5:14b not pulled |
-| `verify_z3` | `scripts/verify_model_plans.py --plans <json> --cohort validation` | Generated plans file missing |
-| `evaluate_harness` | `scripts/run_eval.py` (catalog labeled plans) | catalog / labeled plans missing |
+| `verify_z3` | `scripts/verify_model_plans.py --plans <json> --cohort validation --generation-metadata <json>` | Generated plans file missing |
+| `evaluate_harness` | `scripts/summarize_model_run.py`: diagnosis accuracy, macro F1, per-pathology recall + checked acceptance, joint success, verdicts → `evaluation_summary.json` | plans or verifier run missing |
 | `g_eval` | `scripts/run_geval.py --judge-model llama3.1:8b` | llama3.1:8b not pulled |
 | `report` | writes `pipeline_report.json` | results dir missing |
 

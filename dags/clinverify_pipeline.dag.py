@@ -43,6 +43,7 @@ RUN_DAY = (
 )
 RESULTS_DIR = os.path.join(REPO, "results", "model_runs", "airflow_runs", RUN_DAY)
 PLANS_JSON = os.path.join(RESULTS_DIR, "model_a_qwen2.5_14b_val_seed298.json")
+PLANS_META = os.path.join(RESULTS_DIR, "model_a_qwen2.5_14b_val_seed298.metadata.json")
 REPORT_JSON = os.path.join(RESULTS_DIR, "pipeline_report.json")
 
 TASK_ENV = {
@@ -118,17 +119,29 @@ with DAG(
     verify_z3 = BashOperator(
         task_id="verify_z3",
         bash_command=_py(
-            f"scripts/verify_model_plans.py --plans {PLANS_JSON!r} --cohort {COHORT} --out {RESULTS_DIR!r}"
+            f"scripts/verify_model_plans.py --plans {PLANS_JSON!r} --cohort {COHORT} "
+            f"--generation-metadata {PLANS_META!r} --out {RESULTS_DIR!r}"
         ),
         env=TASK_ENV,
     )
+    # Evaluation of this run: diagnosis metrics from the generated plans plus the verifier's plan metrics.
     evaluate_harness = BashOperator(
         task_id="evaluate_harness",
+        bash_command=_py(
+            f"scripts/summarize_model_run.py --plans {PLANS_JSON!r} --verify-dir {RESULTS_DIR!r} "
+            f"--cohort {COHORT} --out {RESULTS_DIR!r}"
+        ),
+        env=TASK_ENV,
+    )
+    # Verifier regression on the synthetic labeled plans; runs before generation so a broken verifier
+    # fails the DAG before any GPU time is spent.
+    verifier_regression = BashOperator(
+        task_id="verifier_regression",
         bash_command=_py(
             "scripts/run_eval.py "
             "--plans tests/data/catalog_labeled_plans.json "
             "--rules clinverify.rules.catalog --seed 298 "
-            f"--out {RESULTS_DIR!r}"
+            f"--out {os.path.join(RESULTS_DIR, 'verifier_regression')!r}"
         ),
         env=TASK_ENV,
     )
@@ -155,6 +168,7 @@ with DAG(
             "  'plans_file': str(plans) if plans.exists() else None,\n"
             "  'n_plans': len(json.loads(plans.read_text())) if plans.exists() else 0,\n"
             "  'artifacts': sorted(p.name for p in out.glob('*') if p.is_file()),\n"
+            "  'evaluation': json.loads((out / 'evaluation_summary.json').read_text()) if (out / 'evaluation_summary.json').exists() else None,\n"
             "}\n"
             f"path = Path({REPORT_JSON!r})\n"
             "path.parent.mkdir(parents=True, exist_ok=True)\n"
@@ -167,4 +181,4 @@ with DAG(
 
     validation_only_guard >> data_manifest >> data_clean >> data_missing >> data_transform
     data_transform >> data_validate >> data_eda >> data_splits >> warehouse
-    warehouse >> generate_plans >> verify_z3 >> evaluate_harness >> g_eval >> report
+    warehouse >> verifier_regression >> generate_plans >> verify_z3 >> evaluate_harness >> g_eval >> report
