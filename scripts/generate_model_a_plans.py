@@ -151,9 +151,12 @@ def run(args, root: Path):
             ids = cohort_ids(args.cohort, root)
         if args.limit is not None:
             ids = ids[: args.limit]
-        # Default to loopback so a hosted OLLAMA_HOST cannot leak MIMIC text.
-        # Tests may pass --ollama-host to a local stub server.
-        host = args.ollama_host or "http://127.0.0.1:11434"
+        # Default to loopback; the OLLAMA_HOST environment variable is ignored so it cannot redirect MIMIC text.
+        # --ollama-host may name only this machine or the Docker host (Airflow on the VM passes host.docker.internal).
+        try:
+            host = A.local_ollama_host(args.ollama_host or "http://127.0.0.1:11434")
+        except ValueError as err:
+            raise ConfigurationError(str(err)) from err
         client = A.Ollama(args.ollama_model, host=host)
         inputs = None
     metadata = {"model": client.model, "model_digest": client.digest(), "prompt_sha256": A.prompt_sha256(),
@@ -229,7 +232,8 @@ def main(argv=None, *, root: Path = ROOT):
     parser.add_argument("--out", type=Path, help="output directory (default results/model_runs/)")
     parser.add_argument("--ollama-model", default="qwen2.5:14b")
     parser.add_argument("--ollama-host", default=None,
-                        help="Ollama base URL (default http://127.0.0.1:11434; for local stubs/tests only)")
+                        help="local Ollama base URL (default http://127.0.0.1:11434); only 127.0.0.1, localhost, ::1 "
+                             "or host.docker.internal are accepted")
     parser.add_argument("--split-file", type=Path,
                         help="alternate split JSON (synthetic tests); skips the frozen protocol split")
     parser.add_argument("--limit", type=int, help="generate only the first N cohort cases")

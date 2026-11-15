@@ -191,3 +191,49 @@ def test_cli_dry_run_works_from_another_directory_without_dataset_or_ollama(tmp_
     assert "DRY RUN" in result.stdout
     journal = next((tmp_path / "out/dry_run").glob("*.jsonl"))
     assert len(A.load_plans(journal)) == 3
+
+
+@pytest.mark.parametrize("url, expected", [
+    ("http://127.0.0.1:11434", "http://127.0.0.1:11434"),
+    ("localhost:11434/", "http://localhost:11434"),
+    ("http://[::1]:11434", "http://[::1]:11434"),
+    ("http://host.docker.internal:11434", "http://host.docker.internal:11434"),
+])
+def test_local_ollama_hosts_are_accepted(url, expected):
+    assert A.local_ollama_host(url) == expected
+
+
+@pytest.mark.parametrize("url", [
+    "https://must-not-send-records.example",
+    "http://10.0.0.5:11434",
+    "http://localhost.example.com:11434",
+    "http://user:pw@localhost:11434",
+    "http://localhost:11434/proxy",
+    "ftp://localhost:11434",
+    "",
+])
+def test_non_local_ollama_hosts_are_refused(url):
+    with pytest.raises(ValueError):
+        A.local_ollama_host(url)
+
+
+def test_remote_ollama_host_flag_is_refused_before_any_request(frozen_root, monkeypatch, capsys):
+    monkeypatch.setattr(G, "cohort_ids", lambda cohort, root: [101])
+    monkeypatch.setattr(A, "Ollama", lambda *a, **k: pytest.fail("client must not be built for a remote host"))
+    with pytest.raises(SystemExit):
+        G.main(["--ollama-host", "https://must-not-send-records.example"], root=frozen_root)
+    assert "must be local" in capsys.readouterr().err
+
+
+def test_docker_host_flag_reaches_client(frozen_root, monkeypatch):
+    hosts = []
+    class LocalStub(G.FakeClient):
+        def __init__(self, model, host):
+            self.model = model
+            hosts.append(host)
+    monkeypatch.setattr(G, "cohort_ids", lambda cohort, root: [101])
+    monkeypatch.setattr(G, "local_inputs", lambda wanted: {cid: "Synthetic fixture only." for cid in wanted})
+    monkeypatch.setattr(A, "Ollama", LocalStub)
+    assert G.main(["--ollama-model", "synthetic-model", "--ollama-host", "http://host.docker.internal:11434"],
+                  root=frozen_root) == 0
+    assert hosts == ["http://host.docker.internal:11434"]
