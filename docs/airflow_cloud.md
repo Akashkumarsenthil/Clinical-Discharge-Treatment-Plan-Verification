@@ -10,23 +10,24 @@ One Airflow for the whole team — **same VM, same URL pattern, same password**.
 |-------|--------|
 | GCP project | `clinverify-298a` |
 | VM name | `clinverify-airflow` (zone `us-west1-b`) |
-| URL | `http://<EXTERNAL_IP>:8080` — **shared**; get the current IP with the command below |
+| URL | `http://localhost:8080` through an IAP tunnel (port 8080 is **not** open to the internet) |
 | Username | `admin` (shared) |
 | Password | `admin` (shared) |
 
 ```bash
-# Current shared UI address (IP changes after every VM stop/start):
-gcloud compute instances describe clinverify-airflow \
-  --project=clinverify-298a --zone=us-west1-b \
-  --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
-# Then open http://THAT_IP:8080
+# Open the shared UI (needs roles/iap.tunnelResourceAccessor; keep this terminal open):
+gcloud compute start-iap-tunnel clinverify-airflow 8080 \
+  --local-host-port=localhost:8080 \
+  --project=clinverify-298a --zone=us-west1-b
+# Then open http://localhost:8080
 ```
 
-Example while a run is live: `http://136.87.113.132:8080` (only valid until the next stop/start).
+The firewall rule `allow-airflow-8080` admits only Google's IAP range (`35.235.240.0/20`), so the UI is reachable
+only through the tunnel by project members. The VM holds MIMIC data; do not reopen 8080 to `0.0.0.0/0`.
 
 Airflow 3 Simple auth: `SIMPLE_AUTH_MANAGER_USERS=admin:admin` means user **admin** with role **admin** (the second `admin` is the *role*, not the password). The password is fixed in [`config/simple_auth_manager_passwords.json`](../config/simple_auth_manager_passwords.json) as `{"admin": "admin"}`.
 
-Class/demo only: port 8080 is open while the VM runs — **stop the VM** when you are done so it is not left on the public internet.
+**Stop the VM** when you are done (cost, and nothing left running with MIMIC data on it).
 
 ## One-time layout on the VM
 
@@ -52,14 +53,9 @@ gcloud compute instances start clinverify-airflow \
 gcloud compute ssh clinverify-airflow \
   --project=clinverify-298a --zone=us-west1-b \
   --command='cd /opt/clinverify && docker compose up -d'
-
-# External IP (changes after stop/start):
-gcloud compute instances describe clinverify-airflow \
-  --project=clinverify-298a --zone=us-west1-b \
-  --format='get(networkInterfaces[0].accessConfigs[0].natIP)'
 ```
 
-Open `http://<EXTERNAL_IP>:8080` and sign in with the **shared** team login above (`admin` / `admin`).
+Open the IAP tunnel (above), then `http://localhost:8080`, and sign in with the **shared** team login above (`admin` / `admin`).
 
 Unpause and trigger:
 
