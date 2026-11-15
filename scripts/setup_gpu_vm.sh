@@ -72,6 +72,17 @@ for r in json.load(sys.stdin):
   [ "$dtype" != pd-standard ] || echo "BLOCKER       pd-standard boot disks are not supported on G2 machines"
 }
 
+# Machine type and maintenance policy must change together: E2 refuses TERMINATE and G2 (built-in GPU) refuses
+# MIGRATE, so neither single-field command works. Export the instance, edit both fields, apply in one update.
+switch_machine() {
+  local type=$1 policy=$2 tmp; tmp=$(mktemp)
+  g compute instances export "$VM" --zone="$ZONE" --destination="$tmp" >/dev/null 2>&1
+  sed -i.bak -e "s|/machineTypes/[a-z0-9-]*|/machineTypes/$type|" -e "s|onHostMaintenance: [A-Z]*|onHostMaintenance: $policy|" "$tmp"
+  grep -q "machineTypes/$type" "$tmp" && grep -q "onHostMaintenance: $policy" "$tmp" || die "could not edit the exported instance"
+  run g compute instances update-from-file "$VM" --zone="$ZONE" --source="$tmp" --most-disruptive-allowed-action=RESTART
+  rm -f "$tmp" "$tmp.bak"
+}
+
 to_gpu() {
   local quota disk dtype size
   quota=$(gpu_quota)
@@ -82,12 +93,10 @@ to_gpu() {
   [ "$dtype" != pd-standard ] || die "boot disk $disk is pd-standard, which G2 machines do not support"
   if [ "$size" -lt "$DISK_GB" ]; then
     say "Resizing boot disk $disk from ${size} GB to ${DISK_GB} GB (cannot be shrunk later)"
-    run g compute disks resize "$disk" --zone="$ZONE" --size="${DISK_GB}GB" --quiet
+    run g compute disks resize "$disk" --zone="$ZONE" --size="${DISK_GB}GB" --quiet --format=none
   fi
-  say "GPU VMs cannot live-migrate: setting maintenance policy to TERMINATE"
-  run g compute instances set-scheduling "$VM" --zone="$ZONE" --maintenance-policy=TERMINATE
-  say "Changing $VM to $GPU_MACHINE (1x NVIDIA L4, about \$0.70/hour while running)"
-  run g compute instances set-machine-type "$VM" --zone="$ZONE" --machine-type="$GPU_MACHINE"
+  say "Changing $VM to $GPU_MACHINE (1x NVIDIA L4, about \$0.70/hour while running), maintenance policy TERMINATE"
+  switch_machine "$GPU_MACHINE" TERMINATE
   cat <<EOF
 
 Done. Next:
@@ -101,8 +110,7 @@ EOF
 to_cpu() {
   require_stopped
   say "Changing $VM back to $CPU_MACHINE"
-  run g compute instances set-machine-type "$VM" --zone="$ZONE" --machine-type="$CPU_MACHINE"
-  run g compute instances set-scheduling "$VM" --zone="$ZONE" --maintenance-policy=MIGRATE
+  switch_machine "$CPU_MACHINE" MIGRATE
 }
 
 host() {
