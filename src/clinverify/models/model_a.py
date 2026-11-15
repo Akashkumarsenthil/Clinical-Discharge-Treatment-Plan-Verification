@@ -15,6 +15,7 @@ import hashlib
 import json
 import os
 import time
+import urllib.parse
 import urllib.request
 from pathlib import Path
 from typing import Iterable, Optional
@@ -101,6 +102,25 @@ def case_inputs(transformed: dict[str, pd.DataFrame], hadm_ids: Optional[Iterabl
 
 
 # ------------------------------------------------------------------------------------------------ Ollama client
+# This machine, or the Docker host as seen from an Airflow container (Compose maps host.docker.internal).
+LOCAL_OLLAMA_HOSTS = frozenset({"127.0.0.1", "localhost", "::1", "host.docker.internal"})
+
+
+def local_ollama_host(url: str) -> str:
+    """Normalise an Ollama base URL and refuse any server that is not on this machine or its Docker host.
+
+    MIMIC text must never reach a hosted service, so a remote URL is an error rather than a silent fallback.
+    """
+    base = url.strip().rstrip("/")
+    if "://" not in base:
+        base = "http://" + base
+    parts = urllib.parse.urlsplit(base)
+    if (parts.scheme not in ("http", "https") or parts.hostname not in LOCAL_OLLAMA_HOSTS
+            or parts.username or parts.password or parts.path or parts.query or parts.fragment):
+        raise ValueError(f"Ollama host must be local ({', '.join(sorted(LOCAL_OLLAMA_HOSTS))}); refusing {parts.hostname!r}")
+    return base
+
+
 class Ollama:
     """Minimal client for a local Ollama server (stdlib only)."""
 

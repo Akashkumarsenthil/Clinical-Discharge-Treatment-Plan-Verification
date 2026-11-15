@@ -31,11 +31,9 @@ DEFAULT_JUDGE_MODEL = "llama3.1:8b"
 
 
 def ollama_chat_url() -> str:
-    """Local Ollama chat endpoint. OLLAMA_HOST overrides the default so tests can stub the server."""
-    host = os.environ.get("OLLAMA_HOST", "http://localhost:11434").rstrip("/")
-    if not host.startswith("http"):
-        host = "http://" + host
-    return host + "/api/chat"
+    """Local Ollama chat endpoint. OLLAMA_HOST may point at this machine or the Docker host only (tests use a stub)."""
+    from clinverify.models.model_a import local_ollama_host
+    return local_ollama_host(os.environ.get("OLLAMA_HOST", "http://localhost:11434")) + "/api/chat"
 
 CRITERIA = {
     "coherence": (

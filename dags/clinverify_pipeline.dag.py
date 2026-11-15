@@ -108,7 +108,9 @@ with DAG(
             f"mkdir -p {RESULTS_DIR!r} && "
             + _py(
                 "scripts/generate_model_a_plans.py "
-                f"--cohort {COHORT} --seed 298 --out {RESULTS_DIR!r}"
+                f"--cohort {COHORT} --seed 298 --out {RESULTS_DIR!r} "
+                # In Compose this is host.docker.internal (Ollama on the VM host); the script refuses non-local hosts.
+                '--ollama-host "$OLLAMA_HOST"'
             )
         ),
         env=TASK_ENV,
