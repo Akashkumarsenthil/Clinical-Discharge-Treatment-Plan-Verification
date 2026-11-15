@@ -12,3 +12,5 @@
 | Cloud VM | Same pull after Ollama install (see `docs/airflow_cloud.md`) |
 
 Do not switch embed models mid-ablation without a new freeze note and a rebuilt DuckDB RAG index.
+
+Guideline text to embed (collected, no MIMIC): [`data/guidelines/`](../data/guidelines/SOURCES.md).

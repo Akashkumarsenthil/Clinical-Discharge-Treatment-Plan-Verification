@@ -1,0 +1,17 @@
+# WSES25 — 2025 WSES Jerusalem guidelines for acute appendicitis (ABSTRACT ONLY)
+# Citation: Podda M. et al. (2026). JAMA Surg 161:283-295. doi:10.1001/jamasurg.2025.6218
+# Access: abstract only in catalog / this corpus (full text paywalled). Do not claim full-text read.
+# Catalog short name: WSES25
+# Used by rules: R-APP-003
+# No MIMIC / patient text.
+# Abstract URL: https://jamanetwork.com/journals/jamasurgery/article-abstract/2844195
+
+IMPORTANCE Acute appendicitis is the most common abdominal surgical emergency worldwide and a leading cause of emergency hospital admissions and operations. Despite its frequency, substantial variability persists in diagnosis and management across patient populations and health care settings.
+
+OBJECTIVE To provide updated, evidence-based recommendations for the diagnosis and treatment of acute appendicitis in adults, children, pregnant women, older patients (aged ≥65 years), immunocompromised individuals, and patients with obesity (body mass index ≥30), developed by the World Society of Emergency Surgery (WSES) using the Grading of Recommendations Assessment, Development, and Evaluation (GRADE) approach.
+
+EVIDENCE REVIEW A systematic literature search was performed in MEDLINE, Embase, Scopus, Web of Science, and the Cochrane Library to identify relevant studies published until May 2025. Eligible designs included randomized clinical trials, observational studies, systematic reviews, and meta-analyses. Risk of bias was assessed with design-appropriate tools (RoB-2, ROBINS-I, QUADAS-2). Evidence profiles and evidence-to-decision frameworks were generated for each of 19 key clinical questions. The certainty of evidence was rated as high, moderate, low, or very low. Recommendations were classified as strong or conditional (weak) according to GRADE.
+
+FINDINGS Six key clinical domains were addressed across 19 questions. Thirty-five recommendations were formulated. Key findings include: (1) clinical risk scores and imaging improve diagnostic accuracy and reduce negative appendectomy rates; (2) nonoperative management with antibiotics is safe and effective in selected patients with uncomplicated appendicitis, with recommendations tailored for specific populations; (3) appendectomy for uncomplicated appendicitis may be safely delayed within 24 hours without increased risk of adverse outcomes; (4) laparoscopic appendectomy remains the standard surgical approach; (5) postoperative antibiotic therapy should be limited to short courses (2-3 days) in complicated disease; and (6) follow-up strategies are essential after nonoperative management of complicated appendicitis with abscess to detect neoplasms.
+
+CONCLUSIONS AND RELEVANCE The 2025 WSES Jerusalem Guidelines provide updated, evidence-based recommendations for the diagnosis and treatment of acute appendicitis with the aim to standardize practice, reduce unwarranted variability, and support safe, effective, and patient-centered care across diverse populations and health care systems. Their implementation should be adapted to local resources.
