@@ -40,6 +40,7 @@ def no_real_generation(monkeypatch):
         pytest.fail("test touched the real cohort, patient data, or Ollama")
     monkeypatch.setattr(G, "cohort_ids", forbidden)
     monkeypatch.setattr(G, "local_inputs", forbidden)
+    monkeypatch.setattr(G, "warehouse_inputs", forbidden)
     monkeypatch.setattr(A, "Ollama", forbidden)
 
 
@@ -161,6 +162,7 @@ def test_validation_path_uses_selected_inputs_and_loopback_client(frozen_root, m
             hosts.append(host)
     monkeypatch.setattr(G, "cohort_ids", cohort)
     monkeypatch.setattr(G, "local_inputs", inputs)
+    monkeypatch.setattr(G, "warehouse_inputs", lambda *a, **k: pytest.fail("csv path must not hit warehouse"))
     monkeypatch.setattr(A, "Ollama", LocalStub)
     monkeypatch.setenv("OLLAMA_HOST", "https://must-not-send-records.example")
     assert G.main(["--ollama-model", "synthetic-model"], root=frozen_root) == 0
@@ -168,6 +170,48 @@ def test_validation_path_uses_selected_inputs_and_loopback_client(frozen_root, m
     journal = next((frozen_root / "results/model_runs").glob("*.jsonl"))
     assert [p["case_id"] for p in A.load_plans(journal)] == ids
     assert json.loads(journal.with_suffix(".metadata.json").read_text())["model"] == "synthetic-model"
+    assert json.loads(journal.with_suffix(".run.json").read_text())["input_source"] == "csv"
+
+
+def test_warehouse_inputs_reads_mart_without_printing_text(tmp_path):
+    duckdb = pytest.importorskip("duckdb")
+    db = tmp_path / "clinverify.duckdb"
+    con = duckdb.connect(str(db))
+    con.execute("CREATE SCHEMA mart")
+    con.execute("CREATE TABLE mart.model_inputs (hadm_id BIGINT, model_input VARCHAR)")
+    con.execute("INSERT INTO mart.model_inputs VALUES (101, 'Synthetic fixture A.'), (102, 'Synthetic fixture B.')")
+    con.close()
+    inputs = G.warehouse_inputs([101, 102], db)
+    assert inputs == {101: "Synthetic fixture A.", 102: "Synthetic fixture B."}
+    with pytest.raises(G.ConfigurationError, match="incomplete"):
+        G.warehouse_inputs([101, 999], db)
+    with pytest.raises(G.ConfigurationError, match="missing"):
+        G.warehouse_inputs([101], tmp_path / "absent.duckdb")
+
+
+def test_from_warehouse_path_uses_warehouse_inputs(frozen_root, monkeypatch, tmp_path):
+    ids = [101, 102]
+    selected = []
+    def cohort(cohort, root):
+        return ids
+    def from_wh(wanted, db_path=None):
+        selected.extend(wanted)
+        assert db_path == tmp_path / "clinverify.duckdb"
+        return {cid: "Synthetic fixture only." for cid in wanted}
+    class LocalStub(G.FakeClient):
+        def __init__(self, model, host):
+            self.model = model
+    monkeypatch.setattr(G, "cohort_ids", cohort)
+    monkeypatch.setattr(G, "warehouse_inputs", from_wh)
+    monkeypatch.setattr(G, "local_inputs", lambda *a, **k: pytest.fail("warehouse path must not hit csv"))
+    monkeypatch.setattr(A, "Ollama", LocalStub)
+    assert G.main(
+        ["--from-warehouse", "--warehouse-db", str(tmp_path / "clinverify.duckdb"), "--ollama-model", "synthetic-model"],
+        root=frozen_root,
+    ) == 0
+    assert selected == ids
+    journal = next((frozen_root / "results/model_runs").glob("*.jsonl"))
+    assert json.loads(journal.with_suffix(".run.json").read_text())["input_source"] == "warehouse"
 
 
 def test_generation_errors_do_not_echo_record_text(frozen_root, monkeypatch, capsys):

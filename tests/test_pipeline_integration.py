@@ -67,6 +67,7 @@ def test_dag_matches_ta_checklist():
     assert "{{ ds }}" not in text
     assert "logical_date" in text
     assert "scripts/generate_model_a_plans.py" in text
+    assert "--from-warehouse" in text
     assert "scripts/data_demo.py" in text
     assert "scripts/run_eval.py" in text
     assert "validation_only_guard" in text
@@ -114,6 +115,8 @@ def test_warehouse_generate_verify_geval(tmp_path, ollama):
             "--limit", "2",
             "--split-file", str(split_file),
             "--out", str(out),
+            "--from-warehouse",
+            "--warehouse-db", str(tmp_path / "wh.duckdb"),
             "--ollama-model", "qwen2.5:14b",
             "--ollama-host", ollama,
         ],

@@ -108,7 +108,7 @@ with DAG(
             f"mkdir -p {RESULTS_DIR!r} && "
             + _py(
                 "scripts/generate_model_a_plans.py "
-                f"--cohort {COHORT} --seed 298 --out {RESULTS_DIR!r}"
+                f"--cohort {COHORT} --seed 298 --out {RESULTS_DIR!r} --from-warehouse"
             )
         ),
         env=TASK_ENV,
