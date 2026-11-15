@@ -21,6 +21,7 @@ Requires:
     - MIMIC_DIR set or ~/data/mimic present (for clinical context)
 
 Output: results/geval/<timestamp>_<plans_stem>.json
+(per-case rows omit case_context; clinical notes are not written to disk).
 """
 from __future__ import annotations
 
