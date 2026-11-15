@@ -16,6 +16,8 @@
 
 Do **not** change the judge prompt, criteria text, or default model without a new freeze note and a new four-way table column version. MIMIC / clinical notes must never go to a hosted API.
 
+Saved G-Eval JSON (`batch_score` / `run_geval.py`) keeps scores and `plan_text` / `case_id` only — **`case_context` is not written** to results files (used in memory for judging only).
+
 ## Smoke evidence (no patient text)
 
 - Plans: warehouse smoke, 2 validation cases (`qwen2.5:14b`, seed 298)
