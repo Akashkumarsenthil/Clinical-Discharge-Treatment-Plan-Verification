@@ -6,5 +6,6 @@ Patient files are not stored in this folder. Both datasets live in `~/data/mimic
 - MIMIC-IV v3.1 — used only to confirm those admissions exist
 
 - splits/   case-ID lists only (no patient text)
+- guidelines/  public guideline text for RAG (no MIMIC); see `guidelines/SOURCES.md`
 
 Never send MIMIC text to a hosted LLM API. Clear notebook outputs before sharing the notebook.
