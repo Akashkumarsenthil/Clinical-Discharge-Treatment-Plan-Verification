@@ -42,10 +42,12 @@ data/*.zip
 data/*.gz
 data/*.csv-*
 
-# Anything else put in data/ (dataset copies, downloads) stays local: only the README and split IDs are tracked
+# Anything else put in data/ (dataset copies, downloads) stays local: only the README, split IDs, and public guideline corpus are tracked
 data/*
 !data/README.md
 !data/splits/
+!data/guidelines/
+!data/guidelines/**
 
 # DuckDB warehouse built from MIMIC data: never commit (PhysioNet DUA)
 warehouse/

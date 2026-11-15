@@ -1,0 +1,3764 @@
+# ILATAM — Ibero-Latin American guidelines on acute pancreatitis (iLATAM-AP)
+# Citation: Cárdenas-Jaén K. et al. (2026). United European Gastroenterol J 14:e70190. doi:10.1002/ueg2.70190
+# Access: open access (PMC13240590). License: CC BY-NC-ND 4.0 (see PMC).
+# Catalog short name: ILATAM
+# Used by rules: R-PAN-001 … R-PAN-005
+# No MIMIC / patient text.
+# Source URL: https://pmc.ncbi.nlm.nih.gov/articles/PMC13240590/
+
+- 
+ 
+
+ - 
+- 
+ 
+
+ 
+ 
+ 
+
+ 
+
+ 
+ - 
+ - 
+ - 
+ - 
+ - 
+ - 
+ 
+ 
+ 
+
+ 
+ AEG‐AESPANC‐OPGE‐SIED‐SPG Ibero‐Latin American Guidelines on Acute Pancreatitis (iLATAM‐AP) - PMC
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ - 
+
+ 
+ - 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+- 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Skip to main content
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ An official website of the United States government
+ 
+
+ Here's how you know 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ Here's how you know 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ Official websites use .gov 
+ 
+
+ A
+ .gov website belongs to an official
+ government organization in the United States.
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ Secure .gov websites use HTTPS 
+ 
+
+ A lock (
+ 
+ 
+ Lock 
+ 
+ Locked padlock icon
+ 
+ 
+ 
+ ) or https:// means you've safely
+ connected to the .gov website. Share sensitive
+ information only on official, secure websites.
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+
+ Search
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+
+ Log in 
+
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ - 
+ 
+ 
+
+ 
+ 
+
+ 
+ Dashboard
+ 
+
+ 
+ 
+
+ 
+ 
+ - 
+ 
+ 
+
+ 
+ 
+
+ 
+ Publications
+ 
+
+ 
+ 
+
+ 
+ 
+ - 
+ 
+ 
+
+ 
+ 
+
+ 
+ Account settings
+ 
+
+ 
+ 
+
+ 
+ 
+ - 
+ 
+
+ 
+ 
+ 
+ 
+
+ Log out
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ Search…
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ Search NCBI
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ Primary site navigation
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Search
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Logged in as:
+ 
+ 
+
+ 
+ 
+ - 
+ 
+
+ 
+ 
+
+ 
+ Dashboard
+ 
+
+ 
+ 
+
+ 
+ 
+ - 
+ 
+
+ 
+ 
+
+ 
+ Publications
+ 
+
+ 
+ 
+
+ 
+ 
+ - 
+ 
+
+ 
+ 
+
+ 
+ Account settings
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ Log in
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ Search PMC Full-Text Archive 
+ 
+ 
+ 
+ 
+ Search in PMC 
+ 
+ 
+ 
+ 
+ 
+ - 
+ 
+ 
+ Journal List
+ 
+ 
+ 
+ - 
+ 
+ 
+ User Guide
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ - 
+ 
+ 
+ 
+ 
+ 
+ - 
+ 
+ 
+ 
+ 
+ 
+ 
+ - 
+ 
+
+ 
+ 
+ 
+ 
+ - 
+ 
+ 
+ 
+ 
+ 
+ 
+ - 
+ 
+ 
+ 
+ 
+ 
+ - 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ PERMALINK
+
+ 
+ 
+ 
+ 
+ Copy 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ As a library, NLM provides access to scientific literature. Inclusion in an NLM database does not imply endorsement of, or agreement with,
+ the contents by NLM or the National Institutes of Health.
+
+ Learn more:
+ PMC Disclaimer 
+ |
+ 
+ PMC Copyright Notice
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ United European Gastroenterol J . 2026 May 30;14(5):e70190. doi: 10.1002/ueg2.70190 
+ 
+ 
+- Search in PMC 
+- Search in PubMed 
+- View in NLM Catalog 
+- Add to search 
+ 
+ AEG‐AESPANC‐OPGE‐SIED‐SPG Ibero‐Latin American Guidelines on Acute Pancreatitis (iLATAM‐AP)
+
+ 
+ Karina Cárdenas‐Jaén 
+ Karina Cárdenas‐Jaén 
+
+ 
+ 
+ 1 
+ Department of Gastroenterology, Dr. Balmis University General Hospital, Alicante, Spain 
+ 
+ 
+ 2 
+ Alicante Institute for Health and Biomedical Research (ISABIAL), Alicante, Spain 
+ Find articles by Karina Cárdenas‐Jaén 
+ 
+ 
+ 1, 2 , Lucía Guilabert 
+ Lucía Guilabert 
+
+ 
+ 
+ 1 
+ Department of Gastroenterology, Dr. Balmis University General Hospital, Alicante, Spain 
+ 
+ 
+ 2 
+ Alicante Institute for Health and Biomedical Research (ISABIAL), Alicante, Spain 
+ Find articles by Lucía Guilabert 
+ 
+ 
+ 1, 2 , Emma Martínez‐Moneo 
+ Emma Martínez‐Moneo 
+
+ 
+ 
+ 3 
+ Department of Gastroenterology, Cruces University Hospital, Barakaldo, Spain 
+ Find articles by Emma Martínez‐Moneo 
+ 
+ 
+ 3 , Carla Mancilla 
+ Carla Mancilla 
+
+ 
+ 
+ 4 
+ Gastroenterology Section and Critical Care Unit, Clinical Hospital, University of Chile, Santiago, Chile 
+ Find articles by Carla Mancilla 
+ 
+ 
+ 4 , Miguel Bispo 
+ Miguel Bispo 
+
+ 
+ 
+ 5 
+ Department of Gastroenterology, Digestive Oncology Unit, Champalimaud Foundation, Lisbon, Portugal 
+ Find articles by Miguel Bispo 
+ 
+ 
+ 5 , Pedro Moutinho‐Ribeiro 
+ Pedro Moutinho‐Ribeiro 
+
+ 
+ 
+ 6 
+ Department of Gastroenterology and Hepatology, São João University Hospital Center, World Gastroenterology Organization (WGO) Porto Training Center, Porto, Portugal 
+ Find articles by Pedro Moutinho‐Ribeiro 
+ 
+ 
+ 6 , Rodrigo Mansilla 
+ Rodrigo Mansilla 
+
+ 
+ 
+ 7 
+ Endoscopy Unit, Puerto Montt Hospital, San Sebastián University Patagonia Campus, Puerto Montt, Chile 
+ Find articles by Rodrigo Mansilla 
+ 
+ 
+ 7 , Andreia Rei 
+ Andreia Rei 
+
+ 
+ 
+ 8 
+ Department of Gastroenterology, Unidade Local de Santo António (ULSSA), Porto, Portugal 
+ Find articles by Andreia Rei 
+ 
+ 
+ 8 , Ana García García de Paredes 
+ Ana García García de Paredes 
+
+ 
+ 
+ 9 
+ Department of Gastroenterology and Hepatology, Ramon y Cajal University Hospital, Madrid, Spain 
+ 
+ 
+ 10 
+ University of Alcalá, Ramon y Cajal Institute for Health Research (IRYCIS), Madrid, Spain 
+ 
+ 
+ 11 
+ Biomedical Research Center in Liver and Digestive Diseases (CIBERehd), Carlos III Health Institute, Madrid, Spain 
+ Find articles by Ana García García de Paredes 
+ 
+ 
+ 9, 10, 11 , Antonio López‐Serrano 
+ Antonio López‐Serrano 
+
+ 
+ 
+ 12 
+ Department of Digestive Medicine, Dr. Peset University Hospital, Valencia, Spain 
+ 
+ 
+ 13 
+ University of Valencia, Valencia, Spain 
+ Find articles by Antonio López‐Serrano 
+ 
+ 
+ 12, 13 , Bruno Rosa 
+ Bruno Rosa 
+
+ 
+ 
+ 14 
+ Department of Gastroenterology, Senhora da Oliveira Hospital ‐ Guimarães, Guimarães, Portugal 
+ Find articles by Bruno Rosa 
+ 
+ 
+ 14 , Claudia Sánchez‐Marín 
+ Claudia Sánchez‐Marín 
+
+ 
+ 
+ 15 
+ Department of Gastroenterology and Hepatology, Marqués de Valdecilla University Hospital, Santander, Spain 
+ 
+ 
+ 16 
+ Clinical and Translational Research Group in Digestive Diseases, Valdecilla Research Institute (IDIVAL), Santander, Spain 
+ Find articles by Claudia Sánchez‐Marín 
+ 
+ 
+ 15, 16 , Daniel de la Iglesia 
+ Daniel de la Iglesia 
+
+ 
+ 
+ 17 
+ Department of Gastroenterology, Biliary‐Pancreatic Unit, Puerta de Hierro University Hospital, Madrid, Spain 
+ Find articles by Daniel de la Iglesia 
+ 
+ 
+ 17 , Edson Guzmán‐Calderon 
+ Edson Guzmán‐Calderon 
+
+ 
+ 
+ 18 
+ Gastroenterology Unit, Edgardo Rebagliati Martins National Hospital, Lima, Peru 
+ 
+ 
+ 19 
+ Peruvian University of Applied Sciences (UPC), Lima, Peru 
+ 
+ 
+ 20 
+ Gastroenterology Unit, Angloamerican Clinic, Lima, Peru 
+ Find articles by Edson Guzmán‐Calderon 
+ 
+ 
+ 18, 19, 20 , Eduardo Rodrigues‐Pinto 
+ Eduardo Rodrigues‐Pinto 
+
+ 
+ 
+ 6 
+ Department of Gastroenterology and Hepatology, São João University Hospital Center, World Gastroenterology Organization (WGO) Porto Training Center, Porto, Portugal 
+ Find articles by Eduardo Rodrigues‐Pinto 
+ 
+ 
+ 6 , Eva Marín‐Serrano 
+ Eva Marín‐Serrano 
+
+ 
+ 
+ 21 
+ Department of Gastroenterology, Biliary‐Pancreatic Unit, La Paz Hospital, Madrid, Spain 
+ Find articles by Eva Marín‐Serrano 
+ 
+ 
+ 21 , Fabio Ausania 
+ Fabio Ausania 
+
+ 
+ 
+ 22 
+ Hepato‐Biliary‐Pancreatic and Transplant Surgery Department, Hospital Clínic of Barcelona, IDIBAPS, University of Barcelona, Barcelona, Spain 
+ Find articles by Fabio Ausania 
+ 
+ 
+ 22 , Fauze Maluf‐Filho 
+ Fauze Maluf‐Filho 
+
+ 
+ 
+ 23 
+ Endoscopy Unit, Department of Gastroenterology, Cancer Institute of São Paulo, Hospital das Clínicas, Medical School of the University of São Paulo, CNPq Researcher, São Paulo, Brazil 
+ Find articles by Fauze Maluf‐Filho 
+ 
+ 
+ 23 , Guido Villagómez 
+ Guido Villagómez 
+
+ 
+ 
+ 24 
+ Endoscopy Unit, Bolivian‐Japanese Institute of Gastroenterology, La Paz, Bolivia 
+ Find articles by Guido Villagómez 
+ 
+ 
+ 24 , Humberto Cristino 
+ Humberto Cristino 
+
+ 
+ 
+ 25 
+ Hepato‐Biliary‐Pancreatic and Splenic Unit, General Surgery Department, São João University Medical Center, Porto, Portugal 
+ Find articles by Humberto Cristino 
+ 
+ 
+ 25 , Isabel Pascual‐Moreno 
+ Isabel Pascual‐Moreno 
+
+ 
+ 
+ 26 
+ Department of Digestive Medicine, Clinical University Hospital of Valencia, Valencia, Spain 
+ Find articles by Isabel Pascual‐Moreno 
+ 
+ 
+ 26 , José A Gonzalez 
+ José A Gonzalez 
+
+ 
+ 
+ 27 
+ Department of Internal Medicine/Gastroenterology and Endoscopy Service, School of Medicine and University Hospital “Dr. E. González”, Autonomous University of Nuevo León, Monterrey, Mexico 
+ Find articles by José A Gonzalez 
+ 
+ 
+ 27 , José M Ramia 
+ José M Ramia 
+
+ 
+ 
+ 2 
+ Alicante Institute for Health and Biomedical Research (ISABIAL), Alicante, Spain 
+ 
+ 
+ 28 
+ Department of General and Digestive Surgery, Dr. Balmis University General Hospital, Alicante, Spain 
+ Find articles by José M Ramia 
+ 
+ 
+ 2, 28 , João Lopes‐Delgado 
+ João Lopes‐Delgado 
+
+ 
+ 
+ 29 
+ Intensive Care Service, São Francisco Xavier Hospital, Lisbon, Portugal 
+ Find articles by João Lopes‐Delgado 
+ 
+ 
+ 29 , Lucas Granero 
+ Lucas Granero 
+
+ 
+ 
+ 30 
+ Department of Surgery, Hepato‐Biliary‐Pancreatic Surgery Section, San Roque Hospital, Córdoba, Argentina 
+ 
+ 
+ 31 
+ Department of Surgery, Hepatobiliary and Pancreatic Surgery Section, Sanatorio Allende, Córdoba, Argentina 
+ Find articles by Lucas Granero 
+ 
+ 
+ 30, 31 , Mario Peláez‐Luna 
+ Mario Peláez‐Luna 
+
+ 
+ 
+ 32 
+ Research Division, School of Medicine, National Autonomous University of Mexico, Mexico City, Mexico 
+ 
+ 
+ 33 
+ Department of Gastroenterology, National Institute of Medical Sciences and Nutrition Salvador Zubirán, Mexico City, Mexico 
+ Find articles by Mario Peláez‐Luna 
+ 
+ 
+ 32, 33 , María Francisco 
+ María Francisco 
+
+ 
+ 
+ 34 
+ Department of Digestive Diseases, Ourense University Hospital Complex, Ourense, Spain 
+ Find articles by María Francisco 
+ 
+ 
+ 34 , Natalia Corzo‐Zamora 
+ Natalia Corzo‐Zamora 
+
+ 
+ 
+ 35 
+ Department of Gastroenterology, Bolivian‐Japanese Institute of Gastroenterology, Cochabamba, Bolivia 
+ Find articles by Natalia Corzo‐Zamora 
+ 
+ 
+ 35 , Ricardo Rio‐Tinto 
+ Ricardo Rio‐Tinto 
+
+ 
+ 
+ 5 
+ Department of Gastroenterology, Digestive Oncology Unit, Champalimaud Foundation, Lisbon, Portugal 
+ Find articles by Ricardo Rio‐Tinto 
+ 
+ 
+ 5 , Rómulo D Vargas 
+ Rómulo D Vargas 
+
+ 
+ 
+ 36 
+ Gastroenterology Unit, San Ignacio University Hospital, Javeriana University, Bogotá, Colombia 
+ Find articles by Rómulo D Vargas 
+ 
+ 
+ 36 , Sandra Basso 
+ Sandra Basso 
+
+ 
+ 
+ 37 
+ Pancreatic Diseases Section, Department of Clinical Gastroenterology, Hospital C.B. Udaondo, Buenos Aires, Argentina 
+ Find articles by Sandra Basso 
+ 
+ 
+ 37 , Susana Lopes 
+ Susana Lopes 
+
+ 
+ 
+ 6 
+ Department of Gastroenterology and Hepatology, São João University Hospital Center, World Gastroenterology Organization (WGO) Porto Training Center, Porto, Portugal 
+ Find articles by Susana Lopes 
+ 
+ 
+ 6 , Susana Marques 
+ Susana Marques 
+
+ 
+ 
+ 5 
+ Department of Gastroenterology, Digestive Oncology Unit, Champalimaud Foundation, Lisbon, Portugal 
+ Find articles by Susana Marques 
+ 
+ 
+ 5 , William Manzanares 
+ William Manzanares 
+
+ 
+ 
+ 38 
+ Academic Unit of Intensive Care Medicine, Hospital de Clínicas, School of Medicine, University of the Republic, Montevideo, Uruguay 
+ Find articles by William Manzanares 
+ 
+ 
+ 38 , Zoltán Berger 
+ Zoltán Berger 
+
+ 
+ 
+ 39 
+ Gastroenterology Section, Department of Medicine, Clinical Hospital, University of Chile, Santiago, Chile 
+ Find articles by Zoltán Berger 
+ 
+ 
+ 39 , Irene Carrillo 
+ Irene Carrillo 
+
+ 
+ 
+ 40 
+ Department of Health Psychology, Miguel Hernández University, Elche, Spain 
+ Find articles by Irene Carrillo 
+ 
+ 
+ 40 , José Joaquín Mira‐Solves 
+ José Joaquín Mira‐Solves 
+
+ 
+ 
+ 40 
+ Department of Health Psychology, Miguel Hernández University, Elche, Spain 
+ Find articles by José Joaquín Mira‐Solves 
+ 
+ 
+ 40 , Alberto Espino 
+ Alberto Espino 
+
+ 
+ 
+ 41 
+ Department of Gastroenterology, School of Medicine, Pontificia Universidad Católica de Chile, Santiago, Chile 
+ Find articles by Alberto Espino 
+ 
+ 
+ 41 , Adriana Cowdin 
+ Adriana Cowdin 
+
+ 
+ 
+ 42 
+ The National Pancreas Foundation, Bethesda, Maryland, USA 
+ Find articles by Adriana Cowdin 
+ 
+ 
+ 42 , Alejandro Piscoya 
+ Alejandro Piscoya 
+
+ 
+ 
+ 43 
+ Director, School of Medicine, Universidad Tecnológica del Perú (UTP), Lima, Peru 
+ Find articles by Alejandro Piscoya 
+ 
+ 
+ 43 , Alexandra Fernandes 
+ Alexandra Fernandes 
+
+ 
+ 
+ 44 
+ Department of Gastroenterology, Local Health Unit of the Leiria Region, Leiria, Portugal 
+ Find articles by Alexandra Fernandes 
+ 
+ 
+ 44 , Noelia Rodríguez‐Ferreiro 
+ Noelia Rodríguez‐Ferreiro 
+
+ 
+ 
+ 45 
+ Department of Gastroenterology, Central University Hospital of Asturias, Oviedo, Spain 
+ Find articles by Noelia Rodríguez‐Ferreiro 
+ 
+ 
+ 45 , Neftalí Jara Pérez‐López 
+ Neftalí Jara Pérez‐López 
+
+ 
+ 
+ 1 
+ Department of Gastroenterology, Dr. Balmis University General Hospital, Alicante, Spain 
+ 
+ 
+ 2 
+ Alicante Institute for Health and Biomedical Research (ISABIAL), Alicante, Spain 
+ Find articles by Neftalí Jara Pérez‐López 
+ 
+ 
+ 1, 2 , Beatriz Valero 
+ Beatriz Valero 
+
+ 
+ 
+ 46 
+ Department of Internal Medicine, Dr. Balmis University General Hospital, Alicante, Spain 
+ Find articles by Beatriz Valero 
+ 
+ 
+ 46 , Enrique de‐Madaria 
+ Enrique de‐Madaria 
+
+ 
+ 
+ 1 
+ Department of Gastroenterology, Dr. Balmis University General Hospital, Alicante, Spain 
+ 
+ 
+ 2 
+ Alicante Institute for Health and Biomedical Research (ISABIAL), Alicante, Spain 
+ 
+ 
+ 11 
+ Biomedical Research Center in Liver and Digestive Diseases (CIBERehd), Carlos III Health Institute, Madrid, Spain 
+ 
+ 
+ 47 
+ Department of Clinical Medicine, Faculty of Medicine, Miguel Hernández University, Elche, Spain 
+ Find articles by Enrique de‐Madaria 
+ 
+ 
+ 1, 2, 11, 47, ✉ 
+ 
+ 
+- Author information 
+- Article notes 
+- Copyright and License information 
+ 
+ 
+ 
+ 
+ 
+ 1 
+ Department of Gastroenterology, Dr. Balmis University General Hospital, Alicante, Spain 
+ 
+ 
+ 2 
+ Alicante Institute for Health and Biomedical Research (ISABIAL), Alicante, Spain 
+ 
+ 
+ 3 
+ Department of Gastroenterology, Cruces University Hospital, Barakaldo, Spain 
+ 
+ 
+ 4 
+ Gastroenterology Section and Critical Care Unit, Clinical Hospital, University of Chile, Santiago, Chile 
+ 
+ 
+ 5 
+ Department of Gastroenterology, Digestive Oncology Unit, Champalimaud Foundation, Lisbon, Portugal 
+ 
+ 
+ 6 
+ Department of Gastroenterology and Hepatology, São João University Hospital Center, World Gastroenterology Organization (WGO) Porto Training Center, Porto, Portugal 
+ 
+ 
+ 7 
+ Endoscopy Unit, Puerto Montt Hospital, San Sebastián University Patagonia Campus, Puerto Montt, Chile 
+ 
+ 
+ 8 
+ Department of Gastroenterology, Unidade Local de Santo António (ULSSA), Porto, Portugal 
+ 
+ 
+ 9 
+ Department of Gastroenterology and Hepatology, Ramon y Cajal University Hospital, Madrid, Spain 
+ 
+ 
+ 10 
+ University of Alcalá, Ramon y Cajal Institute for Health Research (IRYCIS), Madrid, Spain 
+ 
+ 
+ 11 
+ Biomedical Research Center in Liver and Digestive Diseases (CIBERehd), Carlos III Health Institute, Madrid, Spain 
+ 
+ 
+ 12 
+ Department of Digestive Medicine, Dr. Peset University Hospital, Valencia, Spain 
+ 
+ 
+ 13 
+ University of Valencia, Valencia, Spain 
+ 
+ 
+ 14 
+ Department of Gastroenterology, Senhora da Oliveira Hospital ‐ Guimarães, Guimarães, Portugal 
+ 
+ 
+ 15 
+ Department of Gastroenterology and Hepatology, Marqués de Valdecilla University Hospital, Santander, Spain 
+ 
+ 
+ 16 
+ Clinical and Translational Research Group in Digestive Diseases, Valdecilla Research Institute (IDIVAL), Santander, Spain 
+ 
+ 
+ 17 
+ Department of Gastroenterology, Biliary‐Pancreatic Unit, Puerta de Hierro University Hospital, Madrid, Spain 
+ 
+ 
+ 18 
+ Gastroenterology Unit, Edgardo Rebagliati Martins National Hospital, Lima, Peru 
+ 
+ 
+ 19 
+ Peruvian University of Applied Sciences (UPC), Lima, Peru 
+ 
+ 
+ 20 
+ Gastroenterology Unit, Angloamerican Clinic, Lima, Peru 
+ 
+ 
+ 21 
+ Department of Gastroenterology, Biliary‐Pancreatic Unit, La Paz Hospital, Madrid, Spain 
+ 
+ 
+ 22 
+ Hepato‐Biliary‐Pancreatic and Transplant Surgery Department, Hospital Clínic of Barcelona, IDIBAPS, University of Barcelona, Barcelona, Spain 
+ 
+ 
+ 23 
+ Endoscopy Unit, Department of Gastroenterology, Cancer Institute of São Paulo, Hospital das Clínicas, Medical School of the University of São Paulo, CNPq Researcher, São Paulo, Brazil 
+ 
+ 
+ 24 
+ Endoscopy Unit, Bolivian‐Japanese Institute of Gastroenterology, La Paz, Bolivia 
+ 
+ 
+ 25 
+ Hepato‐Biliary‐Pancreatic and Splenic Unit, General Surgery Department, São João University Medical Center, Porto, Portugal 
+ 
+ 
+ 26 
+ Department of Digestive Medicine, Clinical University Hospital of Valencia, Valencia, Spain 
+ 
+ 
+ 27 
+ Department of Internal Medicine/Gastroenterology and Endoscopy Service, School of Medicine and University Hospital “Dr. E. González”, Autonomous University of Nuevo León, Monterrey, Mexico 
+ 
+ 
+ 28 
+ Department of General and Digestive Surgery, Dr. Balmis University General Hospital, Alicante, Spain 
+ 
+ 
+ 29 
+ Intensive Care Service, São Francisco Xavier Hospital, Lisbon, Portugal 
+ 
+ 
+ 30 
+ Department of Surgery, Hepato‐Biliary‐Pancreatic Surgery Section, San Roque Hospital, Córdoba, Argentina 
+ 
+ 
+ 31 
+ Department of Surgery, Hepatobiliary and Pancreatic Surgery Section, Sanatorio Allende, Córdoba, Argentina 
+ 
+ 
+ 32 
+ Research Division, School of Medicine, National Autonomous University of Mexico, Mexico City, Mexico 
+ 
+ 
+ 33 
+ Department of Gastroenterology, National Institute of Medical Sciences and Nutrition Salvador Zubirán, Mexico City, Mexico 
+ 
+ 
+ 34 
+ Department of Digestive Diseases, Ourense University Hospital Complex, Ourense, Spain 
+ 
+ 
+ 35 
+ Department of Gastroenterology, Bolivian‐Japanese Institute of Gastroenterology, Cochabamba, Bolivia 
+ 
+ 
+ 36 
+ Gastroenterology Unit, San Ignacio University Hospital, Javeriana University, Bogotá, Colombia 
+ 
+ 
+ 37 
+ Pancreatic Diseases Section, Department of Clinical Gastroenterology, Hospital C.B. Udaondo, Buenos Aires, Argentina 
+ 
+ 
+ 38 
+ Academic Unit of Intensive Care Medicine, Hospital de Clínicas, School of Medicine, University of the Republic, Montevideo, Uruguay 
+ 
+ 
+ 39 
+ Gastroenterology Section, Department of Medicine, Clinical Hospital, University of Chile, Santiago, Chile 
+ 
+ 
+ 40 
+ Department of Health Psychology, Miguel Hernández University, Elche, Spain 
+ 
+ 
+ 41 
+ Department of Gastroenterology, School of Medicine, Pontificia Universidad Católica de Chile, Santiago, Chile 
+ 
+ 
+ 42 
+ The National Pancreas Foundation, Bethesda, Maryland, USA 
+ 
+ 
+ 43 
+ Director, School of Medicine, Universidad Tecnológica del Perú (UTP), Lima, Peru 
+ 
+ 
+ 44 
+ Department of Gastroenterology, Local Health Unit of the Leiria Region, Leiria, Portugal 
+ 
+ 
+ 45 
+ Department of Gastroenterology, Central University Hospital of Asturias, Oviedo, Spain 
+ 
+ 
+ 46 
+ Department of Internal Medicine, Dr. Balmis University General Hospital, Alicante, Spain 
+ 
+ 
+ 47 
+ Department of Clinical Medicine, Faculty of Medicine, Miguel Hernández University, Elche, Spain 
+ 
+ 
+ * 
+
+ Correspondence: Enrique de‐Madaria, 
+( enriquedemadaria@gmail.com )
+
+ 
+ 
+ ✉ Corresponding author.
+
+ 
+ 
+ 
+ Revised 2026 Jan 20; Received 2025 Sep 17; Accepted 2026 Feb 12; Collection date 2026 Jun.
+
+ 
+ 
+ © 2026 The Author(s). United European Gastroenterology Journal published by Wiley Periodicals LLC on behalf of United European Gastroenterology. 
+ This is an open access article under the terms of the http://creativecommons.org/licenses/by-nc-nd/4.0/ License, which permits use and distribution in any medium, provided the original work is properly cited, the use is non‐commercial and no modifications or adaptations are made.
+
+ PMC Copyright notice 
+ 
+ 
+ PMCID: PMC13240590  PMID: 42216617 
+ 
+ ABSTRACT
+
+ Introduction
+
+ Acute pancreatitis (AP) is a major cause of gastrointestinal hospitalizations worldwide. Although typically self‐limiting, up to one‐third of cases develop complications associated with increased morbidity and mortality. Despite recent advances that have improved outcomes, clinical heterogeneity necessitates updated, evidence‐based guidance. In addition, there remains a need to improve the implementation of evidence‐based recommendations across Ibero‐Latin American countries by bringing together diverse scientific societies and regional experts to enhance applicability and the dissemination of best practices. This guideline offers comprehensive recommendations for both mild and complicated AP diagnosis and management.
+
+ Methods
+
+ Questions on AP management were addressed by expert teams comprising one coordinator and four pancreatology specialists from the Iberian Peninsula and Latin America. For each question, a systematic review was conducted using PubMed, Embase, and the Cochrane Library, focusing on randomized controlled trials and systematic reviews published between January 1979 and March 2024 in English, Spanish, or Portuguese. In the absence of high‐quality evidence, the search was expanded to include observational studies. Recommendations were formulated using the GRADE system and submitted to an expert panel for consensus; unresolved questions were revised and resubmitted until consensus was reached.
+
+ Results
+
+ Twenty evidence‐based recommendations were developed, addressing key aspects of AP management, including definitions, diagnostic criteria, etiological assessment, initial management, management of local complications, splanchnic vein thrombosis, abdominal compartment syndrome, indications for intensive care admission, antibiotic use, early endoscopic retrograde cholangiopancreatography, timing of cholecystectomy, strategies for detecting choledocholithiasis, and the management of pancreatic function insufficiency. Each recommendation included a statement, the level of evidence, the strength of the recommendation, and a summary of the supporting evidence.
+
+ Conclusion
+
+ The iLATAM guidelines are the first Ibero‐Latin American clinical practice guidelines for AP. They provide evidence‐based recommendations integrating medical, endoscopic, and surgical approaches, with the aim of promoting consistent, high‐quality care across diverse healthcare settings.
+
+ Trail Registration
+
+ In alignment with international standards for transparency and methodological rigor, the methodological protocol for this guideline was registered in PROSPERO (International Prospective Register of Systematic Reviews) on July 23, 2022 (Registration ID: CRD42022345788).
+
+ Keywords: acute pancreatitis, consensus, GRADE, guidelines, ibero‐Latin American, management, Portuguese, Spanish
+
+ 
+ 
+
+ 
+ Abbreviations
+
+ 
+ ALP 
+ alkaline phosphatase
+
+ 
+ ALT 
+ alanine aminotransferase
+
+ 
+ AP 
+ acute pancreatitis
+
+ 
+ APACHE II 
+ Acute Physiology and Chronic Health Examination II
+
+ 
+ AST 
+ aspartate aminotransferase
+
+ 
+ BISAP 
+ Bedside Index for Severity in Acute Pancreatitis
+
+ 
+ CI 
+ confidence interval
+
+ 
+ CRP 
+ C‐reactive protein
+
+ 
+ CT 
+ computed tomography
+
+ 
+ DBC 
+ determinant‐based classification
+
+ 
+ DPDS 
+ disconnected pancreatic duct syndrome
+
+ 
+ ERCP 
+ endoscopic retrograde cholangiopancreatography
+
+ 
+ EUS 
+ endoscopic ultrasound
+
+ 
+ GGT 
+ gamma‐glutamyl transferase
+
+ 
+ HR 
+ hazard ratio
+
+ 
+ HTG 
+ hypertriglyceridemia
+
+ 
+ IAH 
+ intra‐abdominal hypertension
+
+ 
+ IAP 
+ intra‐abdominal pressure
+
+ 
+ ICU 
+ intensive care unit
+
+ 
+ IL 
+ interleukin
+
+ 
+ IPN 
+ infected pancreatic necrosis
+
+ 
+ LAMS 
+ lumen‐opposed metal stent
+
+ 
+ MRCP 
+ magnetic resonance cholangiopancreatography
+
+ 
+ MRI 
+ magnetic resonance imaging
+
+ 
+ NSAIDs 
+ nonsteroidal anti‐inflammatory drugs
+
+ 
+ OF 
+ organ failure
+
+ 
+ PEI 
+ pancreatic exocrine insufficiency
+
+ 
+ PERT 
+ pancreatic enzyme replacement therapy
+
+ 
+ PPPC 
+ pancreatic and/or peripancreatic collections
+
+ 
+ RAC 
+ Revised Atlanta Classification
+
+ 
+ RAP 
+ recurrent acute pancreatitis
+
+ 
+ RCT 
+ randomized clinical trial
+
+ 
+ RR 
+ relative risk
+
+ 
+ SIRS 
+ systemic inflammatory response syndrome
+
+ 
+ TG 
+ triglyceride
+
+ 
+ TNF 
+ tumor necrosis factor
+
+ 
+ TUS 
+ transabdominal ultrasound
+
+ 
+ WON 
+ walled‐off necrosis
+
+ 
+ 
+ 1. Introduction
+
+ Acute pancreatitis (AP) is a leading cause of gastrointestinal‐related hospital admissions worldwide, with an incidence exceeding 34 cases per 100,000 person‐years [ 1 ] and a documented average annual percent change of 3.07% (95% CI, 2.30%–3.84%) between 1961 and 2016 [ 2 ]. In the United States, AP accounted for more than 378,000 emergency department visits and 263,000 hospitalizations in 2021, ranking third among gastrointestinal diagnoses and generating costs exceeding $12.8 billion [ 3 ]. While most cases are mild, up to one‐third develop local or systemic complications with mortality up to 50% in the case of persistent or multiple organ failure [ 4 , 5 ]. These data highlight the clinical and economic impact of AP, underscoring the need for standardized, evidence‐based care.
+
+ Advances in understanding the pathophysiology, diagnosis, and treatment of AP have improved outcomes [ 6 ]; however, disease heterogeneity and the expansion of therapeutic options necessitate updated guidance. Moreover, several studies have reported suboptimal adherence to international AP guidelines across Ibero‐Latin American countries [ 7 , 8 ]. This guideline responds to the need for improving the implementation of evidence‐based recommendations across Ibero‐Latin American countries by bringing together diverse national scientific societies and local experts, many of whom are not represented in existing international AP guidelines, to enhance regional applicability and dissemination of best practices.
+
+ 2. Materials and Methods
+
+ This is the first Ibero–Latin American guideline on AP management. It was developed by a multidisciplinary panel of experts from the Iberian Peninsula (Spain and Portugal) and Latin America, with institutional support from the Spanish Association of Gastroenterology (AEG), Spanish Association of Pancreatology (AESPANC), the Portuguese Society of Gastroenterology (SPG), The Panamerican Gastroenterology Organization (OPGE) and the Interamerican Society of Gastrointestinal Endoscopy (SIED), and funding provided by AEG, through a competitive research grant (AEG grant from the Pancreas and Bile Duct 2022). In alignment with international standards for transparency and methodological rigor, the methodological protocol for this guideline was registered in PROSPERO (International Prospective Register of Systematic Reviews) on July 23, 2022 (Registration ID: CRD42022345788). Methodological support was provided by experts in healthcare quality and patient safety (JJM and IC), who advised on guideline structure, evidence appraisal processes, and consensus methodology.
+
+ 2.1. Organizational Structure and Clinical Question Formulation
+
+ The study had two general coordinators (KCJ and EdM) and six team coordinators (KCJ, CM, MB, PMR, EMM, and RM). A first draft of the questions to be addressed in these guidelines was shared with the full panel of participants. Using an online platform, each participant rated the appropriateness of the questions on a 0–10 scale and suggested changes or proposed new questions. A total of 20 key clinical questions (appropriateness 9 or 10) addressing the diagnostic, therapeutic, and follow‐up aspects of AP were agreed upon. Each question was assigned to a dedicated working team composed of one team coordinator and four physicians (including specialists in gastroenterology, surgery, internal medicine, and intensive care medicine), with experience in the management of AP and research in that field (Supporting Information  S1 ).
+
+ A patient representative of Latin American origin from a recognized patient organization (The National Pancreas Foundation) participated in all the stages of these guidelines (AC). This patient representative reviewed the questions to be addressed and the draft recommendations, contributed experiential insights reflecting patient priorities, and participated in the Delphi voting rounds. This contribution ensured that patient‐centered perspectives were incorporated.
+
+ In addition, to facilitate implementation, uptake, and wider dissemination across Ibero‐American settings, the guideline has been translated into Spanish and Portuguese; these versions are provided as Supporting Information  S2 and S3 .
+
+ 2.2. Literature Search and Study Selection
+
+ For each clinical question, a structured, comprehensive literature search was conducted in PubMed, Embase, and the Cochrane Library. These were framed as PICO questions for the search where appropriate. The search included studies published from January 1979 to March 2024 in English, Spanish, or Portuguese. Priority was given to randomized controlled trials (RCTs) and systematic reviews. In the absence of high‐quality evidence, the inclusion criteria were expanded to include observational studies with at least 20 participants. A qualitative risk‐of‐bias assessment was performed for all studies contributing to each clinical question. Given the marked heterogeneity in study designs, populations, and outcome measures across the available evidence, the use of a single standardized tool was not considered appropriate. Instead, risk of bias was evaluated across key methodological domains and studies with significant methodological flaws, inconsistent results, or indirect evidence were excluded. Search terms and further methodological information can be found in Supporting Information S1 .
+
+ A formal cost‐effectiveness analysis was beyond the scope of this guideline; however, several pragmatic considerations related to resource availability and the regional healthcare context were incorporated by the panel into the formulation of recommendations, particularly those involving advanced diagnostic modalities or higher levels.
+
+ 2.3. Data Extraction and Quality Assessment
+
+ Each team member independently reviewed the literature and extracted data into a standardized Excel template comprising three evidence Tables: (1) RCTs and systematic reviews, (2) observational studies, and (3) diagnostic or prognostic studies. Extracted variables included study design, population characteristics, interventions, outcomes, and key findings. Risk of bias was assessed qualitatively, with particular attention to non‐blinded or non‐randomized studies.
+
+ 2.4. Evidence Synthesis and Recommendation Development
+
+ Each question team synthesized the evidence through structured discussion. For each clinical question, a technical summary report was developed, containing:
+
+ 
+- The structured clinical question
+
+ 
+- A recommendation statement
+
+ 
+- The level and strength of evidence using the GRADE system (Grading of Recommendations, Assessment, Development and Evaluation) [ 9 ] (Supporting Information S1 )
+
+ 
+- A concise summary of supporting evidence “Remarks”
+
+ 
+- Full bibliographic references (Author, Journal, Year, PMID)
+
+ 
+ 
+ The expert panel then submitted recommendations to a structured voting process in a dedicated Delphi consensus platform. Statements that did not reach consensus (< 80%) in the initial round were revised and resubmitted for reevaluation. At the end, all questions had more than 80% agreement. Internal documentation of the whole consensus process was maintained and recorded.
+
+ Although a formal Evidence to Decision framework [ 10 ] was not applied systematically, key Evidence to Decision domains, including resource use, accessibility, feasibility, and equity, were considered during guideline development. Given the heterogeneity of healthcare systems across Ibero‐Latin American settings, several recommendations were intentionally framed to allow flexibility according to local availability of diagnostic tools, specialized procedures, and levels of care. This pragmatic approach aimed to maximize applicability and support equitable implementation across diverse clinical environments.
+
+ 2.5. Use of Artificial Intelligence and Reporting Standards
+
+ This guideline was developed in accordance with the AGREE II (Appraisal of Guidelines for Research & Evaluation II) recommendations [ 11 ] to ensure methodological rigor and transparency. ChatGPT‐4 (OpenAI, San Francisco, CA, USA) was used exclusively to assist with language editing and grammar refinement of the manuscript's English version. All scientific content, interpretation, and final approval of the text were performed by the authors.
+
+ 3. Results (Clinical Questions and Guideline Recommendations—Table 1 )
+
+ TABLE 1.
+
+ Summary of key clinical questions and evidence‐based recommendations.
+
+ 
+ 
+ 
+ 
+ 
+ 
+ Clinical question 
+ 
+ Evidence‐based answer
+
+ Recommendation
+
+ 
+ 
+ Grade
+
+ Evidence level
+
+ 
+ 
+ 
+ 
+ What is the definition of acute pancreatitis? 
+ 
+ - AP is a sudden inflammation of the pancreas that can range from mild cases to more severe forms with necrosis and systemic complications, presenting a wide clinical spectrum with significant risk of morbidity and mortality.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ How is acute pancreatitis diagnosed? What is the role of imaging studies? 
+ 
+ - Diagnosis of acute pancreatitis requires at least two of three criteria: Typical abdominal pain, elevated serum pancreatic enzymes (more than 3 times the upper limit of normality), or characteristic imaging.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ 
+ - It is mainly a clinical and laboratory diagnosis; imaging is used when presentation is atypical.
+
+ 
+ 
+ Strong recommendation; low‐quality evidence 
+ 
+ 
+ How should the etiology of acute pancreatitis be assessed? 
+ 
+ - Initial assessment includes clinical history, physical examination, liver profile, triglycerides, calcium, and abdominal ultrasound. Contrast‐ enhanced CT is recommended if malignancy is suspected.
+
+ 
+ 
+ Strong recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - If the cause is unclear, follow‐up may include repeat ultrasound, labs, EUS and/or MRCP; contrast‐ enhanced CT is a secondary option.
+
+ 
+ 
+ Strong recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Genetic and/or immunological testing may be considered for recurrent idiopathic cases.
+
+ 
+ 
+ Strong recommendation; low‐quality evidence 
+ 
+ 
+ What is the definition of acute idiopathic pancreatitis? What is the definition of acute recurrent pancreatitis? 
+ 
+ - Idiopathic AP is defined as AP with no identifiable cause after thorough history, lab workup, and at least one advanced imaging test (EUS and/or MRCP).
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - RAP is defined as two or more distinct AP episodes, separated by over 3 months of complete resolution.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ How should pancreatitis secondary to hypertriglyceridemia be diagnosed and managed? 
+ 
+ - Diagnosis: Levels > 1000 mg/dL confirm AP cause if no other etiology is found; > 500 mg/dL indicates high likelihood.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ 
+ - Treatment: Lower TG levels rapidly with fasting and insulin; blood purification may be considered if TG > 5000 mg/dL.
+
+ 
+ 
+ Strong recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Start oral fibrates once feeding resumes.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ How should the severity of acute pancreatitis be classified? How can severity be predicted early in the course of disease? 
+ 
+ - Severity of acute pancreatitis should be classified using Revised Atlanta Classification, based on OF and local and systemic complications.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ 
+ - For early prediction, BISAP and persistent SIRS are recommended due to their simplicity despite limited accuracy.
+
+ 
+ 
+ Strong recommendation; low‐quality evidence 
+ 
+ 
+ Which patients with acute pancreatitis should be admitted to an intensive care unit? 
+ 
+ - Early ICU admission is recommended for patients with OF unresponsive to initial resuscitation or with IPN and systemic compromise. Patients with persistent (> 48 h) single or multiple OF should also be managed in the ICU.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ 
+ - Intermediate care admission is recommended for predicted severe AP (BISAP ≥ 3, persistent SIRS), isolated organ failure responsive to treatment, or early IAH. If unavailable, close monitoring is advised.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ What type and rate of fluid resuscitation should be used in acute pancreatitis? 
+ 
+ - Moderate fluid resuscitation (1.5 mL/kg/h) is recommended, with optional 10 mL/kg bolus in hypovolemic patients.
+
+ 
+ 
+ Strong recommendation; high‐quality evidence 
+ 
+ 
+ 
+ - Lactated Ringer's solution is preferred due to potential anti‐inflammatory benefits.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ How should pain be managed in acute pancreatitis? 
+ 
+ - Pain management should be multimodal, using NSAIDs and/or opioids based on pain severity and patient factors.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ 
+ - Mild cases may respond to NSAIDs and paracetamol, while moderately severe to severe pain may require strong opioids or epidural analgesia, with gradual de‐escalation.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ What is the role of antibiotic therapy in the management of acute pancreatitis? 
+ 
+ - Antibiotics are not recommended prophylactically in necrotizing pancreatitis; use only for confirmed or suspected bacterial infections. If needed, use high‐dose broad‐spectrum antibiotics.
+
+ 
+ 
+ Strong recommendation; high‐quality evidence 
+ 
+ 
+ 
+ - Procalcitonin can guide antibiotic use.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ 
+ - Antifungals should be used only if fungal infection is suspected or confirmed.
+
+ 
+ 
+ Strong recommendation; low‐quality evidence 
+ 
+ 
+ When should prophylaxis for deep vein thrombosis and pulmonary embolism be indicated in acute pancreatitis? 
+ 
+ - Pharmacological thromboprophylaxis is recommended in moderate/severe AP or in case of high thrombotic risk without bleeding risk.
+
+ 
+ 
+ Strong recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - It is not routinely advised in mild AP.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Mechanical methods may be used if bleeding risk is high, switching to pharmacological once safe.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ How should nutritional support be managed in acute pancreatitis? When and how should oral feeding be restarted? 
+ 
+ - Early oral feeding (< 24–48 h) is recommended in all cases if tolerated; in mild AP, it may be started immediately with a soft or solid diet.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ 
+ - If oral intake is not tolerated after 3–4 days, initiate enteral nutrition via nasogastric tube (or nasojejunal tube if gastric outlet obstruction is present); reserve parenteral nutrition for when all other routes fail.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ What are the indications for early ERCP in acute pancreatitis? 
+ 
+ - Urgent ERCP (≤ 24 h) is recommended in acute cholangitis complicating AP.
+
+ 
+ 
+ Strong recommendation; high‐quality evidence 
+ 
+ 
+ 
+ - In patients with choledocholithiasis without acute cholangitis, ERCP can be delayed, as early intervention does not improve outcomes.
+
+ 
+ 
+ Conditional recommendation; moderate quality evidence 
+ 
+ 
+ How should abdominal compartment syndrome be diagnosed and managed? 
+ 
+ - IAH is defined as IAP > 12 mmHg; abdominal compartment syndrome is defined as IAP > 20 mmHg with new onset OF.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ 
+ - ICU patients with AP should undergo IAP monitoring; management includes medical measures (sedation, nasogastric and rectal tubes, prokinetics), percutaneous drainage, and even decompressive laparotomy if abdominal compartment syndrome persists.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ How should DPDS be diagnosed and managed? 
+ 
+ - MRCP is recommended as the first‐line diagnostic modality for suspected DPDS; secretin‐enhanced MRCP is preferable, when available, due to its higher diagnostic sensitivity. Besides, amylase measurement in drained fluid helps detect DPDS.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Endoscopic transluminal drainage is favored over ERCP in complete duct disruption.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Long‐term plastic stent placement is advised in symptomatic cases.
+
+ 
+ 
+ Strong recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - MRCP is recommended before stent removal to assess duct integrity.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Surgical timing in DPDS is unclear; a step‐up approach is generally preferred, reserving surgery for refractory cases
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ How should sterile and infected (peri)pancreatic collections be diagnosed and managed? 
+ 
+ - Contrast‐enhanced CT is effective for diagnosing PPPC, while MRI provides superior characterization of their contents when necessary.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Broad‐spectrum antibiotic therapy should be reserved for confirmed or suspected infections, with prophylactic use not recommended.
+
+ 
+ 
+ Strong recommendation; high‐quality evidence 
+ 
+ 
+ 
+ - When intervention is required, delaying it for at least 4 weeks is preferred.
+
+ 
+ 
+ Strong recommendation; high‐quality evidence 
+ 
+ 
+ 
+ - Percutaneous drainage is indicated when early drainage (< 4 weeks) is needed, endoscopy or surgery is not feasible, collections are inaccessible by other means or as a combination treatment with endoscopic drainage.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ 
+ - Endoscopic drainage and/or necrosectomy is preferred when technically feasible
+
+ 
+ 
+ Strong recommendation; high‐quality evidence 
+ 
+ 
+ 
+ - Minimally invasive surgical necrosectomy is recommended if percutaneous or endoscopic approaches fail.
+
+ 
+ 
+ Strong recommendation; high‐quality evidence 
+ 
+ 
+ How should (peri)pancreatic vein thrombosis and left‐sided portal hypertension be managed? 
+ 
+ - Therapeutic anticoagulation may be considered in acute portal vein thrombosis, multi‐vessel splanchnic vein thrombosis, or progressive splenic vein thrombosis.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Thrombophilia testing is recommended post‐acute episode to guide recurrence risk and treatment duration.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Treatment involves LMWH followed by oral anticoagulants for 3–6 months; discontinue after resolution or absent recanalization, except in thrombophilia.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Current evidence does not support beta‐blockers or endoscopic therapy for primary or secondary bleeding prevention in left‐sided non‐cirrhotic portal hypertension.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ When should cholecystectomy be performed in patients with biliary acute pancreatitis? 
+ 
+ - In mild AP, laparoscopic cholecystectomy should be performed during the index hospitalization.
+
+ 
+ 
+ Strong recommendation; moderate quality evidence 
+ 
+ 
+ 
+ - In moderately severe to severe cases, cholecystectomy should be delayed until 8 weeks post‐discharge or after resolution of local complications.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ When and how should choledocholithiasis be ruled out in acute pancreatitis? 
+ 
+ - In mild or predicted severe AP without cholangitis but with persistent cholestasis or duct dilation, testing may be delayed up to 1 week if the patient is clinically stable. If cholestasis resolves and ducts are non‐dilated, no further testing is needed.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - 
+ In mild biliary ap with high suspicion choledocholithiasis scheduled for early cholecystectomy, preoperative biliary exploration is advised when one of the following criteria are met:
+
+ 
+- 
+ ◦ bilirubin > 70 μmol/L (4 mg/dL)
+
+ 
+- 
+ ◦ common bile duct > 6 mm with bilirubin 30–70 μmol/L (1.75–4 mg/dL)
+
+ 
+- 
+ ◦ signs of cholangitis.
+
+ 
+ 
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - MRCP or EUS should be used in uncertain cases due to their high accuracy to detect lithiasis.
+
+ 
+ 
+ Strong recommendation; low‐quality evidence 
+ 
+ 
+ When and how should pancreatic exocrine and endocrine insufficiency be assessed and managed following acute pancreatitis? 
+ 
+ - Assessment of pancreatic function is recommended in patients with necrotizing AP, alcoholic etiology, recurrent forms, patients undergoing necrosectomy or with metabolic risk factors.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Fecal elastase is suitable for PEI screening, while endocrine function should be evaluated with fasting glucose, HbA1c, and/or C‐peptide.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Empirical PERT may be considered, when resuming oral feeding, in extensive necrosis or necrosectomy and in patients with symptoms of maldigestion.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Treatment includes PERT for PEI and standard diabetes therapy for endocrine insufficiency.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ - Follow‐up is advised at 3, 6, and 12 months, and then every 6–12 months if disfunction persist, through laboratory and clinical monitoring.
+
+ 
+ 
+ Conditional recommendation; low‐quality evidence 
+ 
+ 
+ 
+ Open in a new tab 
+ Abbreviations: AP, acute pancreatitis; BISAP, bedside index for severity in acute pancreatitis; CT, computed tomography; DPDS, disconnected pancreatic duct syndrome; ERCP, endoscopic retrograde cholangiopancreatography; EUS, endoscopic ultrasound; HbA1c, glycated hemoglobin; IAH, intra‐abdominal hypertension; IAP, intra‐abdominal pressure; ICU, intensive care unit; IPN, infected pancreatic necrosis; LMWH, low molecular weight heparin; MRI, magnetic resonance imaging; MRCP, magnetic resonance cholangiopancreatography; NSAIDs, non‐steroidal anti‐inflammatory drugs; OF: organ failure; PEI, pancreatic exocrine insufficiency; PERT: pancreatic enzyme replacement therapy; PPPC: pancreatic or peripancreatic collection; RAC, revised atlanta classification; RAP, recurrent acute pancreatitis; SIRS, systemic inflammatory response syndrome; TG, triglycerides.
+
+ 3.1. Key Clinical Questions
+
+ 3.1.1. Q1. What is the Definition of Acute Pancreatitis?
+
+ 3.1.1.1. Statement and GRADE
+
+ - Acute pancreatitis (AP) is an acute inflammation of the pancreas with several etiologies. Most patients experience a mild inflammatory process limited to the pancreas, whereas approximately one third develop pancreatic necrosis and/or peripancreatic or distant organ involvement resulting in a moderate severe to severe disease course. This yields a wide clinical spectrum, ranging from self‐limited abdominal pain to local or systemic complications associated with significant morbidity and potential mortality. Strong recommendation, moderate quality evidence .
+
+ 3.1.1.2. Remarks
+
+ The pancreas integrates two glandular systems: endocrine, secreting hormones like insulin and glucagon for glycemic control, and exocrine, producing pancreatic juice for digestion [ 12 ]. Damage to acinar cells, caused by ductal hypertension, luminal acidification, or toxic metabolites, initiates a cascade that leads to cell injury and pancreatitis [ 12 , 13 ]. This cellular damage results in persistently elevated intracellular calcium levels, which subsequently increase mitochondrial permeability and lead to loss of membrane potential, thereby impairing ATP generation [ 14 , 15 , 16 , 17 , 18 ]. Endoplasmic reticulum oxidative stress worsens injury by inhibiting autophagy [ 19 , 20 ], while blocked zymogen exocytosis granules (inactive enzymes) trigger the premature intrapancreatic trypsinogen activation and autodigestion [ 19 , 20 , 21 , 22 ].
+
+ In most patients, these mechanisms remain self‐limited, resulting in mild disease confined to the pancreas. However, in a subset of patients, sustained acinar cell injury and dysregulated inflammatory signaling amplify local damage and promote systemic inflammatory response syndrome (SIRS), and organ failure may ensue [ 21 , 22 , 23 , 24 ]. The progression from mild to moderate or severe AP, occurs in about one third of patients [ 5 ].
+
+ 3.1.2. Q2. How to Diagnose AP? What is the Role of Imaging Studies?
+
+ 3.1.2.1. Statement and GRADE
+
+ 
+- The diagnosis of AP requires at least two of the following three criteria: (i) abdominal pain consistent with pancreatitis (epigastric, band‐like, radiating to the back), (ii) serum amylase and/or lipase activity > 3 times the upper limit of the normal value or (iii) characteristic imaging findings. Strong recommendation, moderate quality evidence .
+
+ 
+- The diagnosis is primarily clinical‐analytical, with imaging studies reserved for cases with atypical signs or symptoms that raise diagnostic doubt. Strong recommendation, low‐quality evidence. 
+
+ 
+ 3.1.2.2. Remarks
+
+ The classic AP diagnostic criteria have been used for decades and were reaffirmed in the 2012 Revised Atlanta Classification [ 4 ]. According to this definition, radiological studies are unnecessary when typical symptoms and labs are present, but are required otherwise [ 4 ].
+
+ Laboratory parameters for the AP diagnosis include the measurement of serum lipase or amylase levels, or determining urinary trypsinogen‐2 [ 25 , 26 ]. Amylase has pancreatic and salivary isoforms, but is also secreted by other organs (ovary, intestine), so elevations may occur in non‐pancreatic illnesses. In AP, amylase rises 6 h after symptom onset, peaks at 48 h, and remains elevated 5–7 days [ 25 , 26 ]. Lipase increases approximately 4 h after symptom onset, peaks at 24 h, and remains elevated for 8–14 days [ 25 , 26 ]. Elevated urinary trypsinogen (> 50 ng/mL) has proven useful in diagnosing AP [ 27 , 28 , 29 ]. Lipase levels rise predominantly in AP, making it a theoretically more specific marker, but all serum/urine methods show comparable sensitivity (∼70%) and specificity (∼90%) in an appropriate clinical context [ 26 , 27 , 28 , 29 ].
+
+ Transabdominal ultrasound (TUS) is commonly used as the initial imaging modality due to its accessibility, low cost, and ability to detect gallstones [ 30 , 31 ]. However, its sensitivity to confirm pancreatitis is limited; therefore, cross‐sectional imaging is preferred when diagnostic uncertainty exists. In this setting, contrast‐enhanced CT is the technique of choice due to its speed, availability, and accuracy. Contrast‐enhanced CT also stages severity and assesses complications; however, for this purpose, it is preferable to wait at least 72 h from pain onset [ 30 , 31 , 32 , 33 , 34 , 35 , 36 ]. Magnetic Resonance Imaging (MRI), while more sensitive for subtle findings and necrosis, is limited by cost, availability, and scan time. Thus, it is less suitable initially but valuable in selected cases, such as contrast allergy or pregnancy [ 30 , 31 , 32 , 33 , 34 , 35 , 36 ].
+
+ 3.1.3. Q3. How Should Etiology Be Assessed?
+
+ 3.1.3.1. Statement and GRADE
+
+ 
+- 
+ Initial Evaluation: Etiology should be assessed in all patients. The essential workup includes personal and family history, with an emphasis on biliopancreatic pathologies, toxic habits and medications, physical examination, blood tests (with liver profile, triglycerides, and calcium), and TUS within the first 24–48 h of admission. Strong recommendation, low‐quality evidence. 
+
+ 
+- 
+ Additional tests: If the etiology remains unknown, additional tests are advised during follow‐up, even for a first episode. This phase should include a second TUS and laboratory tests. If the results are inconclusive, endoscopic ultrasound (EUS) is recommended; where highly available, EUS may replace the second TUS. Magnetic resonance cholangiopancreatography (MRCP), preferably secretin‐enhanced when available, may be used as an alternative or complementary examination in cases where EUS is negative or unavailable. Pancreas‐protocol contrast‐enhanced CT is a fallback option if EUS/MRI are inaccessible, though it is less accurate and should also be considered to rule out pancreatic malignancy in patients over 50 years of age without an identified etiology, and even in younger patients with other risk factors. Endoscopic retrograde cholangiopancreatography (ERCP) is not recommended due to its invasiveness and associated adverse events. Strong recommendation, low‐quality evidence. 
+
+ 
+- 
+ Genetic and Immunological Testing in idiopathic recurrent AP: Genetic and immunological testing are not recommended after a first episode of AP; their use is reserved for recurrent idiopathic cases or when specific clinical indications exist, such as suspected autoimmune disease, young age, or family history of pancreatic diseases. S trong recommendation, low‐quality evidence (Figure 1 ).
+
+ 
+ 
+ FIGURE 1.
+
+ 
+
+ Open in a new tab 
+ Algorithm for etiological diagnosis. ALT, alanine aminotransferase; AST, aspartate aminotransferase; ALP, alkaline phosphatase; CT, computed tomography; EUS, endoscopic ultrasound; GGT, gamma‐glutamyl transferase; MRCP, magnetic resonance cholangiopancreatography; MRI, magnetic resonance imaging.
+
+ 3.1.3.2. Remarks
+
+ Globally, the most common causes of AP are gallstones (42%; 95% confidence interval (CI) 39%–44%), alcohol consumption (21%; 95% CI 17%–25%), and idiopathic etiology (18%; 95% CI 15%–22%) [ 37 ]. Hypertriglyceridemia ranks third among identifiable causes, accounting for 4%–10% of cases [ 38 ]. In Latin America, biliary etiology is even more frequent, responsible for 50%–83% of all cases [ 37 ].
+
+ Etiological assessment requires a thorough anamnesis and examination. Certain factors can suggest specific etiologies: the combination of female sex, age > 58 years, and serum alanine aminotransferase (ALT) elevation over three times (≥ 150 U/L) suggests a biliary etiology [ 39 , 40 , 41 , 42 , 43 ]; long‐term alcohol abuse, in the absence of other identifiable causes, points to an alcohol‐related etiology [ 44 ]; chylous serum with triglyceride (TG) levels exceeding 500–1000 mg/dL indicates hypertriglyceridemia‐related (HTG) etiology [ 45 ].
+
+ A second TUS can enhance lithiasis detection [ 46 , 47 ], increasing diagnosis rates from 66% to 83% [ 46 , 47 ]. When combined with elevated ALT levels, accuracy further increases to 87% [ 46 , 47 ]. EUS demonstrates high sensitivity and specificity (> 90%) in detecting microlithiasis, biliary sludge, and small (< 2 cm) biliopancreatic and periampullary lesions, providing an etiological diagnosis in over 30% of idiopathic cases [ 48 , 49 , 50 , 51 , 52 , 53 , 54 , 55 , 56 , 57 , 58 , 59 , 60 , 61 , 62 ]. It can replace the second TUS if readily available; otherwise, it can be performed afterward. A meta‐analysis revealed that EUS has higher diagnostic accuracy than MRCP (64% vs. 34%) in the etiological diagnosis of presumed idiopathic AP [ 55 ]. EUS should be performed 4–6 weeks post‐episode, when inflammation subsides, to improve diagnostic accuracy [ 63 ]. Conversely, secretin‐MRCP may be superior to EUS in patients with anatomical alterations of the biliopancreatic duct system or those who have undergone cholecystectomy and complement the results from EUS [ 64 , 65 , 66 , 67 ]. Some studies suggest that MRCP with neostigmine stimulation may be an alternative to secretin‐MRCP, offering comparable stimulation of pancreatic juice production and enhanced visualization of the ductal system, but limited evidence precludes any definitive recommendation [ 68 , 69 ]. Secretin is not widely available in many regions targeted by this guideline and is associated with a higher cost. Consequently, MRCP without secretin is an appropriate and pragmatic alternative and is generally far more accessible than EUS in most Latin American countries.
+
+ Contrast‐enhanced CT should not be used routinely for etiological assessment during the acute phase; rather, its role is limited to cases with clear clinical suspicion of associated pancreatic malignancy or as a fallback diagnostic option when EUS or MRCP are unavailable, particularly in patients over 50 years of age without an identified cause or in younger patients with additional risk factors [ 42 , 43 ].
+
+ Isolated IgG4 elevation has low sensitivity (64%) and high specificity (93%) for type 1 autoimmune pancreatitis [ 70 ]. It is not diagnostic on its own; other clinical, radiologic, and histologic criteria should be considered alongside. Therefore, routine IgG4 testing is not recommended except in cases of recurrent AP or when clinical or imaging features raise suspicion for autoimmune disease [ 47 , 71 ].
+
+ Genetic testing for PRSS1 , SPINK1 , CFTR , CTRC , CLDN2 , and CPA1 is not indicated after a first episode of acute pancreatitis (AP). It is, however, recommended in cases of idiopathic recurrent AP or in high‐risk individuals, such as patients under 35 years of age, who often have distinct etiological profiles [ 72 , 73 , 74 ], and/or family history of pancreatic disease [ 75 , 76 ].
+
+ We acknowledge that access to advanced imaging modalities and specialized endoscopic or diagnostic procedures, varies across different Ibero‐Latin American regions and may not be available. Therefore, their use should be adapted to local resource availability.
+
+ 3.1.4. Q4. What is the Definition of Idiopathic Acute Pancreatitis? What is the Definition of Recurrent Acute Pancreatitis?
+
+ 3.1.4.1. Statements and GRADE
+
+ 
+- Idiopathic AP is defined as AP with no identifiable cause after a comprehensive diagnostic workup, including clinical history, laboratory tests, and TUS to exclude common biliary, toxic, and metabolic causes, as well as at least one advanced imaging modality (EUS and/or MRCP), as outlined in prior recommendations. Weak recommendation, low‐quality evidence. 
+
+ 
+- Recurrent acute pancreatitis (RAP) is defined as two or more well‐documented separate attacks of AP, with complete clinical resolution for more than 3 months between them. Weak recommendation, low‐quality evidence. 
+
+ 
+ 3.1.4.2. Remarks
+
+ AP should not be classified as idiopathic without a complete and thorough diagnostic evaluation, previously discussed. This evaluation must include at least one advanced diagnostic technique, such as EUS or MRCP [ 47 , 54 , 55 , 57 , 77 , 78 ]. When access to these techniques is limited, a contrast‐enhanced CT may serve as an alternative, though its diagnostic accuracy in determining etiology is lower. While recent evidence advocates performing both EUS and MRCP in case of EUS negativity because of their complementary diagnostic value, limited access—especially to EUS—in many Latin American settings led the panel to agree that performing at least one advanced imaging test is a pragmatic and feasible approach.
+
+ RAP occurs in approximately 10%–30% of patients after a first AP episode [ 47 , 54 , 55 , 57 , 77 , 78 , 79 ]. In some cases, RAP progresses to chronic pancreatitis during follow‐up [ 77 ]. Current recommendations for evaluating patients with RAP vary; however, a comprehensive assessment using advanced imaging is essential. If radiological studies yield negative results and RAP persists, further tests including measurement of IgG4 levels and genetic analysis are recommended [ 55 , 77 , 78 ]. Emerging evidence suggests that many patients with idiopathic AP and RAP may possess complex genetic predispositions [ 80 , 81 ]. In this context, we recommend implementing the diagnostic algorithm outlined in the preceding question.
+
+ 3.1.5. Q5. How Should Pancreatitis Secondary to Hypertriglyceridemia Be Diagnosed and Managed?
+
+ 3.1.5.1. Statement and GRADE
+
+ 
+- In the AP setting, TG levels should be measured at admission. TG levels above 1000 mg/dL or grossly lipemic serum in the absence of alcohol abuse or other etiologies should be considered the definitive cause of AP. In the absence of other etiology, levels > 500 mg/dL should raise a high suspicion of causality. Strong recommendation, moderate quality evidence. 
+
+ 
+- Rapid reduction of TG levels below 1000 mg/dL should be obtained based on conventional therapies, including fasting and insulin treatment. S trong recommendation, low‐quality evidence .
+
+ 
+- Blood purification methods may be considered in individual cases with very high TG levels (> 5000 mg/dL) not responding to insulin, but studies showing improved outcomes are lacking. Strong recommendation, moderate quality evidence. 
+
+ 
+- Oral fibrates should be started once oral feeding is possible, as maintenance therapy is advised to prevent recurrence. Weak recommendation, low‐quality evidence .
+
+ 
+ 3.1.5.2. Remarks
+
+ HTG is the third most frequent identifiable cause of AP [ 38 ]. A well‐defined threshold for classifying HTG as the etiology of AP has not been firmly established; however, it is widely accepted that triglyceride levels exceeding 1000 mg/dL should be considered a significant causal factor for AP. Alcohol increases TG levels and must be considered. In a retrospective cohort of 129 patients with severe HTG (TG > 1000 mg/dL), 20% of them presented at least one attack of AP [ 82 ]. Another retrospective study on 95 patients referred to a lipid control program with TG > 1772 mg/dL found 15.8% had a history of AP compared to none in 91 patients with TG 886–1772 mg/dL, suggesting a low risk of AP when TG levels are < 1772 mg/dL [ 83 ]. Nonetheless, in a large population study, the adjusted hazard ratio (HR) for AP was 3.20 (95% CI 1.99–5.16) in a group with TG levels > 500 mg/dL when compared with a group with TG levels < 150; there was 4% increase in AP for every 100 mg/dL increase in TG concentration [ 84 ]. In a prospective cohort of 116,550 patients followed 6.7 years, the HR of AP increased progressively with rising TG levels: HR 2.3 (95% CI, 1.3–4.0; 5.5 events/10,000 person‐years) for TG 177–265 mg/dL to HR of 8.7 (95% CI, 3.7–20.0; 12 events/10,000 person‐years) for individuals with TG > 443 mg/dL [ 85 ].
+
+ Although it has not been proven that rapid reduction of TG levels improves the prognosis of HTG‐induced AP, specific treatments aim to prevent the ongoing damage induced by free fatty acids and hyperviscosity. While no RCTs have evaluated fasting or insulin therapy, both have proven effective and safe in observational studies, with insulin infusion adding glycemic control in diabetic patients. A case‐control series comparing fasting to insulin infusion showed both approaches reduced TG levels < 1000 mg/dL by day three, with no significant differences and minimal risk of hypoglycemia, even in non‐diabetics [ 86 ]. A retrospective analysis of 77 patients with HTG‐induced AP (74% with diabetes mellitus) receiving intravenous insulin showed that half of them reached TG < 1000 mg/dL in 36 h [ 87 ]. The insulin doses reported in the published evidence vary depending on whether the patient had pre‐existing diabetes (0.1 UI/kg/h) or not (1‐2 UI/kg/day) and are typically adjusted by body weight and close clinical and biochemical monitoring [ 87 ]. The role of heparin, alone or in combination with insulin, remains controversial. In two small‐sample studies, it was associated with increased chylomicron levels and rebound hypertriglyceridemia [ 88 , 89 ]. Blood purification therapies (plasmapheresis, high‐volume hemofiltration, and double‐filtration plasma apheresis) have been evaluated in two meta‐analyses, both showing that TG reduction is faster with blood purification than with insulin with/without heparin. However, this is not associated with a reduction in organ dysfunction or mortality but with increased costs and complications, so its use is controversial [ 90 , 91 , 92 , 93 ].
+
+ Fibrates are highly effective at lowering triglyceride levels and are recommended by multiple medical societies as a first‐line therapy for hypertriglyceridemia [ 94 , 95 , 96 ], which is why they are considered maintenance treatment after HTG‐induced AP. Despite this, their effectiveness in preventing recurrent AP has not been confirmed by clinical trials. Other long‐term strategies include omega‐3 fatty acids [ 97 , 98 , 99 ], lifestyle modifications, and alcohol withdrawal [ 100 , 101 ].
+
+ 3.1.6. Q6. How Should Severity Be Classified? How to Predict Severity Early in the Course of Disease?
+
+ 3.1.6.1. Statement and GRADE
+
+ 
+- The severity of AP should be assessed and classified based on the presence or absence of organ failure (OF) and the occurrence of local and/or systemic complications. Strong recommendation, moderate quality evidence. 
+
+ 
+- Both the Determinant‐Based Classification (DBC) and the RAC effectively classify severity and are comparable. However, RAC is recommended given its widespread use in both clinical practice and research. Strong recommendation, moderate quality evidence. 
+
+ 
+- The accuracy of the various factors and scores in the early prediction of severe AP is limited. The BISAP score and the presence of persistent SIRS are recommended for routine clinical use because of their simplicity and reasonable predictive utility. Strong recommendation, low‐quality evidence. 
+
+ 
+ 3.1.6.2. Remarks
+
+ Currently, there are two main classifications for assessing AP severity: the RAC and the DBC [ 4 , 102 ]. In both systems, severity is determined by the presence of local or systemic complications, as well as transient (≤ 48 h) or persistent (> 48 h) OF involving the lungs, kidneys, and/or cardiovascular system. The DBC further distinguishes between sterile and infected pancreatic necrosis (IPN). The DBC categorizes AP severity as mild, moderate, severe, or critical, whereas the RAC stratifies severity as mild, moderately severe, or severe. Although both classifications are comparable in assessing severity, the DBC's severe categories may not always accurately reflect clinical outcomes [ 5 , 103 , 104 , 105 ] (Table  2 ).
+
+ TABLE 2.
+
+ Severity classification in acute pancreatitis: revised atlanta classification versus determinant‐based classification.
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Aspect 
+ Revised Atlanta Classification (2012) [ 4 ] 
+ Determinant‐based classification (2012) [ 102 ] 
+ 
+ 
+ 
+ Severity categories 
+ 
+ ‐ Mild
+
+ ‐ Moderately severe
+
+ ‐ Severe
+
+ 
+ 
+ ‐ Mild
+
+ ‐ Moderate
+
+ ‐ Severe
+
+ ‐ Critical
+
+ 
+ 
+ 
+ Basis of classification 
+ 
+ ‐ Presence and duration of OF
+
+ ‐ Presence of local or systemic complications
+
+ 
+ 
+ ‐ Presence of three key determinants:
+
+ 1. Presence and duration OF
+
+ 2. Necrosis
+
+ 3. IPN
+
+ 
+ 
+ 
+ Severity categories 
+ Mild 
+ 
+ ‐ No OF
+
+ ‐ No local or systemic complications
+
+ 
+ 
+ ‐ No OF
+
+ ‐ No necrosis
+
+ ‐ No IPN
+
+ 
+ 
+ 
+ Moderately severe/Moderate 
+ 
+ ‐ Transient OF (≤ 48 h)
+
+ And/or
+
+ ‐ Local or systemic complications
+
+ 
+ 
+ ‐ Sterile necrosis
+
+ And/or
+
+ ‐ Transient OF
+
+ 
+ 
+ 
+ Severe 
+ ‐ Persistent OF (> 48 h) 
+ 
+ ‐ Presence of either:
+
+ 1. Persistent OF
+
+ 2. IPN
+
+ 
+ 
+ 
+ Critical 
+ *Not defined in RAC* 
+ ‐ Both, persistent OF and IPN present 
+ 
+ 
+ 
+ Open in a new tab 
+ Abbreviations: IPN, infected pancreatic necrosis; OF, organ failure; RAC, revised atlanta classification.
+
+ Clinical and laboratory parameters such as advanced age [ 5 , 106 , 107 ], sarcopenia, body‐mass index > 30 [ 107 , 108 , 109 , 110 , 111 , 112 ], comorbidity [ 107 ], increased serum blood urea nitrogen > 20 mg/dL [ 113 , 114 ], hematocrit > 44% [ 115 , 116 , 117 ], C‐reactive protein (CRP) ≥ 190 mg/L [ 118 , 119 , 120 ], SIRS (particularly persistent SIRS > 48 h) [ 121 , 122 ] and procalcitonin correlating with IPN [ 123 , 124 ] demonstrated an association with higher risk of severe AP development. Other inflammatory markers (e.g., polymorphonuclear elastase [ 125 ], TNF‐alpha, IL‐6, and IL‐8) showed predictive accuracy for severe AP in observational studies, but remain unavailable in most centers [ 125 , 126 , 127 , 128 , 129 ].
+
+ Numerous scoring systems, such as Ranson's criteria, Glasgow criteria, SIRS criteria, Acute Physiology and Chronic Health Evaluation II (APACHE II), Panc 3, Pancreatitis Outcome Prediction, BISAP [ 130 ], CT Severity Index, the revised Japanese Severity Score, and Harmless Acute Pancreatitis Score have been developed to predict severe AP by combining clinical, analytical, and radiological parameters. Typically, they are applied at admission (except for imaging‐based scores, which require established local complications), while Ranson and Glasgow scores also rely on 48 h of data. Despite their widespread use, they have limited accuracy (70%–80%) with a high negative but low positive predictive value for severe AP [ 130 , 131 , 132 , 133 , 134 , 135 , 136 , 137 , 138 , 139 ]. The Pancreatitis Activity Scoring System, a promising tool, tracks clinical progression but has limited accuracy at a single time point [ 131 , 132 ]. A recent systematic review and meta‐analysis evaluating the most commonly used scores found that pretest probabilities of severe AP ranged 16.6%–25.3%, while posttest probabilities for positive/negative scores were: BISAP 47%/6%, APACHE II 43%/5%, Ranson 48%/5%, and SIRS 40%/12% [ 140 ]. These findings highlight the ongoing challenges in prognostic accuracy and underscore the need for new predictive models. Emerging scoring systems using artificial intelligence offer promising potential for improvement [ 141 ].
+
+ Given the limitations of existing scores (suboptimal accuracy, complexity, or limited availability), clinical practice often favors simpler tools. Among these, BISAP and SIRS are widely used due to their straightforward application and reasonable predictive utility.
+
+ 3.1.7. Q7. Which Patients Should Be Admitted to an Intensive Care Unit?
+
+ 3.1.7.1. Statement and GRADE
+
+ 
+- 
+ Intensive Care Unit (ICU) Admission: Early ICU admission is advised for patients with OF unresponsive to initial resuscitation or in the presence of concomitant IPN with systemic compromise, given the markedly increased risk of mortality. Patients with persistent (> 48 h) single or multiple OF should also be managed in the ICU. Strong recommendation, moderate‐quality evidence. 
+
+ 
+- 
+ Intermediate Care Unit Admission: Admission to an intermediate care unit is recommended for patients with predicted severe AP (BISAP ≥ 3, persistent SIRS), or isolated OF (e.g., hypotension, respiratory failure, or acute renal failure) responsive to initial management without (peri)pancreatic infection. If it is unavailable, close monitoring is advised. Patients with early signs of intra‐abdominal hypertension (IAH) should also be considered for intermediate care, as progression to abdominal compartment syndrome carries a high risk of mortality. Strong recommendation, moderate‐quality evidence. 
+
+ 
+ 3.1.7.2. Remarks
+
+ ICU admission should be guided by the need for organ support in patients at high risk of adverse outcomes. OF and IPN are the main determinants of morbidity and mortality in AP, each independently linked to mortality rates approaching 30% [ 142 ]. When both are present, the risk of death increases substantially [ 5 , 142 ].
+
+ Early mortality is primarily driven by persistent OF. Persistent dysfunction of respiratory, cardiovascular, or renal systems for > 48 h strongly indicates severe disease and typically warrants intensive care, irrespective of initial severity scores. Clinical judgment, based on the progression of organ dysfunction and treatment response, remains essential for determining the appropriate level of care.
+
+ Late mortality is more commonly linked to IPN. A systematic review and meta‐analysis involving > 6900 patients reported significantly higher mortality in IPN (28%) than in sterile necrosis (13%), with an odds ratio of 3.30 (95% CI, 2.81–3.88) [ 143 ].
+
+ Finally, observational studies have identified IAH (see question 14) in critically ill patients as a predictor of shock, respiratory and renal failure, and increased mortality. This reinforces the need for close monitoring and potential escalation of care in patients with early signs of abdominal compartment syndrome [ 144 ].
+
+ 3.1.8. Q8. Fluid Resuscitation: What Type and Volume Rate?
+
+ 3.1.8.1. Statement and GRADE
+
+ 
+- Moderate fluid resuscitation, defined as an infusion rate of 1.5 mL/kg/h, is recommended. It should be preceded by an initial bolus of 10 mL/kg administered over 2 h in patients with signs of hypovolemia at admission. This bolus may be repeated during hospitalization if hypovolemia persists or appears. In the event of fluid overload, fluid volume must be reduced or discontinued. Strong recommendation, high‐quality evidence .
+
+ 
+- Lactated Ringer's solution is recommended as the fluid of choice due to its apparent anti‐inflammatory properties and improved AP outcomes. However, high‐quality studies are needed to establish a robust recommendation. Strong recommendation, moderate quality evidence. 
+
+ 
+ 3.1.8.2. Remarks
+
+ The WATERFALL trial, which randomized 249 patients with AP to aggressive (20 mL/kg bolus plus 3 mL/kg/h infusion) versus moderate fluid resuscitation (1.5 mL/kg/h infusion preceded by 10 mL/kg bolus only in patients with hypovolemia), demonstrated higher fluid overload with aggressive therapy (20.5% vs 6.3%; adjusted relative risk (RR) 2.85, 95% CI, 1.36 to 5.94; p  = 0.004), without efficacy benefit [ 145 ]. Based on this, moderate fluid resuscitation is recommended [ 146 , 147 , 148 , 149 , 150 , 151 , 152 , 153 ]. Subsequent meta‐analyses validated these findings [ 154 , 155 , 156 , 157 ].
+
+ Some RCTs comparing lactated Ringer's solution with normal saline have shown lower incidence of SIRS and CRP levels within 24–48 h (both surrogate variables) [ 158 , 159 , 160 , 161 , 162 ], fewer ICU admissions, and shorter hospital stays in the lactated Ringer's solution groups [ 163 ]. Recent meta‐analyses also reported a lower incidence of local complications, moderately severe to severe AP, ICU admission, and mortality with lactated Ringer's solution [ 164 , 165 , 166 , 167 ]. In cell culture, it reduces macrophage inflammatory activation [ 160 ], which could explain its benefit. However, the heterogeneity and bias in current studies, mostly surrogate‐based, underscore the need for well‐designed multicenter RCTs with strong endpoints (e.g., severity) to consolidate these recommendations.
+
+ Hydroxyethyl starch, a colloid, is discouraged in AP due to increased adverse events and OF compared with lactated Ringer's solutions or normal saline [ 151 ].
+
+ 3.1.9. Q9. How to Manage Pain?
+
+ 3.1.9.1. Statements and GRADE
+
+ 
+- Pain management should follow a multimodal approach based on nonsteroidal anti‐inflammatory drugs (NSAIDs) and/or opioids. The selection of analgesics should be guided by patient characteristics, comorbidities, pain intensity, and AP severity. Strong recommendation, moderate quality evidence. 
+
+ 
+- For patients with mild AP and/or low‐intensity pain, treatment with NSAIDs and paracetamol (opioid‐sparing) may suffice. Escalation to weak or strong opioids can be considered, if necessary, for adequate pain control. Strong recommendation, moderate quality evidence. 
+
+ 
+- For patients with moderate to severe pancreatitis and/or high‐intensity pain, options could include bolus or continuous infusions of NSAIDs, strong opioids (alone or combined with NSAIDs), or epidural analgesia. This “Step‐Down” approach should be continued with a gradual de‐escalation of analgesic treatment, guided by effective pain control and the patient's clinical progress. Strong recommendation, moderate quality evidence. 
+
+ 
+- NSAIDs should be carefully used or avoided in patients with acute or chronic renal failure. Strong recommendation, low‐quality evidence. 
+
+ 
+ 3.1.9.2. Remarks
+
+ Pain relief is a clinical priority in AP management, as it mitigates the stress response and improves patient well‐being [ 168 ]. However, analgesia practices remain inconsistent across clinical settings, and systematic reviews of RCTs comparing different analgesics have shown a low overall evidence quality, failing to clearly favor any class or method [ 169 , 170 , 171 ]. As no internationally accepted, evidence‐based analgesic algorithm exists for AP, most centers adopt a pragmatic step‐up approach aligned with the World Health Organization analgesic ladder, although this has not been formally validated in AP. A more detailed United European Gastroenterology guideline on pain management in AP is currently under development and will address this topic in greater depth.
+
+ Pain severity assessment should consider patient characteristics and comorbidities when selecting an appropriate analgesic. For instance, NSAIDs require caution in patients with renal failure [ 172 , 173 ]. Although clinical trials in AP have not demonstrated an increased risk of acute kidney injury or gastrointestinal bleeding, these studies may have been underpowered to detect such outcomes [ 169 ]. Two RCTs showed improved outcomes with COX‐2 inhibitors, including fewer local complications and OF [ 174 , 175 ], however, they should be used with caution in patients with known or suspected cardiovascular disease, and further studies are needed to confirm these findings.
+
+ In clinical practice, many patients ultimately require weak or strong opioids despite initiation with simple analgesics. A step‐down strategy has been proposed by some experts, but the absence of robust studies prevents formal recommendations at this time [ 176 ].
+
+ Opioids remain the most prescribed analgesic for AP pain relief due to their potency, despite the heterogeneity of results from RCTs comparing them with NSAIDs [ 174 , 177 , 178 , 179 , 180 , 181 ]. Furthermore, a recent meta‐analysis has suggested comparable effectiveness and similar adverse event profiles between the two treatment types [ 182 ]. Combining different classes (paracetamol, NSAIDs, opioids) with distinct mechanisms allows effective pain relief with lower doses of each drug [ 183 , 184 , 185 , 186 ].
+
+ Growing evidence supports the use of epidural analgesia for pain management, offering superior pain control in the first 24 h and comparable effectiveness to opioids at 48 h [ 169 ]. Benefits may be associated with improved splanchnic perfusion and redistribution of blood flow to under perfused pancreatic areas, potentially enhancing outcomes [ 186 , 187 , 188 , 189 , 190 , 191 ]. However, a recent RCT has not consistently demonstrated benefits [ 192 ]. Given these potential advantages, epidural analgesia should be considered as an alternative or adjunct to intravenous analgesia, especially in patients requiring high opioid doses or at risk of opioid‐related adverse events (e.g., respiratory failure, obesity), in the first 24 h [ 176 ].
+
+ There is no evidence supporting the use of parenteral local anesthetics (e.g., procaine) [ 193 , 194 , 195 ]. The usefulness of alternative therapies such as acupuncture remains unclear [ 196 , 197 ]. Further research is needed to (A optimize the use of opioids and non‐opioids, alone or in combination, in patients with AP; B) determine the clinical indications and timing for epidural analgesia within a step‐down analgesic approach.
+
+ 3.1.10. Q10. What is the Role of Antibiotic Therapy in the Management of Acute Pancreatitis?
+
+ 3.1.10.1. Statements and GRADE
+
+ 
+- Routine prophylactic antibiotic use is not recommended for necrotizing pancreatitis, as it does not significantly reduce pancreatic infection rates or mortality. Strong recommendation, high‐quality evidence. 
+
+ 
+- Antibiotic treatment should be reserved for suspected or confirmed IPN, acute cholangitis, or other extrapancreatic infections. Strong recommendation, high‐quality evidence. 
+
+ 
+- Employing procalcitonin as a biomarker could guide therapy, reducing unnecessary antibiotic use without compromising optimal outcomes. Strong recommendation, moderate‐quality evidence. 
+
+ 
+- If required, antibiotics of choice are carbapenems, high‐dose third‐generation cephalosporins, and quinolones plus metronidazole. Strong recommendation, high‐quality evidence. 
+
+ 
+- Antifungal prophylaxis is not advised; treatment is recommended only for highly suspected or confirmed fungal infection. Strong recommendation, low‐quality evidence. 
+
+ 
+ 3.1.10.2. Remarks
+
+ High‐quality RCTs and meta‐analyses over 2 decades consistently show prophylactic antibiotics do not significantly reduce IPN, surgical need, or mortality [ 198 , 199 , 200 , 201 , 202 , 203 , 204 , 205 , 206 , 207 , 208 ]. A recent meta‐analysis of 21 trials involving 1383 patients found fewer overall infections (RR 0.60; 95% CI 0.49–0.74), mainly due to lower rates of sepsis (RR 0.43; 95% CI 0.25–0.73) and urinary infections (RR 0.46; 95% CI 0.25–0.86), but no significant decrease in IPN (RR 0.81; 95% CI 0.63–1.04) or mortality [ 200 ]. Therefore, prophylactic antibiotics in AP are discouraged because they have no impact on pancreatic outcomes and carry a risk of resistant strains.
+
+ Empiric antibiotics must be initiated in necrotizing pancreatitis with confirmed or strongly suspected infection. These recommendations should be applied within an antimicrobial stewardship framework, ensuring that antibiotic selection and duration are guided not only by suspected infection and pancreatic penetration but also by local resistance patterns and microbiological epidemiology. Common choices include carbapenems, high‐dose third‐generation cephalosporin, and quinolones plus metronidazole [ 203 , 209 ]. Procalcitonin‐guided therapy can minimize unnecessary use [ 210 , 211 ]. In one RCT, 45% of patients in the procalcitonin‐guided group received antibiotics when procalcitonin ≥ 1.0 ng/mL, compared with 63% in the standard care group, with an adjusted risk difference of −15.6% (95% CI −27.0 to −4.2; p  = 0.0071). No significant differences in hospital‐acquired infections, secondary effects, or mortality were noted [ 211 ].
+
+ Patients with necrotizing AP are at increased risk of fungal infections, particularly with extended ICU stays, central venous catheters, parenteral nutrition, and prolonged broad‐spectrum antibiotics [ 212 , 213 ]. Invasive candidiasis occurs in up to 18% of ICU‐treated severe AP [ 214 ] and 27% of cases treated for infected walled‐off necrosis [ 215 ]. Nonetheless, prophylactic antifungal therapy is not advised, as no RCT has confirmed its efficacy. Antifungal treatment should be reserved for confirmed or highly suspected fungal infections.
+
+ 3.1.11. Q11. When Should Prophylaxis of Venous Thromboembolism Prophylaxis Be Given?
+
+ 3.1.11.1. Statement and GRADE
+
+ 
+- Pharmacological thromboprophylaxis is recommended for patients with predicted or established moderately severe to severe AP or those at high risk of thrombosis, provided they do not have an increased bleeding risk. Although specific studies in AP are lacking, this intervention has been shown to improve hospital outcomes in patients with limited mobility and acute inflammatory conditions. Strong recommendation, low‐quality evidence. 
+
+ 
+- There is insufficient evidence to support thromboprophylaxis in patients with mild AP without high thrombosis risk. Weak recommendation, low‐quality evidence. 
+
+ 
+- In patients who are actively bleeding or at high risk of bleeding, mechanical thromboprophylaxis (graduated compression stockings or intermittent pneumatic compression) may offer benefits over no intervention. However, pharmacological thromboprophylaxis should begin once the bleeding risk decreases. Weak recommendation, low‐quality evidence. 
+
+ 
+ 3.1.11.2. Remarks
+
+ Hospitalization for acute medical conditions increases the risk of venous thromboembolism [ 216 ]. Although AP‐specific guidelines are lacking, available data indicate high rates of thromboembolic complications, particularly in necrotizing pancreatitis [ 217 ]. Risk assessment is challenging due to the heterogeneity of hospitalized medical patients. Numerous risk assessment models exist, each with distinct limitations. Among them, the Padua Prediction Score [ 218 ] effectively stratifies non‐surgical inpatients into low‐ and high‐venous thromboembolism risk groups.
+
+ Pharmacologic thromboprophylaxis using low‐molecular‐weight heparin, low‐dose unfractionated heparin, or fondaparinux significantly reduces the incidence of symptomatic deep vein thrombosis and fatal pulmonary embolism in immobilized patients with acute inflammatory conditions, with minimal bleeding risk [ 219 ]. In studies involving patients with moderate to severe AP, heparin at prophylactic or therapeutic doses improves hospital outcomes and reduces local and systemic complications [ 220 , 221 , 222 , 223 ]. Two recent meta‐analyses support these findings, showing a significant reduction in mortality and outcomes in the intervention group [ 224 , 225 ].
+
+ Pharmacologic thromboprophylaxis is not advised in patients with active bleeding or high bleeding risk [ 226 ]. Major bleeding risk factors include active gastroduodenal ulcer, recent bleeding (3 months before admission), and platelet count < 50 × 10 9 /L [ 226 ]. For these patients, indirect data from surgical populations suggest that graduated compression stockings or intermittent pneumatic compression may provide moderate effectiveness in preventing asymptomatic deep vein thrombosis and pulmonary embolism and are preferable to no prophylaxis [ 227 , 228 ]. More high‐quality AP‐focused studies are needed to strengthen recommendations.
+
+ 3.1.12. Q12. How Should Nutritional Support Be Managed? When and How to Restart Oral Feeding?
+
+ 3.1.12.1. Statements and GRADE
+
+ 
+- Early oral feeding (within 24–48 h) is recommended for both mild and predicted severe AP if the patient feels able to eat. In mild cases, oral feeding may even be started immediately with a soft or solid diet. Strong recommendation, high‐quality evidence .
+
+ 
+- In patients unable to tolerate oral feeding 3–4 days after disease onset, enteral nutrition via nasogastric tube is preferred. The nasojejunal tube should be reserved for cases of difficult gastric emptying, proximal mechanical obstruction, or a high risk of aspiration. Parenteral nutrition should be reserved for cases in which oral and enteral nutrition are not feasible. Strong recommendation, high‐quality evidence .
+
+ 
+ 3.1.12.2. Remarks
+
+ Traditionally, patients with AP were advised to fast for a few days for “pancreatic rest.” However, recent evidence shows that early feeding offers significant benefits. Six RCTs and two meta‐analyses demonstrated that immediate refeeding in mild AP is safe, accelerates recovery, and does not increase gastrointestinal events [ 229 , 230 , 231 , 232 , 233 , 234 , 235 ]. Additionally, two other RCTs confirmed that a soft or solid diet is well tolerated and that there is no need to start with a liquid diet [ 236 , 237 ]. Early feeding in these patients shortens hospital stay and reduces healthcare costs without raising complications [ 238 ].
+
+ For patients with moderately severe to severe AP, enteral nutrition within the first 3 days after disease onset is preferred over parenteral nutrition, which is associated with increased risk of infected pancreatic collections, organ failure, and mortality [ 235 , 238 , 239 , 240 , 241 , 242 , 243 , 244 , 245 , 246 , 247 ]. A RCT by Bakker et al. found no benefit of early enteral tube feeding over on‐demand enteral feeding (only in case of intolerance to oral feeding within 72 h), reducing tube placement in 67% of cases [ 248 ]. Therefore, enteral tube feeding is recommended only for patients unable to tolerate oral intake after 72 h. When required, both nasogastric or nasojejunal tubes may be used [ 249 , 250 , 251 , 252 , 253 , 254 , 255 ], with the nasogastric tube preferred if there is no gastric emptying obstruction, due to ease of placement and physiological advantage [ 252 ].
+
+ Seven meta‐analyses suggest that immunonutritional support, such as supplementation with glutamine and omega‐3 fatty acids, may improve clinical outcomes, particularly in severe AP [ 256 , 257 , 258 , 259 , 260 , 261 , 262 ]. Conversely, probiotics are not recommended, as one RCT reported increased mortality with their use [ 263 ].
+
+ 3.1.13. Q13. What Are the Indications for Early Endoscopic Retrograde Cholangiopancreatography?
+
+ 3.1.13.1. Statements and GRADE
+
+ 
+- Urgent (≤ 24h) ERCP is strongly recommended for patients with acute biliary pancreatitis and concurrent acute cholangitis. Strong recommendation, high‐quality evidence. 
+
+ 
+- In patients with choledocholithiasis without cholangitis, ERCP may be delayed in the absence of acute cholangitis, as early ERCP is not associated with improved outcomes. Weak recommendation, moderate‐quality evidence. 
+
+ 
+ 3.1.13.2. Remarks
+
+ Initial studies suggested that early ERCP reduced complications in biliary AP [ 264 , 265 , 266 , 267 , 268 ], but limitations included heterogeneous populations (with or without cholangitis), non‐uniform definitions of cholangitis, delayed ERCP timing, and inconsistent sphincterotomy. Studies excluding cholangitis showed no benefit of early ERCP [ 269 , 270 , 271 , 272 , 273 ].
+
+ A 2012 Cochrane meta‐analysis [ 274 ] comprising 7 RCTs, including 2 with predicted severe biliary AP, found early ERCP did not reduce mortality or local/systemic adverse events compared to conservative treatment, regardless of severity. Subgroup analyses of patients with cholangitis revealed that early ERCP was associated with reduced mortality and adverse events. Based on this, urgent ERCP ≤ 24 h was recommended for biliary AP only in cases of cholangitis, and within 72 h for patients with ongoing biliary obstruction, whereas it was discouraged in the absence of cholangitis or biliary obstruction.
+
+ The recent APEC and APEC‐2 multicenter RCTs [ 275 , 276 ] demonstrated that early ERCP (≤ 24 h) in patients with predicted severe biliary AP with and without cholestasis, but without cholangitis, did not reduce mortality or major complications compared to conservative approach, defined as an ERCP performed only if cholestasis persisted or bile duct stones remained after recovery [ 275 , 276 ]. This result was consistent even when ERCP was preceded by EUS‐confirmed choledocholithiasis [ 277 ], supporting conservative management with delayed elective ERCP, even in patients with ongoing biliary obstruction.
+
+ 3.1.14. Q14. How to Diagnose and Manage Abdominal Compartment Syndrome?
+
+ 3.1.14.1. Statement and GRADE
+
+ 
+- IAH is defined as a persistent intra‐abdominal pressure (IAP) > 12 mmHg, whereas abdominal compartment syndrome involves an IAP > 20 mmHg associated with a new onset OF. Strong recommendation, moderate quality evidence. 
+
+ 
+- IAP monitoring is recommended for all patients with AP requiring ICU admission. Strong recommendation, moderate quality evidence. 
+
+ 
+- Medical management of IAH includes sedation, analgesia, neuromuscular blockade, supine positioning, vasoactive drugs, nasogastric suction, rectal tube, prokinetic/laxative agents, reduced or discontinued enteral nutrition, diuretics, and hemofiltration. Strong recommendation, moderate quality evidence. 
+
+ 
+- Percutaneous catheter drainage and paracentesis are preferred for fluid collections and ascites. Strong recommendation, moderate quality evidence. 
+
+ 
+- If medical or minimally invasive treatments fail and abdominal compartment syndrome develops, decompressive laparotomy is indicated. Strong recommendation, moderate quality evidence (Figure 2 ).
+
+ 
+ 
+ FIGURE 2.
+
+ 
+
+ Open in a new tab 
+ Management of intra‐abdominal hypertension (IAH). ACS, abdominal compartment syndrome; AP, acute pancreatitis; APP, abdominal perfusion pressure; IAP, intra‐abdominal pressure; ICU, intensive care unit; IV, intravenous; MAP, mean arterial pressure.
+
+ 3.1.14.2. Remarks
+
+ The 2013 World Society of the Abdominal Compartment Syndrome consensus criteria have defined IAH and abdominal compartment syndrome over the last decade [ 278 ]. These conditions significantly contribute to increasing morbidity and mortality in AP, with elevated IAP causing pancreatic necrosis, intestinal ischemia, gut barrier dysfunction, and multiple OF [ 278 , 279 ]. A systematic review of 226 patients with moderately severe to severe AP found prevalence rates of 66% for IAH and 38% for abdominal compartment syndrome, with 49% mortality in abdominal compartment syndrome [ 280 ].
+
+ High‐quality studies on AP with IAH/abdominal compartment syndrome are scarce. The transvesical technique is commonly used to measure IAP [ 281 ]. Medical management of IAH follows a step‐up approach; if there is no response, the next measures should be implemented. Initial measures include adequate sedation and analgesia, neuromuscular blockade (e.g., 0.15 mg/kg of cisatracurium [ 282 ], and supine position (with head‐of‐bed elevation < 20°) to improve abdominal compliance [ 278 ]. Vasoactive agents help to maintain an abdominal perfusion pressure > 60 mmHg, while nasogastric suction and rectal tubes, prokinetics, laxatives, and reduced/discontinued enteral nutrition, reduce intraluminal contents [ 278 ]. An RCT showed that intramuscular neostigmine reduced IAP by ∼20% by promoting peristalsis and defecation [ 283 ]. Diuretics and restrictive fluid resuscitation prevent volume overload [ 278 ].
+
+ Volume overload is a risk factor for IAH. Hemofiltration appears to induce volume depletion and the removal of inflammatory cytokines [ 284 ]. In a recent RCT of 74 severe AP patients, those with IAP > 20 mmHg treated with continuous veno‐venous hemofiltration from one to seven days (vs conventional treatment) had negative fluid balance, shorter ventilation and ICU stay, and fewer operations at 28 days; no benefit was observed in patients with IAP < 20 mmHg [ 285 ].
+
+ Percutaneous drainage or paracentesis are other possible interventions. A retrospective case‐control study of 206 AP patients showed lower mortality (3.7% vs. 8.2%), faster IAP reduction, and less OF with paracentesis [ 286 ]. A prospective cohort study of 105 AP patients found significant IAP reduction after percutaneous drainage (21.85 ± 4.53 mmHg to 12.5 ± 4.42 mmHg) in patients with IAH, with greater reduction linked to improved survival (63.3% vs. 36.7%, p  = 0.006) [ 287 ]fewer complications (41.0% vs. 80.3%, p  < 0.001), and mortality rates (18.9% vs. 52.5%, p  < 0.001) compared to decompressive laparotomy in a retrospective study [ 288 ].
+
+ Percutaneous drainage is therefore a reasonable initial strategy, particularly when CT demonstrates large intra‐abdominal fluid collections amenable to drainage [ 288 ]. Decompressive laparotomy, via midline xipho‐pubic incision with vacuum‐assisted closure is often reserved for abdominal compartment syndrome not responding to non‐operative or percutaneous measures; however, when there is a clear temporal relationship between rising intra‐abdominal pressure and progressive renal and/or respiratory failure, surgical decompression should be advocated and, in selected patients with rapidly progressive organ dysfunction early operative intervention may be indicated [ 278 , 279 , 280 , 288 , 289 ]. Although decompressive laparotomy rapidly reduces IAP, its effect on organ dysfunction is still uncertain, and the optimal timing or pressure threshold remains undefined [ 278 , 279 , 280 , 288 ]. When indicated, surgical intervention seems to improve outcomes [ 289 ], while less invasive techniques, such as subcutaneous fasciotomy, require further study [ 288 ]. High‐quality trials are needed to guide decompressive interventions.
+
+ 3.1.15. Q15. How to Diagnose and Manage Disconnected Pancreatic Duct Syndrome?
+
+ 3.1.15.1. Statements and GRADE
+
+ 
+- MRCP is recommended as the first‐line diagnostic modality for suspected disconnected pancreatic duct syndrome (DPDS); secretin‐enhanced MRCP is preferable, when available, due to its higher diagnostic sensitivity. Weak recommendation, low‐quality evidence. 
+
+ 
+- In AP patients undergoing percutaneous drainage of fluid collections, measuring amylase in drained fluid is advised, given its high sensitivity for detecting DPDS. Weak recommendation, low‐quality evidence. 
+
+ 
+- For suspected complete disruption of the main pancreatic duct associated with pancreatic necrosis, endoscopic transluminal drainage is preferred to transpapillary ERCP drainage, which adds no benefit, is technically demanding, and increases the risk of adverse events. Weak recommendation, low‐quality evidence. 
+
+ 
+- Long‐term placement of transluminal plastic stents is recommended for symptomatic (peri)pancreatic collections associated with DPDS. Strong recommendation, low‐quality evidence. 
+
+ 
+- Before removing stents after endoscopic drainage of walled‐off necrosis (WON), MRCP, preferably secretin‐enhanced, is recommended to assess main duct integrity. Weak recommendation, low‐quality evidence. 
+
+ 
+- Surgical timing in DPDS remains unclear; a step‐up approach is generally preferred, with surgery reserved for refractory cases. Weak recommendation, low‐quality evidence. 
+
+ 
+ 3.1.15.2. Remarks
+
+ Acute necrotizing pancreatitis can rupture the pancreatic duct, causing pancreatic fluid leakage and collections. This complication occurs in ∼25% of patients with necrotizing pancreatitis [ 290 ] and persistent leakage in 30%–50% of cases [ 291 ]. The diagnosis and management of DPDS are challenging, relying mainly on retrospective studies and complicated by the heterogeneity of clinical manifestations [ 291 , 292 , 293 ].
+
+ MRCP, preferably secretin‐enhanced if available, is the recommended initial diagnostic test, with a pooled sensitivity of 83% and specificity of 100% according to a systematic review [ 294 ]. Secretin has a good safety profile and increases sensitivity by ∼19% [ 295 ]. Timing is not standardized to exclude DPDS, but assessment is indicated if collections persist or before stent removal [ 293 ]. In patients undergoing percutaneous drainage, drained fluid amylase > 3× serum levels showed 100% sensitivity and 50% specificity for DPDS [ 294 ].
+
+ Somatostatin analogs have no therapeutic role [ 296 ]. ERCP is useful for partial duct obstruction but is less effective for complete obstructions [ 297 , 298 ]. EUS‐guided drainage is the preferred method for symptomatic (peri)pancreatic collections associated with DPDS [ 293 , 294 , 299 , 300 , 301 ]. Evidence indicates that transpapillary drainage does not improve outcomes compared to transmural drainage in WON, and routine pancreatic duct stenting in combination with transluminal drainage is discouraged [ 302 ]. A systematic review reported a 92% success rate for endoscopic transluminal drainage of DPDS, with double pigtail plastic stents often left indefinitely [ 299 ]. A single‐center RCT showed a lower recurrence rate with stents left in situ (0% vs. 38%), highlighting a higher recurrence risk after removal in DPDS [ 303 ]. Consequently, double‐pigtail plastic stent placement is long‐term recommended; if lumen‐opposing metal stents (LAMS) are used initially, they should be replaced with a plastic stent within 4 weeks, [ 291 , 304 ].
+
+ Surgery is reserved for refractory cases; no RCTs define optimal timing. A step‐up approach is favored, reserving surgery for cases refractory to endoscopic treatment, with pooled success rates of 84% for cystojejunostomy and 80% for distal pancreatectomy [ 299 ]. In symptomatic DPDS with external fistulas, surgery remains the standard, although EUS‐guided ductal access is emerging in expert centers [ 305 ]. Given surgical complexity and a postoperative morbidity approaching 50%, minimally invasive pancreatic endotherapy is increasingly preferred [ 292 ].
+
+ 3.1.16. Q16. How to Diagnose and Manage Sterile and Infected Pancreatic And/Or Peripancreatic Collections?
+
+ 3.1.16.1. Statement and GRADE
+
+ 
+- Contrast‐enhanced CT is effective for diagnosing pancreatic and/or peripancreatic collections (PPPC). MRI can better characterize the contents (fluid or solid) when needed. Weak recommendation, low‐quality evidence. 
+
+ 
+- Serum procalcitonin may help assess infection risk. Strong recommendation, moderate quality evidence. 
+
+ 
+- Broad‐spectrum antibiotics should be reserved for suspected or confirmed infection; prophylaxis is not advised. Strong recommendation, high‐quality evidence. 
+
+ 
+- Most PPPC resolve spontaneously. When intervention is warranted, delaying it by at least 4 weeks (≥ 4 weeks) is preferable to minimize morbidity, reduce complication risk, and reduce the number of procedures. Strong recommendation, high‐quality evidence .
+
+ 
+- If early intervention (< 4 weeks) is unavoidable, percutaneous drainage is recommended; endoscopic drainage may be considered, preferably at third‐level centers with experience in advanced endoscopy. Strong recommendation, moderate quality evidence. 
+
+ 
+- Indications for drainage are suspected or confirmed infection unresponsive to antibiotics, persistent SIRS or OF, sepsis, refractory abdominal pain, refractory gastrointestinal or biliary obstruction, vascular compression, abdominal compartment syndrome, or disconnected duct syndrome. Strong recommendation, high‐quality evidence. 
+
+ 
+- Endoscopic drainage, when feasible, is preferred over percutaneous drainage. Strong recommendation, high‐quality evidence .
+
+ 
+- Double pigtail plastic stents (7‐10 Fr) and metal stents, preferably LAMS, are equally effective for drainage. Endoscopic necrosectomy is only advised in the absence of clinical improvement with endoscopic drainage or if the patient's condition deteriorates. Strong recommendation, high‐quality evidence .
+
+ 
+- Minimally invasive surgical necrosectomy is recommended if percutaneous or endoscopic approaches fail, as it is preferable to open surgery. Strong recommendation, high‐quality evidence (Figure 3 ).
+
+ 
+ 
+ FIGURE 3.
+
+ 
+
+ Open in a new tab 
+ Algorithm for diagnosis and management of sterile and infected pancreatic or peripancreatic collections. CECT: contrast enhanced computed tomography; EUS: endoscopic ultrasound; SIRS: systemic inflammatory response syndrome; WON: walled‐off necrosis.
+
+ 3.1.16.2. Remarks
+
+ 3.1.16.2.1. Diagnosis
+
+ Collections in AP are classified according to the RAC [ 4 ]. Acute collections, defined as those occurring within the first 4 weeks, include acute peripancreatic fluid collections associated with edematous pancreatitis and acute necrotic collections associated with necrotizing pancreatitis (pancreatic and/or peripancreatic fat necrosis). About 4 weeks after onset, a fibrous capsule‐like inflammatory wall develops around the collection; such collections are referred to as pseudocysts (containing only liquid) and walled‐off necrosis (WON) (containing liquid and necrotic debris), respectively. Contrast‐enhanced CT is primary for diagnosis; MRI may provide additional insight, distinguishing between liquid and solid components [ 306 ]. Clinical worsening, no improvement, or gas within collections reliably indicate infection [ 306 ] and are sufficient to initiate specific treatments. Routine fine‐needle aspiration for the diagnosis of infection is not recommended [ 307 ]. Additionally, serum procalcitonin levels may be useful for predicting infection risk [ 211 , 308 ].
+
+ 3.1.16.2.2. Management (Figure 3)
+
+ Most acute PPPC resolve spontaneously and do not require any intervention. Pseudocysts often regress; up to 40% of WON resolve conservatively, even when infected [ 309 ]. Broad‐spectrum antibiotics (cephalosporins, carbapenems, quinolones plus metronidazole) should be used only with suspected/confirmed infection; prophylaxis is discouraged [ 203 ].
+
+ 
+ Drainage . Indications include suspected or confirmed infection unresponsive to antimicrobial therapy, persistent SIRS and/or OF, sepsis, persistent abdominal pain, refractory gastrointestinal or biliary obstruction, vascular compression, compartment syndrome, or DPDS [ 209 ]. The timing of interventions should be individualized and guided by clinical and imaging criteria, as there are currently no universally applicable guidelines. Delaying ≥ 4 weeks improves safety [ 309 ] by allowing encapsulation and liquefaction [ 310 ], reducing the risk of complications and even requiring fewer interventions [ 309 ]. Percutaneous drainage is recommended within the first 4 weeks for patients with IPN who are septic and unstable despite conservative management. Recent studies suggest that early endoscopic drainage (< 4 weeks) is feasible, and does not appear to increase overall adverse events or mortality, but the procedure carries greater technical risks and should therefore be restricted to expert centers [ 311 , 312 , 313 , 314 , 315 ]. Microbiological samples should be collected whenever drainage is performed to guide antibiotic therapy.
+
+ 
+ Endoscopic Drainage and Necrosectomy . The PENGUIN trial demonstrated that endoscopic drainage and necrosectomy are superior to open necrosectomy, reducing new‐onset multiple OF and overall complications [ 316 ]. The TENSION trial, along with its long‐term follow‐up study, revealed that an endoscopic step‐up approach, consisting of endoscopic drainage followed by endoscopic necrosectomy only if needed (refractory cases), offers shorter hospital stay and fewer pancreatic‐cutaneous fistulas over the minimally invasive surgical approach, which involves percutaneous drainage followed by minimally invasive surgical necrosectomy if required [ 317 , 318 ]. Additional studies have supported this recommendation [ 319 , 320 ]. More recently, the ACCELERATE trial suggested that an endoscopic strategy, with direct necrosectomy at the index drainage in patients with large (> 15 cm) WON, may further reduce major complications and hospital stay compared with the conventional step‐up approach, although confirmation in larger multicenter studies is warranted to support this strategy [ 321 ]. Most endoscopic drainage procedures for PPPC adjacent to the stomach or duodenum are performed transmurally, either via a transgastric or transduodenal approach. EUS‐guided access is preferred over conventional transmural drainage [ 322 , 323 ]. Double pigtail plastic stents (7‐10 Fr) and metal stents, particularly LAMS, are both recommended [ 324 , 325 ]. LAMS with a diameter of 15–20 mm provide the advantage of improved drainage of necrotic material and facilitate endoscopic transluminal necrosectomy when needed. Additionally, placing one or more double pigtail plastic stents through the LAMS may help prevent complications such as stent migration, early occlusion by necrotic debris, and bleeding due to mucosal erosion [ 326 ].
+
+ Endoscopic necrosectomy is limited to refractory cases despite endoscopic drainage [ 324 ]. Although evidence is insufficient to support routine use, various strategies have been suggested to enhance drainage and minimize the need for necrosectomy, including the placement of a naso‐cystic catheter for cavity irrigation with NS (typically 500–1000 mL/day) [ 316 ], antibiotic [ 327 ] or hydrogen peroxide lavage [ 328 ], and creating multiple transluminal fistulas, either endoscopically or in combination with percutaneous drainage. Some studies suggest PPIs may increase the number of procedures needed, as gastric acid promotes autodebridement of necrotic debris and prevents stent occlusion [ 329 ]. While early stent removal can lead to recurrent collections, prolonged use of LAMS has been associated with complications. A follow‐up CT scan 2–4 weeks after drainage is generally recommended. If there is significant size reduction along with clinical resolution, the stent should be removed, ideally within 2–4 weeks for pseudocysts and 3–6 weeks for walled‐off necrosis; if abundant necrosis persists requiring ongoing access for necrosectomy, the LAMS should be exchanged every 6 weeks or replaced with plastic stents [ 203 , 209 , 310 , 311 , 312 , 313 , 314 , 315 , 316 , 317 , 318 , 319 , 320 , 322 , 323 , 324 , 325 , 330 ].
+
+ 
+ Percutaneous Drainage . Percutaneous drainage is recommended in specific scenarios: need for drainage before encapsulation (< 3–4 weeks from onset), unstable patient unfit for endoscopic or surgical drainage; collection inaccessible to endoscopic drainage; concomitant with endoscopic drainage in collections extending to the pelvis or paracolic gutters [ 324 , 331 ]. In most published series and in the available randomized study, percutaneous drains were routinely flushed with saline at regular intervals (commonly every 8 h) to maintain catheter patency and reduce the risk of occlusion [ 332 ]. Streptokinase and hydrogen peroxide (3%) have been proposed as necrolytic agents to enhance drainage and potentially reduce the need for surgical necrosectomy in cases where saline irrigation alone is ineffective. However, evidence supporting their use is limited. A single randomized trial comparing streptokinase with hydrogen peroxide reported better outcomes and fewer complications with streptokinase; nevertheless, the current evidence remains insufficient to support a formal recommendation [ 333 ].
+
+ 
+ Surgical Necrosectomy . If percutaneous drainage or endoscopic approach fails, minimally invasive surgical necrosectomy is recommended and preferred over open surgery. The PANTER trial demonstrated that it outperforms open necrosectomy, reducing new‐onset multiple OF, hernias, and new‐onset diabetes [ 334 ]. These benefits were sustained in long‐term follow‐up, in which death/major complications occurred in 44% of minimally invasive step‐up patients versus 73% with open surgery ( p  = 0.005). Incisional hernias (23% vs. 53%, p  = 0.004), pancreatic exocrine insufficiency (29% vs. 56%, p  = 0.03), and endocrine insufficiency (40% vs. 64%, p  = 0.05) were also significantly lower in the long term [ 335 ]. Open surgery should be limited to cases with extensive necrotic burden distributed across the entire abdominal cavity. The approach depends on institutional experience and collection location [ 324 ].
+
+ 3.1.17. Q17. How Should Peripancreatic Vein Thrombosis and Left Portal Hypertension Be Managed?
+
+ 3.1.17.1. Statements and GRADE
+
+ 
+- Evidence is insufficient to establish optimal management of splanchnic vein thrombosis in AP; therapeutic anticoagulation may be considered for acute portal vein thrombosis with multi‐vessel involvement, or for progressive splenic vein thrombosis. Weak recommendation, low‐quality evidence. 
+
+ 
+- Local inflammation likely triggers thrombosis; however, a thrombophilia evaluation is recommended after the acute thrombosis episode. Weak recommendation, low‐quality evidence. 
+
+ 
+- Standard regimens use an initial course of low‐molecular‐weight heparin (LMWH), followed by oral anticoagulants for 3–6 months. Anticoagulation should be discontinued once the thrombus resolves or recanalization is not achieved, except in cases of confirmed thrombophilia, with case‐by‐case assessment due to limited efficacy data and potential complications. Weak recommendation, low‐quality evidence. 
+
+ 
+- There is no evidence supporting beta‐blockers or endoscopic therapy for primary or secondary prevention of bleeding in non‐cirrhotic left‐sided portal hypertension. Individualized endoscopic surveillance every 1–2 years appears reasonable for assessing variceal development and guiding tailored decisions. Weak recommendation, low‐quality evidence. 
+
+ 
+ 3.1.17.2. Remarks
+
+ The incidence of splanchnic vein thrombosis, including portal vein thrombosis, superior mesenteric vein thrombosis (which rarely occurs in isolation, typically representing progression from portal vein thrombosis or splenic vein thrombosis) and splenic vein thrombosis, is higher among patients with moderately severe to severe AP [ 336 , 337 , 338 , 339 , 340 , 341 , 342 , 343 ], mainly due to inflammation and venous stasis [ 339 , 340 , 341 , 342 , 343 , 344 , 345 ]. Thrombophilia can be present in a substantial proportion of AP patients but does not independently increase the risk of splanchnic vein thrombosis; however, it should be assessed to estimate recurrence risk and guide anticoagulation duration [ 346 ]. Additional risk factors include male sex, alcohol‐related AP, smoking, IPN, and IAH [ 338 , 339 , 340 , 341 , 342 , 343 , 344 , 345 ].
+
+ Management is difficult given the scarcity of high‐quality evidence. Some observational studies suggest that therapeutic anticoagulation may improve vessel recanalization rates without substantially increasing bleeding [ 347 , 348 , 349 , 350 , 351 , 352 ], but meta‐analyses of retrospective studies show inconsistent results and no clear impact on varices, collaterals, cavernomatosis, or mortality compared with non‐therapeutic approaches, likely due to study heterogeneity [ 352 , 353 , 354 , 355 , 356 ].
+
+ Anticoagulation is more clearly indicated in acute portal vein thrombosis, multi‐vessel involvement, or progressive splenic vein thrombosis, understood as initial thrombosis limited to the splenic vein that extends over time to other splanchnic vessels, where anticoagulation appears to enhance recanalization [ 352 , 353 , 354 , 355 , 356 , 357 , 358 , 359 ]. Standard practice typically involves heparin or LMWH initially, followed by oral anticoagulants for 3–6 months [ 352 , 353 , 354 , 355 , 356 , 357 , 358 , 359 , 360 ].
+
+ Evidence on left‐sided portal hypertension after AP is very limited. In this setting, beta‐blockers and endoscopic interventions are not routinely recommended for primary or secondary variceal bleeding prevention [ 360 ]. In practice, individualized strategies with endoscopic surveillance every 1–2 years, as suggested in Baveno VII for isolated gastric varices type I, seem reasonable to assess varices and guide tailored prevention decisions [ 360 ]. High‐quality studies are needed to improve management protocols for splanchnic vein thrombosis associated with AP.
+
+ 3.1.18. Q18. When Should Cholecystectomy Be Performed?
+
+ 3.1.18.1. Statement and GRADE
+
+ 
+- For patients with mild AP, laparoscopic cholecystectomy should be performed during the index hospitalization. Strong recommendation, high‐quality evidence. 
+
+ 
+- For patients with moderate to severe acute pancreatitis, delaying cholecystectomy until 8 weeks post‐discharge or until local complications resolve is recommended. Weak recommendation, low‐quality evidence. 
+
+ 
+ 3.1.18.2. Remarks
+
+ Evidence from RCTs strongly supports early laparoscopic cholecystectomy as the best strategy for mild AP. The PANC trial found that cholecystectomy within 24 h reduced ERCP need, time to surgery, and 30‐day hospital stay [ 277 ]. Three RCTs showed that cholecystectomy within the first 48 h significantly decreased hospitalization time without increasing complications or conversions to open surgery and lowered biliary recurrences [ 361 , 362 , 363 ]. For laparoscopic cholecystectomy within 72 h of admission, Omar et al. reported fewer gallstone‐related complications and shorter hospital stays [ 364 ], while Riquelme et al. also found no significant differences in ERCP need or postoperative complications [ 365 ]. The PONCHO trial demonstrated that same‐admission cholecystectomy significantly reduced recurrent biliary events (5% vs. 17%, p  = 0.002) [ 366 ], consistent with Jee et al. [ 367 ]. Facundo et al. noted that cholecystectomy on day 7 of admission did not lead to an increase in residual choledocholithiasis or unnecessary ERCPs [ 368 ]. Notably, all RCTs incorporated intraoperative cholangiography or pre‐cholecystectomy ERCP when choledocholithiasis was suspected or confirmed [ 277 , 361 , 362 , 363 , 364 , 365 , 366 , 367 , 368 ]. Meta‐analyses of RCTs and observational studies consistently confirm these findings [ 369 , 370 , 371 , 372 , 373 , 374 , 375 , 376 , 377 , 378 ]. Early cholecystectomy in mild AP is also cost‐effective compared to delayed surgery, mainly through shorter stays and fewer complications [ 379 , 380 ].
+
+ By contrast, in moderately severe to severe AP, particularly when PPPC are present, evidence on the timing of cholecystectomy is limited and mainly observational. Early cholecystectomy in these patients is associated with higher mortality, morbidity, infection rates [ 381 ], and postoperative complications [ 382 ] compared to delayed surgery. Delaying cholecystectomy allows for patient stabilization and resolution of inflammation, thereby reducing surgical risks and improving outcomes [ 383 , 384 ]. A recent Dutch post hoc analysis of an RCT including 248 patients with necrotizing biliary AP demonstrated that cholecystectomy performed within 10 weeks of discharge significantly reduced the risk of recurrent biliary events, with the greatest reduction in recurrent pancreatitis observed when surgery was performed within 8 weeks. Surgical complication rates were not influenced by timing, and endoscopic sphincterotomy did not reduce recurrence risk [ 384 ].
+
+ Accordingly, in patients with PPPC, cholecystectomy should be delayed until collections resolve or, if absent, until 8 weeks after hospital discharge. [ 384 ]. When performed after clinical resolution of AP, the laparoscopic cholecystectomy approach is safe and associated with a low risk of surgical complications [ 383 ].
+
+ 3.1.19. Q19: When and How Should Choledocholithiasis Be Ruled out?
+
+ 3.1.19.1. Statement and GRADE
+
+ 
+- In mild or predicted severe biliary AP without cholangitis, but with persistent or progressive cholestasis or bile duct dilation, evaluation for choledocholithiasis may be deferred for up to 1 week if the patient is clinically stable. Weak recommendation, low‐quality evidence. 
+
+ 
+- Patients with normalization of cholestasis and no bile duct dilation do not require further testing. Weak recommendation, low‐quality evidence. 
+
+ 
+- In mild biliary AP with high suspicion of choledocholithiasis scheduled for early cholecystectomy, biliary exploration should be considered before surgery if any of the following ASGE criteria [ 385 ] are met: 
+- Serum bilirubin > 70 μmol/L (4 mg/dL), or 
+- Common bile duct > 6 mm and bilirubin 30–70 μmol/L (1.75–4 mg/dL), or 
+- Signs of ascending cholangitis are present 
+ 
+ Weak recommendation, moderate quality evidence. 
+ 
+- MRCP and EUS offer high diagnostic accuracy for detecting choledocholithiasis in biliary AP and should be considered in cases of uncertainty, when indicated. Strong recommendation, moderate quality evidence. 
+
+ 
+ 3.1.19.2. Remarks
+
+ Choledocholithiasis occurs in 20%–50% of biliary AP cases [ 386 , 387 , 388 , 389 , 390 ], but up to 80% resolve spontaneously as small stones (< 5 mm) pass into the duodenum. Thus, some studies suggest delaying diagnostic procedures for choledocholithiasis without cholangitis until after the first week [ 388 ] or clinical recovery [ 275 , 276 , 389 ], avoiding overdiagnosis and unnecessary interventions.
+
+ Predictive algorithms based on clinical factors (age, sex), laboratory tests (liver function abnormalities), and imaging findings (bile duct dilation) have been attempted to identify choledocholithiasis in patients without pancreatitis [ 385 , 390 , 391 , 392 , 393 , 394 , 395 ]. However, in biliary AP their accuracy is limited [ 386 , 387 , 388 , 389 , 390 , 391 ], with significant variability and lack of validation in this setting [ 390 , 391 , 392 , 393 , 394 , 396 ]. Moreover, inflammation and local complications of AP alter liver tests and imaging, weakening their diagnostic value [ 386 ].
+
+ The APEC and APEC‐2 trials showed that early ERCP (≤ 24 h) for predicted severe biliary AP, with or without cholestasis but without cholangitis, did not reduce mortality or major complications compared with a conservative approach [ 275 , 276 ], even when ERCP was preceded by EUS‐confirmed choledocholithiasis [ 276 ]. In this context, the lack of observed benefit in early ERCP supports refraining from diagnostic procedures solely intended to identify choledocholithiasis early in the course of disease.
+
+ In patients with mild biliary AP scheduled for early cholecystectomy, preoperative bile duct evaluation is recommended when the suspicion of choledocholithiasis is high. Although clinical criteria vary across RCTs, the PONCHO trial [ 366 ] applied the ASGE criteria [ 385 ], which may represent a reasonable approach in this setting. According to these, preoperative evaluation is indicated if any of the following are present: serum bilirubin > 70 μmol/L (4 mg/dL), a common bile duct diameter > 6 mm with bilirubin 30–70 μmol/L (1.75–4 mg/dL), or clinical signs of ascending cholangitis [ 385 ]. In high‐probability patients, MRCP or EUS should be used, reserving ERCP for confirmed stones [ 366 ]. Both EUS and MRCP outperform TUS and contrast‐enhanced CT in detecting choledocholithiasis [ 397 , 398 , 399 ], and show accuracy comparable to ERCP [ 398 , 399 , 400 ]. Comparative studies generally report similar performance [ 401 , 402 , 403 ], though some suggest higher sensitivity and accuracy for EUS [ 55 , 404 , 405 ]. However, comparative research specifically focused on biliary AP remains limited in establishing recommendations favoring one modality.
+
+ 3.1.20. Q20. When and How Should Pancreatic Exocrine and Endocrine Insufficiency Be Assessed and Managed?
+
+ 3.1.20.1. Statement and GRADE
+
+ Current evidence is insufficient to define clear guidelines on timing and patient selection for pancreatic function testing after AP. However, specific scenarios warrant consideration:
+
+ 
+- Pancreatic exocrine (PEI) and endocrine insufficiency assessment is recommended during follow‐up for necrotizing pancreatitis, alcohol‐induced AP, RAP, or after necrosectomy. Weak recommendation, low‐quality evidence. 
+
+ 
+- Post‐discharge evaluation for endocrine insufficiency, using fasting glucose, glycated hemoglobin (HbA1c), and/or C‐peptide, is also recommended in patients with pre‐existing risk factors such as obesity, hyperlipidemia, or prediabetes. Weak recommendation, low‐quality evidence. 
+
+ 
+- Fecal elastase is a suitable first‐line screening test for PEI, given its accessibility and ease of use. Weak recommendation, low‐quality evidence .
+
+ 
+- Empirical PERT may be considered in patients with extensive necrotizing AP when resuming oral intake or those with maldigestion symptoms. Weak recommendation, low‐quality evidence. 
+
+ 
+- Management of PEI typically involves PERT, following chronic pancreatitis dosing schemes. Treatment of endocrine insufficiency follows standard diabetes protocols, including oral antidiabetic agents and insulin, ideally within a multidisciplinary framework involving endocrinology. Weak recommendation, low‐quality evidence. 
+
+ 
+- Follow‐up for at‐risk patients may include assessment of pancreatic function at 3, 6, and 12 months post‐AP, and every 6–12 months thereafter if dysfunction persists. Monitoring must combine nutritional and diabetological laboratory tests with clinical assessment of maldigestion symptoms. Special attention should be given to endocrine insufficiency, as it may progress over time. Weak recommendation, low‐quality evidence. 
+
+ 
+ 3.1.20.2. Remarks
+
+ In AP, PEI occurs in 2.5%–34% of patients and endocrine insufficiency in 3.5%–37% [ 406 , 407 , 408 , 409 , 410 , 411 ], with higher rates when considering only patients with severe AP [ 412 , 413 , 414 , 415 , 416 , 417 ]. Evidence is limited to small observational studies with variable follow‐up and methodological bias.
+
+ Some studies suggest that PEI may develop at any severity [ 418 , 419 ], but is more common in AP with pancreatic necrosis [ 409 , 410 , 420 , 421 ], RAP, alcoholic etiology [ 422 , 423 , 424 ] or after necrosectomy [ 318 , 335 , 336 , 425 , 426 , 427 , 428 , 429 ]. It is usually transient, resolving within weeks or months [ 408 , 421 , 423 ]. Endocrine insufficiency is strongly associated with severe AP and pancreatic necrosis [ 414 , 418 , 430 , 431 ], rarely occurs in mild cases, and is linked to obesity, hyperlipidemia, and prediabetes [ 432 , 433 ]. Unlike PEI, its incidence seems to increase over time, particularly in the 4th‐6th year after AP [ 408 , 434 ]. Both PEI and diabetes often coexist, reflecting overlapping risk factors [ 412 ].
+
+ The diagnostic techniques used vary and lack validation in AP. For PEI, fecal elastase (preferred for its simplicity) and fecal fat measurement are the most commonly used tests, while direct duodenal testing is rarely applied. [ 416 , 418 , 422 , 426 ]. For endocrine function, the oral glucose tolerance test, fasting blood glucose, HbA1c, fasting insulin, and/or C‐peptide measurements are employed [ 407 , 415 , 430 , 433 ]. No comparative studies on diagnostic techniques exist for AP.
+
+ Currently, no robust evidence guides the initiation of PERT in AP. However, empirical treatment may be started in severe necrotizing disease when oral feeding resumes, or in patients presenting with maldigestive symptoms (steatorrhea, flatulence, digestive discomfort, etc.), and after confirmatory tests. In clinical practice, chronic pancreatitis regimens are adopted: 50,000 IU of enzymes per main meals (two capsules per meal: 2‐2‐2) and 25,000 IU (one capsule) with snacks [ 411 , 435 ], with further adjustments based on clinical response. Diabetes management follows standard protocols with oral agents or insulin therapy, due to the lack of specific evidence in AP.
+
+ In the absence of high‐quality evidence, the most recent European guidelines recommend a pragmatic follow‐up for patients at risk of pancreatic dysfunction: exocrine and endocrine assessments at 3, 6, and 12 months after AP, and every 6–12 months thereafter if dysfunction persists [ 435 ]. Monitoring should combine laboratory evaluation of nutritional status (including fat‐soluble vitamins, iron studies, vitamin B12, folate, calcium, magnesium, zinc, and selenium), diabetological markers (fasting glucose, HbA1c, lipid profile, and, when indicated, C‐peptide), and clinical assessment of symptoms related to maldigestion (steatorrhea, diarrhea, bloating, weight loss) and endocrine dysfunction (polyuria, polydipsia, unintended weight loss) [ 435 ].
+
+ 4. Discussion
+
+ These iLATAM guidelines provide a comprehensive synthesis of current evidence for the management of acute pancreatitis (AP). However, across multiple sections, several recommendations remain supported by low‐certainty evidence, reflecting persistent gaps in the literature. In some areas, strong recommendations were issued despite low certainty, because the panel judged that clinical necessity, consistent expert agreement, and a favorable balance of expected benefits over potential harms outweighed the limitations of the available trial data. This highlights the need for well‐designed prospective studies to strengthen the evidence base. In addition, very few studies incorporate patient‐reported outcome measures, such as the PAN‐PROMISE symptom scale [ 168 ] which is a notable gap given the increasing emphasis on patient‐centered care. Future research should extend beyond in‐hospital management and short‐term complications to address long‐term morbidity and mortality [ 436 ], functional recovery, integration with primary care, and health‐related quality of life after an AP episode. The development of structured post‐discharge pathways and recovery‐oriented protocols will be essential to meet the needs of this patient population. Although this guideline did not formally develop quality indicators or audit measures, several recommendations naturally map to measurable metrics. Future collaborative initiatives may therefore focus on defining context‐appropriate quality indicators to support evaluation of adherence and outcomes across Ibero–Latin American healthcare systems.
+
+ Author Contributions
+
+ E. de‐Madaria conceptualized and designed the study. J Mira advised on methodological framework and contributed to defining the study steps and quality and safety evaluation criteria. K. Cárdenas‐Jaén and E. de‐Madaria oversaw the overall coordination and methodological processes. K. Cárdenas‐Jaén, C. Mancilla, M. Bispo, P. Moutinho‐Ribeiro, E. Martínez‐Moneo, and R. Mansilla coordinated the working teams. Each working team, comprising by one coordinator and four authors, conducted the systematic literature review, data extraction, and evidence synthesis for the assigned clinical questions, and developed recommendations following the GRADE approach. I. Carrillo configured the online voting platform for each clinical question and extracted the corresponding levels of agreement reached. All authors constituted the expert panel, which refined and voted on the recommendations. K. Cárdenas‐Jaén and L. Guilabert drafted the final English manuscript. All authors critically revised and approved the final version.
+
+ Funding
+
+ This project received financial support from the Spanish Association of Gastroenterology AEG, through a competitive research grant (AEG grant from the Pancreas and Bile Duct Group 2022).
+
+ Conflicts of Interest
+
+ Alberto Espino has received consulting fees from Olympus Latam Continuum Professional Education related to endoscopy (colonoscopy, ERCP, EUS). President of the Chilean Pancreas Club. Alejandro Piscoya is Vice‐President of the Peruvian Society of Gastroenterology. Chair of the World Gastroenterology Organization (WGO) Guidelines Committee. President‐elect of the Panamerican Gastroenterology Organization (OPGE). Ana García García de Paredes is recipient of a Río Hortega research grant from the Instituto de Salud Carlos III. Has received support for attending meetings from Viatris, Casen, and Pentax. Honoraria from Elsevier. Antonio López‐Serrano has received lecture honoraria from GlaxoSmithKline, S.A. and Sistemas Integrales de Medicina, S.A. Daniel de la Iglesia has received lecture honoraria from Viatris and travel and meeting support from Viatris. Emma Martínez‐Moneo has received lecture honoraria and meeting attendance support from Viatris. President of AESPANC and has been a member of the Executive Board of the Spanish Gastroenterology Association (AEG) as coordinator of the Pancreas section. Enrique de‐Madaria has received research funding from Abbott, is chair of the adjudication committee in three studies by Arrowhead, has received travel grants from AbbVie, and has participated in educational events sponsored by Abbott and Viatris. Past president of the Spanish Gastroenterology Association (AEG) and AESPANC. Independent councilor of the United European Gastroenterology and previous member of the Education committee. Eva Marín‐Serrano has received travel and meeting support from Viatris, Izasa, and Canon, and honoraria for lectures from Editorial Médica Panamericana and for teaching activities in the Master of Intestinal Permeability and the Ultrasound Course at Hospital La Paz. President of AEED and Secretary of FESUMB. Fauze Maluf‐Filho is consultant for Boston Scientific, Cook Medical, and Medtronic. Isabel Pascual‐Moreno has received travel and meeting support from Viatris, and honoraria from the Spanish Gastroenterology Association (AEG) for a book chapter and for lectures in a Master's program in inflammatory bowel disease (2021). Neftalí Jara Pérez‐López has received travel and meeting support from Norgine José Manuel Ramia is Chair of the Scientific Committee of EAHPBA, member of the Executive Board of SEOQ, member of the Executive Committee of EAHPBA, member of the Program Committee of the EAHPBA Lyon 2023 Congress, President of the Spanish Chapter of the American College of Surgeons. Karina Cárdenas‐Jaén is Representative on the Executive board of the Asociación Española de Gastroenterología (AEG) as a member of the Pancreas Section. Lucas Granero has received payments for lectures and travel support from Abbott. Lucía Guilabert is recipient of a Río Hortega research grant from the Instituto de Salud Carlos III. Coordinator of YOUPPIE (young group of the European Pancreatic Club (EPC), 2025). Member of the Education Committee of the EPC (2024). Has received travel and congress support from AbbVie, Janssen, Viatris, Takeda, and Phaes Pharma. María Francisco González has received honoraria for lectures or expert activities, as well as travel and meeting support from Mylan. Has received lecture honoraria and travel support from Abbott, and travel and meeting support from Norgine. Sandra Basso has received lecture honoraria from Abbott and PTC Therapeutics. William Manzanares Castro has received honoraria for lectures from Baxter International (Colombia) and Bioerix (Uruguay) and expert testimony fees from Baxter International (Colombia).
+
+ Supporting information
+
+ 
+Supporting Information S1
+
+ 
+ 
+ UEG2-14-e70190-s003.docx (643.5KB, docx) 
+ 
+Supporting Information S2
+
+ 
+ 
+ UEG2-14-e70190-s002.pdf (1.4MB, pdf) 
+ 
+Supporting Information S3
+
+ 
+ 
+ UEG2-14-e70190-s001.pdf (1.5MB, pdf) 
+ Acknowledgments
+
+ We would like to thank the Governing Boards of the participating associations for their support. Thanks to AEG for the funding (AEG grant from the Pancreas and Bile Duct Group 2022). These guidelines are dedicated to our Master and friend Guido Villagómez, from La Paz, Bolivia.
+
+ Data Availability Statement
+
+ Data sharing not applicable to this article as no datasets were generated or analyzed during the current study.
+
+ References
+
+ 
+- 
+ 1. 
+Xiao A. Y., Tan M. L., Wu L. M., et al., “Global Incidence and Mortality of Pancreatic Diseases: A Systematic Review, Meta‐Analysis, and Meta‐Regression of Population‐Based Cohort Studies,” Lancet Gastroenterology & Hepatology
+1, no. 1 (2016): 45–55, 10.1016/s2468-1253(16)30004-8.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 2. 
+Iannuzzi J. P., King J. A., Leong J. H., et al., “Global Incidence of Acute Pancreatitis is Increasing Over Time: A Systematic Review and Meta‐Analysis,” Gastroenterology
+162, no. 1 (2022): 122–134, 10.1053/j.gastro.2021.09.043.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 3. 
+Peery A. F., Murphy C. C., Anderson C., et al., “Burden and Cost of Gastrointestinal, Liver, and Pancreatic Diseases in the United States: Update 2024,” Gastroenterology
+168, no. 5 (2025): 1000–1024, 10.1053/j.gastro.2024.12.029.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 4. 
+Banks P. A., Bollen T. L., Dervenis C., et al., “Classification of Acute Pancreatitis–2012: Revision of the Atlanta Classification and Definitions by International Consensus,” Gut
+62, no. 1 (2013): 102–111, 10.1136/gutjnl-2012-302779.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 5. 
+Sternby H., Bolado F., Canaval‐Zuleta H. J., et al., “Determinants of Severity in Acute Pancreatitis: A Nation‐Wide Multicenter Prospective Cohort Study,” Annals of Surgery
+270, no. 2 (2019): 348–355, 10.1097/sla.0000000000002766.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 6. 
+Beij A., Verdonk R., van Santvoort H. A.‐O., de‐Madaria E., “Voermans RA‐OX. Acute Pancreatitis: An Update of Evidence‐Based Management and Recent Trends in Treatment Strategies,” (2050‐6414 (Electronic)). [ DOI ] [ PMC free article ] [ PubMed ] 
+- 
+ 7. 
+Lluís N., Asbun H., Basso S., et al., “Survey on Initial Management of Acute Pancreatitis in Latin America,” (0210–5705 (Print)). [ DOI ] [ PubMed ] 
+- 
+ 8. 
+Berger Z., Mancilla C., Tobar E., et al., “Acute Pancreatitis in Chile: A Multicenter Study on Epidemiology, Etiology and Clinical Outcome: Retrospective Analysis of Clinical Files,” (1424–3911 (Electronic)). [ DOI ] [ PubMed ] 
+- 
+ 9. 
+Guyatt G. H., Oxman A. D., Vist G. E., et al., “GRADE: An Emerging Consensus on Rating Quality of Evidence and Strength of Recommendations,” BMJ
+336, no. 7650 (2008): 924–926, 10.1136/bmj.39489.470347.ad.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 10. 
+Alonso‐Coello P., Schünemann H. J., Moberg J., et al., “GRADE Evidence to Decision (EtD) Frameworks: A Systematic and Transparent Approach to Making Well Informed Healthcare Choices. 1: Introduction,” (1756–1833 (Electronic)). [ DOI ] [ PubMed ] 
+- 
+ 11. 
+Brouwers M. C., Kho M. E., Browman G. P., et al., “AGREE II: Advancing Guideline Development, Reporting and Evaluation in Health Care,” Canadian Medical Association Journal
+182, no. 18 (2010): E839–E842, 10.1503/cmaj.090449.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 12. 
+Mayerle J., Sendler M., Hegyi E., Beyer G., Lerch M. M., and Sahin‐Toth M., “Genetics, Cell Biology, and Pathophysiology of Pancreatitis,” Gastroenterology
+156, no. 7 (2019): 1951–1968.e1, 10.1053/j.gastro.2018.11.081.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 13. 
+Wen L., Javed T. A., Yimlamai D., Mukherjee A., Xiao X., and Husain S. Z., “Transient High Pressure in Pancreatic Ducts Promotes Inflammation and Alters Tight Junctions Via Calcineurin Signaling in Mice,” Gastroenterology
+155, no. 4 (2018): 1250–1263.e5, 10.1053/j.gastro.2018.06.036.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 14. 
+Gerasimenko J. V., Peng S., Tsugorka T., and Gerasimenko O. V., “Ca(2+) Signalling Underlying Pancreatitis,” Cell Calcium
+70 (2018): 95–101, 10.1016/j.ceca.2017.05.010.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 15. 
+Pallagi P., Madacsy T., Varga A., and Maleth J., “Intracellular Ca(2+) Signalling in the Pathogenesis of Acute Pancreatitis: Recent Advances and Translational Perspectives,” International Journal of Molecular Sciences
+21, no. 11 (2020): 4005, 10.3390/ijms21114005.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 16. 
+Maléth J. and Hegyi P., “Ca2+ Toxicity and Mitochondrial Damage in Acute Pancreatitis: Translational Overview,” Philosophical Transactions of the Royal Society of London B Biological Sciences
+371, no. 1700 (2016): 20150425, 10.1098/rstb.2015.0425.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 17. 
+Petersen O. H., Gerasimenko J. V., Gerasimenko O. V., Gryshchenko O., and Peng S., “The Roles of Calcium and ATP in the Physiology and Pathology of the Exocrine Pancreas,” Physiological Reviews
+101, no. 4 (2021): 1691–1744, 10.1152/physrev.00003.2021.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 18. 
+Mukherjee R., Mareninova O. A., Odinokova I. V., et al., “Mechanism of Mitochondrial Permeability Transition Pore Induction and Damage in the Pancreas: Inhibition Prevents Acute Pancreatitis by Protecting Production of ATP,” Gut
+65, no. 8 (2016): 1333–1346, 10.1136/gutjnl-2014-308553.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 19. 
+Saluja A., Dudeja V., Dawra R., and Sah R. P., “Early Intra‐Acinar Events in Pathogenesis of Pancreatitis,” Gastroenterology
+156, no. 7 (2019): 1979–1993, 10.1053/j.gastro.2019.01.268.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 20. 
+Hall J. C. and Crawford H. C., “The Conspiracy of Autophagy, Stress and Inflammation in Acute Pancreatitis,” Current Opinion in Gastroenterology
+30, no. 5 (2014): 495–499, 10.1097/mog.0000000000000097.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 21. 
+Gukovskaya A. S., Gukovsky I., Algül H., and Habtezion A., “Autophagy, Inflammation, and Immune Dysfunction in the Pathogenesis of Pancreatitis,” Gastroenterology
+153, no. 5 (2017): 1212–1226, 10.1053/j.gastro.2017.08.071.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 22. 
+Lee P. J. and Papachristou G. I., “New Insights Into Acute Pancreatitis,” Nature Reviews Gastroenterology & Hepatology
+16, no. 8 (2019): 479–496, 10.1038/s41575-019-0158-2.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 23. 
+Kang R., Lotze M. T., Zeh H. J., Billiar T. R., and Tang D., “Cell Death and DAMPs in Acute Pancreatitis,” Molecular Medicine
+20, no. 1 (2014): 466–477, 10.2119/molmed.2014.00117.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 24. 
+Garg P. K. and Singh V. P., “Organ Failure due to Systemic Injury in Acute Pancreatitis,” Gastroenterology
+156, no. 7 (2019): 2008–2023, 10.1053/j.gastro.2018.12.041.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 25. 
+Vissers R. J., Abu‐Laban R. B., and McHugh D. F., “Amylase and Lipase in the Emergency Department Evaluation of Acute Pancreatitis,” Journal of Emergency Medicine
+17, no. 6 (1999): 1027–1037, 10.1016/s0736-4679(99)00136-5.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 26. 
+Rompianesi G., Hann A., Komolafe O., Pereira S. P., Davidson B. R., and Gurusamy K. S., “Serum Amylase and Lipase and Urinary Trypsinogen and Amylase for Diagnosis of Acute Pancreatitis,” Cochrane Database of Systematic Reviews
+4, no. 4 (2017): Cd012010, 10.1002/14651858.CD012010.pub2.(
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 27. 
+Hedstrom J., Sainio V., Kemppainen E., et al., “Urine Trypsinogen‐2 as Marker of Acute Pancreatitis,” Clinical Chemistry
+42, no. 5 (1996): 685–690, 10.1093/clinchem/42.5.685.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 28. 
+Chang K., Lu W., Zhang K., et al., “Rapid Urinary Trypsinogen‐2 Test in the Early Diagnosis of Acute Pancreatitis: A Meta‐Analysis,” Clinical Biochemistry
+45, no. 13–14 (2012): 1051–1056, 10.1016/j.clinbiochem.2012.04.028.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 29. 
+Kemppainen E. A., Hedstrom J. I., Puolakkainen P. A., et al., “Rapid Measurement of Urinary Trypsinogen‐2 as a Screening Test for Acute Pancreatitis,” New England Journal of Medicine
+336, no. 25 (1997): 1788–1793, 10.1056/nejm199706193362504.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 30. 
+Bollen T. L., van Santvoort H. C., Besselink M. G., van Es W. H., Gooszen H. G., and van Leeuwen M. S., “Update on Acute Pancreatitis: Ultrasound, Computed Tomography, and Magnetic Resonance Imaging Features,” Seminars In Ultrasound CT and MR
+28, no. 5 (2007): 371–383, 10.1053/j.sult.2007.06.002.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 31. 
+Wang S. S., Lin X. Z., Tsai Y. T., et al., “Clinical Significance of Ultrasonography, Computed Tomography, and Biochemical Tests in the Rapid Diagnosis of Gallstone‐Related Pancreatitis: A Prospective Study,” Pancreas
+3, no. 2 (1988): 153–158, 10.1097/00006676-198804000-00007.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 32. 
+Ward J., Chalmers A. G., Guthrie A. J., Larvin M., and Robinson P. J., “T2‐Weighted and Dynamic Enhanced MRI in Acute Pancreatitis: Comparison With Contrast Enhanced CT,” Clinical Radiology
+52, no. 2 (1997): 109–114, 10.1016/s0009-9260(97)80102-x.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 33. 
+Lecesne R., Taourel P., Bret P. M., Atri M., and Reinhold C., “Acute Pancreatitis: Interobserver Agreement and Correlation of CT and MR Cholangiopancreatography With Outcome,” Radiology
+211, no. 3 (1999): 727–735, 10.1148/radiology.211.3.r99jn08727.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 34. 
+Arvanitakis M., Delhaye M., De Maertelaere V., et al., “Computed Tomography and Magnetic Resonance Imaging in the Assessment of Acute Pancreatitis,” Gastroenterology
+126, no. 3 (2004): 715–723, 10.1053/j.gastro.2003.12.006.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 35. 
+Morgan D. E., Baron T. H., Smith J. K., Robbin M. L., and Kenney P. J., “Pancreatic Fluid Collections Prior to Intervention: Evaluation With MR Imaging Compared With CT and US,” Radiology
+203, no. 3 (1997): 773–778, 10.1148/radiology.203.3.9169703.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 36. 
+Sun H., Jian S., Peng B., and Hou J., “Comparison of Magnetic Resonance Imaging and Computed Tomography in the Diagnosis of Acute Pancreatitis: A Systematic Review and meta‐analysis of Diagnostic Test Accuracy Studies,” Annals of Translational Medicine
+10, no. 7 (2022): 410, 10.21037/atm-22-812.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 37. 
+Zilio M. B., Eyff T. F., Azeredo‐Da‐Silva A. L. F., Bersch V. P., and Osvaldt A. B., “A Systematic Review and Meta‐Analysis of the Aetiology of Acute Pancreatitis,” HPB
+21, no. 3 (2019): 259–267, 10.1016/j.hpb.2018.08.003.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 38. 
+Adiamah A., Psaltis E., Crook M., and Lobo D. N., “A Systematic Review of the Epidemiology, Pathophysiology and Current Management of Hyperlipidaemic Pancreatitis,” Clinical Nutrition
+37, no. 6 Pt A (2018): 1810–1822, 10.1016/j.clnu.2017.09.028.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 39. 
+Liu C. L., Fan S. T., Lo C. M., et al., “Clinico‐Biochemical Prediction of Biliary Cause of Acute Pancreatitis in the Era of Endoscopic Ultrasonography,” Alimentary Pharmacology & Therapeutics
+22, no. 5 (2005): 423–431, 10.1111/j.1365-2036.2005.02580.x.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 40. 
+Zarnescu N. O., Costea R., Zarnescu Vasiliu E. C., and Neagu S., “Clinico‐Biochemical Factors to Early Predict Biliary Etiology of Acute Pancreatitis: Age, Female Gender, and ALT,” Journal of Medicine and Life
+8, no. 4 (2015): 523–526, https://pmc.ncbi.nlm.nih.gov/articles/PMC4656965/ .
+ [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 41. 
+Tenner S., Dubner H., and Steinberg W., “Predicting Gallstone Pancreatitis With Laboratory Parameters: A Meta‐Analysis,” American Journal of Gastroenterology
+89, no. 10 (1994): 1863–1866, https://pubmed.ncbi.nlm.nih.gov/7942684/ .
+ [ PubMed ] [ Google Scholar ] 
+- 
+ 42. 
+Mathuram Thiyagarajan U., Ponnuswamy A., and Thomas R., “Predictivity of Biochemical Markers on Aetiology and Length of Hospitalisation in Acute Pancreatitis,” Cureus
+12, no. 12 (2020): e11989, 10.7759/cureus.11989.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 43. 
+Azevedo B. and Fagundes D. J., “Differential Diagnosis Between Biliary and Nonbiliary Acute Pancreatitis: What is the Importance of Laboratory Tests?,” ABCD: Arquivos Brasileiros de Cirurgia Digestiva
+35 (2022): e1694, 10.1590/0102-672020220002e1694.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 44. 
+Irving H. M., Samokhvalov A. V., and Rehm J., “Alcohol as a Risk Factor for Pancreatitis. A Systematic Review and Meta‐Analysis,” Jop
+10, no. 4 (2009): 387–392, https://pmc.ncbi.nlm.nih.gov/articles/PMC3299482/ .
+ [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 45. 
+Carr R. A., Rejowski B. J., Cote G. A., Pitt H. A., and Zyromski N. J., “Systematic Review of Hypertriglyceridemia‐Induced Acute Pancreatitis: A More Virulent Etiology?,” Pancreatology
+16, no. 4 (2016): 469–476, 10.1016/j.pan.2016.02.011.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 46. 
+Signoretti M., Baccini F., Piciucchi M., et al., “Repeated Transabdominal Ultrasonography is a Simple and Accurate Strategy to Diagnose a Biliary Etiology of Acute Pancreatitis,” Pancreas
+43, no. 7 (2014): 1106–1110, 10.1097/mpa.0000000000000164.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 47. 
+Hallensleben N. D., Umans D. S., Bouwense S. A., et al., “The Diagnostic Work‐Up and Outcomes of 'Presumed' Idiopathic Acute Pancreatitis: A Post‐hoc Analysis of a Multicentre Observational Cohort,” United European Gastroenterology Journal
+8, no. 3 (2020): 340–350, 10.1177/2050640619890462.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 48. 
+Ardengh J. C., Malheiros C. A., Rahal F., Pereira V., and Ganc A. J., “Microlithiasis of the Gallbladder: Role of Endoscopic Ultrasonography in Patients With Idiopathic Acute Pancreatitis,” Revista da Associação Médica Brasileira
+56, no. 1 (2010): 27–31, 10.1590/s0104-42302010000100011.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 49. 
+Frossard J. L., Sosa‐Valencia L., Amouyal G., Marty O., Hadengue A., and Amouyal P., “Usefulness of Endoscopic Ultrasonography in Patients With “Idiopathic” Acute Pancreatitis,” American Journal of Medicine
+109, no. 3 (2000): 196–200, 10.1016/s0002-9343(00)00478-2.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 50. 
+Mujica V. R., Barkin J. S., and Go V. L., “Acute Pancreatitis Secondary to Pancreatic Carcinoma: Study Group Participants,” Pancreas
+21, no. 4 (2000): 329–332, 10.1097/00006676-200011000-00001.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 51. 
+Norton S. A. and Alderson D., “Endoscopic Ultrasonography in the Evaluation of Idiopathic Acute Pancreatitis,” British Journal of Surgery
+87, no. 12 (2000): 1650–1655, 10.1046/j.1365-2168.2000.01587.x.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 52. 
+Wilcox C. M., Varadarajulu S., and Eloubeidi M., “Role of Endoscopic Evaluation in Idiopathic Pancreatitis: A Systematic Review,” Gastrointestinal Endoscopy
+63, no. 7 (2006): 1037–1045, 10.1016/j.gie.2006.02.024.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 53. 
+Mariani A., Arcidiacono P. G., Curioni S., Giussani A., and Testoni P. A., “Diagnostic Yield of ERCP and Secretin‐Enhanced MRCP and EUS in Patients With Acute Recurrent Pancreatitis of Unknown Aetiology,” Digestive and Liver Disease
+41, no. 10 (2009): 753–758, 10.1016/j.dld.2009.01.009.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 54. 
+Smith I., Ramesh J., Mönkemüller K., Kyanam Kabir Baig K. R., Mönkemüller K., and Wilcox CM. “Emerging Role of Endoscopic Ultrasound in the Diagnostic Evaluation of Idiopathic Pancreatitis,” American Journal of the Medical Sciences
+350, no. 3 (2015): 229–234, 10.1097/maj.0000000000000541.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 55. 
+Wan J., Ouyang Y., Yu C., Yang X., Xia L., and Lu N., “Comparison of EUS With MRCP in Idiopathic Acute Pancreatitis: A Systematic Review and Meta‐Analysis,” Gastrointestinal Endoscopy
+87, no. 5 (2018): 1180–1188.e9, 10.1016/j.gie.2017.11.028.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 56. 
+Kim D. B., Paik C. N., Song D. S., et al., “The Role of Endoscopic Ultrasonography and Magnetic Resonance Cholangiopancreatography in Patients With Acute Pancreatitis After Negative Computed Tomography Findings of the Etiology,” Pancreas
+47, no. 9 (2018): 1165–1171, 10.1097/mpa.0000000000001149.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 57. 
+Pereira R., Eslick G., and Cox M., “Endoscopic Ultrasound for Routine Assessment in Idiopathic Acute Pancreatitis,” Journal of Gastrointestinal Surgery
+23, no. 8 (2019): 1694–1700, 10.1007/s11605-019-04272-3.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 58. 
+Valverde‐Lopez F., Ortega‐Suazo E. J., Wilcox C. M., Fernandez‐Cano M. C., Martinez‐Cara J. G., and Redondo‐Cerezo E., “Endoscopic Ultrasound as a Diagnostic and Predictive Tool in Idiopathic Acute Pancreatitis,” Annals of Gastroenterology
+33, no. 3 (2020): 305–312, 10.20524/aog.2020.0464.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 59. 
+Vila J. J., Mendioroz F. J. J., Yeaton P., et al., “EUS is Superior to Secretin‐Enhanced Cholangio‐MRI to Establish the Etiology of Idiopathic Acute Pancreatitis,” Endoscopy International Open
+8, no. 10 (2020): E1441–E1447, 10.1055/a-1233-1849.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 60. 
+Umans D. S., Rangkuti C. K., Sperna Weiland C. J., et al., “Endoscopic Ultrasonography Can Detect a Cause in the Majority of Patients With Idiopathic Acute Pancreatitis: A Systematic Review and Meta‐Analysis,” Endoscopy
+52, no. 11 (2020): 955–964, 10.1055/a-1183-3370.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 61. 
+Mazza S., Elvo B., Conti C. B., et al., “Endoscopic Ultrasound Diagnostic Gain Over Computed Tomography and Magnetic Resonance Cholangiopancreatography in Defining Etiology of Idiopathic Acute Pancreatitis,” World Journal of Gastrointestinal Endoscopy
+14, no. 6 (2022): 376–386, 10.4253/wjge.v14.i6.376. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 62. 
+Umans D. S., Timmerhuis H. C., Anten M. G. F., et al., “Prospective Multicentre Study of Indications for Surgery in Patients With Idiopathic Acute Pancreatitis Following Endoscopic Ultrasonography (PICUS),” British Journal of Surgery
+110, no. 12 (2023): 1877–1882, 10.1093/bjs/znad318.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 63. 
+Khoury T., Shahin A., and Sbeit W., “Exploring the Optimal Timing of Endoscopic Ultrasound Performance Post‐Acute Idiopathic Pancreatitis,” Diagnostics
+12, no. 8 (2022): 1808, 10.3390/diagnostics12081808.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 64. 
+Ortega A. R., Gomez‐Rodriguez R., Romero M., Fernandez‐Zapardiel S., Cespedes Mdel M., and Carrobles J. M., “Prospective Comparison of Endoscopic Ultrasonography and Magnetic Resonance Cholangiopancreatography in the Etiological Diagnosis of “Idiopathic” Acute Pancreatitis,” Pancreas
+40, no. 2 (2011): 289–294, 10.1097/mpa.0b013e318201654a.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 65. 
+Thevenot A., Bournet B., Otal P., Canevet G., Moreau J., and Buscail L., “Endoscopic Ultrasound and Magnetic Resonance Cholangiopancreatography in Patients With Idiopathic Acute Pancreatitis,” Digestive Diseases and Sciences
+58, no. 8 (2013): 2361–2368, 10.1007/s10620-013-2632-y.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 66. 
+Sandrasegaran K., Tahir B., Barad U., et al., “The Value of Secretin‐Enhanced MRCP in Patients With Recurrent Acute Pancreatitis,” American Journal of Roentgenology
+208, no. 2 (2017): 315–321, 10.2214/ajr.16.16566.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 67. 
+Mitra T., Dixit V. K., Yadav D. P., et al., “Idiopathic Acute Pancreatitis‐A Myth or Reality? Role of Endoscopic Ultrasonography and Magnetic Resonance Cholangiopancreatography in Its Diagnosis,” Indian Journal of Gastroenterology
+40, no. 1 (2021): 22–29, 10.1007/s12664-020-01125-9.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 68. 
+Chowdhury A. H., Humes D. J., Pritchard S. E., et al., “The Effects of Morphine‐Neostigmine and Secretin Provocation on Pancreaticobiliary Morphology in Healthy Subjects: A Randomized, Double‐Blind Crossover Study Using Serial MRCP,” World Journal of Surgery
+35, no. 9 (2011): 2102–2109, 10.1007/s00268-011-1162-z.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 69. 
+Toledo P. F., Cardenas G., Berger Z., Simian D., and Araya F., “Neostigmine(R) Improves Pancreatic Duct Visualization in Magnetic Resonance Cholangiopancreatography and Could Be a Cheap Alternative for Secretin,” Turkish Journal of Gastroenterology
+33, no. 8 (2022): 704–709, 10.5152/tjg.2022.21864. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 70. 
+Yoon S. B., Moon S. H., Kim J. H., Song T. J., and Kim M. H., “The Use of Immunohistochemistry for IgG4 in the Diagnosis of Autoimmune Pancreatitis: A Systematic Review and meta‐analysis,” Pancreatology
+20, no. 8 (2020): 1611–1619, 10.1016/j.pan.2020.10.028.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 71. 
+Shimosegawa T., Chari S. T., Frulloni L., et al., “International Consensus Diagnostic Criteria for Autoimmune Pancreatitis: Guidelines of the International Association of Pancreatology,” Pancreas
+40, no. 3 (2011): 352–358, 10.1097/mpa.0b013e3182142fd2.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 72. 
+Barkin J. A., Nemeth Z., Saluja A. K., and Barkin J. S., “Cannabis‐Induced Acute Pancreatitis: A Systematic Review,” Pancreas
+46, no. 8 (2017): 1035–1038, 10.1097/mpa.0000000000000873.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 73. 
+Culetto A., Bournet B., Haennig A., Alric L., Peron J. M., and Buscail L., “Prospective Evaluation of the Aetiological Profile of Acute Pancreatitis in Young Adult Patients,” Digestive and Liver Disease
+47, no. 7 (2015): 584–589, 10.1016/j.dld.2015.03.009.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 74. 
+Munigala S., Kanwal F., Xian H., Scherrer J. F., and Agarwal B., “Increased Risk of Pancreatic Adenocarcinoma After Acute Pancreatitis,” Clinical Gastroenterology and Hepatology
+12, no. 7 (2014): 1143–1150.e1, 10.1016/j.cgh.2013.12.033.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 75. 
+Werlin S., Konikoff F. M., Halpern Z., et al., “Genetic and Electrophysiological Characteristics of Recurrent Acute Pancreatitis,” Journal of Pediatric Gastroenterology and Nutrition
+60, no. 5 (2015): 675–679, 10.1097/mpg.0000000000000623.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 76. 
+Cruz L. M., Kwon J. Y., Oman S. P., et al., “Comparison of Idiopathic Recurrent Acute Pancreatitis [IRAP] and Recurrent Acute Pancreatitis With Genetic Mutations,” Digestive and Liver Disease
+53, no. 10 (2021): 1294–1300, 10.1016/j.dld.2021.04.013.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 77. 
+Guda N. M., Muddana V., Whitcomb D. C., et al., “Recurrent Acute Pancreatitis: International State‐of‐the‐Science Conference With Recommendations,” Pancreas
+47, no. 6 (2018): 653–666, 10.1097/mpa.0000000000001053.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 78. 
+Del Vecchio Blanco G., Gesuale C., Varanese M., Monteleone G., and Paoluzi O. A., “Idiopathic Acute Pancreatitis: A Review on Etiology and Diagnostic Work‐Up,” Clinical Journal of Gastroenterology
+12, no. 6 (2019): 511–524, 10.1007/s12328-019-00987-7.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 79. 
+Romagnuolo J., Guda N., Freeman M., and Durkalski V., “Preferred Designs, Outcomes, and Analysis Strategies for Treatment Trials in Idiopathic Recurrent Acute Pancreatitis,” Gastrointestinal Endoscopy
+68, no. 5 (2008): 966–974, 10.1016/j.gie.2008.05.006.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 80. 
+Kumar S., Ooi C. Y., Werlin S., et al., “Risk Factors Associated With Pediatric Acute Recurrent and Chronic Pancreatitis: Lessons From INSPPIRE,” JAMA Pediatrics
+170, no. 6 (2016): 562–569, 10.1001/jamapediatrics.2015.4955.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 81. 
+Jalaly N. Y., Moran R. A., Fargahi F., et al., “An Evaluation of Factors Associated With Pathogenic PRSS1, SPINK1, CTFR, And/Or CTRC Genetic Variants in Patients With Idiopathic Pancreatitis,” American Journal of Gastroenterology
+112, no. 8 (2017): 1320–1329, 10.1038/ajg.2017.106.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 82. 
+Lloret Linares C., Pelletier A. L., Czernichow S., et al., “Acute Pancreatitis in a Cohort of 129 Patients Referred for Severe Hypertriglyceridemia,” Pancreas
+37, no. 1 (2008): 13–22, 10.1097/mpa.0b013e31816074a1.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 83. 
+Sandhu S., Al‐Sarraf A., Taraboanta C., Frohlich J., and Francis G. A., “Incidence of Pancreatitis, Secondary Causes, and Treatment of Patients Referred to a Specialty Lipid Clinic With Severe Hypertriglyceridemia: A Retrospective Cohort Study,” Lipids in Health and Disease
+10, no. 1 (2011): 157, 10.1186/1476-511x-10-157.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 84. 
+Murphy M. J., Sheng X., MacDonald T. M., and Wei L., “Hypertriglyceridemia and Acute Pancreatitis,” JAMA Internal Medicine
+173, no. 2 (2013): 162–164, 10.1001/2013.jamainternmed.477.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 85. 
+Pedersen S. B., Langsted A., and Nordestgaard B. G., “Nonfasting Mild‐to‐Moderate Hypertriglyceridemia and Risk of Acute Pancreatitis,” JAMA Internal Medicine
+176, no. 12 (2016): 1834–1842, 10.1001/jamainternmed.2016.6875.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 86. 
+Dhindsa S., Sharma A., Al‐Khazaali A., et al., “Intravenous Insulin Versus Conservative Management in Hypertriglyceridemia‐Associated Acute Pancreatitis,” Journal of the Endocrine Society
+4, no. 1 (2020): bvz019, 10.1210/jendso/bvz019.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 87. 
+Pulipati V. P., Amblee A., Yap S. E. T., Shaka H., Tahsin B., and Fogelfeld L., “Hypertriglyceridemia‐Associated Acute Pancreatitis: Response to Continuous Insulin Infusion,” PLoS One
+16, no. 11 (2021): e0260495, 10.1371/journal.pone.0260495.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 88. 
+Nasstrom B., Olivecrona G., Olivecrona T., and Stegmayr B. G., “Lipoprotein Lipase During Continuous Heparin Infusion: Tissue Stores Become Partially Depleted,” Journal of Laboratory and Clinical Medicine
+138, no. 3 (2001): 206–213, 10.1067/mlc.2001.117666.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 89. 
+Weintraub M., Rassin T., Eisenberg S., et al., “Continuous Intravenous Heparin Administration in Humans Causes a Decrease in Serum Lipolytic Activity and Accumulation of Chylomicrons in Circulation,” Journal of Lipid Research
+35, no. 2 (1994): 229–238, 10.1016/s0022-2275(20)41211-8.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 90. 
+Zhang Y., Lin J., Wu L., Lin J., and Liang Y., “Blood Purification for Hypertriglyceridemia‐Induced Acute Pancreatitis: A Meta‐Analysis,” Pancreas
+51, no. 5 (2022): 531–539, 10.1097/mpa.0000000000002071.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 91. 
+He W., Cai W., Yang X., et al., “Insulin or Blood Purification Treatment for Hypertriglyceridaemia‐Associated Acute Pancreatitis: A Systematic Review and Meta‐Analysis,” Pancreatology
+22, no. 7 (2022): 846–857, 10.1016/j.pan.2022.07.013.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 92. 
+Yan L. H., Hu X. H., Chen R. X., et al., “Plasmapheresis Compared With Conventional Treatment for Hypertriglyceridemia‐Induced Acute Pancreatitis: A Systematic Review and Meta‐Analysis,” Journal of Clinical Apheresis
+38, no. 1 (2023): 4–15, 10.1002/jca.22018.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 93. 
+Piplani S., Jain A., Singh K., et al., “Efficacy and Adverse Effects of Insulin Versus Plasmapheresis in Patients With Hypertriglyceridemia‐3‐Induced Acute Pancreatitis: A Systematic Review and Meta‐Analysis,” Annals of Gastroenterology
+37, no. 1 (2024): 109–116, 10.20524/aog.2023.0849.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 94. 
+Kinoshita M., Yokote K., Arai H., et al., “Japan Atherosclerosis Society (JAS) Guidelines for Prevention of Atherosclerotic Cardiovascular Diseases 2017,” Journal of Atherosclerosis and Thrombosis
+25, no. 9 (2018): 846–984, 10.5551/jat.gl2017.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 95. 
+Mach F., Baigent C., Catapano A. L., et al., “2019 ESC/EAS Guidelines for the Management of Dyslipidaemias: Lipid Modification to Reduce Cardiovascular Risk,” European Heart Journal
+41, no. 1 (2020): 111–188, 10.1093/eurheartj/ehz455.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 96. 
+Grundy S. M., Stone N. J., Bailey A. L., et al., “2018 AHA/ACC/AACVPR/AAPA/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the Management of Blood Cholesterol: A Report of the American College of Cardiology/American Heart Association Task Force on Clinical Practice Guidelines,” Circulation
+139, no. 25 (2019): e1082–e1143, 10.1161/cir.0000000000000625.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 97. 
+Arca M., Borghi C., Pontremoli R., et al., “Hypertriglyceridemia and omega‐3 Fatty Acids: Their Often Overlooked Role in Cardiovascular Disease Prevention,” Nutrition, Metabolism, and Cardiovascular Diseases
+28, no. 3 (2018): 197–205, 10.1016/j.numecd.2017.11.001. [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 98. 
+O'Mahoney L. L., Matu J., Price O. J., et al., “Omega‐3 Polyunsaturated Fatty Acids Favourably Modulate Cardiometabolic Biomarkers in Type 2 Diabetes: A Meta‐Analysis and Meta‐Regression of Randomized Controlled Trials,” Cardiovascular Diabetology
+17, no. 1 (2018): 98, 10.1186/s12933-018-0740-x.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 99. 
+Yokoyama M., Origasa H., Matsuzaki M., et al., “Effects of Eicosapentaenoic Acid on Major Coronary Events in Hypercholesterolaemic Patients (JELIS): A Randomised Open‐Label, Blinded Endpoint Analysis,” Lancet
+369, no. 9567 (2007): 1090–1098, 10.1016/s0140-6736(07)60527-3.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 100. 
+Rawla P., Sunkara T., Thandra K. C., and Gaduputi V., “Hypertriglyceridemia‐Induced Pancreatitis: Updated Review of Current Treatment and Preventive Strategies,” Clinical Journal of Gastroenterology
+11, no. 6 (2018): 441–448, 10.1007/s12328-018-0881-1.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 101. 
+Simha V., “Management of Hypertriglyceridemia,” BMJ
+371 (2020): m3109, 10.1136/bmj.m3109.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 102. 
+Dellinger E. P., Forsmark C. E., Layer P., et al., “Determinant‐Based Classification of Acute Pancreatitis Severity: An International Multidisciplinary Consultation,” Annals of Surgery
+256, no. 6 (2012): 875–880, 10.1097/sla.0b013e318256f778.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 103. 
+Guo Q., Li M., Chen Y., and Hu W., “Determinant‐Based Classification and Revision of the Atlanta Classification, Which One Should We Choose to Categorize Acute Pancreatitis?,” Pancreatology
+15, no. 4 (2015): 331–336, 10.1016/j.pan.2015.05.467.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 104. 
+Choi J. H., Kim M. H., Oh D., et al., “Clinical Relevance of the Revised Atlanta Classification Focusing on Severity Stratification System,” Pancreatology
+14, no. 5 (2014): 324–329, 10.1016/j.pan.2014.08.001.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 105. 
+Chen Y., Ke L., Tong Z., Li W., and Li J., “Association Between Severity and the Determinant‐Based Classification, Atlanta 2012 and Atlanta 1992, in Acute Pancreatitis: A Clinical Retrospective Study,” Medicine (Baltimore)
+94, no. 13 (2015): e638, 10.1097/md.0000000000000638.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 106. 
+Carvalho J. R., Fernandes S. R., Santos P., Moura C. M., Antunes T., and Velosa J., “Acute Pancreatitis in the Elderly: A Cause for Increased Concern?,” European Journal of Gastroenterology and Hepatology
+30, no. 3 (2018): 337–341, 10.1097/meg.0000000000001028.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 107. 
+Moran R. A., Garcia‐Rayado G., de la Iglesia‐Garcia D., et al., “Influence of Age, Body Mass Index and Comorbidity on Major Outcomes in Acute Pancreatitis, a Prospective Nation‐Wide Multicentre Study,” United European Gastroenterology Journal
+6, no. 10 (2018): 1508–1518, 10.1177/2050640618798155.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 108. 
+Martinez J., Johnson C. D., Sanchez‐Paya J., de Madaria E., Robles‐Diaz G., and Perez‐Mateo M., “Obesity is a Definitive Risk Factor of Severity and Mortality in Acute Pancreatitis: An Updated meta‐analysis,” Pancreatology
+6, no. 3 (2006): 206–209, 10.1159/000092104.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 109. 
+Hong S., Qiwen B., Ying J., Wei A., and Chaoyang T., “Body Mass Index and the Risk and Prognosis of Acute Pancreatitis: A Meta‐Analysis,” European Journal of Gastroenterology and Hepatology
+23, no. 12 (2011): 1136–1143, 10.1097/meg.0b013e32834b0e0e.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 110. 
+Dobszai D., Mátrai P., Gyöngyi Z., et al., “Body‐Mass Index Correlates With Severity and Mortality in Acute Pancreatitis: A Meta‐Analysis,” World Journal of Gastroenterology
+25, no. 6 (2019): 729–743, 10.3748/wjg.v25.i6.729.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 111. 
+Farquhar R., Matthews S., Baxter N., et al., “Sarcopenia and Sarcopenic Obesity on Body Composition Analysis is a Significant Predictor of Mortality in Severe Acute Pancreatitis: A Longitudinal Observational Study,” World Journal of Surgery
+47, no. 11 (2023): 2825–2833, 10.1007/s00268-023-07122-1.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 112. 
+Fei Y., Gao K., Tu J., Wang W., Zong G. Q., and Li W. Q., “Predicting and Evaluation the Severity in Acute Pancreatitis Using a New Modeling Built on Body Mass Index and Intra‐abdominal Pressure,” American Journal of Surgery
+216, no. 2 (2018): 304–309, 10.1016/j.amjsurg.2017.04.017.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 113. 
+Wu B. U., Johannes R. S., Sun X., Conwell D. L., and Banks P. A., “Early Changes in Blood Urea Nitrogen Predict Mortality in Acute Pancreatitis,” Gastroenterology
+137, no. 1 (2009): 129–135, 10.1053/j.gastro.2009.03.056.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 114. 
+Wu B. U., Bakker O. J., Papachristou G. I., et al., “Blood Urea Nitrogen in the Early Assessment of Acute Pancreatitis: An International Validation Study,” Archives of Internal Medicine
+171, no. 7 (2011): 669–676, 10.1001/archinternmed.2011.126.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 115. 
+Gan S. I. and Romagnuolo J., “Admission Hematocrit: A Simple, Useful and Early Predictor of Severe Pancreatitis,” Digestive Diseases and Sciences
+49, no. 11–12 (2004): 1946–1952, 10.1007/s10620-004-9598-8.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 116. 
+Baillargeon J. D., Orav J., Ramagopal V., Tenner S. M., and Banks P. A., “Hemoconcentration as an Early Risk Factor for Necrotizing Pancreatitis,” American Journal of Gastroenterology
+93, no. 11 (1998): 2130–2134, 10.1111/j.1572-0241.1998.00608.x.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 117. 
+Lankisch P. G., Mahlke R., Blum T., et al., “Hemoconcentration: An Early Marker of Severe And/Or Necrotizing Pancreatitis? A Critical Appraisal,” American Journal of Gastroenterology
+96, no. 7 (2001): 2081–2085, 10.1111/j.1572-0241.2001.03966.x.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 118. 
+Cardoso F. S., Ricardo L. B., Oliveira A. M., et al., “C‐Reactive Protein Prognostic Accuracy in Acute Pancreatitis: Timing of Measurement and Cutoff Points,” European Journal of Gastroenterology and Hepatology
+25, no. 7 (2013): 784–789, 10.1097/meg.0b013e32835fd3f0.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 119. 
+Komolafe O., Pereira S. P., Davidson B. R., and Gurusamy K. S., “Serum C‐reactive Protein, Procalcitonin, and Lactate Dehydrogenase for the Diagnosis of Pancreatic Necrosis,” Cochrane Database of Systematic Reviews
+4, no. 4 (2017): Cd012645, 10.1002/14651858.CD012645.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 120. 
+Lelubre C., Anselin S., Zouaoui Boudjeltia K., Biston P., and Piagnerelli M., “Interpretation of C‐Reactive Protein Concentrations in Critically Ill Patients,” BioMed Research International
+2013 (2013): 124021, 10.1155/2013/124021.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 121. 
+Mofidi R., Duff M. D., Wigmore S. J., Madhavan K. K., Garden O. J., and Parks R. W., “Association Between Early Systemic Inflammatory Response, Severity of Multiorgan Dysfunction and Death in Acute Pancreatitis,” British Journal of Surgery
+93, no. 6 (2006): 738–744, 10.1002/bjs.5290.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 122. 
+Singh V. K., Wu B. U., Bollen T. L., et al., “Early Systemic Inflammatory Response Syndrome is Associated With Severe Acute Pancreatitis,” Clinical Gastroenterology and Hepatology
+7, no. 11 (2009): 1247–1251, 10.1016/j.cgh.2009.08.012.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 123. 
+Mofidi R., Suttie S. A., Patil P. V., Ogston S., and Parks R. W., “The Value of Procalcitonin at Predicting the Severity of Acute Pancreatitis and Development of Infected Pancreatic Necrosis: Systematic Review,” Surgery
+146, no. 1 (2009): 72–81, 10.1016/j.surg.2009.02.013.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 124. 
+Rau B. M., Kemppainen E. A., Gumbs A. A., et al., “Early Assessment of Pancreatic Infections and Overall Prognosis in Severe Acute Pancreatitis by Procalcitonin (PCT): A Prospective International Multicenter Study,” Annals of Surgery
+245, no. 5 (2007): 745–754, 10.1097/01.sla.0000252443.22360.46.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 125. 
+Papachristou G. I. and Whitcomb D. C., “Inflammatory Markers of Disease Severity in Acute Pancreatitis,” Clinics in Laboratory Medicine
+25, no. 1 (2005): 17–37, 10.1016/j.cll.2004.12.003.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 126. 
+Pezzilli R., Billi P., Miniero R., et al., “Serum Interleukin‐6, Interleukin‐8, and Beta 2‐Microglobulin in Early Assessment of Severity of Acute Pancreatitis. Comparison With Serum C‐Reactive Protein,” Digestive Diseases and Sciences
+40, no. 11 (1995): 2341–2348, 10.1007/bf02063235.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 127. 
+Aoun E., Chen J., Reighard D., Gleeson F. C., Whitcomb D. C., and Papachristou G. I., “Diagnostic Accuracy of Interleukin‐6 and Interleukin‐8 in Predicting Severe Acute Pancreatitis: A Meta‐Analysis,” Pancreatology
+9, no. 6 (2009): 777–785, 10.1159/000214191.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 128. 
+Pooran N., Indaram A., Singh P., and Bank S., “Cytokines (IL‐6, IL‐8, TNF): Early and Reliable Predictors of Severe Acute Pancreatitis,” Journal of Clinical Gastroenterology
+37, no. 3 (2003): 263–266, 10.1097/00004836-200309000-00013.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 129. 
+Malmstrom M. L., Hansen M. B., Andersen A. M., et al., “Cytokines and Organ Failure in Acute Pancreatitis: Inflammatory Response in Acute Pancreatitis,” Pancreas
+41, no. 2 (2012): 271–277, 10.1097/mpa.0b013e3182240552.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 130. 
+Wu B. U., Johannes R. S., Sun X., Tabak Y., Conwell D. L., and Banks P. A., “The Early Prediction of Mortality in Acute Pancreatitis: A Large Population‐Based Study,” Gut
+57, no. 12 (2008): 1698–1703, 10.1136/gut.2008.152702.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 131. 
+Wu B. U., Batech M., Quezada M., et al., “Dynamic Measurement of Disease Activity in Acute Pancreatitis: The Pancreatitis Activity Scoring System,” American Journal of Gastroenterology
+112, no. 7 (2017): 1144–1152, 10.1038/ajg.2017.114.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 132. 
+Buxbaum J., Quezada M., Chong B., et al., “The Pancreatitis Activity Scoring System Predicts Clinical Outcomes in Acute Pancreatitis: Findings From a Prospective Cohort Study,” American Journal of Gastroenterology
+113, no. 5 (2018): 755–764, 10.1038/s41395-018-0048-1.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 133. 
+Mounzer R., Langmead C. J., Wu B. U., et al., “Comparison of Existing Clinical Scoring Systems to Predict Persistent Organ Failure in Patients With Acute Pancreatitis,” Gastroenterology
+142, no. 7 (2012): 1476–1482: quiz e15–6, 10.1053/j.gastro.2012.03.005.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 134. 
+Lee K. J., Kim H. M., Choi J. S., Kim Y. J., Kim Y. S., and Cho J. H., “Comparison of Predictive Systems in Severe Acute Pancreatitis According to the Revised Atlanta Classification,” Pancreas
+45, no. 1 (2016): 46–50, 10.1097/mpa.0000000000000433.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 135. 
+Papachristou G. I., Muddana V., Yadav D., et al., “Comparison of BISAP, Ranson's, APACHE‐II, and CTSI Scores in Predicting Organ Failure, Complications, and Mortality in Acute Pancreatitis,” American Journal of Gastroenterology
+105, no. 2 (2010): 435–441: quiz 42, 10.1038/ajg.2009.622.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 136. 
+Khanna A. K., Meher S., Prakash S., et al., “Comparison of Ranson, Glasgow, MOSS, SIRS, BISAP, APACHE‐II, CTSI Scores, IL‐6, CRP, and Procalcitonin in Predicting Severity, Organ Failure, Pancreatic Necrosis, and Mortality in Acute Pancreatitis,” HPB Surgery
+2013 (2013): 367581, 10.1155/2013/367581.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 137. 
+Cho J. H., Kim T. N., Chung H. H., and Kim K. H., “Comparison of Scoring Systems in Predicting the Severity of Acute Pancreatitis,” World Journal of Gastroenterology
+21, no. 8 (2015): 2387–2394, 10.3748/wjg.v21.i8.2387.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 138. 
+Chandra S., Murali A., Bansal R., Agarwal D., and Holm A., “The Bedside Index for Severity in Acute Pancreatitis: A Systematic Review of Prospective Studies to Determine Predictive Performance,” Journal of Community Hospital Internal Medicine Perspectives
+7, no. 4 (2017): 208–213, 10.1080/20009666.2017.1361292.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 139. 
+Gao W., Yang H. X., and Ma C. E., “The Value of BISAP Score for Predicting Mortality and Severity in Acute Pancreatitis: A Systematic Review and Meta‐Analysis,” PLoS One
+10, no. 6 (2015): e0130412, 10.1371/journal.pone.0130412.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 140. 
+Capurso G., Ponz de Leon Pisani R., Lauri G., et al., “Clinical Usefulness of Scoring Systems to Predict Severe Acute Pancreatitis: A Systematic Review and Meta‐Analysis With Pre and Post‐Test Probability Assessment,” United European Gastroenterology Journal
+11, no. 9 (2023): 825–836, 10.1002/ueg2.12464.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 141. 
+Kui B., Pinter J., Molontay R., et al., “EASY‐APP: An Artificial Intelligence Model and Application for Early and Easy Prediction of Severity in Acute Pancreatitis,” Clinical and Translational Medicine
+12, no. 6 (2022): e842, 10.1002/ctm2.842.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 142. 
+Petrov M. S., Shanbhag S., Chakraborty M., Phillips A. R., and Windsor J. A., “Organ Failure and Infection of Pancreatic Necrosis as Determinants of Mortality in Patients With Acute Pancreatitis,” Gastroenterology
+139, no. 3 (2010): 813–820, 10.1053/j.gastro.2010.06.010.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 143. 
+Werge M., Novovic S., Schmidt P. N., and Gluud L. L., “Infection Increases Mortality in Necrotizing Pancreatitis: A Systematic Review and Meta‐Analysis,” Pancreatology
+16, no. 5 (2016): 698–707, 10.1016/j.pan.2016.07.004.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 144. 
+Marcos‐Neira P., Zubia‐Olaskoaga F., Lopez‐Cuenca S., and Bordeje‐Laguna L., “Epidemiology of Acute Pancreatitis in Intensive Care Medicine Study G. Relationship Between Intra‐abdominal Hypertension, Outcome and the Revised Atlanta and Determinant‐Based Classifications in Acute Pancreatitis,” BJS Open
+1, no. 6 (2017): 175–181, 10.1002/bjs5.29.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 145. 
+de‐Madaria E., Buxbaum J. L., Maisonneuve P., et al., “Aggressive or Moderate Fluid Resuscitation in Acute Pancreatitis,” New England Journal of Medicine
+387, no. 11 (2022): 989–1000, 10.1056/nejmoa2202884.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 146. 
+Mao E. Q., Tang Y. Q., Fei J., et al., “Fluid Therapy for Severe Acute Pancreatitis in Acute Response Stage,” Chinese Medical Journal
+122, no. 2 (2009): 169–173, 10.3760/cma.j.issn.0366-6999.2009.02.011.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 147. 
+Mao E. Q., Fei J., Peng Y. B., Huang J., Tang Y. Q., and Zhang S. D., “Rapid Hemodilution is Associated With Increased Sepsis and Mortality Among Patients With Severe Acute Pancreatitis,” Chinese Medical Journal
+123, no. 13 (2010): 1639–1644, 10.3760/cma.j.issn.0366-6999.2010.13.005.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 148. 
+Buxbaum J. L., Quezada M., Da B., et al., “Early Aggressive Hydration Hastens Clinical Improvement in Mild Acute Pancreatitis,” American Journal of Gastroenterology
+112, no. 5 (2017): 797–803, 10.1038/ajg.2017.40.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 149. 
+Cuellar‐Monterrubio J. E., Monreal‐Robles R., Gonzalez‐Moreno E. I., et al., “Nonaggressive Versus Aggressive Intravenous Fluid Therapy in Acute Pancreatitis With More than 24 Hours From Disease Onset: A Randomized Controlled Trial,” Pancreas
+49, no. 4 (2020): 579–583, 10.1097/mpa.0000000000001528.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 150. 
+Angsubhakorn A., Tipchaichatta K., and Chirapongsathorn S., “Comparison of Aggressive Versus Standard Intravenous Hydration for Clinical Improvement Among Patients With Mild Acute Pancreatitis: A Randomized Controlled Trial,” Pancreatology
+21, no. 7 (2021): 1224–1230, 10.1016/j.pan.2021.06.004.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 151. 
+Di Martino M., Van Laarhoven S., Ielpo B., et al., “Systematic Review and Meta‐Analysis of Fluid Therapy Protocols in Acute Pancreatitis: Type, Rate and Route,” HPB
+23, no. 11 (2021): 1629–1638, 10.1016/j.hpb.2021.06.426.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 152. 
+Wu F., She D., Ao Q., Zhang S., and Li J., “Aggressive Intravenous Hydration Protocol of Lactated Ringer's Solution Benefits Patients With Mild Acute Pancreatitis: A Meta‐Analysis of 5 Randomized Controlled Trials,” Frontiers of Medicine
+9 (2022): 966824, 10.3389/fmed.2022.966824. [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 153. 
+Gad M. M. and Simons‐Linares C. R., “Is Aggressive Intravenous Fluid Resuscitation Beneficial in Acute Pancreatitis? A Meta‐Analysis of Randomized Control Trials and Cohort Studies,” World Journal of Gastroenterology
+26, no. 10 (2020): 1098–1106, 10.3748/wjg.v26.i10.1098.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 154. 
+Li X. W., Wang C. H., Dai J. W., et al., “Comparison of Clinical Outcomes Between Aggressive and Non‐Aggressive Intravenous Hydration for Acute Pancreatitis: A Systematic Review and Meta‐Analysis,” Critical Care
+27, no. 1 (2023): 122, 10.1186/s13054-023-04401-0.
+ [ DOI ] [ PMC free article ] [ PubMed ] [ Google Scholar ] 
+- 
+ 155. 
+Ding X. and Chen B., “Effect of Aggressive Intravenous Fluid Resuscitation Versus Nonaggressive Fluid Resuscitation in the Treatment of Acute Pancreatitis: A Systematic Review and Meta‐Analysis,” Pancreas
+52, no. 2 (2023): e89–e100, 10.1097/mpa.0000000000002230.
+ [ DOI ] [ PubMed ] [ Google Scholar ] 
+- 
+ 156. 
+H
+
+[TRUNCATED FOR REPO SIZE; re-fetch full OA text locally if needed]
+

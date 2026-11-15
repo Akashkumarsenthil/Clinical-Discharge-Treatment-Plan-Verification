@@ -4,7 +4,9 @@
 **Cohort:** validation (460) unless noted  
 **Generator:** `scripts/generate_model_a_plans.py` · seed **298** (also 299/300 when reporting spread)  
 **Judge:** frozen in [`geval_judge_freeze.md`](geval_judge_freeze.md) (`llama3.1:8b`)  
-**Warehouse:** `--from-warehouse` after `run_pipeline`
+**Warehouse:** `--from-warehouse` after `run_pipeline`  
+**RAG embedder (prep):** `nomic-embed-text` via local Ollama (`ollama pull nomic-embed-text`) — pulled locally 2026-11-14; use the same tag on the VM  
+**RAG corpus (prep):** public guidelines in [`data/guidelines/`](../data/guidelines/SOURCES.md) (SWE / WSES abstract / ILATAM / ACG abstract / KASID; no MIMIC)
 
 ## Variants
 

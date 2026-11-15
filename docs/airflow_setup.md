@@ -8,7 +8,7 @@ leaves the box (PhysioNet DUA requirement).
 
 - Anaconda (Python 3.13) installed — Airflow 3.1.0 ships with the conda env
 - MIMIC-IV data downloaded to your machine (requires your own PhysioNet credentials)
-- Ollama running locally with `qwen2.5:14b` and `llama3.1:8b` pulled
+- Ollama running locally with `qwen2.5:14b`, `llama3.1:8b`, and `nomic-embed-text` (RAG embedder) pulled
 
 ## 1. Confirm Airflow is available
 
