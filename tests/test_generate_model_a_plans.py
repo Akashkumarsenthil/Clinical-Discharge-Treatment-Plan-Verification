@@ -281,3 +281,11 @@ def test_docker_host_flag_reaches_client(frozen_root, monkeypatch):
     assert G.main(["--ollama-model", "synthetic-model", "--ollama-host", "http://host.docker.internal:11434"],
                   root=frozen_root) == 0
     assert hosts == ["http://host.docker.internal:11434"]
+
+
+def test_rag_flag_fails_closed_until_module_ships(frozen_root, monkeypatch, capsys):
+    no_real_generation(monkeypatch)
+    with pytest.raises(SystemExit):
+        G.main(["--dry-run", "--rag"], root=frozen_root)
+    assert "RAG is not implemented yet" in capsys.readouterr().err
+    assert not (frozen_root / "results/model_runs").exists()

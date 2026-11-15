@@ -45,10 +45,15 @@ MIMIC notes are **not** in the RAG index.
 
 ## How to fill later
 
-1. Run warehouse → generate (A0 / A+RAG / …) → Z3 → harness → G-Eval.  
-2. Copy **aggregate** metrics only into the table.  
-3. Keep raw plans / G-Eval JSON under `results/` (gitignored).  
-4. If judge prompt or model changes, bump a table version note and link a new freeze doc.
+1. Trigger Airflow `clinverify_pipeline` four times with params:
+   - A0 → `rag=off`, `model=base`
+   - A+RAG → `rag=on`, `model=base` (blocked until RAG ships)
+   - A+FT → `rag=off`, `model=ft`
+   - A+RAG+FT → `rag=on`, `model=ft`
+2. Or run warehouse → generate → Z3 → harness → G-Eval by hand with the same flags.  
+3. Copy **aggregate** metrics only into the table.  
+4. Keep raw plans / G-Eval JSON under `results/` (gitignored).  
+5. If judge prompt or model changes, bump a table version note and link a new freeze doc.
 
 ## Related
 

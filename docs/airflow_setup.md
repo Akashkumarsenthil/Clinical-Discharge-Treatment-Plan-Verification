@@ -115,14 +115,26 @@ validation_only_guard
   → verifier_regression → generate_plans → verify_z3 → evaluate_harness → g_eval → report
 ```
 
+### Trigger params (four-way ablation)
+
+| Param | Values | Default | Effect |
+|-------|--------|---------|--------|
+| `cohort` | `validation` only | `validation` | Guard refuses anything else |
+| `rag` | `on` / `off` | `off` | `on` adds `--rag` to generate (refused until `src/clinverify/rag/` ships) |
+| `model` | `base` / `ft` | `base` | `base` → `qwen2.5:14b`; `ft` → Variable `CLINVERIFY_FT_MODEL` (default `qwen2.5:14b-ft`) |
+
+Outputs land under  
+`results/model_runs/airflow_runs/<YYYY-MM-DD>/rag-<rag>_model-<model>/`  
+so A0 / A+RAG / A+FT / A+RAG+FT do not overwrite each other. See also `docs/four_way_ablation_table.md`.
+
 | Task | Script | Fails if |
 |------|--------|----------|
-| `validation_only_guard` | built-in check | cohort is not `validation` |
+| `validation_only_guard` | built-in check | cohort is not `validation`, or `rag`/`model` invalid |
 | `data_*` | `scripts/data_demo.py <step>` | MIMIC_DIR wrong / tables missing |
 | `warehouse` | `scripts/run_pipeline.py --trigger airflow` | MIMIC_DIR wrong / DuckDB locked |
 | `verifier_regression` | `scripts/run_eval.py` on `tests/data/catalog_labeled_plans.json` (synthetic labeled plans) | the verifier no longer catches the known violations; runs before generation so no GPU time is spent |
-| `generate_plans` | `scripts/generate_model_a_plans.py --cohort validation --seed 298` | Ollama not running / qwen2.5:14b not pulled |
-| `verify_z3` | `scripts/verify_model_plans.py --plans <json> --cohort validation --generation-metadata <json>` | Generated plans file missing |
+| `generate_plans` | `generate_model_a_plans.py --from-warehouse` (+ `--rag` / `--ollama-model` from params) | Ollama down / model missing / `--rag` before RAG ships |
+| `verify_z3` | `scripts/verify_model_plans.py --plans <json> --cohort validation` | Generated plans file missing |
 | `evaluate_harness` | `scripts/summarize_model_run.py`: diagnosis accuracy, macro F1, per-pathology recall + checked acceptance, joint success, verdicts → `evaluation_summary.json` | plans or verifier run missing |
 | `g_eval` | `scripts/run_geval.py --judge-model llama3.1:8b` | llama3.1:8b not pulled |
 | `report` | writes `pipeline_report.json` | results dir missing |
@@ -139,5 +151,6 @@ If your machine is off or Airflow is stopped, the missed run is skipped
 
 ## Outputs
 
-All run artifacts go to `results/model_runs/airflow_runs/<YYYY-MM-DD>/`
+All run artifacts go to  
+`results/model_runs/airflow_runs/<YYYY-MM-DD>/rag-<on|off>_model-<base|ft>/`  
 (gitignored — patient data never committed).

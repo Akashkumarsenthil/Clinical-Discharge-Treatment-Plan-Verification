@@ -9,6 +9,9 @@ Real validation (local Ext-CDM in MIMIC_DIR, local Ollama required):
 Same cohort, prompts from the DuckDB warehouse mart (after run_pipeline):
     python scripts/generate_model_a_plans.py --cohort validation --seed 298 --from-warehouse
 
+RAG (Airflow rag=on) is reserved; --rag fails closed until src/clinverify/rag/ ships:
+    python scripts/generate_model_a_plans.py --cohort validation --from-warehouse --rag
+
 Only after human freeze/sign-off, on the GPU machine:
     python scripts/generate_model_a_plans.py --cohort test --seed 298 --i-confirm-freeze
 
@@ -178,6 +181,11 @@ def run(args, root: Path):
     freeze = require_test_freeze(root, args.i_confirm_freeze) if args.cohort == "test" else {}
     if not math.isfinite(args.temperature) or not 0 <= args.temperature <= 2:
         raise ConfigurationError("temperature must be finite and between 0 and 2")
+    if args.rag:
+        # Fail closed so Airflow rag=on cannot look like A+RAG before retrieval exists.
+        raise ConfigurationError(
+            "RAG is not implemented yet; refuse --rag until src/clinverify/rag/ ships"
+        )
     protocol = load_protocol(root)
     if args.cohort == "test" and args.seed not in protocol["generation_seeds"]:
         raise ConfigurationError(f"test seed must be one of {protocol['generation_seeds']}")
@@ -291,6 +299,8 @@ def main(argv=None, *, root: Path = ROOT):
                         help="read prompts from DuckDB mart.model_inputs instead of rebuilding from CSVs")
     parser.add_argument("--warehouse-db", type=Path, default=None,
                         help="DuckDB path (default: $MIMIC_DIR/warehouse/clinverify.duckdb)")
+    parser.add_argument("--rag", action="store_true",
+                        help="enable guideline RAG (reserved; currently refused until rag module ships)")
     parser.add_argument("--i-confirm-freeze", action="store_true")
     parser.add_argument("--dry-run", action="store_true", help="fake client and invented IDs; never loads real cohort data")
     args = parser.parse_args(argv)

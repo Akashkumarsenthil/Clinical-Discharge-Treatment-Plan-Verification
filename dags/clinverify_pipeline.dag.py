@@ -6,9 +6,15 @@ Run Airflow on a local machine or GCP VM (Docker Compose). Do not use Cloud Comp
 Hard rule: every model/eval step is validation-split only. The held-out test cohort
 is never selected by this DAG.
 
+Trigger params (four-way ablation):
+    rag    – on | off   (default off). on passes --rag to generate (fails until RAG ships).
+    model  – base | ft  (default base). ft uses Airflow Variable CLINVERIFY_FT_MODEL
+             (default qwen2.5:14b-ft); base uses qwen2.5:14b.
+
 Requires Airflow 3.x (schedule= not schedule_interval=).
 Airflow Variables:
-    MIMIC_DIR  – path to the MIMIC root on the worker (required)
+    MIMIC_DIR            – path to the MIMIC root on the worker (required)
+    CLINVERIFY_FT_MODEL  – optional Ollama tag for model=ft
 """
 
 from __future__ import annotations
@@ -33,6 +39,7 @@ PYTHON = os.environ.get(
 
 # Never change this to "test" in the DAG. The guard task refuses anything else.
 COHORT = "validation"
+BASE_OLLAMA_MODEL = "qwen2.5:14b"
 
 RUN_DAY = (
     "{% if dag_run.logical_date %}"
@@ -41,10 +48,30 @@ RUN_DAY = (
     "{{ macros.datetime.utcnow().strftime('%Y-%m-%d') }}"
     "{% endif %}"
 )
-RESULTS_DIR = os.path.join(REPO, "results", "model_runs", "airflow_runs", RUN_DAY)
-PLANS_JSON = os.path.join(RESULTS_DIR, "model_a_qwen2.5_14b_val_seed298.json")
-PLANS_META = os.path.join(RESULTS_DIR, "model_a_qwen2.5_14b_val_seed298.metadata.json")
-REPORT_JSON = os.path.join(RESULTS_DIR, "pipeline_report.json")
+# One folder per (day, rag, model) so the four variants do not overwrite each other.
+RESULTS_DIR = os.path.join(
+    REPO,
+    "results",
+    "model_runs",
+    "airflow_runs",
+    RUN_DAY,
+    "rag-{{ params.rag }}_model-{{ params.model }}",
+)
+
+OLLAMA_MODEL = (
+    "{% if params.model == 'ft' %}"
+    "{{ var.value.get('CLINVERIFY_FT_MODEL', 'qwen2.5:14b-ft') }}"
+    "{% else %}"
+    f"{BASE_OLLAMA_MODEL}"
+    "{% endif %}"
+)
+RAG_FLAG = "{% if params.rag == 'on' %} --rag{% endif %}"
+
+# generate_model_a_plans.py writes model_a_<sanitized-model>_val_seed298.json
+PLANS_RESOLVE = (
+    f"plans=$(ls {RESULTS_DIR!r}/model_a_*_val_seed298.json 2>/dev/null | head -n1); "
+    "test -n \"$plans\" || { echo 'generated plans JSON missing' >&2; exit 1; }"
+)
 
 TASK_ENV = {
     "MIMIC_DIR": "{{ var.value.get('MIMIC_DIR', '') }}",
@@ -77,14 +104,18 @@ with DAG(
     catchup=False,
     default_args=default_args,
     tags=["clinverify", "pipeline", "validation-only"],
-    params={"cohort": COHORT},
+    params={"cohort": COHORT, "rag": "off", "model": "base"},
 ) as dag:
 
     validation_only_guard = BashOperator(
         task_id="validation_only_guard",
         bash_command=(
             "test \"{{ params.cohort }}\" = 'validation' || "
-            "{ echo 'refusing non-validation cohort; this DAG is validation-split-only' >&2; exit 1; }"
+            "{ echo 'refusing non-validation cohort; this DAG is validation-split-only' >&2; exit 1; }; "
+            "case \"{{ params.rag }}\" in on|off) ;; "
+            "*) echo 'params.rag must be on or off' >&2; exit 1 ;; esac; "
+            "case \"{{ params.model }}\" in base|ft) ;; "
+            "*) echo 'params.model must be base or ft' >&2; exit 1 ;; esac"
         ),
         env=TASK_ENV,
     )
@@ -110,6 +141,7 @@ with DAG(
             + _py(
                 "scripts/generate_model_a_plans.py "
                 f"--cohort {COHORT} --seed 298 --out {RESULTS_DIR!r} --from-warehouse "
+                f"--ollama-model {OLLAMA_MODEL}{RAG_FLAG} "
                 # In Compose this is host.docker.internal (Ollama on the VM host); the script refuses non-local hosts.
                 '--ollama-host "$OLLAMA_HOST"'
             )
@@ -118,9 +150,9 @@ with DAG(
     )
     verify_z3 = BashOperator(
         task_id="verify_z3",
-        bash_command=_py(
-            f"scripts/verify_model_plans.py --plans {PLANS_JSON!r} --cohort {COHORT} "
-            f"--generation-metadata {PLANS_META!r} --out {RESULTS_DIR!r}"
+        bash_command=_bash(
+            f"{PLANS_RESOLVE} && "
+            f"{PYTHON!r} scripts/verify_model_plans.py --plans \"$plans\" --cohort {COHORT} --out {RESULTS_DIR!r}"
         ),
         env=TASK_ENV,
     )
@@ -148,8 +180,9 @@ with DAG(
 
     g_eval = BashOperator(
         task_id="g_eval",
-        bash_command=_py(
-            f"scripts/run_geval.py --plans {PLANS_JSON!r} --judge-model llama3.1:8b --out {RESULTS_DIR!r}"
+        bash_command=_bash(
+            f"{PLANS_RESOLVE} && "
+            f"{PYTHON!r} scripts/run_geval.py --plans \"$plans\" --judge-model llama3.1:8b --out {RESULTS_DIR!r}"
         ),
         env=TASK_ENV,
     )
@@ -157,21 +190,23 @@ with DAG(
     report = BashOperator(
         task_id="report",
         bash_command=_bash(
+            f"{PLANS_RESOLVE} && export PLANS_PATH=\"$plans\" && "
             f"{PYTHON!r} - <<'PY'\n"
-            "import json\n"
+            "import json, os\n"
             "from pathlib import Path\n"
             f"out = Path({RESULTS_DIR!r})\n"
-            "plans = out / 'model_a_qwen2.5_14b_val_seed298.json'\n"
+            "plans = Path(os.environ['PLANS_PATH'])\n"
             "report = {\n"
             "  'cohort': 'validation',\n"
+            "  'rag': '{{ params.rag }}',\n"
+            "  'model': '{{ params.model }}',\n"
             "  'results_dir': str(out),\n"
             "  'plans_file': str(plans) if plans.exists() else None,\n"
             "  'n_plans': len(json.loads(plans.read_text())) if plans.exists() else 0,\n"
             "  'artifacts': sorted(p.name for p in out.glob('*') if p.is_file()),\n"
             "  'evaluation': json.loads((out / 'evaluation_summary.json').read_text()) if (out / 'evaluation_summary.json').exists() else None,\n"
             "}\n"
-            f"path = Path({REPORT_JSON!r})\n"
-            "path.parent.mkdir(parents=True, exist_ok=True)\n"
+            "path = out / 'pipeline_report.json'\n"
             "path.write_text(json.dumps(report, indent=1) + '\\n')\n"
             "print(json.dumps(report, indent=1))\n"
             "PY"

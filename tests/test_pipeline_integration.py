@@ -75,6 +75,9 @@ def test_dag_matches_ta_checklist():
     assert "warehouse >> verifier_regression >> generate_plans >> verify_z3 >> evaluate_harness" in text
     assert "validation_only_guard" in text
     assert 'COHORT = "validation"' in text
+    assert '"rag": "off"' in text and '"model": "base"' in text
+    assert "params.rag" in text and "params.model" in text
+    assert "rag-{{ params.rag }}_model-{{ params.model }}" in text
     for task in (
         "data_manifest", "data_clean", "data_missing", "data_transform", "data_validate",
         "data_eda", "data_splits", "warehouse", "verifier_regression", "generate_plans", "verify_z3",
