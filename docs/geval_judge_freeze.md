@@ -25,3 +25,5 @@ Do **not** change the judge prompt, criteria text, or default model without a ne
 - Artifact path (local only): `results/geval/smoke/`
 
 Full 460-case G-Eval waits for cloud Ollama / GPU; this smoke locks the judge contract.
+
+Four-way results shell (A0 / A+RAG / A+FT / A+RAG+FT) and RAG circularity caveat: [`four_way_ablation_table.md`](four_way_ablation_table.md).
