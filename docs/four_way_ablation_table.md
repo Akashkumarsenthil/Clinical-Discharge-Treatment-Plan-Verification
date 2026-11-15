@@ -1,6 +1,6 @@
 # Four-way ablation table (Model A)
 
-**Status:** shell only — fill after validation runs  
+**Status:** A0 metrics filled from [`validation_summary.json`](validation_summary.json); other columns blank  
 **Cohort:** validation (460) unless noted  
 **Generator:** `scripts/generate_model_a_plans.py` · seed **298** (also 299/300 when reporting spread)  
 **Judge:** frozen in [`geval_judge_freeze.md`](geval_judge_freeze.md) (`llama3.1:8b`)  
@@ -17,16 +17,18 @@
 
 ## Results shell (validation)
 
-Leave cells blank until that variant’s run is frozen. Do not paste patient text here.
+Leave non-A0 cells blank until that variant’s run is frozen. Do not paste patient text here.
 
 | Metric | A0 | A+RAG | A+FT | A+RAG+FT |
 |---|---|---|---|---|
-| Diagnosis accuracy | | | | |
-| Checked acceptance | | | | |
-| Joint success | | | | |
-| G-Eval composite (mean) | | | | |
-| G-Eval n | | | | |
-| Notes / artifact path (local) | | | | |
+| Diagnosis accuracy | **0.887** (408/460) | | | |
+| Checked acceptance | **0.146** (49/336 covered) | | | |
+| Joint success | **0.120** | | | |
+| G-Eval composite (mean) | *smoke only* **4.125** | | | |
+| G-Eval n | *smoke* **2** (not 460) | | | |
+| Notes / artifact path (local) | `docs/validation_summary.json` · Model A `qwen2.5:14b` seed 298; G-Eval smoke → `results/geval/smoke/` | | | |
+
+A0 source: `validation_summary.json` → `models["Model A (qwen2.5:14b)"]` (accuracy 0.88696…, checked acceptance 0.14583…, joint success 0.11957…). G-Eval is **not** a full validation score — local smoke on 2 warehouse plans only ([`geval_judge_freeze.md`](geval_judge_freeze.md)).
 
 Optional seed spread (mean ± sd across 298/299/300) — same columns, separate row block when ready.
 
