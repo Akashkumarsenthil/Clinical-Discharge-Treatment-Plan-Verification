@@ -58,8 +58,11 @@ Runs on synthetic data write to `results/synthetic/` and never touch the real sp
 | see the model proposals, the platform and architecture diagram and the model comparison (Workbook 2, section 4) | [`docs/workbook2_model_development.md`](docs/workbook2_model_development.md) |
 | run everything for Workbook 2 (sections 3.1-4.5: data, stages and splits, case facts, population gaps, rule catalog check, models A and E on the GPU, warehouse demo) | [`notebooks/workbook2.ipynb`](notebooks/workbook2.ipynb); warehouse: `python scripts/run_pipeline.py` |
 | run the live prototype (pick a validation case, see the plan accepted or rejected, inject a fault) | `streamlit run app/demo_app.py` (needs `MIMIC_DIR` data; live generation also needs a local Ollama server). Only validation cases are offered |
-| run the Airflow pipeline (replaces Task Scheduler) | Local: [`docs/airflow_setup.md`](docs/airflow_setup.md). Cloud (one shared VM for the team): [`docs/airflow_cloud.md`](docs/airflow_cloud.md) — UI via IAP tunnel at `http://localhost:8080` (8080 is not public), login **admin** / **admin**. DAG: [`dags/clinverify_pipeline.dag.py`](dags/clinverify_pipeline.dag.py) |
-| score plans with G-Eval (local Ollama judge) | `python scripts/run_geval.py --plans <plans.json> --judge-model llama3.1:8b` |
+| run the Airflow pipeline (replaces Task Scheduler) | Local: [`docs/airflow_setup.md`](docs/airflow_setup.md). Cloud (one shared VM for the team): [`docs/airflow_cloud.md`](docs/airflow_cloud.md) — UI via IAP tunnel at `http://localhost:8080` (8080 is not public), login **admin** / **admin**. DAG: [`dags/clinverify_pipeline.dag.py`](dags/clinverify_pipeline.dag.py). Trigger params: `rag=on\|off`, `model=base\|ft` |
+| generate Model A plans from the DuckDB warehouse | `python scripts/generate_model_a_plans.py --cohort validation --seed 298 --from-warehouse` (needs `MIMIC_DIR` warehouse after `run_pipeline.py`; CSV path remains the default without the flag) |
+| score plans with G-Eval (local Ollama judge) | `python scripts/run_geval.py --plans <plans.json> --judge-model llama3.1:8b` — judge freeze: [`docs/geval_judge_freeze.md`](docs/geval_judge_freeze.md) (saved JSON omits `case_context`) |
+| see the four-way ablation table (A0 / A+RAG / A+FT / A+RAG+FT) | [`docs/four_way_ablation_table.md`](docs/four_way_ablation_table.md) |
+| RAG prep (embed model + public guideline text, no MIMIC) | Embedder: [`docs/rag_embed_model.md`](docs/rag_embed_model.md) (`nomic-embed-text`). Corpus: [`data/guidelines/SOURCES.md`](data/guidelines/SOURCES.md) |
 | follow tasks | Linear links at the end of this page |
 
 ## Human audit of case facts
