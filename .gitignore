@@ -31,6 +31,7 @@ results/runs/*
 results/synthetic/
 results/figures/
 results/model_runs/
+results/geval/
 results/workbook2/
 
 # personal working files (templates, drafts, external clones): never pushed
@@ -45,3 +46,6 @@ data/*.csv-*
 data/*
 !data/README.md
 !data/splits/
+
+# DuckDB warehouse built from MIMIC data: never commit (PhysioNet DUA)
+warehouse/

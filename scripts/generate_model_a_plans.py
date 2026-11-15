@@ -6,6 +6,12 @@ Safe, data-free check (no Ollama, GPU, patient records or frozen case IDs):
 Real validation (local Ext-CDM in MIMIC_DIR, local Ollama required):
     python scripts/generate_model_a_plans.py --cohort validation --seed 298
 
+Same cohort, prompts from the DuckDB warehouse mart (after run_pipeline):
+    python scripts/generate_model_a_plans.py --cohort validation --seed 298 --from-warehouse
+
+RAG (Airflow rag=on) is reserved; --rag fails closed until src/clinverify/rag/ ships:
+    python scripts/generate_model_a_plans.py --cohort validation --from-warehouse --rag
+
 Only after human freeze/sign-off, on the GPU machine:
     python scripts/generate_model_a_plans.py --cohort test --seed 298 --i-confirm-freeze
 
@@ -124,6 +130,47 @@ def local_inputs(ids):
     return inputs
 
 
+def warehouse_inputs(ids, db_path: Path | None = None):
+    """Load model prompts from mart.model_inputs (DuckDB warehouse).
+
+    Never prints record text. Missing or empty rows fail closed with a count-only error.
+    """
+    from clinverify import warehouse as W
+
+    path = Path(db_path) if db_path is not None else W.DEFAULT_DB
+    if not path.is_file():
+        raise ConfigurationError("warehouse database is missing; run scripts/run_pipeline.py first")
+    wanted = [int(cid) for cid in ids]
+    con = W.connect(path)
+    try:
+        rows = con.execute(
+            """
+            SELECT hadm_id, model_input
+            FROM mart.model_inputs
+            WHERE hadm_id IN (SELECT UNNEST(?::BIGINT[]))
+            """,
+            [wanted],
+        ).fetchall()
+    except Exception as err:
+        # Schema/missing-table failures must not echo SQL with record text.
+        raise ConfigurationError("warehouse mart.model_inputs is unavailable or unreadable") from err
+    finally:
+        con.close()
+
+    inputs = {}
+    for hadm_id, model_input in rows:
+        text = model_input if isinstance(model_input, str) else ""
+        if not text.strip():
+            continue
+        inputs[int(hadm_id)] = text
+    if set(inputs) != set(wanted):
+        missing = len(set(wanted) - set(inputs))
+        raise ConfigurationError(
+            f"warehouse mart.model_inputs incomplete for selected cohort ({missing} missing or empty)"
+        )
+    return inputs
+
+
 def write_json(path, value):
     temp = path.with_name(path.name + ".tmp")
     temp.write_text(json.dumps(value, indent=1) + "\n")
@@ -134,6 +181,11 @@ def run(args, root: Path):
     freeze = require_test_freeze(root, args.i_confirm_freeze) if args.cohort == "test" else {}
     if not math.isfinite(args.temperature) or not 0 <= args.temperature <= 2:
         raise ConfigurationError("temperature must be finite and between 0 and 2")
+    if args.rag:
+        # Fail closed so Airflow rag=on cannot look like A+RAG before retrieval exists.
+        raise ConfigurationError(
+            "RAG is not implemented yet; refuse --rag until src/clinverify/rag/ ships"
+        )
     protocol = load_protocol(root)
     if args.cohort == "test" and args.seed not in protocol["generation_seeds"]:
         raise ConfigurationError(f"test seed must be one of {protocol['generation_seeds']}")
@@ -142,6 +194,7 @@ def run(args, root: Path):
         ids = list(DRY_RUN_IDS)
         inputs = {cid: "Synthetic fixture only; no patient data." for cid in ids}
         client = FakeClient()
+        input_source = "dry_run"
     else:
         if args.split_file is not None:
             splits = json.loads(args.split_file.read_text())["splits"]
@@ -159,6 +212,7 @@ def run(args, root: Path):
             raise ConfigurationError(str(err)) from err
         client = A.Ollama(args.ollama_model, host=host)
         inputs = None
+        input_source = "warehouse" if args.from_warehouse else "csv"
     metadata = {"model": client.model, "model_digest": client.digest(), "prompt_sha256": A.prompt_sha256(),
                 "seed": args.seed, "temperature": args.temperature, "top_p": TOP_P, "max_new_tokens": MAX_NEW_TOKENS}
     if args.cohort == "test":
@@ -178,6 +232,7 @@ def run(args, root: Path):
     run_path = plans_path.with_suffix(".run.json")
     list_path = plans_path.with_suffix(".json")
     descriptor = {"cohort": args.cohort, "dry_run": args.dry_run, "num_ctx": NUM_CTX,
+                  "input_source": input_source,
                   "protocol_sha256": sha256(root / "docs/evaluation_protocol.json"),
                   "generator_sha256": sha256(Path(__file__)), "model_a_sha256": sha256(Path(A.__file__)),
                   "case_ids_sha256": hashlib.sha256(json.dumps(ids).encode()).hexdigest(), **freeze}
@@ -203,7 +258,10 @@ def run(args, root: Path):
                 if len(seen) != len(set(seen)) or not set(seen) <= set(ids):
                     raise ConfigurationError("existing JSONL has duplicate or out-of-cohort case IDs")
             if inputs is None:
-                inputs = local_inputs(ids)
+                if args.from_warehouse:
+                    inputs = warehouse_inputs(ids, args.warehouse_db)
+                else:
+                    inputs = local_inputs(ids)
             write_json(metadata_path, metadata)
             write_json(run_path, descriptor)
             try:
@@ -237,6 +295,12 @@ def main(argv=None, *, root: Path = ROOT):
     parser.add_argument("--split-file", type=Path,
                         help="alternate split JSON (synthetic tests); skips the frozen protocol split")
     parser.add_argument("--limit", type=int, help="generate only the first N cohort cases")
+    parser.add_argument("--from-warehouse", action="store_true",
+                        help="read prompts from DuckDB mart.model_inputs instead of rebuilding from CSVs")
+    parser.add_argument("--warehouse-db", type=Path, default=None,
+                        help="DuckDB path (default: $MIMIC_DIR/warehouse/clinverify.duckdb)")
+    parser.add_argument("--rag", action="store_true",
+                        help="enable guideline RAG (reserved; currently refused until rag module ships)")
     parser.add_argument("--i-confirm-freeze", action="store_true")
     parser.add_argument("--dry-run", action="store_true", help="fake client and invented IDs; never loads real cohort data")
     args = parser.parse_args(argv)
