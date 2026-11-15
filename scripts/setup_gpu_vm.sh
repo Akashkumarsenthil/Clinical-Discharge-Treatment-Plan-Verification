@@ -159,7 +159,7 @@ check() {
   done
   set -- $MODELS
   if ollama run "$1" "Reply with the single word OK." >/dev/null 2>&1; then
-    ollama ps | grep -q "GPU" && echo "OK    $1 runs on the GPU ($(ollama ps | awk 'NR==2{print $(NF-3), $(NF-2)}'))" \
+    ollama ps | grep -q "GPU" && echo "OK    $1 runs on the GPU ($(ollama ps | grep -o '[0-9]*% GPU' | head -1))" \
       || { echo "FAIL  $1 is not on the GPU (ollama ps)"; ok=0; }
   else echo "FAIL  $1 did not answer"; ok=0; fi
   if command -v docker >/dev/null 2>&1; then
