@@ -31,6 +31,7 @@ results/runs/*
 results/synthetic/
 results/figures/
 results/model_runs/
+results/geval/
 results/workbook2/
 
 # personal working files (templates, drafts, external clones): never pushed
