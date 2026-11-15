@@ -46,3 +46,6 @@ data/*.csv-*
 data/*
 !data/README.md
 !data/splits/
+
+# DuckDB warehouse built from MIMIC data: never commit (PhysioNet DUA)
+warehouse/
