@@ -10,6 +10,9 @@ Trigger params (four-way ablation):
     rag    – on | off   (default off). on passes --rag to generate (guideline passages, docs/rag.md).
     model  – base | ft  (default base). ft uses Airflow Variable CLINVERIFY_FT_MODEL
              (default qwen2.5:14b-ft); base uses qwen2.5:14b.
+    auto_stop – on | off (default on). The stop_vm teardown task stops the GCP VM at the end of the run, after
+             success or failure. It does nothing off GCE (local Airflow). Set off to run several variants back to
+             back, or to keep the VM up; scripts/cloud_run.sh handles this.
 
 Requires Airflow 3.x (schedule= not schedule_interval=).
 Airflow Variables:
@@ -104,7 +107,8 @@ with DAG(
     catchup=False,
     default_args=default_args,
     tags=["clinverify", "pipeline", "validation-only"],
-    params={"cohort": COHORT, "rag": "off", "model": "base"},
+    params={"cohort": COHORT, "rag": "off", "model": "base", "auto_stop": "on"},
+    max_active_runs=1,          # stop_vm must never shut the VM down under another run
 ) as dag:
 
     validation_only_guard = BashOperator(
@@ -115,7 +119,9 @@ with DAG(
             "case \"{{ params.rag }}\" in on|off) ;; "
             "*) echo 'params.rag must be on or off' >&2; exit 1 ;; esac; "
             "case \"{{ params.model }}\" in base|ft) ;; "
-            "*) echo 'params.model must be base or ft' >&2; exit 1 ;; esac"
+            "*) echo 'params.model must be base or ft' >&2; exit 1 ;; esac; "
+            "case \"{{ params.auto_stop }}\" in on|off) ;; "
+            "*) echo 'params.auto_stop must be on or off' >&2; exit 1 ;; esac"
         ),
         env=TASK_ENV,
     )
@@ -216,6 +222,19 @@ with DAG(
         env=TASK_ENV,
     )
 
+    # Teardown: runs after report whether the run succeeded or failed, and Airflow leaves it out when deciding the
+    # run's state. A stop failure (e.g. missing IAM permission) shows as a failed stop_vm, not a failed pipeline.
+    stop_vm = BashOperator(
+        task_id="stop_vm",
+        bash_command=(
+            "{% if params.auto_stop == 'on' %}"
+            + _py("scripts/stop_this_vm.py")
+            + "{% else %}echo 'auto_stop=off: leaving the VM running. Stop it when done.'{% endif %}"
+        ),
+        env=TASK_ENV,
+        retries=0,
+    ).as_teardown()
+
     validation_only_guard >> data_manifest >> data_clean >> data_missing >> data_transform
     data_transform >> data_validate >> data_eda >> data_splits >> warehouse
-    warehouse >> verifier_regression >> generate_plans >> verify_z3 >> evaluate_harness >> g_eval >> report
+    warehouse >> verifier_regression >> generate_plans >> verify_z3 >> evaluate_harness >> g_eval >> report >> stop_vm
