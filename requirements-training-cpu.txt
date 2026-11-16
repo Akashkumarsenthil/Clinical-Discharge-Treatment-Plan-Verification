@@ -1,0 +1,3 @@
+# Tested Apple Silicon software smoke environment. Not the CUDA installation file.
+-r requirements-training.txt
+torch==2.9.1

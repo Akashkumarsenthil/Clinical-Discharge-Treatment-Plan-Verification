@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "task": "diagnosis",
+  "approved_by": "REPLACE_WITH_ACTUAL_TEAM_APPROVER",
+  "approved_on": "YYYY-MM-DD",
+  "decision_reference": "REPLACE_WITH_ISSUE_OR_MEETING_DECISION",
+  "target_source": "ext_cdm_reference_diagnosis"
+}

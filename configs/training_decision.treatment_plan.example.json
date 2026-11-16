@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "task": "treatment_plan",
+  "approved_by": "REPLACE_WITH_ACTUAL_TEAM_APPROVER",
+  "approved_on": "YYYY-MM-DD",
+  "decision_reference": "REPLACE_WITH_TARGET_APPROVAL_RECORD",
+  "target_source": "human_reviewed",
+  "targets_sha256": "REPLACE_WITH_SHA256_OF_APPROVED_PRIVATE_TARGET_JSONL"
+}

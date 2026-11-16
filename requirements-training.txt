@@ -1,0 +1,10 @@
+# Optional, separate environment; leave requirements.txt and the inference stack unchanged.
+# Install an appropriate CUDA PyTorch build separately on the GPU host.
+transformers==4.57.3
+peft==0.18.0
+accelerate==1.12.0
+safetensors==0.7.0
+# Data preparation imports the existing Model A formatter.
+pandas==2.2.3
+numpy==2.1.3
+pytest==8.3.4
