@@ -47,6 +47,9 @@ Answer with JSON only, using exactly these fields:
   postop_antibiotic_days: whole days of antibiotics after surgery, 0 if none, null if no surgery is planned"""
 
 USER_TEMPLATE = "Patient record (case {case_id}):\n\n{record}\n\nReturn the JSON plan."
+# A+RAG only: guideline passages retrieved for this case go before the record. The system prompt is unchanged.
+RAG_USER_TEMPLATE = ("Excerpts from published clinical guidelines that may apply (use them only where they fit this "
+                     "patient):\n\n{guidance}\n\n" + USER_TEMPLATE)
 
 PLAN_SCHEMA = {
     "type": "object",
@@ -60,11 +63,17 @@ PLAN_SCHEMA = {
 }
 
 
-def prompt_sha256() -> str:
-    """Hash of everything fixed in the prompt (system text, template, schema, input limits). Goes in the run metadata."""
-    fixed = json.dumps({"system": SYSTEM_PROMPT, "user": USER_TEMPLATE, "schema": PLAN_SCHEMA,
-                        "limits": [MAX_LABS, MAX_RADIOLOGY, MAX_REPORT_CHARS, MAX_MICRO]}, sort_keys=True)
-    return hashlib.sha256(fixed.encode()).hexdigest()
+def prompt_sha256(rag: Optional[dict] = None) -> str:
+    """Hash of everything fixed in the prompt (system text, template, schema, input limits). Goes in the run metadata.
+
+    For A+RAG pass the retrieval settings (index hash, k, ...): the RAG template and those settings are hashed too.
+    Without rag the hash is unchanged from the base Model A runs.
+    """
+    fixed = {"system": SYSTEM_PROMPT, "user": USER_TEMPLATE, "schema": PLAN_SCHEMA,
+             "limits": [MAX_LABS, MAX_RADIOLOGY, MAX_REPORT_CHARS, MAX_MICRO]}
+    if rag is not None:
+        fixed["rag"] = {"template": RAG_USER_TEMPLATE, **rag}
+    return hashlib.sha256(json.dumps(fixed, sort_keys=True).encode()).hexdigest()
 
 
 # ------------------------------------------------------------------------------------------------ case input
@@ -170,10 +179,11 @@ def parse_plan(case_id: int, content: str) -> dict:
 
 def generate_plans(client: Ollama, inputs: dict[int, str], case_ids: Iterable[int], out_jsonl: Path, *, seed: int = 298,
                    temperature: float = 0.0, top_p: float = 1.0, max_new_tokens: int = 256, num_ctx: int = 8192,
-                   progress_every: int = 25) -> pd.DataFrame:
+                   progress_every: int = 25, guidance: Optional[dict[int, str]] = None) -> pd.DataFrame:
     """Generate one plan per case and append it to `out_jsonl` as it goes, so an interrupted run resumes where it stopped.
     One attempt per case: a generation that fails is logged and left out (the scorer counts it as missing).
-    Returns a log frame with case_id, ok, error, seconds and token counts (no patient text)."""
+    Returns a log frame with case_id, ok, error, seconds and token counts (no patient text).
+    With `guidance` ({case_id: retrieved guideline passages}) the user message uses RAG_USER_TEMPLATE."""
     out_jsonl = Path(out_jsonl)
     out_jsonl.parent.mkdir(parents=True, exist_ok=True)
     done = {json.loads(l)["case_id"] for l in out_jsonl.read_text().splitlines() if l.strip()} if out_jsonl.exists() else set()
@@ -184,7 +194,9 @@ def generate_plans(client: Ollama, inputs: dict[int, str], case_ids: Iterable[in
             t0 = time.perf_counter()
             row = {"case_id": h, "ok": False, "error": None}
             try:
-                resp = client.chat(SYSTEM_PROMPT, USER_TEMPLATE.format(case_id=h, record=inputs[h]), seed=seed,
+                user = (USER_TEMPLATE.format(case_id=h, record=inputs[h]) if guidance is None else
+                        RAG_USER_TEMPLATE.format(guidance=guidance[h], case_id=h, record=inputs[h]))
+                resp = client.chat(SYSTEM_PROMPT, user, seed=seed,
                                    temperature=temperature, top_p=top_p, max_new_tokens=max_new_tokens, num_ctx=num_ctx,
                                    schema=PLAN_SCHEMA)
                 row.update(prompt_tokens=resp.get("prompt_eval_count"), output_tokens=resp.get("eval_count"))

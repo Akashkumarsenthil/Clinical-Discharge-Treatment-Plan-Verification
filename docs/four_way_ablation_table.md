@@ -51,7 +51,7 @@ MIMIC notes are **not** in the RAG index.
 
 1. Trigger Airflow `clinverify_pipeline` four times with params:
    - A0 → `rag=off`, `model=base`
-   - A+RAG → `rag=on`, `model=base` (blocked until RAG ships)
+   - A+RAG → `rag=on`, `model=base` (see [`rag.md`](rag.md))
    - A+FT → `rag=off`, `model=ft`
    - A+RAG+FT → `rag=on`, `model=ft`
 2. Or run warehouse → generate → Z3 → harness → G-Eval by hand with the same flags.  

@@ -51,3 +51,4 @@ data/*
 
 # DuckDB warehouse built from MIMIC data: never commit (PhysioNet DUA)
 warehouse/
+results/rag/

@@ -7,7 +7,7 @@ Hard rule: every model/eval step is validation-split only. The held-out test coh
 is never selected by this DAG.
 
 Trigger params (four-way ablation):
-    rag    – on | off   (default off). on passes --rag to generate (fails until RAG ships).
+    rag    – on | off   (default off). on passes --rag to generate (guideline passages, docs/rag.md).
     model  – base | ft  (default base). ft uses Airflow Variable CLINVERIFY_FT_MODEL
              (default qwen2.5:14b-ft); base uses qwen2.5:14b.
 

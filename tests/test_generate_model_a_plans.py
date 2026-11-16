@@ -283,9 +283,41 @@ def test_docker_host_flag_reaches_client(frozen_root, monkeypatch):
     assert hosts == ["http://host.docker.internal:11434"]
 
 
-def test_rag_flag_fails_closed_until_module_ships(frozen_root, monkeypatch, capsys):
+def test_rag_dry_run_adds_passages_and_records_ids_only(frozen_root, monkeypatch):
     no_real_generation(monkeypatch)
+    seen = []
+
+    class Capturing(G.FakeClient):
+        def chat(self, system, user, **settings):
+            seen.append(user)
+            return super().chat(system, user, **settings)
+
+    monkeypatch.setattr(G, "FakeClient", Capturing)
+    assert G.main(["--dry-run", "--rag", "--rag-k", "2"], root=frozen_root) == 0
+    out = frozen_root / "results/model_runs/dry_run"
+    assert len(seen) == 3 and all(u.startswith("Excerpts from published clinical guidelines") for u in seen)
+    assert all("[1] (" in u and "[2] (" in u and "[3] (" not in u for u in seen)
+    stem = out / "model_a_dry-run_fake-client_val_seed298"
+    retrieved = json.loads(stem.with_suffix(".rag.json").read_text())
+    assert set(retrieved) == {"-1", "-2", "-3"} and all(len(v) == 2 for v in retrieved.values())
+    assert all(isinstance(cid, str) and ":" in cid for v in retrieved.values() for cid, _ in v)
+    metadata = json.loads(stem.with_suffix(".metadata.json").read_text())
+    run = json.loads(stem.with_suffix(".run.json").read_text())
+    assert metadata["prompt_sha256"] == A.prompt_sha256(run["rag"]) != A.prompt_sha256()
+    assert set(metadata) == {"model", "model_digest", "prompt_sha256", "seed", "temperature", "top_p", "max_new_tokens"}
+    assert run["rag"]["k"] == 2 and run["rag"]["embed_model"] == "test/hash-embedder"
+
+
+def test_rag_and_base_runs_cannot_share_an_output_directory(frozen_root, monkeypatch, capsys):
+    no_real_generation(monkeypatch)
+    assert G.main(["--dry-run"], root=frozen_root) == 0
     with pytest.raises(SystemExit):
         G.main(["--dry-run", "--rag"], root=frozen_root)
-    assert "RAG is not implemented yet" in capsys.readouterr().err
-    assert not (frozen_root / "results/model_runs").exists()
+    assert "existing run settings differ" in capsys.readouterr().err
+
+
+def test_rag_k_out_of_range_is_refused(frozen_root, monkeypatch, capsys):
+    no_real_generation(monkeypatch)
+    with pytest.raises(SystemExit):
+        G.main(["--dry-run", "--rag", "--rag-k", "0"], root=frozen_root)
+    assert "--rag-k" in capsys.readouterr().err
