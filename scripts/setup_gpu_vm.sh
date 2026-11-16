@@ -14,7 +14,7 @@
 set -euo pipefail
 
 PROJECT=${PROJECT:-clinverify-298a}
-ZONE=${ZONE:-us-west1-b}
+ZONE=${ZONE:-us-west1-a}
 VM=${VM:-clinverify-airflow}
 GPU_MACHINE=${GPU_MACHINE:-g2-standard-4}
 CPU_MACHINE=${CPU_MACHINE:-e2-medium}

@@ -8,6 +8,10 @@ is switched to **g2-standard-4 (1x NVIDIA L4, 24 GB)** for model runs. Ollama ru
 reach it through `host.docker.internal`. MIMIC text never leaves the VM: generation and G-Eval refuse any Ollama host
 that is not local.
 
+The VM lives in **us-west1-a**. It was moved from us-west1-b on 2026-11-15 because us-west1-b had no L4 capacity
+(`ZONE_RESOURCE_POOL_EXHAUSTED`); the boot disk was snapshotted first, so data and models carried over. If a zone runs
+out again, set `ZONE=...` for the script. If SSH on port 22 times out from your network, add `--tunnel-through-iap`.
+
 ## Prerequisites (project owner)
 
 | Need | Why |
@@ -25,8 +29,8 @@ that is not local.
 # laptop
 bash scripts/setup_gpu_vm.sh preflight
 bash scripts/setup_gpu_vm.sh to-gpu            # VM must be stopped; DRY_RUN=1 to preview
-gcloud compute instances start clinverify-airflow --project=clinverify-298a --zone=us-west1-b
-gcloud compute ssh clinverify-airflow --project=clinverify-298a --zone=us-west1-b
+gcloud compute instances start clinverify-airflow --project=clinverify-298a --zone=us-west1-a
+gcloud compute ssh clinverify-airflow --project=clinverify-298a --zone=us-west1-a
 
 # on the VM
 sudo bash /opt/clinverify/scripts/setup_gpu_vm.sh host   # if the VM reboots for the driver, rerun
