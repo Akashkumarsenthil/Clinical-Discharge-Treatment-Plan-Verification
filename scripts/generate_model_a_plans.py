@@ -9,7 +9,8 @@ Real validation (local Ext-CDM in MIMIC_DIR, local Ollama required):
 Same cohort, prompts from the DuckDB warehouse mart (after run_pipeline):
     python scripts/generate_model_a_plans.py --cohort validation --seed 298 --from-warehouse
 
-RAG (Airflow rag=on) is reserved; --rag fails closed until src/clinverify/rag/ ships:
+A+RAG (Airflow rag=on): top-k public guideline passages per case, embedded locally with nomic-embed-text.
+The index (results/rag/guidelines.duckdb) is built on first use and rebuilt if the corpus or embedder changes:
     python scripts/generate_model_a_plans.py --cohort validation --from-warehouse --rag
 
 Only after human freeze/sign-off, on the GPU machine:
@@ -181,11 +182,8 @@ def run(args, root: Path):
     freeze = require_test_freeze(root, args.i_confirm_freeze) if args.cohort == "test" else {}
     if not math.isfinite(args.temperature) or not 0 <= args.temperature <= 2:
         raise ConfigurationError("temperature must be finite and between 0 and 2")
-    if args.rag:
-        # Fail closed so Airflow rag=on cannot look like A+RAG before retrieval exists.
-        raise ConfigurationError(
-            "RAG is not implemented yet; refuse --rag until src/clinverify/rag/ ships"
-        )
+    if args.rag and not 1 <= args.rag_k <= 10:
+        raise ConfigurationError("--rag-k must be between 1 and 10")
     protocol = load_protocol(root)
     if args.cohort == "test" and args.seed not in protocol["generation_seeds"]:
         raise ConfigurationError(f"test seed must be one of {protocol['generation_seeds']}")
@@ -195,6 +193,7 @@ def run(args, root: Path):
         inputs = {cid: "Synthetic fixture only; no patient data." for cid in ids}
         client = FakeClient()
         input_source = "dry_run"
+        host = None
     else:
         if args.split_file is not None:
             splits = json.loads(args.split_file.read_text())["splits"]
@@ -213,7 +212,18 @@ def run(args, root: Path):
         client = A.Ollama(args.ollama_model, host=host)
         inputs = None
         input_source = "warehouse" if args.from_warehouse else "csv"
-    metadata = {"model": client.model, "model_digest": client.digest(), "prompt_sha256": A.prompt_sha256(),
+    rag_cfg, index, embedder = None, None, None
+    if args.rag:
+        from clinverify import rag as R
+        if args.dry_run:
+            embedder, index_path = R.HashEmbedder(), (args.out or root / "results/model_runs") / "dry_run" / "rag_index.duckdb"
+        else:
+            embedder, index_path = R.OllamaEmbedder(host, args.embed_model), args.rag_index
+        index = R.open_index(embedder, index_path)      # public guideline text only
+        rag_cfg = {"index_sha256": index.meta["index_sha256"], "corpus_sha256": index.meta["corpus_sha256"],
+                   "embed_model": index.meta["embed_model"], "embed_digest": index.meta["embed_digest"],
+                   "k": args.rag_k, "query_chars": R.store.QUERY_CHARS}
+    metadata = {"model": client.model, "model_digest": client.digest(), "prompt_sha256": A.prompt_sha256(rag_cfg),
                 "seed": args.seed, "temperature": args.temperature, "top_p": TOP_P, "max_new_tokens": MAX_NEW_TOKENS}
     if args.cohort == "test":
         try:
@@ -236,6 +246,8 @@ def run(args, root: Path):
                   "protocol_sha256": sha256(root / "docs/evaluation_protocol.json"),
                   "generator_sha256": sha256(Path(__file__)), "model_a_sha256": sha256(Path(A.__file__)),
                   "case_ids_sha256": hashlib.sha256(json.dumps(ids).encode()).hexdigest(), **freeze}
+    if rag_cfg is not None:
+        descriptor["rag"] = rag_cfg
     out.mkdir(parents=True, exist_ok=True)
     # Avoid simultaneous processes making two attempts for the same case.
     lock = plans_path.with_suffix(".lock")
@@ -262,11 +274,23 @@ def run(args, root: Path):
                     inputs = warehouse_inputs(ids, args.warehouse_db)
                 else:
                     inputs = local_inputs(ids)
+            guidance = None
+            if index is not None:
+                hits = R.retrieve(index, embedder, inputs, k=args.rag_k)
+                guidance = {h: R.format_passages(hits[h]) for h in ids}
+                # IDs and scores only: which public passages each case received. No record text.
+                write_json(plans_path.with_suffix(".rag.json"),
+                           {str(h): [[c.chunk_id, score] for c, score in hits[h]] for h in ids})
             write_json(metadata_path, metadata)
             write_json(run_path, descriptor)
             try:
-                A.generate_plans(client, inputs, ids, plans_path, seed=args.seed, temperature=args.temperature,
-                                 top_p=TOP_P, max_new_tokens=MAX_NEW_TOKENS, num_ctx=NUM_CTX)
+                log = A.generate_plans(client, inputs, ids, plans_path, seed=args.seed, temperature=args.temperature,
+                                       top_p=TOP_P, max_new_tokens=MAX_NEW_TOKENS, num_ctx=NUM_CTX, guidance=guidance)
+                if "prompt_tokens" in log and log["prompt_tokens"].notna().any():
+                    # Ollama silently drops the start of a prompt longer than num_ctx; counts only, no text.
+                    longest = int(log["prompt_tokens"].max())
+                    over = int((log["prompt_tokens"] + MAX_NEW_TOKENS > NUM_CTX).sum())
+                    print(f"Prompt tokens: max {longest} of num_ctx {NUM_CTX}; {over} case(s) at risk of truncation")
             finally:
                 # A partial run still has a loader-compatible list; omitted plans
                 # remain missing outputs under the fixed-cohort scorer.
@@ -300,7 +324,11 @@ def main(argv=None, *, root: Path = ROOT):
     parser.add_argument("--warehouse-db", type=Path, default=None,
                         help="DuckDB path (default: $MIMIC_DIR/warehouse/clinverify.duckdb)")
     parser.add_argument("--rag", action="store_true",
-                        help="enable guideline RAG (reserved; currently refused until rag module ships)")
+                        help="A+RAG: add the top-k guideline passages for each case to the prompt")
+    parser.add_argument("--rag-k", type=int, default=3, help="passages per case with --rag (default 3)")
+    parser.add_argument("--rag-index", type=Path, default=ROOT / "results/rag/guidelines.duckdb",
+                        help="guideline index DuckDB file (built on first use)")
+    parser.add_argument("--embed-model", default="nomic-embed-text", help="local Ollama embedding model for --rag")
     parser.add_argument("--i-confirm-freeze", action="store_true")
     parser.add_argument("--dry-run", action="store_true", help="fake client and invented IDs; never loads real cohort data")
     args = parser.parse_args(argv)

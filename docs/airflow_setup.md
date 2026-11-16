@@ -120,7 +120,7 @@ validation_only_guard
 | Param | Values | Default | Effect |
 |-------|--------|---------|--------|
 | `cohort` | `validation` only | `validation` | Guard refuses anything else |
-| `rag` | `on` / `off` | `off` | `on` adds `--rag` to generate (refused until `src/clinverify/rag/` ships) |
+| `rag` | `on` / `off` | `off` | `on` adds `--rag` to generate: top-3 guideline passages per case ([`rag.md`](rag.md)) |
 | `model` | `base` / `ft` | `base` | `base` → `qwen2.5:14b`; `ft` → Variable `CLINVERIFY_FT_MODEL` (default `qwen2.5:14b-ft`) |
 
 Outputs land under  

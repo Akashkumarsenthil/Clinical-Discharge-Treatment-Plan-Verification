@@ -1,6 +1,6 @@
 # RAG embed model (plan §2 prep)
 
-**Status:** frozen tag for upcoming `src/clinverify/rag/`  
+**Status:** frozen; used by `src/clinverify/rag/` ([`rag.md`](rag.md))  
 **Date:** 2026-11-14  
 **Owner:** Sneha
 
