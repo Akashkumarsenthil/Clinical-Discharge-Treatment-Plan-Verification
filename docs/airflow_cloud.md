@@ -9,7 +9,7 @@ One Airflow for the whole team — **same VM, same URL pattern, same password**.
 | Field | Value |
 |-------|--------|
 | GCP project | `clinverify-298a` |
-| VM name | `clinverify-airflow` (zone `us-west1-b`) |
+| VM name | `clinverify-airflow` (zone `us-west1-a`) |
 | URL | `http://localhost:8080` through an IAP tunnel (port 8080 is **not** open to the internet) |
 | Username | `admin` (shared) |
 | Password | `admin` (shared) |
@@ -18,7 +18,7 @@ One Airflow for the whole team — **same VM, same URL pattern, same password**.
 # Open the shared UI (needs roles/iap.tunnelResourceAccessor; keep this terminal open):
 gcloud compute start-iap-tunnel clinverify-airflow 8080 \
   --local-host-port=localhost:8080 \
-  --project=clinverify-298a --zone=us-west1-b
+  --project=clinverify-298a --zone=us-west1-a
 # Then open http://localhost:8080
 ```
 
@@ -48,10 +48,10 @@ MIMIC_DIR=/data/mimic
 
 ```bash
 gcloud compute instances start clinverify-airflow \
-  --project=clinverify-298a --zone=us-west1-b
+  --project=clinverify-298a --zone=us-west1-a
 
 gcloud compute ssh clinverify-airflow \
-  --project=clinverify-298a --zone=us-west1-b \
+  --project=clinverify-298a --zone=us-west1-a \
   --command='cd /opt/clinverify && docker compose up -d'
 ```
 
@@ -68,11 +68,11 @@ docker compose exec airflow-scheduler airflow dags trigger clinverify_pipeline
 
 ```bash
 gcloud compute ssh clinverify-airflow \
-  --project=clinverify-298a --zone=us-west1-b \
+  --project=clinverify-298a --zone=us-west1-a \
   --command='cd /opt/clinverify && docker compose down'
 
 gcloud compute instances stop clinverify-airflow \
-  --project=clinverify-298a --zone=us-west1-b
+  --project=clinverify-298a --zone=us-west1-a
 ```
 
 ## Ollama (model / G-Eval tasks only)
