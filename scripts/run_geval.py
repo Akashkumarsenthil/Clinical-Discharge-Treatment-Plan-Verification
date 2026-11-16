@@ -62,6 +62,8 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=None,
                     help="score only the first N plans (for quick sanity checks)")
     ap.add_argument("--out", type=Path, default=ROOT / "results" / "geval")
+    ap.add_argument("--max-unscored", type=int, default=0,
+                    help="exit non-zero when more plans than this could not be judged at all (default 0)")
     args = ap.parse_args()
 
     plans = json.loads(args.plans.read_text())
@@ -98,7 +100,7 @@ def main() -> int:
 
     summary = summarise(results)
     print(f"\n=== G-Eval summary (judge: {args.judge_model}) ===")
-    print(f"  n={summary['n']}  composite mean={summary['mean']}  "
+    print(f"  n={summary['n']}  unscored={summary['n_unscored']}  composite mean={summary['mean']}  "
           f"min={summary['min']}  max={summary['max']}")
     if summary.get("per_criterion"):
         for crit, score in summary["per_criterion"].items():
@@ -120,6 +122,10 @@ def main() -> int:
     except ValueError:
         shown = out_path
     print(f"\nResults written to: {shown}")
+    if summary["n_unscored"] > args.max_unscored:
+        print(f"ERROR: {summary['n_unscored']} of {len(results)} plans were not judged (Ollama unreachable or every "
+              f"call failed); not a complete G-Eval run. Check `journalctl -u ollama` on the host.", file=sys.stderr)
+        return 1
     return 0
 
 

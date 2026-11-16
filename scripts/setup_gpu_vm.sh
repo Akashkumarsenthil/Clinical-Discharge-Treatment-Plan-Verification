@@ -78,6 +78,13 @@ switch_machine() {
   local type=$1 policy=$2 tmp; tmp=$(mktemp)
   g compute instances export "$VM" --zone="$ZONE" --destination="$tmp" >/dev/null 2>&1
   sed -i.bak -e "s|/machineTypes/[a-z0-9-]*|/machineTypes/$type|" -e "s|onHostMaintenance: [A-Z]*|onHostMaintenance: $policy|" "$tmp"
+  if [ "$policy" = MIGRATE ]; then
+    # A G2 export lists its built-in L4 under guestAccelerators; a CPU machine type refuses it, so drop the block.
+    # G2 also attaches the boot disk over NVMe, which E2 does not support.
+    awk '/^guestAccelerators:/{skip=1; next} skip && /^[- ] /{next} {skip=0; print}' "$tmp" \
+      | sed -e 's|interface: NVME|interface: SCSI|' > "$tmp.cpu" && mv "$tmp.cpu" "$tmp"
+    ! grep -q "^guestAccelerators:" "$tmp" || die "could not remove the GPU from the exported instance"
+  fi
   grep -q "machineTypes/$type" "$tmp" && grep -q "onHostMaintenance: $policy" "$tmp" || die "could not edit the exported instance"
   run g compute instances update-from-file "$VM" --zone="$ZONE" --source="$tmp" --most-disruptive-allowed-action=RESTART
   rm -f "$tmp" "$tmp.bak"
@@ -133,9 +140,11 @@ host() {
   say "Configuring Ollama to accept connections from Docker containers"
   run mkdir -p /etc/systemd/system/ollama.service.d
   if [ "${DRY_RUN:-0}" = 1 ]; then
-    echo "[dry-run] write /etc/systemd/system/ollama.service.d/override.conf (OLLAMA_HOST=0.0.0.0:$OLLAMA_PORT)"
+    echo "[dry-run] write /etc/systemd/system/ollama.service.d/override.conf (OLLAMA_HOST=0.0.0.0:$OLLAMA_PORT, OLLAMA_MAX_LOADED_MODELS=1)"
   else
-    printf '[Service]\nEnvironment="OLLAMA_HOST=0.0.0.0:%s"\n' "$OLLAMA_PORT" \
+    # One model in memory at a time: on 2026-11-15 qwen2.5:14b (kept alive after generate_plans) and the llama3.1:8b
+    # G-Eval judge were both resident, the 16 GB host ran out of RAM and the OOM killer stopped Ollama mid-run.
+    printf '[Service]\nEnvironment="OLLAMA_HOST=0.0.0.0:%s"\nEnvironment="OLLAMA_MAX_LOADED_MODELS=1"\n' "$OLLAMA_PORT" \
       > /etc/systemd/system/ollama.service.d/override.conf
   fi
   run systemctl daemon-reload
