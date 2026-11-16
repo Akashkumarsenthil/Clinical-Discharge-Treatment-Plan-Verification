@@ -10,13 +10,18 @@ import types
 ROOT = Path(__file__).resolve().parents[1]
 CHAIN = ["validation_only_guard", "data_manifest", "data_clean", "data_missing", "data_transform", "data_validate",
          "data_eda", "data_splits", "warehouse", "verifier_regression", "generate_plans", "verify_z3",
-         "evaluate_harness", "g_eval", "report"]
+         "evaluate_harness", "g_eval", "report", "stop_vm"]
 
 
 class _Task:
-    def __init__(self, task_id, bash_command="", env=None, **_):
+    def __init__(self, task_id, bash_command="", env=None, **kwargs):
         self.task_id, self.bash_command, self.env, self.downstream = task_id, bash_command, env or {}, []
+        self.kwargs, self.is_teardown = kwargs, False
         _DAG.current.tasks[task_id] = self
+
+    def as_teardown(self):
+        self.is_teardown = True
+        return self
 
     def __rshift__(self, other):
         self.downstream.append(other)
@@ -69,3 +74,13 @@ def test_model_steps_use_the_generated_plans_and_metadata(monkeypatch):
     assert "catalog_labeled_plans" not in t["evaluate_harness"].bash_command
     assert '--ollama-host "$OLLAMA_HOST"' in t["generate_plans"].bash_command
     assert "--cohort validation" in t["generate_plans"].bash_command
+
+
+def test_stop_vm_is_a_teardown_after_report_and_can_be_switched_off(monkeypatch):
+    dag = _load(monkeypatch)
+    stop = dag.tasks["stop_vm"]
+    assert stop.is_teardown and stop.kwargs.get("retries") == 0
+    assert dag.tasks["report"].downstream == [stop] and stop.downstream == []
+    assert "scripts/stop_this_vm.py" in stop.bash_command and "params.auto_stop == 'on'" in stop.bash_command
+    assert dag.kwargs["params"]["auto_stop"] == "on" and dag.kwargs["max_active_runs"] == 1
+    assert "params.auto_stop" in dag.tasks["validation_only_guard"].bash_command
