@@ -20,7 +20,9 @@ from __future__ import annotations
 
 import json
 import os
+import http.client
 import statistics
+import time
 import urllib.request
 import urllib.error
 from dataclasses import dataclass, field
@@ -77,7 +79,31 @@ class GEvalResult:
     error: Optional[str] = None
 
 
+# Seconds to wait before each retry when Ollama refuses or drops the connection. systemd restarts a crashed Ollama
+# within a few seconds; without retries every remaining plan in the batch fails at once (2026-11-15: 398 of 460).
+RETRY_DELAYS = (2, 4, 8, 16, 30)
+
+
+def _is_connection_failure(exc: BaseException) -> bool:
+    """Server not reachable (refused, reset, dropped). Timeouts and HTTP errors are not retried."""
+    if isinstance(exc, urllib.error.HTTPError):
+        return False
+    reason = exc.reason if isinstance(exc, urllib.error.URLError) else exc
+    return isinstance(reason, (ConnectionError, http.client.RemoteDisconnected))
+
+
 def _call_ollama(prompt: str, model: str, timeout: int = 60) -> str:
+    for delay in (*RETRY_DELAYS, None):
+        try:
+            return _call_ollama_once(prompt, model, timeout)
+        except (urllib.error.URLError, ConnectionError, http.client.RemoteDisconnected) as exc:
+            if delay is None or not _is_connection_failure(exc):
+                raise
+            time.sleep(delay)
+    raise AssertionError("unreachable")
+
+
+def _call_ollama_once(prompt: str, model: str, timeout: int) -> str:
     payload = json.dumps({
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
@@ -160,12 +186,18 @@ def batch_score(
 
 
 def summarise(results: list[dict]) -> dict:
-    """Aggregate geval_composite scores from batch_score output."""
+    """Aggregate geval_composite scores from batch_score output.
+
+    n counts scored plans only; n_unscored counts plans where every judge call failed (composite 0). Report both:
+    a mean over the scored plans alone hides how many were never judged.
+    """
     composites = [r["geval_composite"] for r in results if r.get("geval_composite")]
+    unscored = len(results) - len(composites)
     if not composites:
-        return {"n": 0, "mean": None, "min": None, "max": None}
+        return {"n": 0, "n_unscored": unscored, "mean": None, "min": None, "max": None}
     return {
         "n": len(composites),
+        "n_unscored": unscored,
         "mean": round(statistics.mean(composites), 3),
         "min": round(min(composites), 3),
         "max": round(max(composites), 3),
