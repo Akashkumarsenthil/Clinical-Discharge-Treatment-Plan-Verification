@@ -86,10 +86,12 @@ rm -f "$runner"
 
 vm_ssh --command="set -e
 sudo shutdown -h +$((MAX_HOURS * 60)) 'clinverify cloud_run safety stop' 2>/dev/null || true
-if ! systemctl show ollama -p Environment | grep -q OLLAMA_MAX_LOADED_MODELS=1; then
-  echo '==> Ollama lacks OLLAMA_MAX_LOADED_MODELS=1; rerunning setup_gpu_vm.sh host'
+if ! nvidia-smi >/dev/null 2>&1 || ! systemctl show ollama -p Environment | grep -q OLLAMA_MAX_LOADED_MODELS=1 \
+   || ! ollama list | grep -q nomic-embed-text; then
+  echo '==> GPU driver, Ollama setting or a model is missing; rerunning setup_gpu_vm.sh host'
   sudo bash $REPO_DIR/scripts/setup_gpu_vm.sh host
 fi
+nvidia-smi >/dev/null 2>&1 || { echo 'ERROR: GPU driver not working after setup (a reboot may be needed); stopping the VM' >&2; sudo shutdown -h now; exit 1; }
 sudo install -d -o 50000 -g 0 $remote_dir
 sudo install -o 50000 -g 0 -m 755 /tmp/cloud_run_$stamp.sh $remote_dir/run_$stamp.sh
 cd $REPO_DIR && sudo docker compose up -d >/dev/null

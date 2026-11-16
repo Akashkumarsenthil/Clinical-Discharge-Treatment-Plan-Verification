@@ -19,7 +19,7 @@ VM=${VM:-clinverify-airflow}
 GPU_MACHINE=${GPU_MACHINE:-g2-standard-4}
 CPU_MACHINE=${CPU_MACHINE:-e2-medium}
 DISK_GB=${DISK_GB:-100}
-MODELS=${MODELS:-"qwen2.5:14b llama3.1:8b"}
+MODELS=${MODELS:-"qwen2.5:14b llama3.1:8b nomic-embed-text"}   # generator, G-Eval judge, RAG embedder
 OLLAMA_PORT=11434
 
 die() { echo "ERROR: $*" >&2; exit 1; }
@@ -122,6 +122,10 @@ to_cpu() {
 
 host() {
   [ "$(id -u)" -eq 0 ] || die "run with sudo on the VM"
+  # The driver module is built for one kernel. After a kernel update (e.g. while the VM ran as e2-medium) it needs
+  # the new kernel's headers to rebuild; without them the installer fails and nvidia-smi cannot reach the driver.
+  say "Installing headers for kernel $(uname -r)"
+  run env DEBIAN_FRONTEND=noninteractive apt-get install -y -q "linux-headers-$(uname -r)"
   if ! nvidia-smi >/dev/null 2>&1; then
     say "Installing the NVIDIA driver (Google's installer; the VM may reboot: if so, SSH back in and rerun this step)"
     run curl -fsSL -o /tmp/install_gpu_driver.py \
