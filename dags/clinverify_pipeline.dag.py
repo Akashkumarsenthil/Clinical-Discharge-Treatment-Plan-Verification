@@ -152,15 +152,17 @@ with DAG(
         task_id="verify_z3",
         bash_command=_bash(
             f"{PLANS_RESOLVE} && "
-            f"{PYTHON!r} scripts/verify_model_plans.py --plans \"$plans\" --cohort {COHORT} --out {RESULTS_DIR!r}"
+            f"{PYTHON!r} scripts/verify_model_plans.py --plans \"$plans\" --cohort {COHORT} "
+            f"--generation-metadata \"${{plans%.json}}.metadata.json\" --out {RESULTS_DIR!r}"
         ),
         env=TASK_ENV,
     )
     # Evaluation of this run: diagnosis metrics from the generated plans plus the verifier's plan metrics.
     evaluate_harness = BashOperator(
         task_id="evaluate_harness",
-        bash_command=_py(
-            f"scripts/summarize_model_run.py --plans {PLANS_JSON!r} --verify-dir {RESULTS_DIR!r} "
+        bash_command=_bash(
+            f"{PLANS_RESOLVE} && "
+            f"{PYTHON!r} scripts/summarize_model_run.py --plans \"$plans\" --verify-dir {RESULTS_DIR!r} "
             f"--cohort {COHORT} --out {RESULTS_DIR!r}"
         ),
         env=TASK_ENV,
